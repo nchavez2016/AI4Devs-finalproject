@@ -1,0 +1,93 @@
+// Modelo de datos de Cuadre (readme.md, sección 3).
+// Nombres en camelCase en TypeScript; tablas y columnas en snake_case en la BD.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TipoMovimiento {
+  INGRESO
+  GASTO
+}
+
+enum TipoCuenta {
+  BANCO
+  EFECTIVO
+  DIGITAL
+}
+
+model Usuario {
+  id            String   @id @default(cuid())
+  nombre        String
+  nombreNegocio String   @map("nombre_negocio")
+  email         String   @unique
+  passwordHash  String   @map("password_hash")
+  creadoEn      DateTime @default(now()) @map("creado_en")
+
+  cuentas       Cuenta[]
+  categorias    Categoria[]
+  transacciones Transaccion[]
+
+  @@map("usuarios")
+}
+
+model Cuenta {
+  id           String     @id @default(cuid())
+  usuarioId    String     @map("usuario_id")
+  nombre       String
+  tipo         TipoCuenta
+  // El saldo actual se calcula (saldo_inicial + ingresos − gastos); no se almacena.
+  saldoInicial Decimal    @default(0) @map("saldo_inicial") @db.Decimal(14, 2)
+  creadoEn     DateTime   @default(now()) @map("creado_en")
+
+  usuario       Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  transacciones Transaccion[]
+
+  @@index([usuarioId])
+  @@map("cuentas")
+}
+
+model Categoria {
+  id               String         @id @default(cuid())
+  usuarioId        String         @map("usuario_id")
+  categoriaPadreId String?        @map("categoria_padre_id")
+  nombre           String
+  tipo             TipoMovimiento
+  creadoEn         DateTime       @default(now()) @map("creado_en")
+
+  usuario        Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  categoriaPadre Categoria?    @relation("Subcategorias", fields: [categoriaPadreId], references: [id], onDelete: Restrict)
+  subcategorias  Categoria[]   @relation("Subcategorias")
+  transacciones  Transaccion[]
+
+  @@index([usuarioId])
+  @@index([categoriaPadreId])
+  @@map("categorias")
+}
+
+model Transaccion {
+  id          String         @id @default(cuid())
+  usuarioId   String         @map("usuario_id")
+  cuentaId    String         @map("cuenta_id")
+  categoriaId String         @map("categoria_id")
+  tipo        TipoMovimiento
+  // Debe ser > 0; se valida con Zod en el servidor.
+  monto       Decimal        @db.Decimal(14, 2)
+  fecha       DateTime       @db.Date
+  descripcion String?
+  creadoEn    DateTime       @default(now()) @map("creado_en")
+
+  usuario   Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  cuenta    Cuenta    @relation(fields: [cuentaId], references: [id], onDelete: Restrict)
+  categoria Categoria @relation(fields: [categoriaId], references: [id], onDelete: Restrict)
+
+  @@index([usuarioId, fecha])
+  @@index([cuentaId])
+  @@index([categoriaId])
+  @@map("transacciones")
+}

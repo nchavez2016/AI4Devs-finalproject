@@ -1,0 +1,22 @@
+# PostgreSQL local para desarrollo. En producción se usa Neon.
+services:
+  db:
+    image: postgres:16
+    container_name: cuadre-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: cuadre
+      POSTGRES_PASSWORD: cuadre
+      POSTGRES_DB: cuadre
+    ports:
+      - "5432:5432"
+    volumes:
+      - cuadre-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cuadre -d cuadre"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  cuadre-pgdata:
