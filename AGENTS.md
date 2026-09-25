@@ -1,78 +1,58 @@
-Este archivo sigue el estándar abierto AGENTS.md y da contexto y reglas a los agentes de IA del IDE (Antigravity y compatibles). Su contenido está alineado con CLAUDE.md; si editas las reglas, actualiza ambos archivos para mantenerlos coherentes.
+<!-- BEGIN:nextjs-agent-rules -->
 
-1. Qué es este proyecto
+# This is NOT the Next.js you know
 
-Cuadre es una aplicación web de control de gastos e ingresos. El usuario registra el dinero que entra y sale, lo clasifica por categorías, y ve en un dashboard su saldo por cuenta, el balance del período y sus mayores gastos.
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
-Es el proyecto final del curso AI4Devs, en fase de MVP acotado. Respeta ese alcance: no agregues módulos ni funcionalidades fuera de los listados abajo.
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
-2. Stack tecnológico (no cambiar sin autorización)
-Framework: Next.js (App Router) con TypeScript.
-Estilos: Tailwind CSS + shadcn/ui.
-ORM: Prisma.
-Base de datos: PostgreSQL (local vía Docker en desarrollo; Neon en producción).
-Autenticación: Auth.js (NextAuth) con credenciales propias. Contraseñas con hash.
-Validación: Zod en el servidor.
-Gráficos: Recharts.
-Tests: Vitest (unitarios/integración) y Playwright (E2E).
-Despliegue: Vercel (app) + Neon (base de datos).
+<!-- END:nextjs-agent-rules -->
 
-Proyecto monolítico full-stack: frontend y backend en el mismo proyecto Next.js. NO crear carpetas separadas frontend/ y backend/.
+# Cuadre — reglas para agentes
 
-3. Alcance del MVP (lo único que se construye ahora)
+App web de control de gastos e ingresos (proyecto final AI4Devs). Solo se construye el MVP
+descrito en `readme.md`. Entorno de desarrollo: Windows.
 
-Must-have:
+## Comandos
+- `docker compose up -d` — levanta PostgreSQL local (contenedor `cuadre-db`, puerto 5432).
+- `npm run dev` — app en http://localhost:3000
+- `npm run build` / `npm run lint`
+- `npx prisma migrate dev --name <nombre>` — nueva migración.
+- `npx prisma generate` — ejecutar SIEMPRE después de migrar o cambiar el schema
+  (Prisma 7 no lo hace solo).
+- Tests: pendiente de configurar (Vitest + Playwright).
 
-HU-001 Registrar transacción (ingreso/gasto) con monto, fecha, cuenta, categoría.
-HU-002 Gestionar cuentas (crear, listar; saldo por cuenta).
-HU-003 Dashboard: saldo, ingresos/gastos del período, principales gastos.
-HU-004 Categorizar transacciones (categorías y subcategorías).
+## Trabajo con OpenSpec
+- No implementes nada sin un change aprobado en `openspec/changes/`.
+- Una tarea a la vez. No adelantes funcionalidades ni agregues extras no pedidos.
 
-Should-have (solo si el núcleo está estable):
+## Convenciones (sí / no)
+- SÍ: Prisma solo dentro de `src/server/repositories/`. NO: importar Prisma en componentes,
+  páginas o route handlers.
+- SÍ: toda consulta filtra por el `usuarioId` del usuario autenticado. Nunca devolver datos de
+  otro usuario.
+- SÍ: validar toda entrada en el servidor con Zod.
+- SÍ: dinero como `Decimal`. NO: usar `float`/`number` para montos.
+- SÍ: el saldo de una cuenta se calcula (saldo inicial + ingresos − gastos). NO: guardarlo.
+- SÍ: nombres del dominio en español (Usuario, Cuenta, Categoria, Transaccion); camelCase en
+  TypeScript y snake_case en la BD con `@map`.
 
-HU-005 Editar y eliminar transacciones.
+## Gotchas del stack
+- Prisma fijado en 7.10.0 exacta. NO actualizar a Prisma 8.
+- El cliente Prisma se genera en `src/generated/prisma` (importar desde ahí, no desde
+  `@prisma/client`).
+- La URL de la BD está en `prisma.config.ts`, no en `schema.prisma`. El `.env` se carga con
+  `process.loadEnvFile()` (no usar dotenv).
+- Next.js 16: las APIs de request (`cookies()`, `headers()`, `params`) son asíncronas y
+  `middleware.ts` ahora se llama `proxy.ts`.
+- Windows no distingue mayúsculas en nombres de archivo: NO crear `README.md` (ya existe `readme.md`).
 
-Transversal:
+## Fuera de alcance (NO construir)
+Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, asistente de IA.
 
-Registro e inicio de sesión (Auth.js). En el registro, el usuario indica el nombre de su negocio o actividad (campo del usuario).
-
-Fuera de alcance (NO construir): ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, asistente de IA.
-
-4. Modelo de datos (4 entidades)
-Usuario: id, nombre, nombre_negocio, email (único), password_hash, creado_en.
-Cuenta: id, usuario_id (FK), nombre, tipo, saldo_inicial, creado_en.
-Categoria: id, usuario_id (FK), categoria_padre_id (FK nullable), nombre, tipo (ingreso/gasto), creado_en.
-Transaccion: id, usuario_id (FK), cuenta_id (FK), categoria_id (FK), tipo (INGRESO/GASTO), monto (decimal), fecha, descripcion (nullable), creado_en.
-
-Reglas:
-
-Normalizado a 3FN. No almacenar datos derivados (la transacción guarda cuenta_id, no el nombre de la cuenta).
-El saldo de una cuenta se calcula (saldo_inicial + ingresos − gastos); no se almacena.
-5. Arquitectura y organización del código
-Patrón repositorio: el acceso a datos pasa por repositorios que encapsulan Prisma (ej. TransaccionRepository). La lógica de negocio nunca llama a Prisma directamente.
-Aislamiento por usuario: toda consulta se filtra por el usuario autenticado. Un usuario nunca accede a datos de otro. Es la regla de seguridad principal.
-Carpetas:
-app/ — páginas y app/api/ (endpoints).
-components/ — UI reutilizable.
-server/ — lógica de negocio; server/repositories/ — acceso a datos.
-lib/ — utilidades (Prisma, Auth.js).
-prisma/ — schema y migraciones.
-6. Cómo trabajar (rol del IDE Antigravity)
-
-Antigravity se usa para el trabajo fino y de precisión: entender el código, ediciones puntuales, ajustes, revisión de lo que produce Claude Code. Para tareas grandes y autónomas (crear módulos completos, scaffold) se usa Claude Code.
-
-Disciplina:
-
-Una tarea a la vez. No adelantar módulos futuros ni añadir extras.
-Explicar antes de cambios grandes que toquen varios archivos.
-Mostrar cómo probar lo implementado.
-Tests: acompañar la lógica con pruebas; no alterar tests para forzar que pasen sin autorización.
-No tocar .env ni credenciales; documentar variables en .env.example.
-Nombres del dominio en español (Usuario, Cuenta, Transaccion).
-Commits pequeños y descriptivos.
-7. Definición de "terminado"
-Cumple los criterios de aceptación de la historia.
-Respeta aislamiento por usuario y valida con Zod.
-Tiene pruebas del caso feliz y de errores principales.
-Se explicó cómo probarlo.
-No rompe lo existente.
+## Restricciones
+- Nunca leer, modificar ni commitear `.env` o secretos. Documentar variables en `.env.example`.
+- No editar migraciones ya aplicadas en `prisma/migrations/`.
+- No instalar dependencias nuevas sin preguntar.
+- No modificar tests para que pasen sin autorización.
+- No hacer commit ni push sin orden explícita.
