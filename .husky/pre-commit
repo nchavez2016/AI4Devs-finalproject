@@ -1,0 +1,5 @@
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
+  echo "ERROR: no se hacen commits directos en $BRANCH. Trabaja en la rama de la entrega."
+  exit 1
+fi
