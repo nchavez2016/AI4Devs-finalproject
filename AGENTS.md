@@ -22,9 +22,21 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
   (Prisma 7 no lo hace solo).
 - Tests: pendiente de configurar (Vitest + Playwright).
 
-## Trabajo con OpenSpec
+## Ciclo de trabajo (OpenSpec)
 - No implementes nada sin un change aprobado en `openspec/changes/`.
-- Una tarea a la vez. No adelantes funcionalidades ni agregues extras no pedidos.
+- Ciclo: proponer → revisión humana de tasks.md → aplicar → verificar → archivar.
+  En Claude Code los comandos son `/opsx:*`; en Antigravity, `/opsx-*`.
+- Una subtarea a la vez. No adelantes funcionalidades ni agregues extras no pedidos.
+
+## TDD
+- Ningún código de producción sin un test que haya fallado antes por la razón esperada.
+- Cada escenario GIVEN/WHEN/THEN de una spec tiene un test con su nombre exacto.
+- Código existente sin tests: primero tests de caracterización, después cambios.
+
+## Definición de terminado
+- `npm run lint` y `npx tsc --noEmit` sin errores.
+- Tests en verde (cuando exista la infraestructura de tests).
+- `openspec validate --strict` sin errores.
 
 ## Convenciones (sí / no)
 - SÍ: Prisma solo dentro de `src/server/repositories/`. NO: importar Prisma en componentes,
@@ -47,13 +59,26 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
   `middleware.ts` ahora se llama `proxy.ts`.
 - Windows no distingue mayúsculas en nombres de archivo: NO crear `README.md` (ya existe `readme.md`).
 
+## Dependencias
+- Aprobadas para el MVP: Zod, Auth.js, shadcn/ui, Recharts, Vitest, Testing Library, jsdom,
+  Playwright.
+- Cada una se instala dentro del change que la necesita y se justifica en su `design.md`.
+- Cualquier otra dependencia: preguntar antes.
+- NO ejecutar `npm audit fix --force`: bajaría Prisma a la versión 6.
+
+## Commits y ramas
+- Se trabaja en la rama de la entrega actual (`feature/entrega-N-NCH`). Nunca en `main`
+  (lo bloquea el hook de pre-commit).
+- Durante la aplicación de un change: un commit por subtarea, formato Conventional Commits.
+  Fuera de eso: solo con orden explícita.
+- Nunca push, merge ni cambio de rama: los hace el humano.
+
 ## Fuera de alcance (NO construir)
 Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, asistente de IA.
 
 ## Restricciones
 - Nunca leer, modificar ni commitear `.env` o secretos. Documentar variables en `.env.example`.
 - No editar migraciones ya aplicadas en `prisma/migrations/`.
-- No instalar dependencias nuevas sin preguntar.
 - No modificar tests para que pasen sin autorización.
-- No hacer commit ni push sin orden explícita.
-- Commits: solo en la rama dev (o en la rama del change, si existe), nunca en main. Uno por subtarea, formato Conventional Commits. Merge a main y push: solo el humano.
+- No encadenar comandos con `;` o `&&`: un comando por ejecución.
+- No leer carpetas completas cuando basta un archivo concreto.
