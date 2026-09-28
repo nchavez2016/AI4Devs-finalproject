@@ -56,3 +56,4 @@ Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, a
 - No instalar dependencias nuevas sin preguntar.
 - No modificar tests para que pasen sin autorización.
 - No hacer commit ni push sin orden explícita.
+- Commits: solo en la rama dev (o en la rama del change, si existe), nunca en main. Uno por subtarea, formato Conventional Commits. Merge a main y push: solo el humano.
