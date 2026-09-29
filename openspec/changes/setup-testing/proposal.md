@@ -25,10 +25,9 @@ Todas las que exige la guía (variante TypeScript), como `devDependencies`:
 | `@testing-library/react` | Sí (Testing Library) |
 | `@testing-library/dom` | Sí (Testing Library; peer de la anterior) |
 | `@vitejs/plugin-react` | No; autorizado para este change (se añade a la lista en la tarea 4.1) |
-| `vite-tsconfig-paths` | No; autorizado para este change (se añade a la lista en la tarea 4.1) |
 | `@types/node` `^20` → `^22` | Actualización de una dependencia existente, autorizada por el humano el 2026-09-29: `vitest@5` exige `@types/node` `^22.0.0 \|\| >=24.0.0` como peer |
 
-`@vitejs/plugin-react` transforma JSX/TSX en los tests de componentes; `vite-tsconfig-paths` resuelve el alias `@/*` de `tsconfig.json`. No se añade `@testing-library/jest-dom` ni ninguna otra dependencia fuera de la guía.
+`@vitejs/plugin-react` transforma JSX/TSX en los tests de componentes. El alias `@/*` de `tsconfig.json` se resuelve con la opción nativa de Vite 8 `resolve.tsconfigPaths: true`: la guía propone `vite-tsconfig-paths`, pero se descartó (decisión humana del 2026-09-29) porque Vite ya lo resuelve y el paquete depende de `tsconfck`, marcado como sin mantenimiento. No se añade `@testing-library/jest-dom` ni ninguna otra dependencia fuera de la guía.
 
 ## Capabilities
 
@@ -47,6 +46,6 @@ Ninguna. No hay specs existentes en `openspec/specs/` y el change no altera comp
 
 ## Impact
 
-- Nuevos: `vitest.config.mts`, `src/test/setup.ts`, `src/test/entorno.test.tsx`.
+- Nuevos: `vitest.config.mts`, `src/test/setup.ts`, `src/test/entorno.test.tsx`, `src/test/fixtures/alias.ts`.
 - Modificados: `package.json`, `package-lock.json`, `.husky/pre-commit`, `AGENTS.md`.
 - Cada commit pasará a ejecutar lint, typecheck y la suite de tests: los commits serán más lentos pero no podrán romper la definición de terminado.

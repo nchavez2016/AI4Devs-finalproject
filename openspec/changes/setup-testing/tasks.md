@@ -1,6 +1,7 @@
 # Tasks
 
 > `@vitejs/plugin-react` y `vite-tsconfig-paths` autorizados por el humano el 2026-09-28 (ver proposal.md → Dependencias).
+> 2026-09-29: el humano decide retirar `vite-tsconfig-paths` (Vite 8 resuelve el alias con `resolve.tsconfigPaths: true`; el paquete depende de `tsconfck`, sin mantenimiento). 1.1 y 1.2 se completaron con el plugin; su retirada es la subtarea 2.10.
 > El change no tiene specs (`skip_specs`); los nombres exactos de los tests están en design.md → Decisión 4.
 
 ## 1. Dependencias y configuración base de Vitest
@@ -25,8 +26,14 @@
 - [ ] 2.8 GREEN: crear `src/test/setup.ts` con un `afterEach` que ejecuta `cleanup()`, `vi.useRealTimers()`, `vi.restoreAllMocks()` y `vi.unstubAllGlobals()`, y registrarlo en `setupFiles`. Verificar: los cuatro tests del archivo pasan.
 - [ ] 2.9 REFACTOR: sin cambios de comportamiento. Verificar: el archivo sigue en verde.
 
+### el alias @/ se resuelve
+- [ ] 2.10 Desinstalar `vite-tsconfig-paths` (`npm uninstall -D vite-tsconfig-paths`) y quitarlo de `vitest.config.mts`. Verificar: ya no aparece en `package.json`, `prisma` y `@prisma/client` siguen en `7.10.0` exacta y los tests del archivo siguen en verde.
+- [ ] 2.11 RED: crear `src/test/fixtures/alias.ts` que exporta una constante y el test `el alias @/ se resuelve` que la importa desde `@/test/fixtures/alias`. Verificar: `npx vitest run src/test/entorno.test.tsx --reporter=dot` falla porque el alias no se resuelve.
+- [ ] 2.12 GREEN: añadir `resolve: { tsconfigPaths: true }` a `vitest.config.mts`. Verificar: todos los tests del archivo pasan.
+- [ ] 2.13 REFACTOR: sin cambios de comportamiento. Verificar: el archivo sigue en verde.
+
 ### Scripts
-- [ ] 2.10 Añadir a `package.json` los scripts `test` (`vitest`), `test:run` (`vitest run`) y `typecheck` (`tsc --noEmit`). Verificar: `npm run test:run` y `npm run typecheck` terminan en verde.
+- [ ] 2.14 Añadir a `package.json` los scripts `test` (`vitest`), `test:run` (`vitest run`) y `typecheck` (`tsc --noEmit`). Verificar: `npm run test:run` y `npm run typecheck` terminan en verde.
 
 ## 3. Hook de pre-commit
 
@@ -38,5 +45,5 @@
 
 ## 4. AGENTS.md y validación final
 
-- [ ] 4.1 En AGENTS.md, sustituir "Tests: pendiente de configurar (Vitest + Playwright)." por los comandos reales (`npm run test`, `npm run test:run`, `npm run typecheck`, `npx vitest run <archivo> --reporter=dot`) e indicar que Playwright llega con el primer change E2E. Añadir `@vitejs/plugin-react` y `vite-tsconfig-paths` a la lista de dependencias aprobadas para el MVP. Verificar: cada comando documentado se ejecuta tal como está escrito y ambos paquetes aparecen en la lista de aprobadas.
+- [ ] 4.1 En AGENTS.md, sustituir "Tests: pendiente de configurar (Vitest + Playwright)." por los comandos reales (`npm run test`, `npm run test:run`, `npm run typecheck`, `npx vitest run <archivo> --reporter=dot`) e indicar que Playwright llega con el primer change E2E. Añadir `@vitejs/plugin-react` a la lista de dependencias aprobadas para el MVP. Verificar: cada comando documentado se ejecuta tal como está escrito y el paquete aparece en la lista de aprobadas.
 - [ ] 4.2 Validación final: `npm run lint`, `npm run typecheck`, `npm run test:run` y `openspec validate setup-testing --strict` sin errores.

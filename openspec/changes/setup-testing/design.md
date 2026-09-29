@@ -12,7 +12,7 @@ No hay tests ni configuración de Vitest. `.husky/pre-commit` solo contiene el b
 
 ## Decisions
 
-1. **Configuración según la guía de Next.js.** `vitest.config.mts` en la raíz con `plugins: [tsconfigPaths(), react()]` y `environment: 'jsdom'`. Se añaden `setupFiles: ['./src/test/setup.ts']` e `include: ['src/**/*.test.{ts,tsx}']` para que la futura carpeta de Playwright no la recoja Vitest. `globals: false`: los tests importan `describe/it/expect/vi` explícitamente. Consecuencia: Testing Library no registra su `cleanup` automático, por eso lo hace el setup.
+1. **Configuración según la guía de Next.js, sin `vite-tsconfig-paths`.** `vitest.config.mts` en la raíz con `plugins: [react()]`, `resolve: { tsconfigPaths: true }` y `environment: 'jsdom'`. Alternativa descartada: el plugin `vite-tsconfig-paths` de la guía, porque Vite 8 resuelve el alias de forma nativa y el plugin depende de `tsconfck` (sin mantenimiento). Se añaden `setupFiles: ['./src/test/setup.ts']` e `include: ['src/**/*.test.{ts,tsx}']` para que la futura carpeta de Playwright no la recoja Vitest. `globals: false`: los tests importan `describe/it/expect/vi` explícitamente. Consecuencia: Testing Library no registra su `cleanup` automático, por eso lo hace el setup.
 
 2. **Limpieza en un único `afterEach` del setup**, en este orden: `cleanup()`, `vi.useRealTimers()`, `vi.restoreAllMocks()`, `vi.unstubAllGlobals()`. Alternativa descartada: las opciones de config `restoreMocks`/`unstubGlobals`, porque reparten la política entre dos archivos y no cubren timers ni DOM.
 
@@ -23,6 +23,7 @@ No hay tests ni configuración de Vitest. `.husky/pre-commit` solo contiene el b
    - `la zona horaria es America/Guayaquil`
    - `un test deja DOM, timers falsos, spies y globals modificados`
    - `el test siguiente empieza con DOM vacío, timers reales, spies restaurados y globals originales`
+   - `el alias @/ se resuelve` (importa una constante de `src/test/fixtures/alias.ts` mediante `@/test/fixtures/alias`)
 
 5. **Scripts:** `test` = `vitest` (watch, como indica la guía), `test:run` = `vitest run`, `typecheck` = `tsc --noEmit`.
 

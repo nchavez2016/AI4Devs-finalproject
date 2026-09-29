@@ -1,4 +1,4 @@
 # Progreso: setup-testing
 - Siguiente: 2.1 RED `jsdom expone document y window`
-- Decisiones: `@types/node` se instala en `^22` en el mismo `npm install -D` para satisfacer el peer de `vitest@5`.
-- Discrepancias: 1.1 incluye actualizar `@types/node` `^20` → `^22` (no previsto en tasks.md; autorizado por el humano y registrado en proposal.md). Vite 8 avisa de que `vite-tsconfig-paths` es redundante (`resolve.tsconfigPaths: true` nativo); se mantiene según design.md, pendiente de decisión humana.
+- Decisiones: `@types/node` se instala en `^22` para satisfacer el peer de `vitest@5`. Se retira `vite-tsconfig-paths` y el alias `@/` se resuelve con `resolve.tsconfigPaths: true` nativo de Vite 8 (decisión humana 2026-09-29: el plugin es redundante y depende de `tsconfck`, sin mantenimiento); lo cubre el test guardián `el alias @/ se resuelve` (2.10–2.13).
+- Discrepancias: 1.1 incluye actualizar `@types/node` `^20` → `^22` (autorizado por el humano y registrado en proposal.md). 1.1 y 1.2 se completaron con `vite-tsconfig-paths`; su retirada es la 2.10.
