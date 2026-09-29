@@ -87,3 +87,4 @@ Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, a
 - No encadenar comandos con `;` o `&&`: un comando por ejecución.
 - No leer carpetas completas cuando basta un archivo concreto.
 - Crear y editar archivos solo con las herramientas de edición, nunca con redirecciones de terminal (`>`, `>>`, `tee`, heredoc).
+- Si un hook o una protección devuelve un error, detente y avisa al usuario. No continúes.
