@@ -1,4 +1,4 @@
 # Progreso: setup-testing
-- Siguiente: 2.8 GREEN `src/test/setup.ts` con `afterEach` de limpieza registrado en `setupFiles`
+- Siguiente: 2.9 REFACTOR de la limpieza entre tests sin cambios de comportamiento
 - Decisiones: `@types/node` se instala en `^22` para satisfacer el peer de `vitest@5`. Se retira `vite-tsconfig-paths` y el alias `@/` se resuelve con `resolve.tsconfigPaths: true` nativo de Vite 8 (decisión humana 2026-09-29: el plugin es redundante y depende de `tsconfck`, sin mantenimiento); lo cubre el test guardián `el alias @/ se resuelve` (2.10–2.13). El RED de 2.4 se fuerza con `process.env.TZ = 'UTC'` en `vitest.config.mts` porque la máquina ya está en America/Guayaquil (decisión humana 2026-09-29, opción 1); la 2.5 sustituye ese valor.
 - Discrepancias: 1.1 incluye actualizar `@types/node` `^20` → `^22` (autorizado por el humano y registrado en proposal.md). 1.1 y 1.2 se completaron con `vite-tsconfig-paths`; su retirada es la 2.10. En 2.4 el fallo muestra `UTC` (zona forzada), no la zona de la máquina como dice la tarea.
