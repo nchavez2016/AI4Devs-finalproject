@@ -17,7 +17,7 @@
 - [x] 2.3 REFACTOR: revisar el archivo de test y la config sin cambiar comportamiento. Verificar: el test sigue en verde.
 
 ### la zona horaria es America/Guayaquil
-- [ ] 2.4 RED: test `la zona horaria es America/Guayaquil` que comprueba `Intl.DateTimeFormat().resolvedOptions().timeZone` y que `new Date('2026-01-15T12:00:00Z').getTimezoneOffset()` es `300`. Verificar: falla mostrando la zona horaria de la máquina.
+- [x] 2.4 RED: test `la zona horaria es America/Guayaquil` que comprueba `Intl.DateTimeFormat().resolvedOptions().timeZone` y que `new Date('2026-01-15T12:00:00Z').getTimezoneOffset()` es `300`. Verificar: falla mostrando la zona horaria de la máquina.
 - [ ] 2.5 GREEN: `process.env.TZ = 'America/Guayaquil'` como primera instrucción de `vitest.config.mts`. Verificar: el test pasa.
 - [ ] 2.6 REFACTOR: sin cambios de comportamiento. Verificar: el archivo sigue en verde.
 
