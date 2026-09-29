@@ -14,7 +14,7 @@
 ### jsdom expone document y window
 - [x] 2.1 RED: en `src/test/entorno.test.tsx`, test `jsdom expone document y window` que renderiza un elemento con Testing Library y lo encuentra en `document`. Verificar: `npx vitest run src/test/entorno.test.tsx --reporter=dot` falla porque `document` no está definido (entorno node).
 - [x] 2.2 GREEN: añadir `environment: 'jsdom'` a `vitest.config.mts`. Verificar: el test pasa.
-- [ ] 2.3 REFACTOR: revisar el archivo de test y la config sin cambiar comportamiento. Verificar: el test sigue en verde.
+- [x] 2.3 REFACTOR: revisar el archivo de test y la config sin cambiar comportamiento. Verificar: el test sigue en verde.
 
 ### la zona horaria es America/Guayaquil
 - [ ] 2.4 RED: test `la zona horaria es America/Guayaquil` que comprueba `Intl.DateTimeFormat().resolvedOptions().timeZone` y que `new Date('2026-01-15T12:00:00Z').getTimezoneOffset()` es `300`. Verificar: falla mostrando la zona horaria de la máquina.
