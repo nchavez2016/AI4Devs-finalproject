@@ -35,5 +35,11 @@ const protegidos = [
 for (const { patron, motivo } of protegidos) {
   if (patron.test(ruta)) bloquear(`${motivo} (${ruta}).`);
 }
-
+  // Las carpetas .claude y .git tampoco se tocan desde la terminal.
+  if (/(^|[\s"'\/\\])\.claude[\/\\]/.test(comando)) {
+    bloquear("los comandos no pueden tocar la carpeta .claude (permisos y hooks del agente).");
+  }
+  if (/(^|[\s"'\/\\])\.git[\/\\]/.test(comando)) {
+    bloquear("los comandos no pueden tocar la carpeta .git.");
+  }
 process.exit(0);

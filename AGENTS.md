@@ -82,3 +82,4 @@ Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, a
 - No modificar tests para que pasen sin autorización.
 - No encadenar comandos con `;` o `&&`: un comando por ejecución.
 - No leer carpetas completas cuando basta un archivo concreto.
+- Crear y editar archivos solo con las herramientas de edición, nunca con redirecciones de terminal (`>`, `>>`, `tee`, heredoc).
