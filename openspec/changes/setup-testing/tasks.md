@@ -24,7 +24,7 @@
 ### Limpieza entre tests
 - [x] 2.7 RED: tests consecutivos `un test deja DOM, timers falsos, spies y globals modificados` y `el test siguiente empieza con DOM vacío, timers reales, spies restaurados y globals originales`, con un comentario que explique que dependen del orden. Verificar: el segundo falla porque el DOM del primero sigue montado (y los timers siguen falsos).
 - [x] 2.8 GREEN: crear `src/test/setup.ts` con un `afterEach` que ejecuta `cleanup()`, `vi.useRealTimers()`, `vi.restoreAllMocks()` y `vi.unstubAllGlobals()`, y registrarlo en `setupFiles`. Verificar: los cuatro tests del archivo pasan.
-- [ ] 2.9 REFACTOR: sin cambios de comportamiento. Verificar: el archivo sigue en verde.
+- [x] 2.9 REFACTOR: sin cambios de comportamiento. Verificar: el archivo sigue en verde.
 
 ### el alias @/ se resuelve
 - [ ] 2.10 Desinstalar `vite-tsconfig-paths` (`npm uninstall -D vite-tsconfig-paths`) y quitarlo de `vitest.config.mts`. Verificar: ya no aparece en `package.json`, `prisma` y `@prisma/client` siguen en `7.10.0` exacta y los tests del archivo siguen en verde.
