@@ -1,7 +1,7 @@
 // Hook PreToolUse del proyecto Cuadre.
 // - Edit/Write: bloquea editar .env, migraciones aplicadas y .git.
 // - Bash/PowerShell: bloquea cualquier comando que mencione un archivo .env
-//   (excepto .env.example).
+//   (excepto .env.example). No bloquea propiedades como process.env o import.meta.env.
 // Exit 2 = bloquear; el mensaje de stderr se le muestra a Claude.
 import { readFileSync } from "node:fs";
 
@@ -15,8 +15,9 @@ function bloquear(motivo) {
 
 if (tool === "Bash" || tool === "PowerShell") {
   const comando = input.tool_input?.command ?? "";
+  // Un archivo .env no va precedido de letra, número ni $ (a diferencia de process.env).
   // Coincide con .env, .env.local, .env.production... pero no con .env.example
-  if (/\.env(?!\.example)(?![\w-])|\.env\.(?!example)[\w.-]+/.test(comando)) {
+  if (/(?<![\w$])\.env(?!\.example\b)(?:\.[\w-]+)*(?![\w-])/.test(comando)) {
     bloquear("los comandos no pueden tocar archivos .env (contienen secretos). Pide al usuario que lo haga manualmente.");
   }
   process.exit(0);
