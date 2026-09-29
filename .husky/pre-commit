@@ -3,3 +3,18 @@ if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
   echo "ERROR: no se hacen commits directos en $BRANCH. Trabaja en la rama de la entrega."
   exit 1
 fi
+
+# Cada tasks.md de un change activo en stage exige su progress.md en stage.
+# El patrón no cubre openspec/changes/archive/<change>/tasks.md.
+STAGED=$(git diff --cached --name-only --diff-filter=ACMR)
+for TASKS in $(echo "$STAGED" | grep -E '^openspec/changes/[^/]+/tasks\.md$'); do
+  CHANGE=$(echo "$TASKS" | cut -d/ -f3)
+  if ! echo "$STAGED" | grep -qxF "openspec/changes/$CHANGE/progress.md"; then
+    echo "ERROR: $CHANGE: tasks.md está en stage sin openspec/changes/$CHANGE/progress.md."
+    exit 1
+  fi
+done
+
+npm run lint || exit 1
+npm run typecheck || exit 1
+npm run test:run || exit 1
