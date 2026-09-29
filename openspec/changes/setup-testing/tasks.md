@@ -39,7 +39,7 @@
 
 - [x] 3.1 Completar `.husky/pre-commit` manteniendo el bloqueo de `main`/`master` como primer bloque, y añadiendo en este orden: comprobación `tasks.md` ↔ `progress.md`, `npm run lint`, `npm run typecheck`, `npm run test:run`. Solo sintaxis POSIX. Verificar: `sh .husky/pre-commit` con el árbol limpio termina con código 0 y el bloqueo de rama sigue siendo lo primero (inspección).
 - [x] 3.2 Probar la comprobación de progreso: poner en stage un `openspec/changes/sonda-hook/tasks.md` temporal sin `progress.md` → `sh .husky/pre-commit` falla nombrando `sonda-hook`; añadir `progress.md` al stage → esa comprobación pasa; poner en stage un `tasks.md` bajo `openspec/changes/archive/` → no se exige `progress.md`. Quitar del stage y borrar los archivos sonda. Verificar: `git status` queda como antes.
-- [ ] 3.3 Probar lint: archivo sonda temporal `src/test/sonda-lint.ts` con un `any` explícito → el hook falla en lint. Borrar la sonda. Verificar: `git status` queda como antes.
+- [x] 3.3 Probar lint: archivo sonda temporal `src/test/sonda-lint.ts` con un `any` explícito → el hook falla en lint. Borrar la sonda. Verificar: `git status` queda como antes.
 - [ ] 3.4 Probar typecheck: archivo sonda temporal `src/test/sonda-tipos.ts` que asigna un string a un `number` → el hook falla en typecheck. Borrar la sonda. Verificar: `git status` queda como antes.
 - [ ] 3.5 Probar tests: archivo sonda temporal `src/test/sonda.test.ts` con un `expect(1).toBe(2)` → el hook falla en tests. Borrar la sonda. Verificar: `git status` queda como antes y `sh .husky/pre-commit` vuelve a terminar con código 0.
 
