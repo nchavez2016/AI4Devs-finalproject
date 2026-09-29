@@ -1,4 +1,4 @@
-process.env.TZ = 'UTC'
+process.env.TZ = 'America/Guayaquil'
 
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
