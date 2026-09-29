@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from '@testing-library/react'
+import { valorAlias } from '@/test/fixtures/alias'
 
 const innerWidthOriginal = window.innerWidth
 
@@ -35,5 +36,9 @@ describe('entorno de tests', () => {
     expect(vi.isFakeTimers()).toBe(false)
     expect(vi.isMockFunction(Math.random)).toBe(false)
     expect(window.innerWidth).toBe(innerWidthOriginal)
+  })
+
+  it('el alias @/ se resuelve', () => {
+    expect(valorAlias).toBe('alias resuelto')
   })
 })

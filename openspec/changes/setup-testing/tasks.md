@@ -28,7 +28,7 @@
 
 ### el alias @/ se resuelve
 - [x] 2.10 Desinstalar `vite-tsconfig-paths` (`npm uninstall -D vite-tsconfig-paths`) y quitarlo de `vitest.config.mts`. Verificar: ya no aparece en `package.json`, `prisma` y `@prisma/client` siguen en `7.10.0` exacta y los tests del archivo siguen en verde.
-- [ ] 2.11 RED: crear `src/test/fixtures/alias.ts` que exporta una constante y el test `el alias @/ se resuelve` que la importa desde `@/test/fixtures/alias`. Verificar: `npx vitest run src/test/entorno.test.tsx --reporter=dot` falla porque el alias no se resuelve.
+- [x] 2.11 RED: crear `src/test/fixtures/alias.ts` que exporta una constante y el test `el alias @/ se resuelve` que la importa desde `@/test/fixtures/alias`. Verificar: `npx vitest run src/test/entorno.test.tsx --reporter=dot` falla porque el alias no se resuelve.
 - [ ] 2.12 GREEN: añadir `resolve: { tsconfigPaths: true }` a `vitest.config.mts`. Verificar: todos los tests del archivo pasan.
 - [ ] 2.13 REFACTOR: sin cambios de comportamiento. Verificar: el archivo sigue en verde.
 
