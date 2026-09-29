@@ -45,5 +45,5 @@
 
 ## 4. AGENTS.md y validación final
 
-- [ ] 4.1 En AGENTS.md, sustituir "Tests: pendiente de configurar (Vitest + Playwright)." por los comandos reales (`npm run test`, `npm run test:run`, `npm run typecheck`, `npx vitest run <archivo> --reporter=dot`) e indicar que Playwright llega con el primer change E2E. Añadir `@vitejs/plugin-react` a la lista de dependencias aprobadas para el MVP. Verificar: cada comando documentado se ejecuta tal como está escrito y el paquete aparece en la lista de aprobadas.
+- [x] 4.1 En AGENTS.md, sustituir "Tests: pendiente de configurar (Vitest + Playwright)." por los comandos reales (`npm run test`, `npm run test:run`, `npm run typecheck`, `npx vitest run <archivo> --reporter=dot`) e indicar que Playwright llega con el primer change E2E. Añadir `@vitejs/plugin-react` a la lista de dependencias aprobadas para el MVP. Verificar: cada comando documentado se ejecuta tal como está escrito y el paquete aparece en la lista de aprobadas.
 - [ ] 4.2 Validación final: `npm run lint`, `npm run typecheck`, `npm run test:run` y `openspec validate setup-testing --strict` sin errores.

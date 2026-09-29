@@ -20,7 +20,11 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
 - `npx prisma migrate dev --name <nombre>` — nueva migración.
 - `npx prisma generate` — ejecutar SIEMPRE después de migrar o cambiar el schema
   (Prisma 7 no lo hace solo).
-- Tests: pendiente de configurar (Vitest + Playwright).
+- `npm run test` — Vitest en modo watch.
+- `npm run test:run` — toda la suite de Vitest una vez.
+- `npm run typecheck` — `tsc --noEmit`.
+- `npx vitest run <archivo> --reporter=dot` — un solo archivo de test.
+- Playwright (E2E) se configura con el primer change que tenga tests E2E.
 
 ## Ciclo de trabajo (OpenSpec)
 - No implementes nada sin un change aprobado en `openspec/changes/`.
@@ -61,7 +65,7 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
 
 ## Dependencias
 - Aprobadas para el MVP: Zod, Auth.js, shadcn/ui, Recharts, Vitest, Testing Library, jsdom,
-  Playwright.
+  `@vitejs/plugin-react`, Playwright.
 - Cada una se instala dentro del change que la necesita y se justifica en su `design.md`.
 - Cualquier otra dependencia: preguntar antes.
 - NO ejecutar `npm audit fix --force`: bajaría Prisma a la versión 6.
