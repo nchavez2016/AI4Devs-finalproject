@@ -26,6 +26,7 @@ Todas las que exige la guía (variante TypeScript), como `devDependencies`:
 | `@testing-library/dom` | Sí (Testing Library; peer de la anterior) |
 | `@vitejs/plugin-react` | No; autorizado para este change (se añade a la lista en la tarea 4.1) |
 | `vite-tsconfig-paths` | No; autorizado para este change (se añade a la lista en la tarea 4.1) |
+| `@types/node` `^20` → `^22` | Actualización de una dependencia existente, autorizada por el humano el 2026-09-29: `vitest@5` exige `@types/node` `^22.0.0 \|\| >=24.0.0` como peer |
 
 `@vitejs/plugin-react` transforma JSX/TSX en los tests de componentes; `vite-tsconfig-paths` resuelve el alias `@/*` de `tsconfig.json`. No se añade `@testing-library/jest-dom` ni ninguna otra dependencia fuera de la guía.
 

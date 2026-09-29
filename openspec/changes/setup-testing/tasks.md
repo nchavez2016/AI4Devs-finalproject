@@ -5,7 +5,7 @@
 
 ## 1. Dependencias y configuración base de Vitest
 
-- [ ] 1.1 Instalar como devDependencies `vitest`, `jsdom`, `@testing-library/react`, `@testing-library/dom`, `@vitejs/plugin-react` y `vite-tsconfig-paths` con un único `npm install -D`. Verificar: aparecen en `package.json` y `prisma` y `@prisma/client` siguen en `7.10.0` exacta.
+- [x] 1.1 Instalar como devDependencies `vitest`, `jsdom`, `@testing-library/react`, `@testing-library/dom`, `@vitejs/plugin-react` y `vite-tsconfig-paths` con un único `npm install -D`. Verificar: aparecen en `package.json` y `prisma` y `@prisma/client` siguen en `7.10.0` exacta.
 - [ ] 1.2 Crear `vitest.config.mts` mínimo: `plugins: [tsconfigPaths(), react()]` e `include: ['src/**/*.test.{ts,tsx}']`, todavía sin `environment`, `setupFiles` ni zona horaria (los introducen los tests del grupo 2). Verificar: `npx vitest run --passWithNoTests` termina en verde y `npx tsc --noEmit` no da errores.
 
 ## 2. Setup, test guardián y scripts
