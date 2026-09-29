@@ -33,7 +33,7 @@
 - [x] 2.13 REFACTOR: sin cambios de comportamiento. Verificar: el archivo sigue en verde.
 
 ### Scripts
-- [ ] 2.14 Añadir a `package.json` los scripts `test` (`vitest`), `test:run` (`vitest run`) y `typecheck` (`tsc --noEmit`). Verificar: `npm run test:run` y `npm run typecheck` terminan en verde.
+- [x] 2.14 Añadir a `package.json` los scripts `test` (`vitest`), `test:run` (`vitest run`) y `typecheck` (`tsc --noEmit`). Verificar: `npm run test:run` y `npm run typecheck` terminan en verde.
 
 ## 3. Hook de pre-commit
 
