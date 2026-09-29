@@ -12,7 +12,7 @@
 ## 2. Setup, test guardián y scripts
 
 ### jsdom expone document y window
-- [ ] 2.1 RED: en `src/test/entorno.test.tsx`, test `jsdom expone document y window` que renderiza un elemento con Testing Library y lo encuentra en `document`. Verificar: `npx vitest run src/test/entorno.test.tsx --reporter=dot` falla porque `document` no está definido (entorno node).
+- [x] 2.1 RED: en `src/test/entorno.test.tsx`, test `jsdom expone document y window` que renderiza un elemento con Testing Library y lo encuentra en `document`. Verificar: `npx vitest run src/test/entorno.test.tsx --reporter=dot` falla porque `document` no está definido (entorno node).
 - [ ] 2.2 GREEN: añadir `environment: 'jsdom'` a `vitest.config.mts`. Verificar: el test pasa.
 - [ ] 2.3 REFACTOR: revisar el archivo de test y la config sin cambiar comportamiento. Verificar: el test sigue en verde.
 
