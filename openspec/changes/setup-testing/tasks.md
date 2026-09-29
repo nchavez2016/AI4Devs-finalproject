@@ -19,7 +19,7 @@
 ### la zona horaria es America/Guayaquil
 - [x] 2.4 RED: test `la zona horaria es America/Guayaquil` que comprueba `Intl.DateTimeFormat().resolvedOptions().timeZone` y que `new Date('2026-01-15T12:00:00Z').getTimezoneOffset()` es `300`. Verificar: falla mostrando la zona horaria de la máquina.
 - [x] 2.5 GREEN: `process.env.TZ = 'America/Guayaquil'` como primera instrucción de `vitest.config.mts`. Verificar: el test pasa.
-- [ ] 2.6 REFACTOR: sin cambios de comportamiento. Verificar: el archivo sigue en verde.
+- [x] 2.6 REFACTOR: sin cambios de comportamiento. Verificar: el archivo sigue en verde.
 
 ### Limpieza entre tests
 - [ ] 2.7 RED: tests consecutivos `un test deja DOM, timers falsos, spies y globals modificados` y `el test siguiente empieza con DOM vacío, timers reales, spies restaurados y globals originales`, con un comentario que explique que dependen del orden. Verificar: el segundo falla porque el DOM del primero sigue montado (y los timers siguen falsos).
