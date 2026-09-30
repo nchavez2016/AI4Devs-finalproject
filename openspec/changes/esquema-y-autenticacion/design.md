@@ -71,7 +71,12 @@ categorías.
 
 **Configuración.** `src/config/env.ts` valida con Zod `DATABASE_URL` y `AUTH_SECRET`
 (mínimo 32 caracteres) al importarse; es el único archivo que lee `process.env`. El error
-nombra la variable, sin mostrar su valor.
+nombra la variable, sin mostrar su valor. Como valida al importarse, cualquier test que
+importe el módulo (directa o indirectamente) necesita esas dos variables ya definidas;
+`vitest.config.mts` las fija con valores ficticios en `test.env` para que los tests
+unitarios no dependan de un `.env` real. La tarea 1.14 reorganiza este `test.env` por
+proyecto (`unidad` mantiene estos valores ficticios; `integracion` usa la URL real de
+`TEST_DATABASE_URL`).
 
 **Validación de registro** (esquema Zod en `src/server/auth/esquemas.ts`, con un mensaje en
 español por campo):

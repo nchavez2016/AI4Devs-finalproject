@@ -8,12 +8,12 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 ## 1. Dependencias y configuración
 
 - [x] 1.1 [PARADA] Pedir autorización e instalar `zod` como dependencia directa; verificar que aparece en `dependencies` de package.json.
-- [ ] 1.2 RED — `src/config/env.test.ts`, test "Configuración incompleta impide arrancar": la carga falla nombrando `AUTH_SECRET`, sin mostrar valores. Ver que falla porque `src/config/env.ts` no existe.
-- [ ] 1.3 GREEN — `src/config/env.ts`: función `cargarEnv(fuente)` con esquema Zod (`DATABASE_URL` URL postgres, `AUTH_SECRET` ≥ 32 caracteres) y `env` exportado a partir de `process.env`. Verificar el test en verde.
-- [ ] 1.4 REFACTOR — revisar mensajes y nombres; test en verde.
-- [ ] 1.5 RED — `src/config/env.test.ts`, test "Configuración completa se acepta". Si pasa sin cambios, detenerse y proponer cómo forzar el RED (config.yaml).
-- [ ] 1.6 GREEN — ajustar `src/config/env.ts` si hace falta; test en verde.
-- [ ] 1.7 REFACTOR — test en verde.
+- [x] 1.2 RED — `src/config/env.test.ts`, test "Configuración incompleta impide arrancar": la carga falla nombrando `AUTH_SECRET`, sin mostrar valores. Ver que falla porque `src/config/env.ts` no existe.
+- [x] 1.3 GREEN — `src/config/env.ts`: función `cargarEnv(fuente)` con esquema Zod (`DATABASE_URL` URL postgres, `AUTH_SECRET` ≥ 32 caracteres) y `env` exportado a partir de `process.env`. Verificar el test en verde.
+- [x] 1.4 REFACTOR — revisar mensajes y nombres; test en verde.
+- [x] 1.5 RED — `src/config/env.test.ts`, test "Configuración completa se acepta". Si pasa sin cambios, detenerse y proponer cómo forzar el RED (config.yaml).
+- [x] 1.6 GREEN — ajustar `src/config/env.ts` si hace falta; test en verde.
+- [x] 1.7 REFACTOR — test en verde.
 - [ ] 1.8 Documentar en `.env.example` `AUTH_SECRET` (para qué sirve, mínimo 32 caracteres y cómo generarlo con `node:crypto`) y `TEST_DATABASE_URL` (opcional, valor por defecto, debe terminar en `_test`, la crea el `globalSetup`); verificar leyendo el archivo.
 - [ ] 1.9 [PARADA] Pedir autorización (paquete NO aprobado, ver design.md a) y ejecutar `npm install --save-exact @prisma/adapter-pg@7.10.0`; verificar que package.json dice exactamente `"7.10.0"` (sin `^`) y que `npm ls pg` resuelve.
 - [ ] 1.10 CARACTERIZACIÓN — ejecutar `npm run test:run` y anotar en progress.md el número de archivos y tests actuales, antes de tocar `vitest.config.mts`.
