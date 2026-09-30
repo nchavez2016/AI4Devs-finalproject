@@ -54,9 +54,9 @@
 - [x] 2.24 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Importe aplica el tamaño indicado
-- [ ] 2.25 RED: test `Importe aplica el tamaño indicado`: `text-cuerpo` por defecto, `text-importe-resumen` y `text-importe-principal`. Verificar: falla por la clase ausente.
-- [ ] 2.26 GREEN: prop `tamano`. Verificar: el archivo pasa.
-- [ ] 2.27 REFACTOR. Verificar: el archivo pasa y la suite completa (`npm run test:run`) está en verde.
+- [x] 2.25 RED: test `Importe aplica el tamaño indicado`: `text-cuerpo` por defecto, `text-importe-resumen` y `text-importe-principal`. Verificar: falla por la clase ausente.
+- [x] 2.26 GREEN: prop `tamano`. Verificar: el archivo pasa.
+- [x] 2.27 REFACTOR. Verificar: el archivo pasa y la suite completa (`npm run test:run`) está en verde.
 
 ## 3. Button y Campo
 

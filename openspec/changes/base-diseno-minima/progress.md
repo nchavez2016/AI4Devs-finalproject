@@ -1,4 +1,4 @@
 # Progreso: base-diseno-minima
-- Siguiente: 2.25 RED: test Importe aplica el tamaño indicado
+- Siguiente: 3.1 RED: test Button aplica las clases de su variante
 - Decisiones: ninguna
 - Discrepancias: ninguna

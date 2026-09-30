@@ -49,18 +49,29 @@ export function formatearImporte(valor: string, tipo: TipoImporte): string {
   return ''
 }
 
+export type TamanoImporte = 'cuerpo' | 'importe-resumen' | 'importe-principal'
+
+const clasesTamano: Record<TamanoImporte, string> = {
+  cuerpo: 'text-cuerpo',
+  'importe-resumen': 'text-importe-resumen',
+  'importe-principal': 'text-importe-principal',
+}
+
 export interface ImporteProps {
   valor: string
   tipo: TipoImporte
+  tamano?: TamanoImporte
 }
 
-export function Importe({ valor, tipo }: ImporteProps) {
+export function Importe({ valor, tipo, tamano = 'cuerpo' }: ImporteProps) {
   const formateado = formatearImporte(valor, tipo)
   const etiquetaSr = tipo === 'ingreso' ? 'Ingreso' : tipo === 'gasto' ? 'Gasto' : null
   const claseColor = obtenerClaseColor(valor, tipo)
+  const claseTamano = clasesTamano[tamano]
+  const className = [claseColor, claseTamano].filter(Boolean).join(' ')
 
   return (
-    <span className={claseColor}>
+    <span className={className}>
       {etiquetaSr && <span className="sr-only">{etiquetaSr}</span>}
       <span>{formateado}</span>
     </span>

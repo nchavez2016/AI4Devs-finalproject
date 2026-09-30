@@ -61,4 +61,19 @@ describe('Importe', () => {
     const { container: positivo } = render(<Importe valor="1234.50" tipo="saldo" />)
     expect(positivo.firstElementChild?.className).toContain('text-foreground')
   })
+
+  it('Importe aplica el tamaño indicado', () => {
+    const { container: porDefecto } = render(<Importe valor="25.50" tipo="ingreso" />)
+    expect(porDefecto.firstElementChild?.className).toContain('text-cuerpo')
+
+    const { container: resumen } = render(
+      <Importe valor="25.50" tipo="ingreso" tamano="importe-resumen" />
+    )
+    expect(resumen.firstElementChild?.className).toContain('text-importe-resumen')
+
+    const { container: principal } = render(
+      <Importe valor="25.50" tipo="ingreso" tamano="importe-principal" />
+    )
+    expect(principal.firstElementChild?.className).toContain('text-importe-principal')
+  })
 })
