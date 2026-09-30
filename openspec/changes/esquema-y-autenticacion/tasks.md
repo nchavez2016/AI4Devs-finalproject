@@ -81,9 +81,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 4.2 RED — `src/app/page.test.tsx`, test "La raíz lleva al panel": invoca `Page()` (componente síncrono, sin renderizar) con `redirect` de `next/navigation` simulado y comprueba que se llama con `"/panel"`.
 - [x] 4.3 GREEN — `src/app/page.tsx` pasa a ser solo `redirect("/panel")`. Test en verde.
 - [x] 4.4 REFACTOR — test en verde.
-- [ ] 4.5 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel muestra el negocio del usuario autenticado": con `@/auth` simulado (sesión de A), renderiza `<ContenidoPanel {...await cargarPanel()} />` y comprueba que aparece "Tienda Ana" y no "Taller Beto". Ver que falla porque no existen.
-- [ ] 4.6 GREEN — `src/server/panel.ts` (`cargarPanel`: `auth()`, `redirect("/login")` sin sesión y devuelve `nombreNegocio`), `src/app/(privado)/panel/ContenidoPanel.tsx` (síncrono: negocio y botón "Cerrar sesión" con `cerrarSesion`, solo tokens de `docs/diseno/sistema/`) y `page.tsx` (async, solo une las dos piezas; se verifica en 5.3). Test en verde.
-- [ ] 4.7 REFACTOR — test en verde.
+- [x] 4.5 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel muestra el negocio del usuario autenticado": con `@/auth` simulado (sesión de A), renderiza `<ContenidoPanel {...await cargarPanel()} />` y comprueba que aparece "Tienda Ana" y no "Taller Beto". Ver que falla porque no existen.
+- [x] 4.6 GREEN — `src/server/panel.ts` (`cargarPanel`: `auth()`, `redirect("/login")` sin sesión y devuelve `nombreNegocio`), `src/app/(privado)/panel/ContenidoPanel.tsx` (síncrono: negocio y botón "Cerrar sesión" con `cerrarSesion`, solo tokens de `docs/diseno/sistema/`) y `page.tsx` (async, solo une las dos piezas; se verifica en 5.3). Test en verde.
+- [x] 4.7 REFACTOR — test en verde.
 - [ ] 4.8 RED — `src/server/auth/acciones.test.ts`, test "registrar devuelve los errores por campo del caso de uso" (caso de uso simulado).
 - [ ] 4.9 GREEN — Server Actions `registrar` (llama a `registrarUsuario` y, si va bien, a `signIn` con `redirectTo: "/panel"`) e `iniciarSesion` (mapea el `CredentialsSignin` al mensaje genérico) en `acciones.ts`. Test en verde.
 - [ ] 4.10 REFACTOR — test en verde.
