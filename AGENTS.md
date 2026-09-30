@@ -77,6 +77,12 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
   Fuera de eso: solo con orden explícita.
 - Nunca push, merge ni cambio de rama: los hace el humano.
 
+## Traspaso entre herramientas
+- Commits finalizados y pusheados (aunque sea localmente) antes de cambiar de herramienta.
+- Nueva sesión: leer primero `openspec/changes/<change>/progress.md` y `tasks.md`.
+- Verifica con `git log` en qué quedó el trabajo anterior.
+- Si vas a cambiar a Antigravity u otra herramienta, avisa al usuario que comitee y registre el estado actual.
+
 ## Fuera de alcance (NO construir)
 Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, asistente de IA.
 

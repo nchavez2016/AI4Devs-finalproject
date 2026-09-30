@@ -62,11 +62,6 @@ describe('claude-adapter', () => {
         stdio: ['pipe', 'pipe', 'pipe'],
       });
 
-      let stderr = '';
-      proc.stderr.on('data', (data) => {
-        stderr += data.toString();
-      });
-
       proc.stdin.write('invalid json{');
       proc.stdin.end();
 
