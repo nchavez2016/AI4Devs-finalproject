@@ -65,9 +65,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 3.12 RED — `src/auth.test.ts`, test "la sesión expone id, nombre y nombre del negocio del token". Ver que falla porque los callbacks no existen.
 - [x] 3.13 GREEN — `src/auth.ts` (NextAuth: Credentials → `verificarCredenciales`, JWT, callbacks `jwt`/`session`, `pages.signIn: "/login"`, `secret: env.AUTH_SECRET`), `src/types/next-auth.d.ts` y `src/app/api/auth/[...nextauth]/route.ts`. Test en verde y `npm run typecheck` sin errores. (`next-auth` importa `next/server` sin extensión; hubo que forzar `server.deps.inline` en vitest.config.mts para que Vite lo procese.)
 - [x] 3.14 REFACTOR — test en verde.
-- [ ] 3.15 RED — `src/server/auth/rutas.test.ts`, test "Ruta privada sin sesión redirige al login". Ver que falla porque `rutas.ts` no existe.
-- [ ] 3.16 GREEN — `src/server/auth/rutas.ts` (función pura `resolverRedireccion(pathname, haySesion)`). Test en verde.
-- [ ] 3.17 REFACTOR — test en verde.
+- [x] 3.15 RED — `src/server/auth/rutas.test.ts`, test "Ruta privada sin sesión redirige al login". Ver que falla porque `rutas.ts` no existe.
+- [x] 3.16 GREEN — `src/server/auth/rutas.ts` (función pura `resolverRedireccion(pathname, haySesion)`). Test en verde.
+- [x] 3.17 REFACTOR — test en verde.
 - [ ] 3.18 RED — mismo archivo, test "Rutas públicas accesibles sin sesión".
 - [ ] 3.19 GREEN — lista de rutas públicas en `rutas.ts`; `proxy.ts` en la raíz que envuelve `auth` y aplica `resolverRedireccion`, con `matcher` que excluye `_next`, `api/auth` y archivos estáticos. Test en verde y `npm run typecheck` sin errores.
 - [ ] 3.20 REFACTOR — test en verde.
