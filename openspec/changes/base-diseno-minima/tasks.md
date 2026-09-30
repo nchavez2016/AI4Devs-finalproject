@@ -90,6 +90,6 @@
 
 ## 4. [HUMANO] Revisión visual y validación final
 
-- [ ] 4.1 [HUMANO] En `/diseno`, "111,11" y "888,88" miden lo mismo (DevTools → ancho del elemento). Si no, la carga de IBM Plex no aplica `tnum`: corregir antes de seguir.
-- [ ] 4.2 [HUMANO] Aspecto general frente a los mockups: fuentes, colores, alturas de control y campo en móvil y en escritorio (≥ 768 px), foco visible con teclado, el botón en carga no cambia de ancho.
-- [ ] 4.3 Validación final: `npm run lint`, `npm run typecheck`, `npm run test:run` y `openspec validate base-diseno-minima --strict` sin errores.
+- [x] 4.1 [HUMANO] En `/diseno`, "111,11" y "888,88" miden lo mismo (DevTools → ancho del elemento). Si no, la carga de IBM Plex no aplica `tnum`: corregir antes de seguir.
+- [x] 4.2 [HUMANO] Aspecto general frente a los mockups: fuentes, colores, alturas de control y campo en móvil y en escritorio (≥ 768 px), foco visible con teclado, el botón en carga no cambia de ancho.
+- [x] 4.3 Validación final: `npm run lint`, `npm run typecheck`, `npm run test:run` y `openspec validate base-diseno-minima --strict` sin errores.

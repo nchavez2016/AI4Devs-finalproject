@@ -1,4 +1,4 @@
 # Progreso: base-diseno-minima
-- Siguiente: 4.1 [HUMANO] En /diseno, "111,11" y "888,88" miden lo mismo (DevTools)
+- Siguiente: archivar el change con /opsx-archive
 - Decisiones: ninguna
 - Discrepancias: ninguna
