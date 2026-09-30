@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
+import { CredentialsSignin } from 'next-auth'
 
 const signOutSimulado = vi.fn()
 const signInSimulado = vi.fn()
@@ -42,5 +43,21 @@ describe('registrar', () => {
 
     expect(estado.errores).toEqual({ email: ['Ese email ya está registrado'] })
     expect(signInSimulado).not.toHaveBeenCalled()
+  })
+})
+
+describe('iniciarSesion', () => {
+  it('mapea el CredentialsSignin al mensaje genérico', async () => {
+    signInSimulado.mockRejectedValue(new CredentialsSignin())
+
+    const { iniciarSesion } = await import('./acciones')
+
+    const formData = new FormData()
+    formData.set('email', 'ana@tienda.ec')
+    formData.set('password', 'otra-clave-99')
+
+    const estado = await iniciarSesion(undefined, formData)
+
+    expect(estado.mensaje).toBe('Email o contraseña incorrectos')
   })
 })

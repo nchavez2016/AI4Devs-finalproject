@@ -90,9 +90,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 4.11 RED — `src/app/registro/FormularioRegistro.test.tsx`, test "muestra junto a cada campo el error devuelto por el servidor".
 - [x] 4.12 GREEN — `src/app/registro/page.tsx` y `FormularioRegistro.tsx` (`useActionState`, `Campo` y `Button` de `src/components/ui/`, enlace a `/login`). Test en verde.
 - [x] 4.13 REFACTOR — test en verde.
-- [ ] 4.14 RED — `src/app/login/FormularioLogin.test.tsx`, test "muestra el mensaje genérico de credenciales incorrectas" (con la Server Action `iniciarSesion` simulada).
-- [ ] 4.15 GREEN — Server Action `iniciarSesion` en `acciones.ts` (`signIn` con `redirectTo: "/panel"`; mapea `CredentialsSignin` al mensaje genérico), `src/app/login/page.tsx` y `FormularioLogin.tsx` (mismos componentes que el registro, enlace a `/registro`). Test en verde.
-- [ ] 4.16 REFACTOR — test en verde.
+- [x] 4.14 RED — `src/app/login/FormularioLogin.test.tsx`, test "muestra el mensaje genérico de credenciales incorrectas" (con la Server Action `iniciarSesion` simulada).
+- [x] 4.15 GREEN — Server Action `iniciarSesion` en `acciones.ts` (`signIn` con `redirectTo: "/panel"`; mapea `CredentialsSignin` al mensaje genérico), `src/app/login/page.tsx` y `FormularioLogin.tsx` (mismos componentes que el registro, enlace a `/registro`). Test en verde. (El test de 4.14 mockea `iniciarSesion` entera, así que su `try/catch` de `CredentialsSignin` quedaba sin test; se añadió un test propio en `acciones.test.ts` y se verificó por mutación.)
+- [x] 4.16 REFACTOR — test en verde.
 - [ ] 4.17 Eliminar `src/app/diseno/`; verificar con una búsqueda que nada la referencia y que `npm run build` termina sin errores (con `DATABASE_URL`/`AUTH_SECRET` disponibles; si `build` no puede ejecutarse por falta de `AUTH_SECRET`, dejarlo anotado para 5.2). Suite completa (cierre de grupo).
 
 ## 5. [HUMANO] Secreto, arranque y prueba manual

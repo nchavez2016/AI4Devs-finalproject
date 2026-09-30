@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 4.14 RED — src/app/login/FormularioLogin.test.tsx, "muestra el mensaje genérico de credenciales incorrectas"
-- Decisiones: FormularioRegistro usa useActionState + fireEvent.click para probar el submit (React 19 intercepta <form action> también en jsdom, sin necesitar mocks adicionales)
+- Siguiente: 4.17 eliminar src/app/diseno/ y npm run build (cierre de grupo)
+- Decisiones: iniciarSesion (con su try/catch de CredentialsSignin) tiene test propio en acciones.test.ts, verificado por mutación, además del test de componente de FormularioLogin
 - Discrepancias: ninguna

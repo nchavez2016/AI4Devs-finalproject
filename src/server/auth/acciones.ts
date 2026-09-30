@@ -1,7 +1,11 @@
 'use server'
 
+import { CredentialsSignin } from 'next-auth'
 import { signIn, signOut } from '@/auth'
 import { registrarUsuario } from './registro'
+
+// Mismo mensaje que credenciales.ts: no revela si el email existe.
+const MENSAJE_CREDENCIALES_INCORRECTAS = 'Email o contraseña incorrectos'
 
 export interface EstadoFormularioRegistro {
   errores: Record<string, string[]>
@@ -31,6 +35,31 @@ export async function registrar(
   })
 
   return { errores: {} }
+}
+
+export interface EstadoFormularioLogin {
+  mensaje?: string
+}
+
+export async function iniciarSesion(
+  _estadoPrevio: EstadoFormularioLogin | undefined,
+  formData: FormData
+): Promise<EstadoFormularioLogin> {
+  try {
+    await signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      redirectTo: '/panel',
+    })
+  } catch (error) {
+    if (error instanceof CredentialsSignin) {
+      return { mensaje: MENSAJE_CREDENCIALES_INCORRECTAS }
+    }
+
+    throw error
+  }
+
+  return {}
 }
 
 export async function cerrarSesion() {
