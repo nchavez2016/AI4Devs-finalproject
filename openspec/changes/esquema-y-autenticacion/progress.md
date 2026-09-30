@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 1.8 documentar AUTH_SECRET y TEST_DATABASE_URL en .env.example
-- Decisiones: vitest.config.mts añade test.env con DATABASE_URL/AUTH_SECRET ficticios para que los tests unitarios puedan importar env.ts (validación al importarse); 1.14 lo reorganiza por proyecto
+- Siguiente: 1.9 [PARADA] pedir autorización e instalar @prisma/adapter-pg@7.10.0
+- Decisiones: ninguna nueva
 - Discrepancias: ninguna
