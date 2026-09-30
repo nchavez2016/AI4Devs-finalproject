@@ -1,4 +1,4 @@
 # Progreso: portabilidad-agentes
-- Siguiente: Grupo 4 (tareas manuales humanas): 4.1-4.5 pruebas en ambas herramientas
-- Decisiones: decisión neutra de Antigravity = ask; entrada inválida = deny; segmentación por separadores evita falsos positivos de .env en mensajes
+- Siguiente: archivar el change
+- Decisiones: Segmentación de comandos por separadores anclada al inicio (evita falsos positivos). Insensibilidad a mayúsculas en todos los patrones (requisito Windows). Antigravity: decisión neutra = `ask` (confirmación blanda), entrada inválida = `deny`.
 - Discrepancias: ninguna
