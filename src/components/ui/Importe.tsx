@@ -10,7 +10,7 @@ export function formatearImporte(valor: string, tipo: TipoImporte): string {
   const valorAbsoluto = tieneSignoMenos ? valor.slice(1) : valor
   const esCero = /^0*(\.0*)?$/.test(valorAbsoluto)
   const esNegativo = tieneSignoMenos && !esCero
-  const formateado = formateadorMoneda.format(valorAbsoluto as unknown as number)
+  const formateado = formateadorMoneda.format(valorAbsoluto as Intl.StringNumericLiteral)
 
   if (esCero) {
     return formateado

@@ -39,9 +39,9 @@
 - [x] 2.15 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea sin convertir el valor a number
-- [ ] 2.16 RED: test `formatea sin convertir el valor a number` con `'12345678901234567.89'` → `$12.345.678.901.234.567,89`. Si pasa sin cambios (la implementación ya no usa `number`), detenerse y proponer cómo forzar el RED según la guía de apply. Verificar: falla por pérdida de precisión.
-- [ ] 2.17 GREEN: pasar el texto a `format` tipado como `Intl.StringNumericLiteral`. Verificar: el archivo pasa.
-- [ ] 2.18 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 2.16 RED: test `formatea sin convertir el valor a number` con `'12345678901234567.89'` → `$12.345.678.901.234.567,89`. Si pasa sin cambios (la implementación ya no usa `number`), detenerse y proponer cómo forzar el RED según la guía de apply. Verificar: falla por pérdida de precisión.
+- [x] 2.17 GREEN: pasar el texto a `format` tipado como `Intl.StringNumericLiteral`. Verificar: el archivo pasa.
+- [x] 2.18 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Importe incluye Ingreso o Gasto solo para lectores de pantalla
 - [ ] 2.19 RED: test `Importe incluye Ingreso o Gasto solo para lectores de pantalla`: renderiza `<Importe valor="25.50" tipo="ingreso" />` y `tipo="gasto"`; el texto "Ingreso"/"Gasto" está en un elemento con clase `sr-only` y el importe visible es `+$25,50`/`−$25,50`; `saldo` no añade texto oculto. Verificar: falla porque el componente no existe.

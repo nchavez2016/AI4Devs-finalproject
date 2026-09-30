@@ -22,4 +22,8 @@ describe('Importe', () => {
     expect(formatearImporte('0.00', 'saldo')).toBe('$0,00')
     expect(formatearImporte('-0.00', 'saldo')).toBe('$0,00')
   })
+
+  it('formatea sin convertir el valor a number', () => {
+    expect(formatearImporte('12345678901234567.89', 'saldo')).toBe('$12.345.678.901.234.567,89')
+  })
 })
