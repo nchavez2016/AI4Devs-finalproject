@@ -1,26 +1,205 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme static {
+  --*: initial;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* 3.3.1 Color */
+  --color-background: #FAF8F4;
+  --color-foreground: #1E1C18;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1E1C18;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #1E1C18;
+  --color-primary: #1F4D78;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-hover: #173B5C;
+  --color-secondary: #FFFFFF;
+  --color-secondary-foreground: #1E1C18;
+  --color-muted: #F1EDE4;
+  --color-muted-foreground: #5C574E;
+  --color-accent: #F1EDE4;
+  --color-accent-foreground: #1E1C18;
+  --color-destructive: #B0271B;
+  --color-destructive-foreground: #FFFFFF;
+  --color-destructive-hover: #8F1F15;
+  --color-border: #E2DCD0;
+  --color-input: #8C8577;
+  --color-ring: #1F4D78;
+  --color-chart-1: #5C574E;
+  --color-ingreso: #1E6B3C;
+  --color-ingreso-fondo: #E6F0E8;
+  --color-gasto: #1E1C18;
+  --color-negativo: #B0271B;
+  --color-negativo-fondo: #F8E6E3;
+  --color-resaltado: #FFF1BF;
+  --color-velo: rgb(30 28 24 / 0.40);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* 3.3.2 Tipografía */
+  --font-interfaz: var(--font-ibm-plex-sans), system-ui, sans-serif;
+  --font-titulo: var(--font-source-serif-4), Georgia, serif;
+  --default-font-family: var(--font-interfaz);
+  --default-font-feature-settings: "tnum", "lnum";
+  --font-weight-lectura: 400;
+  --font-weight-control: 500;
+  --font-weight-enfasis: 600;
+
+  --text-titulo-pagina: 1.75rem;
+  --text-titulo-pagina--line-height: 2.125rem;
+  --text-titulo-pagina--font-weight: var(--font-weight-enfasis);
+
+  --text-titulo-seccion: 1.25rem;
+  --text-titulo-seccion--line-height: 1.75rem;
+  --text-titulo-seccion--font-weight: var(--font-weight-enfasis);
+
+  --text-importe-principal: 2rem;
+  --text-importe-principal--line-height: 2.375rem;
+  --text-importe-principal--font-weight: var(--font-weight-enfasis);
+
+  --text-importe-campo: 1.75rem;
+  --text-importe-campo--line-height: 2.25rem;
+  --text-importe-campo--font-weight: var(--font-weight-control);
+
+  --text-importe-resumen: 1.25rem;
+  --text-importe-resumen--line-height: 1.75rem;
+  --text-importe-resumen--font-weight: var(--font-weight-enfasis);
+
+  --text-cuerpo: 1rem;
+  --text-cuerpo--line-height: 1.5rem;
+  --text-cuerpo--font-weight: var(--font-weight-lectura);
+
+  --text-detalle: 0.875rem;
+  --text-detalle--line-height: 1.25rem;
+  --text-detalle--font-weight: var(--font-weight-lectura);
+
+  --text-etiqueta: 0.875rem;
+  --text-etiqueta--line-height: 1.25rem;
+  --text-etiqueta--font-weight: var(--font-weight-control);
+
+  --text-grupo: 0.8125rem;
+  --text-grupo--line-height: 1.25rem;
+  --text-grupo--font-weight: var(--font-weight-enfasis);
+
+  /* 3.3.3 Espaciado */
+  --spacing-ninguno: 0;
+  --spacing-pagina: 1rem;
+  --spacing-seccion: 2rem;
+  --spacing-tarjeta: 1rem;
+  --spacing-entre-campos: 1rem;
+  --spacing-etiqueta: 0.375rem;
+  --spacing-mensaje: 0.25rem;
+  --spacing-control-x: 1rem;
+  --spacing-campo-x: 0.75rem;
+  --spacing-icono-texto: 0.5rem;
+  --spacing-acciones: 0.75rem;
+  --spacing-fila-x: 1rem;
+  --spacing-fila-y: 0.5rem;
+  --spacing-opcion-x: 0.75rem;
+  --spacing-opcion-y: 0.5rem;
+
+  /* 3.3.4 Tamaños y anchos */
+  --spacing-alto-control: 2.75rem;
+  --spacing-alto-campo: 3rem;
+  --spacing-alto-fila: 3.5rem;
+  --spacing-alto-fila-tabla: 2.75rem;
+  --spacing-objetivo-tactil: 2.75rem;
+  --spacing-icono: 1.25rem;
+  --spacing-icono-detalle: 1rem;
+  --spacing-reserva-barra-inferior: 4.75rem;
+  --container-formulario: 30rem;
+  --container-dialogo: 30rem;
+  --container-contenido: 65rem;
+
+  /* 3.3.5 Puntos de corte */
+  --breakpoint-escritorio: 48rem;
+  --breakpoint-amplio: 64rem;
+
+  /* 3.3.6 Radios, bordes y foco */
+  --radius-control: 0.25rem;
+  --radius-superficie: 0.375rem;
+  --default-border-width: 1px;
+  --default-outline-width: 2px;
+
+  /* 3.3.7 Elevación */
+  --shadow-flotante: 0 8px 24px rgb(30 28 24 / 0.16);
+
+  /* 3.3.8 Movimiento */
+  --ease-entrada: cubic-bezier(0.2, 0, 0, 1);
+  --ease-salida: cubic-bezier(0.4, 0, 1, 1);
+  --default-transition-duration: var(--duracion-rapida);
+  --default-transition-timing-function: var(--ease-entrada);
+  --animate-giro: giro var(--duracion-giro) linear infinite;
+  --animate-resaltado: resaltado var(--duracion-resaltado-salida) var(--ease-salida) var(--duracion-resaltado);
+
+  @keyframes giro {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes resaltado {
+    from {
+      background-color: var(--color-resaltado);
+    }
+    to {
+      background-color: transparent;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  --foco-separacion: 2px;
+  --duracion-rapida: 100ms;
+  --duracion-base: 160ms;
+  --duracion-panel: 220ms;
+  --duracion-resaltado: 600ms;
+  --duracion-resaltado-salida: 1000ms;
+  --duracion-giro: 800ms;
+}
+
+@variant escritorio {
+  :root {
+    --text-titulo-pagina: 2rem;
+    --text-titulo-pagina--line-height: 2.375rem;
+    --text-importe-principal: 2.5rem;
+    --text-importe-principal--line-height: 2.875rem;
+    --spacing-pagina: 1.5rem;
+    --spacing-tarjeta: 1.25rem;
+    --spacing-alto-control: 2.5rem;
+    --spacing-alto-campo: 2.5rem;
+  }
+}
+
+@variant amplio {
+  :root {
+    --spacing-pagina: 2rem;
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--default-font-family);
+    font-feature-settings: var(--default-font-feature-settings);
+  }
+
+  :focus-visible {
+    outline: var(--default-outline-width) solid var(--color-ring);
+    outline-offset: var(--foco-separacion);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duracion-rapida: 0ms;
+    --duracion-base: 0ms;
+    --duracion-panel: 0ms;
+    --duracion-resaltado: 2000ms;
+    --duracion-resaltado-salida: 0ms;
+    --animate-giro: none;
+  }
 }
