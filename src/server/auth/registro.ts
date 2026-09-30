@@ -1,6 +1,6 @@
 import { esquemaRegistro } from './esquemas'
 import { hashear } from './password'
-import { usuarioRepository } from '@/server/repositories/usuarioRepository'
+import { EmailDuplicadoError, usuarioRepository } from '@/server/repositories/usuarioRepository'
 
 export type ResultadoRegistro =
   | {
@@ -31,12 +31,21 @@ export async function registrarUsuario(datosSinValidar: unknown): Promise<Result
   const datos = validacion.data
   const passwordHash = await hashear(datos.password)
 
-  const usuario = await usuarioRepository.crear({
-    nombre: datos.nombre,
-    nombreNegocio: datos.nombreNegocio,
-    email: datos.email,
-    passwordHash,
-  })
+  let usuario
+  try {
+    usuario = await usuarioRepository.crear({
+      nombre: datos.nombre,
+      nombreNegocio: datos.nombreNegocio,
+      email: datos.email,
+      passwordHash,
+    })
+  } catch (error) {
+    if (error instanceof EmailDuplicadoError) {
+      return { ok: false, errores: { email: ['Ese email ya está registrado'] } }
+    }
+
+    throw error
+  }
 
   return {
     ok: true,

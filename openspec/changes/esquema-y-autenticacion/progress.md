@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 2.7 RED — "Registro rechazado por email duplicado"
-- Decisiones: promisify no tipa el overload de scrypt con opciones; derivarClave lo envuelve a mano con callback
+- Siguiente: 2.10 RED — "Registro rechazado por datos inválidos" (4 campos)
+- Decisiones: usuarioRepository traduce P2002 a EmailDuplicadoError (dominio); registro.ts la mapea a errores.email
 - Discrepancias: ninguna

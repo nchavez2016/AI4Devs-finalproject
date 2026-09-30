@@ -44,4 +44,31 @@ describe('registrarUsuario', () => {
     expect(beto?.passwordHash).not.toContain('clave-segura-1')
     expect(ana?.passwordHash).not.toBe(beto?.passwordHash)
   })
+
+  it('Registro rechazado por email duplicado', async () => {
+    await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+
+    const resultado = await registrarUsuario({
+      nombre: 'Otra Ana',
+      nombreNegocio: 'Otro negocio',
+      email: ' ANA@Tienda.ec ',
+      password: 'otra-clave-99',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.errores.email).toEqual(['Ese email ya está registrado'])
+    }
+
+    const usuarios = await prisma.usuario.findMany({ where: { email: 'ana@tienda.ec' } })
+    expect(usuarios).toHaveLength(1)
+
+    const categorias = await prisma.categoria.count()
+    expect(categorias).toBe(0)
+  })
 })

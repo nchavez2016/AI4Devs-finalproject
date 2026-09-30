@@ -36,9 +36,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 2.4 RED — mismo archivo, test "La contraseña se guarda con hash y nunca en texto plano".
 - [x] 2.5 GREEN — `src/server/auth/password.ts` (`hashear`/`verificar` con scrypt, formato de design.md b) y usarlo en `registro.ts`. Test en verde.
 - [x] 2.6 REFACTOR — test en verde.
-- [ ] 2.7 RED — mismo archivo, test "Registro rechazado por email duplicado".
-- [ ] 2.8 GREEN — traducir P2002 en el repositorio a un resultado de dominio "email ya registrado". Test en verde.
-- [ ] 2.9 REFACTOR — test en verde.
+- [x] 2.7 RED — mismo archivo, test "Registro rechazado por email duplicado".
+- [x] 2.8 GREEN — traducir P2002 en el repositorio a un resultado de dominio "email ya registrado". Test en verde.
+- [x] 2.9 REFACTOR — test en verde.
 - [ ] 2.10 RED — mismo archivo, test "Registro rechazado por datos inválidos": nombre `""`, negocio `"   "`, email `"no-es-un-email"` y contraseña `"1234567"` (7 caracteres) producen un error en cada uno de los cuatro campos, y no se crea ningún usuario.
 - [ ] 2.11 GREEN — `src/server/auth/esquemas.ts` con las reglas de design.md (Validación de registro), y los errores de Zod agrupados por campo desde `registro.ts`. Test en verde; si una regla entra sin que el RED la exija, verificarla por mutación.
 - [ ] 2.12 REFACTOR — test en verde.
