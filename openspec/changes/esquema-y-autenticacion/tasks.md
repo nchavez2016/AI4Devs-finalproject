@@ -7,7 +7,7 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 
 ## 1. Dependencias y configuración
 
-- [ ] 1.1 [PARADA] Pedir autorización e instalar `zod` como dependencia directa; verificar que aparece en `dependencies` de package.json.
+- [x] 1.1 [PARADA] Pedir autorización e instalar `zod` como dependencia directa; verificar que aparece en `dependencies` de package.json.
 - [ ] 1.2 RED — `src/config/env.test.ts`, test "Configuración incompleta impide arrancar": la carga falla nombrando `AUTH_SECRET`, sin mostrar valores. Ver que falla porque `src/config/env.ts` no existe.
 - [ ] 1.3 GREEN — `src/config/env.ts`: función `cargarEnv(fuente)` con esquema Zod (`DATABASE_URL` URL postgres, `AUTH_SECRET` ≥ 32 caracteres) y `env` exportado a partir de `process.env`. Verificar el test en verde.
 - [ ] 1.4 REFACTOR — revisar mensajes y nombres; test en verde.
