@@ -12,4 +12,15 @@ describe('evaluarComando', () => {
       expect(resultado).toBeTruthy();
     });
   });
+
+  describe('permite comandos con .env.example, process.env o import.meta.env', () => {
+    it.each([
+      'cat .env.example',
+      'echo process.env',
+      'grep import.meta.env src/config.ts',
+    ])('permite: %s', (comando) => {
+      const resultado = evaluarComando(comando);
+      expect(resultado).toBeFalsy();
+    });
+  });
 });
