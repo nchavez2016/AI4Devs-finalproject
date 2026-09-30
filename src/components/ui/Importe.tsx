@@ -6,11 +6,14 @@ const formateadorMoneda = new Intl.NumberFormat('es-EC', {
 })
 
 export function formatearImporte(valor: string, tipo: TipoImporte): string {
-  const formateado = formateadorMoneda.format(valor as unknown as number)
+  const esNegativo = valor.startsWith('-')
+  const valorAbsoluto = esNegativo ? valor.slice(1) : valor
+  const formateado = formateadorMoneda.format(valorAbsoluto as unknown as number)
+
   if (tipo === 'ingreso') {
     return `+${formateado}`
   }
-  if (tipo === 'gasto') {
+  if (tipo === 'gasto' || (tipo === 'saldo' && esNegativo)) {
     return `\u2212${formateado}`
   }
   if (tipo === 'saldo') {

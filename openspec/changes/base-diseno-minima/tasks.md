@@ -29,9 +29,9 @@
 - [x] 2.9 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea un saldo negativo como −$120,00
-- [ ] 2.10 RED: test `formatea un saldo negativo como −$120,00` (`'-120.00'`, `'saldo'`). Verificar: falla porque sale `$-120,00` o sin signo.
-- [ ] 2.11 GREEN: detectar el signo en el texto, formatear el valor absoluto y anteponer U+2212. Verificar: el archivo pasa.
-- [ ] 2.12 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 2.10 RED: test `formatea un saldo negativo como −$120,00` (`'-120.00'`, `'saldo'`). Verificar: falla porque sale `$-120,00` o sin signo.
+- [x] 2.11 GREEN: detectar el signo en el texto, formatear el valor absoluto y anteponer U+2212. Verificar: el archivo pasa.
+- [x] 2.12 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea el cero como $0,00 sin signo
 - [ ] 2.13 RED: test `formatea el cero como $0,00 sin signo` (`'0.00'` y `'-0.00'`, `'saldo'`). Verificar: falla con `'-0.00'`.
