@@ -47,4 +47,16 @@ describe('verificarCredenciales', () => {
       expect(resultado.mensaje).toBe('Email o contraseña incorrectos')
     }
   })
+
+  it('Inicio de sesión con email no registrado', async () => {
+    const resultado = await verificarCredenciales({
+      email: 'nadie@tienda.ec',
+      password: 'cualquier-clave',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.mensaje).toBe('Email o contraseña incorrectos')
+    }
+  })
 })
