@@ -17,4 +17,9 @@ describe('Importe', () => {
   it('formatea un saldo negativo como −$120,00', () => {
     expect(formatearImporte('-120.00', 'saldo')).toBe('−$120,00')
   })
+
+  it('formatea el cero como $0,00 sin signo', () => {
+    expect(formatearImporte('0.00', 'saldo')).toBe('$0,00')
+    expect(formatearImporte('-0.00', 'saldo')).toBe('$0,00')
+  })
 })

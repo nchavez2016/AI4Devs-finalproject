@@ -34,9 +34,9 @@
 - [x] 2.12 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea el cero como $0,00 sin signo
-- [ ] 2.13 RED: test `formatea el cero como $0,00 sin signo` (`'0.00'` y `'-0.00'`, `'saldo'`). Verificar: falla con `'-0.00'`.
-- [ ] 2.14 GREEN: el cero nunca lleva signo. Verificar: el archivo pasa.
-- [ ] 2.15 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 2.13 RED: test `formatea el cero como $0,00 sin signo` (`'0.00'` y `'-0.00'`, `'saldo'`). Verificar: falla con `'-0.00'`.
+- [x] 2.14 GREEN: el cero nunca lleva signo. Verificar: el archivo pasa.
+- [x] 2.15 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea sin convertir el valor a number
 - [ ] 2.16 RED: test `formatea sin convertir el valor a number` con `'12345678901234567.89'` → `$12.345.678.901.234.567,89`. Si pasa sin cambios (la implementación ya no usa `number`), detenerse y proponer cómo forzar el RED según la guía de apply. Verificar: falla por pérdida de precisión.

@@ -1,4 +1,4 @@
 # Progreso: base-diseno-minima
-- Siguiente: 2.13 RED: test formatea el cero como $0,00 sin signo
+- Siguiente: 2.16 RED: test formatea sin convertir el valor a number
 - Decisiones: ninguna
 - Discrepancias: ninguna
