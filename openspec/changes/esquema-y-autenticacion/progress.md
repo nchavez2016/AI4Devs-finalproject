@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 2.1 RED — src/server/auth/registro.int.test.ts, "Registro válido crea el usuario"
-- Decisiones: grupo 1 cerrado (20/82 tareas); prisma.ts es el cliente único (PrismaClient+PrismaPg con env.DATABASE_URL)
+- Siguiente: 2.4 RED — "La contraseña se guarda con hash y nunca en texto plano"
+- Decisiones: registrarUsuario devuelve { ok, usuario } o { ok:false, errores } (Zod safeParse); passwordHash aún guarda el texto plano, lo corrige 2.5
 - Discrepancias: ninguna
