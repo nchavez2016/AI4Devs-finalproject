@@ -1,8 +1,15 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { evaluarComando, evaluarRuta } from './guard-core.mjs';
 
-describe('guard-core', () => {
-  it.skip('placeholder', () => {
-    // Tests will be added in task 1.2 and beyond
+describe('evaluarComando', () => {
+  describe('bloquea un comando que toca un archivo .env real', () => {
+    it.each([
+      'cat .env',
+      'rm .env.local',
+      'cat .ENV',
+    ])('bloquea: %s', (comando) => {
+      const resultado = evaluarComando(comando);
+      expect(resultado).toBeTruthy();
+    });
   });
 });
