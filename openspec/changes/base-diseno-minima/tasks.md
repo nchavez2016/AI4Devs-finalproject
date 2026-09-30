@@ -71,9 +71,9 @@
 - [x] 3.6 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Campo enlaza la etiqueta y la ayuda con el control
-- [ ] 3.7 RED: en `src/components/ui/Campo.test.tsx`, test `Campo enlaza la etiqueta y la ayuda con el control`: `getByLabelText(etiqueta)` devuelve el input y su `aria-describedby` apunta al texto de ayuda; con `opcional` la etiqueta termina en "(opcional)". Verificar: falla porque `Campo` no existe.
-- [ ] 3.8 GREEN: `src/components/ui/Campo.tsx` según design.md → Decisión 6. Verificar: el archivo pasa.
-- [ ] 3.9 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 3.7 RED: en `src/components/ui/Campo.test.tsx`, test `Campo enlaza la etiqueta y la ayuda con el control`: `getByLabelText(etiqueta)` devuelve el input y su `aria-describedby` apunta al texto de ayuda; con `opcional` la etiqueta termina en "(opcional)". Verificar: falla porque `Campo` no existe.
+- [x] 3.8 GREEN: `src/components/ui/Campo.tsx` según design.md → Decisión 6. Verificar: el archivo pasa.
+- [x] 3.9 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Campo con error tiene aria-invalid y el mensaje enlazado con aria-describedby
 - [ ] 3.10 RED: test `Campo con error tiene aria-invalid y el mensaje enlazado con aria-describedby`: `aria-invalid="true"`, `aria-describedby` incluye los ids de ayuda y error, el mensaje se muestra y el input tiene `border-destructive`; sin error no hay `aria-invalid`. Verificar: falla por `aria-invalid` ausente.
