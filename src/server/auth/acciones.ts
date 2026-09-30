@@ -1,6 +1,37 @@
 'use server'
 
-import { signOut } from '@/auth'
+import { signIn, signOut } from '@/auth'
+import { registrarUsuario } from './registro'
+
+export interface EstadoFormularioRegistro {
+  errores: Record<string, string[]>
+}
+
+export async function registrar(
+  _estadoPrevio: EstadoFormularioRegistro | undefined,
+  formData: FormData
+): Promise<EstadoFormularioRegistro> {
+  const datos = {
+    nombre: formData.get('nombre'),
+    nombreNegocio: formData.get('nombreNegocio'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+  }
+
+  const resultado = await registrarUsuario(datos)
+
+  if (!resultado.ok) {
+    return { errores: resultado.errores }
+  }
+
+  await signIn('credentials', {
+    email: datos.email,
+    password: datos.password,
+    redirectTo: '/panel',
+  })
+
+  return { errores: {} }
+}
 
 export async function cerrarSesion() {
   await signOut({ redirectTo: '/login' })

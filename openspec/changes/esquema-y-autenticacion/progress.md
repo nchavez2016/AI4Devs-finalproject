@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 4.8 RED — src/server/auth/acciones.test.ts, "registrar devuelve los errores por campo del caso de uso"
-- Decisiones: panel dividido en cargarPanel (async, server.ts) y ContenidoPanel (síncrono, testable); page.tsx solo las une y se verifica a mano en 5.3
+- Siguiente: 4.11 RED — src/app/registro/FormularioRegistro.test.tsx, "muestra junto a cada campo el error devuelto por el servidor"
+- Decisiones: reorganizado 4.9/4.15 en tasks.md: iniciarSesion se crea en 4.15 (tiene su propio RED); registrar no lleva try/catch de CredentialsSignin (sin test ni escenario que lo exija)
 - Discrepancias: ninguna

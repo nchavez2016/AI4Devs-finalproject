@@ -84,14 +84,14 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 4.5 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel muestra el negocio del usuario autenticado": con `@/auth` simulado (sesión de A), renderiza `<ContenidoPanel {...await cargarPanel()} />` y comprueba que aparece "Tienda Ana" y no "Taller Beto". Ver que falla porque no existen.
 - [x] 4.6 GREEN — `src/server/panel.ts` (`cargarPanel`: `auth()`, `redirect("/login")` sin sesión y devuelve `nombreNegocio`), `src/app/(privado)/panel/ContenidoPanel.tsx` (síncrono: negocio y botón "Cerrar sesión" con `cerrarSesion`, solo tokens de `docs/diseno/sistema/`) y `page.tsx` (async, solo une las dos piezas; se verifica en 5.3). Test en verde.
 - [x] 4.7 REFACTOR — test en verde.
-- [ ] 4.8 RED — `src/server/auth/acciones.test.ts`, test "registrar devuelve los errores por campo del caso de uso" (caso de uso simulado).
-- [ ] 4.9 GREEN — Server Actions `registrar` (llama a `registrarUsuario` y, si va bien, a `signIn` con `redirectTo: "/panel"`) e `iniciarSesion` (mapea el `CredentialsSignin` al mensaje genérico) en `acciones.ts`. Test en verde.
-- [ ] 4.10 REFACTOR — test en verde.
+- [x] 4.8 RED — `src/server/auth/acciones.test.ts`, test "registrar devuelve los errores por campo del caso de uso" (caso de uso simulado).
+- [x] 4.9 GREEN — Server Action `registrar` en `acciones.ts` (llama a `registrarUsuario` y, si va bien, a `signIn` con `redirectTo: "/panel"`). Test en verde. (`iniciarSesion` se crea en 4.15, junto al formulario de login que la exige: 4.9 solo tenía un RED para `registrar`. Sin `try/catch` de `CredentialsSignin` tras un registro exitoso: ningún escenario de la spec lo exige, y las credenciales ya se acaban de validar y hashear.)
+- [x] 4.10 REFACTOR — test en verde.
 - [ ] 4.11 RED — `src/app/registro/FormularioRegistro.test.tsx`, test "muestra junto a cada campo el error devuelto por el servidor".
 - [ ] 4.12 GREEN — `src/app/registro/page.tsx` y `FormularioRegistro.tsx` (`useActionState`, `Campo` y `Button` de `src/components/ui/`, enlace a `/login`). Test en verde.
 - [ ] 4.13 REFACTOR — test en verde.
-- [ ] 4.14 RED — `src/app/login/FormularioLogin.test.tsx`, test "muestra el mensaje genérico de credenciales incorrectas".
-- [ ] 4.15 GREEN — `src/app/login/page.tsx` y `FormularioLogin.tsx` (mismos componentes, enlace a `/registro`). Test en verde.
+- [ ] 4.14 RED — `src/app/login/FormularioLogin.test.tsx`, test "muestra el mensaje genérico de credenciales incorrectas" (con la Server Action `iniciarSesion` simulada).
+- [ ] 4.15 GREEN — Server Action `iniciarSesion` en `acciones.ts` (`signIn` con `redirectTo: "/panel"`; mapea `CredentialsSignin` al mensaje genérico), `src/app/login/page.tsx` y `FormularioLogin.tsx` (mismos componentes que el registro, enlace a `/registro`). Test en verde.
 - [ ] 4.16 REFACTOR — test en verde.
 - [ ] 4.17 Eliminar `src/app/diseno/`; verificar con una búsqueda que nada la referencia y que `npm run build` termina sin errores (con `DATABASE_URL`/`AUTH_SECRET` disponibles; si `build` no puede ejecutarse por falta de `AUTH_SECRET`, dejarlo anotado para 5.2). Suite completa (cierre de grupo).
 
