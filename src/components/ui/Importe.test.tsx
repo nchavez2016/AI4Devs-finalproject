@@ -9,4 +9,8 @@ describe('Importe', () => {
   it('formatea un gasto como −$25,50 con el signo U+2212', () => {
     expect(formatearImporte('25.50', 'gasto')).toBe('−$25,50')
   })
+
+  it('formatea un saldo positivo como $1.234,50', () => {
+    expect(formatearImporte('1234.50', 'saldo')).toBe('$1.234,50')
+  })
 })

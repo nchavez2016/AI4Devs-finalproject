@@ -24,9 +24,9 @@
 - [x] 2.6 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea un saldo positivo como $1.234,50
-- [ ] 2.7 RED: test `formatea un saldo positivo como $1.234,50` (`'1234.50'`, `'saldo'`). Verificar: falla por el formato o el signo.
-- [ ] 2.8 GREEN: caso `saldo` sin signo en `Importe.tsx`. Verificar: el archivo pasa.
-- [ ] 2.9 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 2.7 RED: test `formatea un saldo positivo como $1.234,50` (`'1234.50'`, `'saldo'`). Verificar: falla por el formato o el signo.
+- [x] 2.8 GREEN: caso `saldo` sin signo en `Importe.tsx`. Verificar: el archivo pasa.
+- [x] 2.9 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea un saldo negativo como −$120,00
 - [ ] 2.10 RED: test `formatea un saldo negativo como −$120,00` (`'-120.00'`, `'saldo'`). Verificar: falla porque sale `$-120,00` o sin signo.
