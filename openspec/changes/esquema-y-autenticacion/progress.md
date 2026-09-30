@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 2.10 RED — "Registro rechazado por datos inválidos" (4 campos)
-- Decisiones: usuarioRepository traduce P2002 a EmailDuplicadoError (dominio); registro.ts la mapea a errores.email
+- Siguiente: 2.13 RED — "Registro crea las categorías por defecto"
+- Decisiones: las 4 reglas de esquemaRegistro (nombre/negocio no vacíos, email válido, password ≥8) verificadas una a una por mutación
 - Discrepancias: ninguna

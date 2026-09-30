@@ -71,4 +71,24 @@ describe('registrarUsuario', () => {
     const categorias = await prisma.categoria.count()
     expect(categorias).toBe(0)
   })
+
+  it('Registro rechazado por datos inválidos', async () => {
+    const resultado = await registrarUsuario({
+      nombre: '',
+      nombreNegocio: '   ',
+      email: 'no-es-un-email',
+      password: '1234567',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.errores.nombre).toBeDefined()
+      expect(resultado.errores.nombreNegocio).toBeDefined()
+      expect(resultado.errores.email).toBeDefined()
+      expect(resultado.errores.password).toBeDefined()
+    }
+
+    const usuarios = await prisma.usuario.findMany()
+    expect(usuarios).toHaveLength(0)
+  })
 })
