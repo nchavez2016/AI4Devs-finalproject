@@ -26,3 +26,20 @@ export function formatearImporte(valor: string, tipo: TipoImporte): string {
   }
   return ''
 }
+
+export interface ImporteProps {
+  valor: string
+  tipo: TipoImporte
+}
+
+export function Importe({ valor, tipo }: ImporteProps) {
+  const formateado = formatearImporte(valor, tipo)
+  const etiquetaSr = tipo === 'ingreso' ? 'Ingreso' : tipo === 'gasto' ? 'Gasto' : null
+
+  return (
+    <span>
+      {etiquetaSr && <span className="sr-only">{etiquetaSr}</span>}
+      <span>{formateado}</span>
+    </span>
+  )
+}

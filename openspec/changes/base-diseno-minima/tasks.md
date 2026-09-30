@@ -44,9 +44,9 @@
 - [x] 2.18 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Importe incluye Ingreso o Gasto solo para lectores de pantalla
-- [ ] 2.19 RED: test `Importe incluye Ingreso o Gasto solo para lectores de pantalla`: renderiza `<Importe valor="25.50" tipo="ingreso" />` y `tipo="gasto"`; el texto "Ingreso"/"Gasto" está en un elemento con clase `sr-only` y el importe visible es `+$25,50`/`−$25,50`; `saldo` no añade texto oculto. Verificar: falla porque el componente no existe.
-- [ ] 2.20 GREEN: componente `Importe` en `Importe.tsx`. Verificar: el archivo pasa.
-- [ ] 2.21 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 2.19 RED: test `Importe incluye Ingreso o Gasto solo para lectores de pantalla`: renderiza `<Importe valor="25.50" tipo="ingreso" />` y `tipo="gasto"`; el texto "Ingreso"/"Gasto" está en un elemento con clase `sr-only` y el importe visible es `+$25,50`/`−$25,50`; `saldo` no añade texto oculto. Verificar: falla porque el componente no existe.
+- [x] 2.20 GREEN: componente `Importe` en `Importe.tsx`. Verificar: el archivo pasa.
+- [x] 2.21 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Importe aplica el color de su caso
 - [ ] 2.22 RED: test `Importe aplica el color de su caso`: `text-ingreso`, `text-gasto`, `text-negativo` (saldo negativo), `text-muted-foreground` (cero), `text-foreground` (saldo positivo). Verificar: falla por la clase ausente.

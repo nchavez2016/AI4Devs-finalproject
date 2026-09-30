@@ -1,4 +1,4 @@
 # Progreso: base-diseno-minima
-- Siguiente: 2.19 RED: test Importe incluye Ingreso o Gasto solo para lectores de pantalla
-- Decisiones: formateo tipado con Intl.StringNumericLiteral para evitar pérdida de precisión
+- Siguiente: 2.22 RED: test Importe aplica el color de su caso
+- Decisiones: ninguna
 - Discrepancias: ninguna
