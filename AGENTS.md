@@ -52,6 +52,7 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
 - SÍ: el saldo de una cuenta se calcula (saldo inicial + ingresos − gastos). NO: guardarlo.
 - SÍ: nombres del dominio en español (Usuario, Cuenta, Categoria, Transaccion); camelCase en
   TypeScript y snake_case en la BD con `@map`.
+- SÍ: los estilos usan solo los tokens definidos en `docs/diseno/sistema/` (punto de entrada: `README.md`). NO: ningún valor visual literal.
 
 ## Gotchas del stack
 - Prisma fijado en 7.10.0 exacta. NO actualizar a Prisma 8.
