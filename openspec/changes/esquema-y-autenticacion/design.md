@@ -104,6 +104,9 @@ tests unitarios.
 ## Risks / Trade-offs
 
 - [v5 en beta] → versión exacta fijada; una tarea verifica la estrategia JWT tras instalar.
+- [`next-auth` importa `next/server` sin extensión; falla al externalizarlo Node ESM puro]
+  → `vitest.config.mts` fuerza `server.deps.inline` para `next-auth`/`@auth/core`, para que
+  Vite lo procese en vez de dejarlo en manos del resolutor nativo de Node.
 - [Tests de integración requieren Docker] → el `globalSetup` falla con un mensaje claro si no
   conecta.
 - [Un JWT no se revoca en el servidor al cerrar sesión] → aceptable en el MVP: el logout

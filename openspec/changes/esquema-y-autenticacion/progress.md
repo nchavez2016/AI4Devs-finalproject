@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 3.12 RED — src/auth.test.ts, "la sesión expone id, nombre y nombre del negocio del token"
-- Decisiones: next-auth@5.0.0-beta.32 instalado (--save-exact); estrategia JWT con Credentials confirmada en @auth/core (assert.js + init.js), design.md actualizado sin la advertencia de "no verificado"
+- Siguiente: 3.15 RED — src/server/auth/rutas.test.ts, "Ruta privada sin sesión redirige al login"
+- Decisiones: authConfig se exporta separado de NextAuth(authConfig) para probar los callbacks sin servidor ni BD; vitest.config.mts añade server.deps.inline para next-auth/@auth/core (importan "next/server" sin extensión, Node ESM puro no lo resuelve)
 - Discrepancias: ninguna
