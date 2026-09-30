@@ -1,4 +1,4 @@
 # Progreso: portabilidad-agentes
-- Siguiente: 1.1 crear guard-core.mjs vacío y ampliar el include de Vitest
-- Decisiones: decisión neutra de Antigravity = ask; entrada inválida = deny
+- Siguiente: Grupo 4 (tareas manuales humanas): 4.1-4.5 pruebas en ambas herramientas
+- Decisiones: decisión neutra de Antigravity = ask; entrada inválida = deny; segmentación por separadores evita falsos positivos de .env en mensajes
 - Discrepancias: ninguna
