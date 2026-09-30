@@ -71,9 +71,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 3.18 RED — mismo archivo, test "Rutas públicas accesibles sin sesión".
 - [x] 3.19 GREEN — lista de rutas públicas en `rutas.ts`; `proxy.ts` en la raíz que envuelve `auth` y aplica `resolverRedireccion`, con `matcher` que excluye `_next`, `api/auth` y archivos estáticos. Test en verde y `npm run typecheck` sin errores. (`proxy.ts` va en `src/proxy.ts`, al mismo nivel que `src/app`, según la convención de Next.)
 - [x] 3.20 REFACTOR — test en verde.
-- [ ] 3.21 RED — `src/server/auth/acciones.test.ts`, test "Cierre de sesión termina la sesión y redirige al login" (con `@/auth` simulado: `signOut` llamado con `redirectTo: "/login"`).
-- [ ] 3.22 GREEN — `src/server/auth/acciones.ts` con la Server Action `cerrarSesion`. Test en verde.
-- [ ] 3.23 REFACTOR — test en verde; suite completa (cierre de grupo).
+- [x] 3.21 RED — `src/server/auth/acciones.test.ts`, test "Cierre de sesión termina la sesión y redirige al login" (con `@/auth` simulado: `signOut` llamado con `redirectTo: "/login"`).
+- [x] 3.22 GREEN — `src/server/auth/acciones.ts` con la Server Action `cerrarSesion`. Test en verde.
+- [x] 3.23 REFACTOR — test en verde; suite completa (cierre de grupo).
 
 ## 4. Pantallas y limpieza
 

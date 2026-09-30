@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 3.21 RED — src/server/auth/acciones.test.ts, "Cierre de sesión termina la sesión y redirige al login"
-- Decisiones: proxy.ts vive en src/proxy.ts (junto a src/app, no en la raíz del repo); envuelve auth((req) => ...) y usa resolverRedireccion con req.auth (comprobación optimista de cookie)
+- Siguiente: 4.1 CARACTERIZACIÓN — confirmar que src/app/page.tsx es la plantilla de Next
+- Decisiones: grupo 3 cerrado (61/82 tareas); acciones.ts concentra las Server Actions de auth (cerrarSesion primero)
 - Discrepancias: ninguna
