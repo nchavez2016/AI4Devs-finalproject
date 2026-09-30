@@ -44,4 +44,21 @@ describe('Importe', () => {
     expect(srSaldo).toBeNull()
     expect(saldoContainer.textContent).toContain('$25,50')
   })
+
+  it('Importe aplica el color de su caso', () => {
+    const { container: ingreso } = render(<Importe valor="25.50" tipo="ingreso" />)
+    expect(ingreso.firstElementChild?.className).toContain('text-ingreso')
+
+    const { container: gasto } = render(<Importe valor="25.50" tipo="gasto" />)
+    expect(gasto.firstElementChild?.className).toContain('text-gasto')
+
+    const { container: negativo } = render(<Importe valor="-120.00" tipo="saldo" />)
+    expect(negativo.firstElementChild?.className).toContain('text-negativo')
+
+    const { container: cero } = render(<Importe valor="0.00" tipo="saldo" />)
+    expect(cero.firstElementChild?.className).toContain('text-muted-foreground')
+
+    const { container: positivo } = render(<Importe valor="1234.50" tipo="saldo" />)
+    expect(positivo.firstElementChild?.className).toContain('text-foreground')
+  })
 })

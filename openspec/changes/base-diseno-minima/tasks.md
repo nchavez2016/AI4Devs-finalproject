@@ -49,9 +49,9 @@
 - [x] 2.21 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Importe aplica el color de su caso
-- [ ] 2.22 RED: test `Importe aplica el color de su caso`: `text-ingreso`, `text-gasto`, `text-negativo` (saldo negativo), `text-muted-foreground` (cero), `text-foreground` (saldo positivo). Verificar: falla por la clase ausente.
-- [ ] 2.23 GREEN: clase de color según el caso. Verificar: el archivo pasa.
-- [ ] 2.24 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 2.22 RED: test `Importe aplica el color de su caso`: `text-ingreso`, `text-gasto`, `text-negativo` (saldo negativo), `text-muted-foreground` (cero), `text-foreground` (saldo positivo). Verificar: falla por la clase ausente.
+- [x] 2.23 GREEN: clase de color según el caso. Verificar: el archivo pasa.
+- [x] 2.24 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Importe aplica el tamaño indicado
 - [ ] 2.25 RED: test `Importe aplica el tamaño indicado`: `text-cuerpo` por defecto, `text-importe-resumen` y `text-importe-principal`. Verificar: falla por la clase ausente.

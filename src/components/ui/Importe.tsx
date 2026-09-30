@@ -5,11 +5,33 @@ const formateadorMoneda = new Intl.NumberFormat('es-EC', {
   currency: 'USD',
 })
 
-export function formatearImporte(valor: string, tipo: TipoImporte): string {
+function analizarValor(valor: string) {
   const tieneSignoMenos = valor.startsWith('-')
   const valorAbsoluto = tieneSignoMenos ? valor.slice(1) : valor
   const esCero = /^0*(\.0*)?$/.test(valorAbsoluto)
   const esNegativo = tieneSignoMenos && !esCero
+  return { valorAbsoluto, esCero, esNegativo }
+}
+
+function obtenerClaseColor(valor: string, tipo: TipoImporte): string {
+  if (tipo === 'ingreso') {
+    return 'text-ingreso'
+  }
+  if (tipo === 'gasto') {
+    return 'text-gasto'
+  }
+  const { esCero, esNegativo } = analizarValor(valor)
+  if (esCero) {
+    return 'text-muted-foreground'
+  }
+  if (esNegativo) {
+    return 'text-negativo'
+  }
+  return 'text-foreground'
+}
+
+export function formatearImporte(valor: string, tipo: TipoImporte): string {
+  const { valorAbsoluto, esCero, esNegativo } = analizarValor(valor)
   const formateado = formateadorMoneda.format(valorAbsoluto as Intl.StringNumericLiteral)
 
   if (esCero) {
@@ -35,9 +57,10 @@ export interface ImporteProps {
 export function Importe({ valor, tipo }: ImporteProps) {
   const formateado = formatearImporte(valor, tipo)
   const etiquetaSr = tipo === 'ingreso' ? 'Ingreso' : tipo === 'gasto' ? 'Gasto' : null
+  const claseColor = obtenerClaseColor(valor, tipo)
 
   return (
-    <span>
+    <span className={claseColor}>
       {etiquetaSr && <span className="sr-only">{etiquetaSr}</span>}
       <span>{formateado}</span>
     </span>

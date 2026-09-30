@@ -1,4 +1,4 @@
 # Progreso: base-diseno-minima
-- Siguiente: 2.22 RED: test Importe aplica el color de su caso
+- Siguiente: 2.25 RED: test Importe aplica el tamaño indicado
 - Decisiones: ninguna
 - Discrepancias: ninguna
