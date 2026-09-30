@@ -87,9 +87,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 4.8 RED — `src/server/auth/acciones.test.ts`, test "registrar devuelve los errores por campo del caso de uso" (caso de uso simulado).
 - [x] 4.9 GREEN — Server Action `registrar` en `acciones.ts` (llama a `registrarUsuario` y, si va bien, a `signIn` con `redirectTo: "/panel"`). Test en verde. (`iniciarSesion` se crea en 4.15, junto al formulario de login que la exige: 4.9 solo tenía un RED para `registrar`. Sin `try/catch` de `CredentialsSignin` tras un registro exitoso: ningún escenario de la spec lo exige, y las credenciales ya se acaban de validar y hashear.)
 - [x] 4.10 REFACTOR — test en verde.
-- [ ] 4.11 RED — `src/app/registro/FormularioRegistro.test.tsx`, test "muestra junto a cada campo el error devuelto por el servidor".
-- [ ] 4.12 GREEN — `src/app/registro/page.tsx` y `FormularioRegistro.tsx` (`useActionState`, `Campo` y `Button` de `src/components/ui/`, enlace a `/login`). Test en verde.
-- [ ] 4.13 REFACTOR — test en verde.
+- [x] 4.11 RED — `src/app/registro/FormularioRegistro.test.tsx`, test "muestra junto a cada campo el error devuelto por el servidor".
+- [x] 4.12 GREEN — `src/app/registro/page.tsx` y `FormularioRegistro.tsx` (`useActionState`, `Campo` y `Button` de `src/components/ui/`, enlace a `/login`). Test en verde.
+- [x] 4.13 REFACTOR — test en verde.
 - [ ] 4.14 RED — `src/app/login/FormularioLogin.test.tsx`, test "muestra el mensaje genérico de credenciales incorrectas" (con la Server Action `iniciarSesion` simulada).
 - [ ] 4.15 GREEN — Server Action `iniciarSesion` en `acciones.ts` (`signIn` con `redirectTo: "/panel"`; mapea `CredentialsSignin` al mensaje genérico), `src/app/login/page.tsx` y `FormularioLogin.tsx` (mismos componentes que el registro, enlace a `/registro`). Test en verde.
 - [ ] 4.16 REFACTOR — test en verde.
