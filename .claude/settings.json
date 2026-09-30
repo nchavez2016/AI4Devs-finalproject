@@ -48,7 +48,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect-files.mjs\""
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/agents/claude-adapter.mjs\""
           }
         ]
       }
