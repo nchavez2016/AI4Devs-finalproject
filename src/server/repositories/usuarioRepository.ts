@@ -17,6 +17,10 @@ interface DatosCrearUsuario {
 }
 
 export const usuarioRepository = {
+  async buscarPorEmail(email: string) {
+    return prisma.usuario.findUnique({ where: { email } })
+  },
+
   async crear(datos: DatosCrearUsuario) {
     try {
       return await prisma.$transaction(async (tx) => {

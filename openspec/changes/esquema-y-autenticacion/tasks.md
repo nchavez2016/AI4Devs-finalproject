@@ -51,9 +51,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 
 ## 3. Credenciales, sesión y proxy.ts
 
-- [ ] 3.1 RED — `src/server/auth/credenciales.int.test.ts`, test "Inicio de sesión con credenciales correctas". Ver que falla porque `verificarCredenciales` no existe.
-- [ ] 3.2 GREEN — `src/server/auth/credenciales.ts` (Zod + `usuarioRepository.buscarPorEmail` + `verificar`). Test en verde.
-- [ ] 3.3 REFACTOR — test en verde.
+- [x] 3.1 RED — `src/server/auth/credenciales.int.test.ts`, test "Inicio de sesión con credenciales correctas". Ver que falla porque `verificarCredenciales` no existe.
+- [x] 3.2 GREEN — `src/server/auth/credenciales.ts` (Zod + `usuarioRepository.buscarPorEmail` + `verificar`). Test en verde.
+- [x] 3.3 REFACTOR — test en verde.
 - [ ] 3.4 RED — mismo archivo, test "Inicio de sesión con contraseña incorrecta".
 - [ ] 3.5 GREEN — devolver el error genérico "Email o contraseña incorrectos". Test en verde.
 - [ ] 3.6 REFACTOR — test en verde.

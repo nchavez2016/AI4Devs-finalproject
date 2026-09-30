@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 3.1 RED — src/server/auth/credenciales.int.test.ts, "Inicio de sesión con credenciales correctas"
-- Decisiones: grupo 2 cerrado (38/82 tareas); aislamiento por usuarioId ya era correcto, verificado por mutación (findFirst por creadoEn) y restaurado
+- Siguiente: 3.4 RED — "Inicio de sesión con contraseña incorrecta"
+- Decisiones: verificarCredenciales devuelve {ok,usuario} o {ok:false} (sin distinguir motivo, por diseño: mensaje genérico); usuarioRepository.buscarPorEmail añadido
 - Discrepancias: ninguna

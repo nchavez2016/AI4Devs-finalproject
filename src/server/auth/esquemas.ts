@@ -8,3 +8,8 @@ export const esquemaRegistro = z.object({
 })
 
 export type DatosRegistro = z.infer<typeof esquemaRegistro>
+
+export const esquemaCredenciales = z.object({
+  email: z.string().trim().toLowerCase(),
+  password: z.string(),
+})
