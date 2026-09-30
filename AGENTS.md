@@ -88,3 +88,4 @@ Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, a
 - No leer carpetas completas cuando basta un archivo concreto.
 - Crear y editar archivos solo con las herramientas de edición, nunca con redirecciones de terminal (`>`, `>>`, `tee`, heredoc).
 - Si un hook o una protección devuelve un error, detente y avisa al usuario. No continúes.
+- No borrar, mover ni reescribir archivos que no estén en un commit (compruébalo con `git status`) sin confirmación del usuario.

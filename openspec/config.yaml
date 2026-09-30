@@ -37,15 +37,19 @@ operations:
     guidance:
       - Antes de empezar, confirma que la rama actual es feature/entrega-N-NCH. Si es main, detente y avisa.
       - Implementa una sola subtarea a la vez, en orden RED, GREEN, REFACTOR. Nunca escribas código de producción sin haber visto fallar su test.
+      - Si el RED no puede observarse de forma natural (por ejemplo, porque el entorno ya cumple la condición), detente y propón cómo forzarlo antes de continuar.
+      - Si un GREEN introduce varias piezas independientes y el RED solo demostró la necesidad de una, verifica cada pieza por mutación (retírala temporalmente, confirma que un test falla y restáurala), sin commit.
       - Ejecuta solo el archivo de test afectado con npx vitest run <archivo> --reporter=dot. La suite completa solo al cerrar un grupo.
       - Si en RED el test falla por un motivo distinto al esperado, detente y explícalo.
       - No modifiques un test existente para que pase sin justificarlo y pedir confirmación.
-      - "progress.md se reescribe completo (nunca se añade al final) con este formato exacto y nada más, un elemento de lista por campo: '# Progreso: <change>', '- Siguiente: <próxima tarea>', '- Decisiones: <solo decisiones técnicas no obvias>', '- Discrepancias: <lista o ninguna>'. No copies casillas ni conteos de tasks.md."
-      - El test, la casilla marcada en tasks.md y progress.md actualizado van en el mismo commit.
+      - "progress.md se reescribe completo (nunca se añade al final) con este formato exacto y nada más, un elemento de lista por campo: '# Progreso: <change>', '- Siguiente: <próxima tarea>', '- Decisiones: <máximo 3, una línea cada una, solo lo necesario para continuar>', '- Discrepancias: <lista o ninguna>'. No copies casillas ni conteos de tasks.md, ni fechas ni quién decidió: eso va en proposal.md o design.md."
+      - Si una decisión cambia el plan, actualiza también design.md o tasks.md; progress.md solo la resume.
+      - El test, la casilla marcada en tasks.md y progress.md actualizado van en el mismo commit. Si un REFACTOR no produce cambios, márcalo en el mismo commit que su GREEN.
       - Al terminar cada grupo, detente con un resumen de máximo 5 líneas que indique, por cada test, el motivo del fallo visto en RED.
       - Al retomar un change, lee primero progress.md y tasks.md, y nada más hasta que una tarea lo requiera.
   archive:
     guidance:
+      - Si no hay constancia de que se ejecutó /opsx:verify para este change, pregunta antes de archivar.
       - Antes de archivar, ejecuta npm run lint, npx tsc --noEmit y npx vitest run --reporter=dot. Si alguno falla, detente.
       - Comprueba con una búsqueda en el código que cada escenario de los deltas tiene un test cuyo nombre coincide exactamente. Lista los que falten y detente.
       - Si el change tiene skip_specs, no modifiques nada en openspec/specs/.
