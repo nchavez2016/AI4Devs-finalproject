@@ -52,6 +52,7 @@ describe('registrarUsuario', () => {
       email: 'ana@tienda.ec',
       password: 'clave-segura-1',
     })
+    const categoriasAntes = await prisma.categoria.count()
 
     const resultado = await registrarUsuario({
       nombre: 'Otra Ana',
@@ -68,8 +69,8 @@ describe('registrarUsuario', () => {
     const usuarios = await prisma.usuario.findMany({ where: { email: 'ana@tienda.ec' } })
     expect(usuarios).toHaveLength(1)
 
-    const categorias = await prisma.categoria.count()
-    expect(categorias).toBe(0)
+    const categoriasDespues = await prisma.categoria.count()
+    expect(categoriasDespues).toBe(categoriasAntes)
   })
 
   it('Registro rechazado por datos inválidos', async () => {
@@ -90,5 +91,32 @@ describe('registrarUsuario', () => {
 
     const usuarios = await prisma.usuario.findMany()
     expect(usuarios).toHaveLength(0)
+  })
+
+  it('Registro crea las categorías por defecto', async () => {
+    await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+
+    const usuario = await prisma.usuario.findUniqueOrThrow({
+      where: { email: 'ana@tienda.ec' },
+    })
+    const categorias = await prisma.categoria.findMany({ where: { usuarioId: usuario.id } })
+
+    const gastos = categorias.filter((categoria) => categoria.tipo === 'GASTO')
+    const ingresos = categorias.filter((categoria) => categoria.tipo === 'INGRESO')
+
+    expect(gastos).toHaveLength(5)
+    expect(ingresos).toHaveLength(2)
+    expect(categorias.every((categoria) => categoria.categoriaPadreId === null)).toBe(true)
+    expect(gastos.map((categoria) => categoria.nombre).sort()).toEqual(
+      ['Arriendo', 'Insumos', 'Otros', 'Servicios básicos', 'Transporte'].sort()
+    )
+    expect(ingresos.map((categoria) => categoria.nombre).sort()).toEqual(
+      ['Otros ingresos', 'Ventas'].sort()
+    )
   })
 })

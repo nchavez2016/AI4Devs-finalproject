@@ -1,4 +1,5 @@
 import { Prisma } from '@/generated/prisma/client'
+import { CATEGORIAS_POR_DEFECTO } from '@/server/auth/categoriasPorDefecto'
 import { prisma } from './prisma'
 
 export class EmailDuplicadoError extends Error {
@@ -18,13 +19,25 @@ interface DatosCrearUsuario {
 export const usuarioRepository = {
   async crear(datos: DatosCrearUsuario) {
     try {
-      return await prisma.usuario.create({
-        data: {
-          nombre: datos.nombre,
-          nombreNegocio: datos.nombreNegocio,
-          email: datos.email,
-          passwordHash: datos.passwordHash,
-        },
+      return await prisma.$transaction(async (tx) => {
+        const usuario = await tx.usuario.create({
+          data: {
+            nombre: datos.nombre,
+            nombreNegocio: datos.nombreNegocio,
+            email: datos.email,
+            passwordHash: datos.passwordHash,
+          },
+        })
+
+        await tx.categoria.createMany({
+          data: CATEGORIAS_POR_DEFECTO.map((categoria) => ({
+            usuarioId: usuario.id,
+            nombre: categoria.nombre,
+            tipo: categoria.tipo,
+          })),
+        })
+
+        return usuario
       })
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
