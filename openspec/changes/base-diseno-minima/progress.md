@@ -1,4 +1,4 @@
 # Progreso: base-diseno-minima
-- Siguiente: 2.4 RED: test formatea un gasto como −$25,50 con el signo U+2212
+- Siguiente: 2.7 RED: test formatea un saldo positivo como $1.234,50
 - Decisiones: ninguna
 - Discrepancias: ninguna

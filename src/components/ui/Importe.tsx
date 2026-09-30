@@ -10,5 +10,8 @@ export function formatearImporte(valor: string, tipo: TipoImporte): string {
   if (tipo === 'ingreso') {
     return `+${formateado}`
   }
+  if (tipo === 'gasto') {
+    return `\u2212${formateado}`
+  }
   return formateado
 }

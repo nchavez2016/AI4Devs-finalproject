@@ -19,9 +19,9 @@
 - [x] 2.3 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea un gasto como −$25,50 con el signo U+2212
-- [ ] 2.4 RED: test `formatea un gasto como −$25,50 con el signo U+2212` (compara con `'−$25,50'`). Verificar: falla por el signo.
-- [ ] 2.5 GREEN: signo U+2212 para `gasto` en `Importe.tsx`. Verificar: el archivo pasa.
-- [ ] 2.6 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 2.4 RED: test `formatea un gasto como −$25,50 con el signo U+2212` (compara con `'−$25,50'`). Verificar: falla por el signo.
+- [x] 2.5 GREEN: signo U+2212 para `gasto` en `Importe.tsx`. Verificar: el archivo pasa.
+- [x] 2.6 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea un saldo positivo como $1.234,50
 - [ ] 2.7 RED: test `formatea un saldo positivo como $1.234,50` (`'1234.50'`, `'saldo'`). Verificar: falla por el formato o el signo.
