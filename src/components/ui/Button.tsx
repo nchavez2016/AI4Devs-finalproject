@@ -10,7 +10,7 @@ const clasesVariante: Record<VarianteBoton, string> = {
 }
 
 const clasesBase =
-  'inline-flex items-center justify-center h-alto-control px-control-x text-cuerpo font-control rounded-control transition-colors'
+  'relative inline-flex items-center justify-center h-alto-control px-control-x text-cuerpo font-control rounded-control transition-colors'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variante?: VarianteBoton
@@ -21,17 +21,52 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({
   variante = 'primario',
+  cargando = false,
+  textoCarga = 'Guardando…',
+  disabled,
   children,
   className: classNameProp,
   ...restoProps
 }: ButtonProps) {
-  const className = [clasesBase, clasesVariante[variante], classNameProp]
+  const estaDeshabilitado = Boolean(disabled || cargando)
+  const claseVariante =
+    !cargando && disabled
+      ? 'bg-muted text-muted-foreground'
+      : clasesVariante[variante]
+
+  const className = [clasesBase, claseVariante, classNameProp]
     .filter(Boolean)
     .join(' ')
 
   return (
-    <button className={className} {...restoProps}>
-      {children}
+    <button
+      className={className}
+      disabled={estaDeshabilitado}
+      aria-busy={cargando ? 'true' : undefined}
+      {...restoProps}
+    >
+      <span
+        className={
+          cargando
+            ? 'invisible inline-flex items-center gap-icono-texto'
+            : 'inline-flex items-center gap-icono-texto'
+        }
+      >
+        {children}
+      </span>
+      {cargando && (
+        <span className="absolute inset-ninguno flex items-center justify-center">
+          <svg
+            className="animate-giro size-icono"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M8 1.5a6.5 6.5 0 1 0 6.5 6.5h-2A4.5 4.5 0 1 1 8 3.5v-2z" />
+          </svg>
+          <span className="sr-only">{textoCarga}</span>
+        </span>
+      )}
     </button>
   )
 }

@@ -1,4 +1,4 @@
 # Progreso: base-diseno-minima
-- Siguiente: 3.4 RED: test Button en carga tiene aria-busy, está deshabilitado y conserva su ancho
+- Siguiente: 3.7 RED: test Campo enlaza la etiqueta y la ayuda con el control
 - Decisiones: ninguna
 - Discrepancias: ninguna

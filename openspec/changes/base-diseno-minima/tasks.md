@@ -66,9 +66,9 @@
 - [x] 3.3 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Button en carga tiene aria-busy, está deshabilitado y conserva su ancho
-- [ ] 3.4 RED: test `Button en carga tiene aria-busy, está deshabilitado y conserva su ancho`: con `cargando`, `aria-busy="true"`, `disabled`, la etiqueta sigue en el DOM con `invisible`, el indicador está en una capa `absolute` con `animate-giro` y "Guardando…" en `sr-only`. Verificar: falla por `aria-busy` ausente.
-- [ ] 3.5 GREEN: estado de carga según design.md → Decisión 5. Verificar: el archivo pasa.
-- [ ] 3.6 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 3.4 RED: test `Button en carga tiene aria-busy, está deshabilitado y conserva su ancho`: con `cargando`, `aria-busy="true"`, `disabled`, la etiqueta sigue en el DOM con `invisible`, el indicador está en una capa `absolute` con `animate-giro` y "Guardando…" en `sr-only`. Verificar: falla por `aria-busy` ausente.
+- [x] 3.5 GREEN: estado de carga según design.md → Decisión 5. Verificar: el archivo pasa.
+- [x] 3.6 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Campo enlaza la etiqueta y la ayuda con el control
 - [ ] 3.7 RED: en `src/components/ui/Campo.test.tsx`, test `Campo enlaza la etiqueta y la ayuda con el control`: `getByLabelText(etiqueta)` devuelve el input y su `aria-describedby` apunta al texto de ayuda; con `opcional` la etiqueta termina en "(opcional)". Verificar: falla porque `Campo` no existe.

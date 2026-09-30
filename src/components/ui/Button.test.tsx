@@ -19,4 +19,22 @@ describe('Button', () => {
     expect(destructivo.firstElementChild?.className).toContain('bg-destructive')
     expect(destructivo.firstElementChild?.className).toContain('text-destructive-foreground')
   })
+
+  it('Button en carga tiene aria-busy, está deshabilitado y conserva su ancho', () => {
+    const { container } = render(<Button cargando>Guardar gasto</Button>)
+    const button = container.querySelector('button')
+    expect(button?.getAttribute('aria-busy')).toBe('true')
+    expect(button?.hasAttribute('disabled')).toBe(true)
+
+    const etiqueta = button?.querySelector('.invisible')
+    expect(etiqueta?.textContent).toBe('Guardar gasto')
+
+    const indicador = button?.querySelector('.animate-giro')
+    expect(indicador).not.toBeNull()
+    const capaIndicador = button?.querySelector('.absolute')
+    expect(capaIndicador).not.toBeNull()
+
+    const textoSr = button?.querySelector('.sr-only')
+    expect(textoSr?.textContent).toBe('Guardando…')
+  })
 })
