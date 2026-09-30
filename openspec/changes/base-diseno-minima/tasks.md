@@ -61,9 +61,9 @@
 ## 3. Button y Campo
 
 ### Button aplica las clases de su variante
-- [ ] 3.1 RED: en `src/components/ui/Button.test.tsx`, test `Button aplica las clases de su variante`: `primario` (por defecto) → `bg-primary text-primary-foreground`; `secundario` → `bg-secondary border-input`; `terciario` → `text-primary`; `destructivo` → `bg-destructive text-destructive-foreground`. Verificar: falla porque `Button` no existe.
-- [ ] 3.2 GREEN: `src/components/ui/Button.tsx` con las cuatro variantes y las medidas de componentes.md 7.1 (solo clases de tokens). Verificar: el archivo pasa.
-- [ ] 3.3 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 3.1 RED: en `src/components/ui/Button.test.tsx`, test `Button aplica las clases de su variante`: `primario` (por defecto) → `bg-primary text-primary-foreground`; `secundario` → `bg-secondary border-input`; `terciario` → `text-primary`; `destructivo` → `bg-destructive text-destructive-foreground`. Verificar: falla porque `Button` no existe.
+- [x] 3.2 GREEN: `src/components/ui/Button.tsx` con las cuatro variantes y las medidas de componentes.md 7.1 (solo clases de tokens). Verificar: el archivo pasa.
+- [x] 3.3 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Button en carga tiene aria-busy, está deshabilitado y conserva su ancho
 - [ ] 3.4 RED: test `Button en carga tiene aria-busy, está deshabilitado y conserva su ancho`: con `cargando`, `aria-busy="true"`, `disabled`, la etiqueta sigue en el DOM con `invisible`, el indicador está en una capa `absolute` con `animate-giro` y "Guardando…" en `sr-only`. Verificar: falla por `aria-busy` ausente.
