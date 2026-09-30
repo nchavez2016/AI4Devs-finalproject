@@ -28,4 +28,23 @@ describe('verificarCredenciales', () => {
       expect(resultado.usuario.id).toBeTruthy()
     }
   })
+
+  it('Inicio de sesión con contraseña incorrecta', async () => {
+    await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+
+    const resultado = await verificarCredenciales({
+      email: 'ana@tienda.ec',
+      password: 'otra-clave-99',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.mensaje).toBe('Email o contraseña incorrectos')
+    }
+  })
 })

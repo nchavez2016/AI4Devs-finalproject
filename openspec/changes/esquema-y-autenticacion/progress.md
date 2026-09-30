@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 3.4 RED — "Inicio de sesión con contraseña incorrecta"
-- Decisiones: verificarCredenciales devuelve {ok,usuario} o {ok:false} (sin distinguir motivo, por diseño: mensaje genérico); usuarioRepository.buscarPorEmail añadido
+- Siguiente: 3.7 RED — "Inicio de sesión con email no registrado"
+- Decisiones: ResultadoCredenciales false ahora incluye mensaje (siempre el mismo texto genérico, constante en credenciales.ts)
 - Discrepancias: ninguna
