@@ -1,4 +1,4 @@
 # Progreso: base-diseno-minima
-- Siguiente: 3.13 RED: test Campo de monto muestra el prefijo $ y usa inputmode decimal
+- Siguiente: 3.16 Crear src/app/diseno/page.tsx
 - Decisiones: ninguna
 - Discrepancias: ninguna

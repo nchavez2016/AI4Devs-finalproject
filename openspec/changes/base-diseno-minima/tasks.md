@@ -81,9 +81,9 @@
 - [x] 3.12 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Campo de monto muestra el prefijo $ y usa inputmode decimal
-- [ ] 3.13 RED: test `Campo de monto muestra el prefijo $ y usa inputmode decimal`: con `monto`, el input tiene `inputmode="decimal"` y `text-importe-campo`, y hay un "$" fuera del input. Verificar: falla por `inputmode` ausente.
-- [ ] 3.14 GREEN: variante de monto. Verificar: el archivo pasa.
-- [ ] 3.15 REFACTOR. Verificar: el archivo pasa y la suite completa está en verde.
+- [x] 3.13 RED: test `Campo de monto muestra el prefijo $ y usa inputmode decimal`: con `monto`, el input tiene `inputmode="decimal"` y `text-importe-campo`, y hay un "$" fuera del input. Verificar: falla por `inputmode` ausente.
+- [x] 3.14 GREEN: variante de monto. Verificar: el archivo pasa.
+- [x] 3.15 REFACTOR. Verificar: el archivo pasa y la suite completa está en verde.
 
 ### Página de muestra
 - [ ] 3.16 Crear `src/app/diseno/page.tsx` (temporal; se elimina al cerrar el change 2) con: los cinco casos de Importe en los tres tamaños; "111,11" y "888,88" en líneas separadas para medir; las cuatro variantes de Button, una deshabilitada y una en carga; Campo normal, opcional, con ayuda, con error y de monto; un `h1` y un `h2`. Solo clases de tokens. Verificar: `npm run build` sin errores y `npm run dev` sirve `/diseno`.

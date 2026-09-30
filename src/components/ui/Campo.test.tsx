@@ -51,4 +51,13 @@ describe('Campo', () => {
     expect(input.getAttribute('aria-invalid')).toBeNull()
     expect(input.className).not.toContain('border-destructive')
   })
+
+  it('Campo de monto muestra el prefijo $ y usa inputmode decimal', () => {
+    const { container } = render(<Campo etiqueta="Monto" monto />)
+    const input = screen.getByLabelText('Monto') as HTMLInputElement
+    expect(input.getAttribute('inputmode')).toBe('decimal')
+    expect(input.className).toContain('text-importe-campo')
+    expect(input.value).toBe('')
+    expect(container.textContent).toContain('$')
+  })
 })

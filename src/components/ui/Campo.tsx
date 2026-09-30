@@ -5,6 +5,7 @@ export interface CampoProps extends InputHTMLAttributes<HTMLInputElement> {
   ayuda?: string
   error?: string
   opcional?: boolean
+  monto?: boolean
 }
 
 export function Campo({
@@ -12,8 +13,10 @@ export function Campo({
   ayuda,
   error,
   opcional,
+  monto = false,
   id: idProp,
   className: classNameProp,
+  inputMode: inputModeProp,
   ...restoProps
 }: CampoProps) {
   const generatedId = useId()
@@ -24,25 +27,46 @@ export function Campo({
 
   const textoEtiqueta = opcional ? `${etiqueta} (opcional)` : etiqueta
   const claseBorde = error ? 'border-destructive' : 'border-input'
+  const claseTexto = monto ? 'text-importe-campo font-control' : 'text-cuerpo'
+  const inputMode = monto ? 'decimal' : inputModeProp
+
+  const inputElement = (
+    <input
+      id={id}
+      aria-describedby={describedBy}
+      aria-invalid={error ? 'true' : undefined}
+      inputMode={inputMode}
+      className={[
+        'bg-card border rounded-control h-alto-campo px-campo-x text-foreground',
+        claseTexto,
+        claseBorde,
+        monto && 'w-full',
+        classNameProp,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      {...restoProps}
+    />
+  )
 
   return (
     <div className="flex flex-col gap-etiqueta">
       <label htmlFor={id} className="text-etiqueta font-control text-foreground">
         {textoEtiqueta}
       </label>
-      <input
-        id={id}
-        aria-describedby={describedBy}
-        aria-invalid={error ? 'true' : undefined}
-        className={[
-          'bg-card border rounded-control h-alto-campo px-campo-x text-cuerpo text-foreground',
-          claseBorde,
-          classNameProp,
-        ]
-          .filter(Boolean)
-          .join(' ')}
-        {...restoProps}
-      />
+      {monto ? (
+        <div className="flex items-center gap-campo-x">
+          <span
+            className="text-importe-campo font-control text-muted-foreground select-none"
+            aria-hidden="true"
+          >
+            $
+          </span>
+          {inputElement}
+        </div>
+      ) : (
+        inputElement
+      )}
       {ayuda && (
         <span id={ayudaId} className="text-detalle text-muted-foreground mt-mensaje">
           {ayuda}
