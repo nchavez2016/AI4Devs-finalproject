@@ -14,9 +14,9 @@
 ## 2. Importe
 
 ### formatea un ingreso como +$25,50
-- [ ] 2.1 RED: en `src/components/ui/Importe.test.tsx`, test `formatea un ingreso como +$25,50` (`formatearImporte('25.50', 'ingreso')`). Verificar: falla porque `formatearImporte` no existe.
-- [ ] 2.2 GREEN: crear `src/components/ui/Importe.tsx` con `formatearImporte` mínimo. Verificar: el test pasa.
-- [ ] 2.3 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 2.1 RED: en `src/components/ui/Importe.test.tsx`, test `formatea un ingreso como +$25,50` (`formatearImporte('25.50', 'ingreso')`). Verificar: falla porque `formatearImporte` no existe.
+- [x] 2.2 GREEN: crear `src/components/ui/Importe.tsx` con `formatearImporte` mínimo. Verificar: el test pasa.
+- [x] 2.3 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### formatea un gasto como −$25,50 con el signo U+2212
 - [ ] 2.4 RED: test `formatea un gasto como −$25,50 con el signo U+2212` (compara con `'−$25,50'`). Verificar: falla por el signo.
