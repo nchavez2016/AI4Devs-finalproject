@@ -86,7 +86,7 @@
 - [x] 3.15 REFACTOR. Verificar: el archivo pasa y la suite completa está en verde.
 
 ### Página de muestra
-- [ ] 3.16 Crear `src/app/diseno/page.tsx` (temporal; se elimina al cerrar el change 2) con: los cinco casos de Importe en los tres tamaños; "111,11" y "888,88" en líneas separadas para medir; las cuatro variantes de Button, una deshabilitada y una en carga; Campo normal, opcional, con ayuda, con error y de monto; un `h1` y un `h2`. Solo clases de tokens. Verificar: `npm run build` sin errores y `npm run dev` sirve `/diseno`.
+- [x] 3.16 Crear `src/app/diseno/page.tsx` (temporal; se elimina al cerrar el change 2) con: los cinco casos de Importe en los tres tamaños; "111,11" y "888,88" en líneas separadas para medir; las cuatro variantes de Button, una deshabilitada y una en carga; Campo normal, opcional, con ayuda, con error y de monto; un `h1` y un `h2`. Solo clases de tokens. Verificar: `npm run build` sin errores y `npm run dev` sirve `/diseno`.
 
 ## 4. [HUMANO] Revisión visual y validación final
 
