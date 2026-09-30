@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 2.16 RED — "Categorías por defecto aisladas por usuario"
-- Decisiones: usuarioRepository.crear usa prisma.$transaction (usuario + categoria.createMany); corregida (justificada) la aserción de "email duplicado" que asumía 0 categorías, ahora compara antes/después
+- Siguiente: 3.1 RED — src/server/auth/credenciales.int.test.ts, "Inicio de sesión con credenciales correctas"
+- Decisiones: grupo 2 cerrado (38/82 tareas); aislamiento por usuarioId ya era correcto, verificado por mutación (findFirst por creadoEn) y restaurado
 - Discrepancias: ninguna

@@ -45,9 +45,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 2.13 RED — mismo archivo, test "Registro crea las categorías por defecto".
 - [x] 2.14 GREEN — constante `CATEGORIAS_POR_DEFECTO` en `src/server/auth/categoriasPorDefecto.ts`; el repositorio crea usuario y categorías en un solo `$transaction`. Test en verde.
 - [x] 2.15 REFACTOR — test en verde.
-- [ ] 2.16 RED — mismo archivo, test "Categorías por defecto aisladas por usuario". Si pasa sin cambios, detenerse y proponer cómo forzar el RED.
-- [ ] 2.17 GREEN — corregir el filtro por `usuarioId` si hace falta. Test en verde.
-- [ ] 2.18 REFACTOR — test en verde; suite completa (cierre de grupo).
+- [x] 2.16 RED — mismo archivo, test "Categorías por defecto aisladas por usuario". Si pasa sin cambios, detenerse y proponer cómo forzar el RED. (Pasó sin cambios; forzado por mutación —desviar todas las categorías al primer usuario— y restaurado.)
+- [x] 2.17 GREEN — corregir el filtro por `usuarioId` si hace falta. Test en verde. (Ya correcto; sin cambios.)
+- [x] 2.18 REFACTOR — test en verde; suite completa (cierre de grupo).
 
 ## 3. Credenciales, sesión y proxy.ts
 

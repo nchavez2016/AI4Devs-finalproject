@@ -119,4 +119,33 @@ describe('registrarUsuario', () => {
       ['Otros ingresos', 'Ventas'].sort()
     )
   })
+
+  it('Categorías por defecto aisladas por usuario', async () => {
+    await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    const usuarioA = await prisma.usuario.findUniqueOrThrow({
+      where: { email: 'ana@tienda.ec' },
+    })
+
+    await registrarUsuario({
+      nombre: 'Beto',
+      nombreNegocio: 'Taller Beto',
+      email: 'beto@taller.ec',
+      password: 'otra-clave-99',
+    })
+    const usuarioB = await prisma.usuario.findUniqueOrThrow({
+      where: { email: 'beto@taller.ec' },
+    })
+
+    const categoriasA = await prisma.categoria.findMany({ where: { usuarioId: usuarioA.id } })
+    const categoriasB = await prisma.categoria.findMany({ where: { usuarioId: usuarioB.id } })
+
+    expect(categoriasA).toHaveLength(7)
+    expect(categoriasB).toHaveLength(7)
+    expect(categoriasB.every((categoria) => categoria.usuarioId !== usuarioA.id)).toBe(true)
+  })
 })
