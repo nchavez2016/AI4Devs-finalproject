@@ -1,4 +1,4 @@
 # Progreso: base-diseno-minima
-- Siguiente: 1.5 Cierre del grupo 1
+- Siguiente: 2.1 RED: test formatea un ingreso como +$25,50
 - Decisiones: ninguna
 - Discrepancias: ninguna

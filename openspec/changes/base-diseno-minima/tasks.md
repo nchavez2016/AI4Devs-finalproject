@@ -9,7 +9,7 @@
 - [x] 1.2 Sonda de utilidades: archivo temporal `src/app/sonda-utilidades.tsx` que usa las clases de las dos columnas de design.md → Decisión 3 (incluidas las "a confirmar"); `npm run build`; buscar cada clase en el CSS de `.next/`. Actualizar la tabla de design.md con el resultado real y borrar la sonda. Verificar: `git status` solo muestra `design.md` y `globals.css` modificados.
 - [x] 1.3 En `src/app/layout.tsx`, sustituir Geist por `IBM_Plex_Sans` y `Source_Serif_4` según design.md → Decisión 2, ajustar `--font-interfaz`/`--font-titulo` en `globals.css`, y cambiar `lang="en"` por `lang="es"` en `<html>`. Verificar: `npm run build` sin errores y `npm run dev` sirve `/` con `<html lang="es">`, las clases de las dos variables en `<html>` y la familia computada del `body` empieza por IBM Plex Sans (inspección en el navegador).
 - [x] 1.4 Añadir en `AGENTS.md` → Convenciones la línea: "SÍ: los estilos usan solo los tokens definidos en `docs/diseno/sistema/` (punto de entrada: `README.md`). NO: ningún valor visual literal." Verificar: `git diff AGENTS.md` muestra solo esa línea.
-- [ ] 1.5 Cierre del grupo: `npm run lint`, `npm run typecheck` y `npm run test:run` en verde.
+- [x] 1.5 Cierre del grupo: `npm run lint`, `npm run typecheck` y `npm run test:run` en verde.
 
 ## 2. Importe
 
