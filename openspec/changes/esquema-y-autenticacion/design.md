@@ -30,9 +30,11 @@ sal aleatoria de 16 bytes, clave de 64 bytes y comparación con `timingSafeEqual
 trunca a 72 bytes. Guardar los parámetros permite subirlos más adelante sin migrar datos.
 
 **c) Auth.js v5 con Credentials → sesión JWT.** Auth.js solo admite `strategy: "jwt"` con el
-proveedor Credentials. **No está verificado localmente** (el paquete aún no está instalado),
-así que una tarea lo comprueba en `node_modules/@auth/core` después de instalar. El JWT
-guarda `id`, `nombre` y `nombreNegocio`, así que el panel no consulta la base de datos.
+proveedor Credentials: verificado en `node_modules/@auth/core/lib/utils/assert.js` (rechaza
+con `UnsupportedStrategy` solo si `session.strategy === "database"` y todos los proveedores
+son Credentials) y en `node_modules/@auth/core/lib/init.js` (sin `adapter`, la estrategia por
+defecto ya es `"jwt"`). El JWT guarda `id`, `nombre` y `nombreNegocio`, así que el panel no
+consulta la base de datos.
 `authorize` delega en el caso de uso `verificarCredenciales` (Zod + repositorio + scrypt).
 Next 16 ejecuta `proxy.ts` en Node.js (guía `authentication.md`) y solo hace una
 comprobación optimista de la cookie. La autorización real está en el servidor: `auth()` en

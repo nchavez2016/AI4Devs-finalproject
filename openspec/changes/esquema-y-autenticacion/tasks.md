@@ -60,8 +60,8 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 3.7 RED — mismo archivo, test "Inicio de sesión con email no registrado". Si pasa sin cambios, detenerse y proponer cómo forzar el RED. (Pasó sin cambios; forzado por mutación —acceso directo a usuario!.passwordHash— y restaurado.)
 - [x] 3.8 GREEN — mismo error genérico; ejecutar `verificar` también con un hash ficticio para no revelar si el email existe por el tiempo de respuesta. Test en verde.
 - [x] 3.9 REFACTOR — test en verde.
-- [ ] 3.10 [PARADA] Pedir autorización y ejecutar `npm install --save-exact next-auth@5.0.0-beta.32`; verificar que package.json dice exactamente `"5.0.0-beta.32"` (sin `^`).
-- [ ] 3.11 Comprobar en `node_modules/@auth/core` que Credentials exige `session.strategy: "jwt"` (buscar la validación de estrategia) y anotar el resultado en design.md (decisión c). Si lo contradice, detenerse.
+- [x] 3.10 [PARADA] Pedir autorización y ejecutar `npm install --save-exact next-auth@5.0.0-beta.32`; verificar que package.json dice exactamente `"5.0.0-beta.32"` (sin `^`).
+- [x] 3.11 Comprobar en `node_modules/@auth/core` que Credentials exige `session.strategy: "jwt"` (buscar la validación de estrategia) y anotar el resultado en design.md (decisión c). Si lo contradice, detenerse.
 - [ ] 3.12 RED — `src/auth.test.ts`, test "la sesión expone id, nombre y nombre del negocio del token". Ver que falla porque los callbacks no existen.
 - [ ] 3.13 GREEN — `src/auth.ts` (NextAuth: Credentials → `verificarCredenciales`, JWT, callbacks `jwt`/`session`, `pages.signIn: "/login"`, `secret: env.AUTH_SECRET`), `src/types/next-auth.d.ts` y `src/app/api/auth/[...nextauth]/route.ts`. Test en verde y `npm run typecheck` sin errores.
 - [ ] 3.14 REFACTOR — test en verde.
