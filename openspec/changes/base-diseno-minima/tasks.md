@@ -76,9 +76,9 @@
 - [x] 3.9 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Campo con error tiene aria-invalid y el mensaje enlazado con aria-describedby
-- [ ] 3.10 RED: test `Campo con error tiene aria-invalid y el mensaje enlazado con aria-describedby`: `aria-invalid="true"`, `aria-describedby` incluye los ids de ayuda y error, el mensaje se muestra y el input tiene `border-destructive`; sin error no hay `aria-invalid`. Verificar: falla por `aria-invalid` ausente.
-- [ ] 3.11 GREEN: estado de error con icono SVG en línea. Verificar: el archivo pasa.
-- [ ] 3.12 REFACTOR. Verificar: el archivo sigue en verde.
+- [x] 3.10 RED: test `Campo con error tiene aria-invalid y el mensaje enlazado con aria-describedby`: `aria-invalid="true"`, `aria-describedby` incluye los ids de ayuda y error, el mensaje se muestra y el input tiene `border-destructive`; sin error no hay `aria-invalid`. Verificar: falla por `aria-invalid` ausente.
+- [x] 3.11 GREEN: estado de error con icono SVG en línea. Verificar: el archivo pasa.
+- [x] 3.12 REFACTOR. Verificar: el archivo sigue en verde.
 
 ### Campo de monto muestra el prefijo $ y usa inputmode decimal
 - [ ] 3.13 RED: test `Campo de monto muestra el prefijo $ y usa inputmode decimal`: con `monto`, el input tiene `inputmode="decimal"` y `text-importe-campo`, y hay un "$" fuera del input. Verificar: falla por `inputmode` ausente.

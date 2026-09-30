@@ -22,4 +22,33 @@ describe('Campo', () => {
     const inputOpcional = screen.getByLabelText('Descripción (opcional)')
     expect(inputOpcional).toBe(input)
   })
+
+  it('Campo con error tiene aria-invalid y el mensaje enlazado con aria-describedby', () => {
+    const { rerender } = render(
+      <Campo
+        etiqueta="Monto"
+        ayuda="En dólares"
+        error="El monto debe ser mayor que 0"
+      />
+    )
+
+    const input = screen.getByLabelText('Monto')
+    expect(input.getAttribute('aria-invalid')).toBe('true')
+    expect(input.className).toContain('border-destructive')
+
+    const describedBy = input.getAttribute('aria-describedby')
+    expect(describedBy).toBeTruthy()
+    const ids = describedBy!.split(' ')
+    expect(ids.length).toBe(2)
+
+    const ayudaElement = document.getElementById(ids[0])
+    expect(ayudaElement?.textContent).toBe('En dólares')
+
+    const errorElement = document.getElementById(ids[1])
+    expect(errorElement?.textContent).toContain('El monto debe ser mayor que 0')
+
+    rerender(<Campo etiqueta="Monto" ayuda="En dólares" />)
+    expect(input.getAttribute('aria-invalid')).toBeNull()
+    expect(input.className).not.toContain('border-destructive')
+  })
 })
