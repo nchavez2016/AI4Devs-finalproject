@@ -7,4 +7,9 @@ describe('resolverRedireccion', () => {
 
     expect(redireccion).toBe('/login')
   })
+
+  it('Rutas públicas accesibles sin sesión', () => {
+    expect(resolverRedireccion('/login', false)).toBeNull()
+    expect(resolverRedireccion('/registro', false)).toBeNull()
+  })
 })
