@@ -33,9 +33,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 2.1 RED — `src/server/auth/registro.int.test.ts`, test "Registro válido crea el usuario". Ver que falla porque `registrarUsuario` no existe.
 - [x] 2.2 GREEN — `src/server/auth/esquemas.ts` (Zod de registro: normaliza el email), `src/server/repositories/usuarioRepository.ts` y `src/server/auth/registro.ts`. Test en verde.
 - [x] 2.3 REFACTOR — test en verde.
-- [ ] 2.4 RED — mismo archivo, test "La contraseña se guarda con hash y nunca en texto plano".
-- [ ] 2.5 GREEN — `src/server/auth/password.ts` (`hashear`/`verificar` con scrypt, formato de design.md b) y usarlo en `registro.ts`. Test en verde.
-- [ ] 2.6 REFACTOR — test en verde.
+- [x] 2.4 RED — mismo archivo, test "La contraseña se guarda con hash y nunca en texto plano".
+- [x] 2.5 GREEN — `src/server/auth/password.ts` (`hashear`/`verificar` con scrypt, formato de design.md b) y usarlo en `registro.ts`. Test en verde.
+- [x] 2.6 REFACTOR — test en verde.
 - [ ] 2.7 RED — mismo archivo, test "Registro rechazado por email duplicado".
 - [ ] 2.8 GREEN — traducir P2002 en el repositorio a un resultado de dominio "email ya registrado". Test en verde.
 - [ ] 2.9 REFACTOR — test en verde.

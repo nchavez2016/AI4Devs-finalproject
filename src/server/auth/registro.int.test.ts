@@ -22,4 +22,26 @@ describe('registrarUsuario', () => {
     expect(usuario?.nombre).toBe('Ana')
     expect(usuario?.nombreNegocio).toBe('Tienda Ana')
   })
+
+  it('La contraseña se guarda con hash y nunca en texto plano', async () => {
+    await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    await registrarUsuario({
+      nombre: 'Beto',
+      nombreNegocio: 'Taller Beto',
+      email: 'beto@taller.ec',
+      password: 'clave-segura-1',
+    })
+
+    const ana = await prisma.usuario.findUnique({ where: { email: 'ana@tienda.ec' } })
+    const beto = await prisma.usuario.findUnique({ where: { email: 'beto@taller.ec' } })
+
+    expect(ana?.passwordHash).not.toContain('clave-segura-1')
+    expect(beto?.passwordHash).not.toContain('clave-segura-1')
+    expect(ana?.passwordHash).not.toBe(beto?.passwordHash)
+  })
 })
