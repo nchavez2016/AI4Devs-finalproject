@@ -24,8 +24,7 @@ cada token y un tema no podría redefinirlo en `:root`.
 `--font-titulo` las referencian con su respaldo; como `@theme static` se emite en `:root` (el mismo
 `<html>` que recibe las variables de `next/font`), la referencia se resuelve.
 
-**3. Utilidades que sobreviven a `--*: initial`** (a confirmar con la sonda de la tarea 1.2, que
-actualiza esta tabla con el resultado real):
+**3. Utilidades que sobreviven a `--*: initial`** (confirmado con la sonda de la tarea 1.2):
 
 | Sobreviven (no dependen del tema) | Desaparecen (dependían del tema) |
 |---|---|
@@ -33,7 +32,7 @@ actualiza esta tabla con el resultado real):
 | `w-full`, `h-full`, `min-h-full`, `w-auto` | `text-xs`…`text-9xl`, `font-medium`, `font-semibold`, `tracking-*` |
 | `relative`, `absolute`, `sr-only`, `invisible`, `truncate`, `text-center` | `max-w-3xl` y demás `--container-*`, `sm:`/`md:`/`lg:` |
 | `border` (ancho `--default-border-width`), `transition-colors`, `antialiased` | paleta (`bg-zinc-50`, `bg-white`), `shadow-*`, `ease-in-out`, `animate-spin`, `font-sans` |
-| Con valor numérico propio: `z-10`, `opacity-50`, `grid-cols-2` | A confirmar: fracciones (`top-1/2`), `rounded-full`, `leading-none`, `p-px` |
+| Con valor numérico o estático propio: `z-10`, `opacity-50`, `grid-cols-2`, `top-1/2`, `rounded-full`, `leading-none`, `p-px` | — |
 
 Las clases de tokens (`bg-primary`, `text-cuerpo`, `font-control`, `h-alto-control`, `size-icono`,
 `rounded-control`, `animate-giro`, `escritorio:`) sustituyen a las desaparecidas.
