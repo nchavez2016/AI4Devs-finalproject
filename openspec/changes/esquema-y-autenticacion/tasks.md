@@ -77,10 +77,10 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 
 ## 4. Pantallas y limpieza
 
-- [ ] 4.1 CARACTERIZACIÓN — confirmar con `git show HEAD:src/app/page.tsx` que es la plantilla de Next sin lógica que conservar, y anotarlo en progress.md.
-- [ ] 4.2 RED — `src/app/page.test.tsx`, test "La raíz lleva al panel": invoca `Page()` (componente síncrono, sin renderizar) con `redirect` de `next/navigation` simulado y comprueba que se llama con `"/panel"`.
-- [ ] 4.3 GREEN — `src/app/page.tsx` pasa a ser solo `redirect("/panel")`. Test en verde.
-- [ ] 4.4 REFACTOR — test en verde.
+- [x] 4.1 CARACTERIZACIÓN — confirmar con `git show HEAD:src/app/page.tsx` que es la plantilla de Next sin lógica que conservar, y anotarlo en progress.md.
+- [x] 4.2 RED — `src/app/page.test.tsx`, test "La raíz lleva al panel": invoca `Page()` (componente síncrono, sin renderizar) con `redirect` de `next/navigation` simulado y comprueba que se llama con `"/panel"`.
+- [x] 4.3 GREEN — `src/app/page.tsx` pasa a ser solo `redirect("/panel")`. Test en verde.
+- [x] 4.4 REFACTOR — test en verde.
 - [ ] 4.5 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel muestra el negocio del usuario autenticado": con `@/auth` simulado (sesión de A), renderiza `<ContenidoPanel {...await cargarPanel()} />` y comprueba que aparece "Tienda Ana" y no "Taller Beto". Ver que falla porque no existen.
 - [ ] 4.6 GREEN — `src/server/panel.ts` (`cargarPanel`: `auth()`, `redirect("/login")` sin sesión y devuelve `nombreNegocio`), `src/app/(privado)/panel/ContenidoPanel.tsx` (síncrono: negocio y botón "Cerrar sesión" con `cerrarSesion`, solo tokens de `docs/diseno/sistema/`) y `page.tsx` (async, solo une las dos piezas; se verifica en 5.3). Test en verde.
 - [ ] 4.7 REFACTOR — test en verde.

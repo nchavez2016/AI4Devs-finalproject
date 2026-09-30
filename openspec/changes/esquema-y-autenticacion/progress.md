@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 4.1 CARACTERIZACIÓN — confirmar que src/app/page.tsx es la plantilla de Next
-- Decisiones: grupo 3 cerrado (61/82 tareas); acciones.ts concentra las Server Actions de auth (cerrarSesion primero)
+- Siguiente: 4.5 RED — src/app/(privado)/panel/panel.test.tsx, "El panel muestra el negocio del usuario autenticado"
+- Decisiones: page.tsx sustituido entero por un redirect("/panel") (era la plantilla de create-next-app, sin lógica propia)
 - Discrepancias: ninguna
