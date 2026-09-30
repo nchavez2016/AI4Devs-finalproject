@@ -103,3 +103,66 @@ describe('evaluarComando', () => {
     });
   });
 });
+
+describe('evaluarRuta', () => {
+  describe('bloquea escribir o editar un archivo de configuración real y permite ejemplo', () => {
+    it.each([
+      { ruta: '.env', debe: true },
+      { ruta: '.env.example', debe: false },
+    ])('$debe: $ruta', ({ ruta, debe }) => {
+      const resultado = evaluarRuta(ruta);
+      if (debe) {
+        expect(resultado).toBeTruthy();
+      } else {
+        expect(resultado).toBeFalsy();
+      }
+    });
+  });
+
+  describe('bloquea escribir o editar dentro de prisma/migrations/', () => {
+    it('bloquea: prisma/migrations/001_init.sql', () => {
+      const resultado = evaluarRuta('prisma/migrations/001_init.sql');
+      expect(resultado).toBeTruthy();
+    });
+  });
+
+  describe('bloquea escribir o editar dentro de carpetas de control', () => {
+    it.each([
+      { ruta: '.git/config', debe: true },
+      { ruta: '.claude/settings.json', debe: true },
+      { ruta: '.Claude/settings.json', debe: true },
+    ])('$debe: $ruta', ({ ruta, debe }) => {
+      const resultado = evaluarRuta(ruta);
+      if (debe) {
+        expect(resultado).toBeTruthy();
+      } else {
+        expect(resultado).toBeFalsy();
+      }
+    });
+  });
+
+  describe('bloquea escribir o editar scripts/agents/ o .agents/hooks.json', () => {
+    it.each([
+      { ruta: 'scripts/agents/guardia.mjs', debe: true },
+      { ruta: '.agents/hooks.json', debe: true },
+      { ruta: 'Scripts/Agents/test.mjs', debe: true },
+    ])('$debe: $ruta', ({ ruta, debe }) => {
+      const resultado = evaluarRuta(ruta);
+      if (debe) {
+        expect(resultado).toBeTruthy();
+      } else {
+        expect(resultado).toBeFalsy();
+      }
+    });
+  });
+
+  describe('bloquea rutas absolutas de Windows con barras invertidas', () => {
+    it.each([
+      'C:\\proyecto\\.env',
+      'C:\\proyecto\\.claude\\settings.json',
+    ])('bloquea: %s', (ruta) => {
+      const resultado = evaluarRuta(ruta);
+      expect(resultado).toBeTruthy();
+    });
+  });
+});

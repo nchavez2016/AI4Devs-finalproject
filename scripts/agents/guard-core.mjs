@@ -94,6 +94,29 @@ export function evaluarComando(comando) {
   return null;
 }
 
-export function evaluarRuta(_ruta) {
-  // TODO: implement
+export function evaluarRuta(rutaOriginal) {
+  if (rutaOriginal.endsWith('.env.example')) {
+    return null;
+  }
+
+  // Normalize separators: \ → /
+  const ruta = rutaOriginal.replace(/\\/g, '/');
+
+  // Protected patterns for paths (case-insensitive)
+  const protegidos = [
+    { patron: /(^|\/)\.env(\.|$)/, motivo: 'los archivos de configuración contienen secretos' },
+    { patron: /(^|\/)prisma\/migrations\//i, motivo: 'las migraciones ya aplicadas no se editan a mano' },
+    { patron: /(^|\/)\.git\//i, motivo: 'la carpeta .git no se toca' },
+    { patron: /(^|\/)\.claude\//i, motivo: 'la carpeta de control solo la edita el humano' },
+    { patron: /(^|\/)scripts\/agents\//i, motivo: 'la carpeta scripts/agents está protegida' },
+    { patron: /(^|\/)\.agents\/hooks\.json$/i, motivo: 'el archivo de hooks está protegido' },
+  ];
+
+  for (const { patron, motivo } of protegidos) {
+    if (patron.test(ruta)) {
+      return motivo;
+    }
+  }
+
+  return null;
 }
