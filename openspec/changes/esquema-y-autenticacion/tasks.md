@@ -24,9 +24,9 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 1.15 `src/test/bd/global-setup.ts`, primera parte: `exigirBaseDePrueba` → conectar a `postgres` → `CREATE DATABASE` si no existe; error claro si no conecta. Verificar: antes, `docker exec cuadre-db psql -U cuadre -lqt` no lista `cuadre_test` (si ya existe, detenerse y preguntar antes de borrarla); después de `npx vitest run --project integracion --passWithNoTests`, sí la lista. (Vitest no ejecuta `globalSetup` sin al menos un archivo de test; se verificó con un archivo temporal sin commitear, que crea 1.18.)
 - [x] 1.16 `global-setup.ts`, segunda parte: `prisma migrate deploy` con `DATABASE_URL` = URL de prueba. Verificar: `docker exec cuadre-db psql -U cuadre -d cuadre_test -c "\dt"` lista `usuarios`, `cuentas`, `categorias`, `transacciones` y `_prisma_migrations` con `init` aplicada.
 - [x] 1.17 Comprobar la idempotencia y que la base de desarrollo no se toca: anotar las filas de `_prisma_migrations` y `count(*)` de `usuarios` en la base `cuadre`; ejecutar dos veces `npx vitest run --project integracion --passWithNoTests` (ambas terminan con código 0); ejecutar una vez con `TEST_DATABASE_URL` apuntando a `.../cuadre` y ver que aborta mencionando `_test`; comprobar que los valores anotados de `cuadre` no han cambiado.
-- [ ] 1.18 RED — `src/test/bd/bd.int.test.ts`, test "la base de integración es la de prueba y está vacía". Ver que falla porque `src/server/repositories/prisma.ts` no existe.
-- [ ] 1.19 GREEN — `src/server/repositories/prisma.ts` (cliente único con `PrismaPg` y `env.DATABASE_URL`). Test en verde.
-- [ ] 1.20 REFACTOR — test en verde; ejecutar la suite completa (cierre de grupo).
+- [x] 1.18 RED — `src/test/bd/bd.int.test.ts`, test "la base de integración es la de prueba y está vacía". Ver que falla porque `src/server/repositories/prisma.ts` no existe.
+- [x] 1.19 GREEN — `src/server/repositories/prisma.ts` (cliente único con `PrismaPg` y `env.DATABASE_URL`). Test en verde.
+- [x] 1.20 REFACTOR — test en verde; ejecutar la suite completa (cierre de grupo).
 
 ## 2. Registro con categorías por defecto
 
