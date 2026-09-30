@@ -8,10 +8,13 @@ fi
 # El patrón no cubre openspec/changes/archive/<change>/tasks.md.
 STAGED=$(git diff --cached --name-only --diff-filter=ACMR)
 for TASKS in $(echo "$STAGED" | grep -E '^openspec/changes/[^/]+/tasks\.md$'); do
-  CHANGE=$(echo "$TASKS" | cut -d/ -f3)
-  if ! echo "$STAGED" | grep -qxF "openspec/changes/$CHANGE/progress.md"; then
-    echo "ERROR: $CHANGE: tasks.md está en stage sin openspec/changes/$CHANGE/progress.md."
-    exit 1
+  # Solo exige progress.md cuando este commit marca alguna casilla como hecha.
+  if git diff --cached -U0 -- "$TASKS" | grep -qE '^\+- \[x\]'; then
+    CHANGE=$(echo "$TASKS" | cut -d/ -f3)
+    if ! echo "$STAGED" | grep -qxF "openspec/changes/$CHANGE/progress.md"; then
+      echo "ERROR: $CHANGE: se marcaron tareas sin actualizar progress.md."
+      exit 1
+    fi
   fi
 done
 

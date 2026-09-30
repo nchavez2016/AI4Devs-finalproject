@@ -10,12 +10,13 @@ change convierte en código el mínimo necesario para que nazcan con el estilo c
 
 - `src/app/globals.css`: catálogo completo de tokens (tokens.md, 3.3) en `@theme static` con
   `--*: initial`, tokens sin utilidad en `:root`, redefiniciones en `escritorio`/`amplio`, foco
-  global y fotogramas `giro`/`resaltado`. Se elimina el bloque `prefers-color-scheme: dark` y se
+  global, fotogramas `giro`/`resaltado` y bloque `prefers-reduced-motion: reduce` que redefine los
+  tokens de movimiento (movimiento.md, 6). Se elimina el bloque `prefers-color-scheme: dark` y se
   declara `color-scheme: light`.
 - **BREAKING (visual)**: desaparecen todas las utilidades del tema por defecto (`p-4`, `text-sm`,
   `bg-zinc-50`…). La página de inicio de plantilla (`src/app/page.tsx`) queda sin esos estilos; no
   se toca porque la sustituye la primera pantalla de negocio.
-- `src/app/layout.tsx`: IBM Plex Sans y Source Serif 4 con `next/font/google` en lugar de Geist.
+- `src/app/layout.tsx`: IBM Plex Sans y Source Serif 4 con `next/font/google` en lugar de Geist, y `lang="es"`.
 - `src/components/ui/`: `Button` (cuatro variantes y carga), `Campo` (etiqueta, ayuda, error y
   variante de monto) e `Importe` (función pura `formatearImporte` y componente).
 - Página temporal `src/app/diseno/page.tsx` para la revisión visual humana; se elimina al cerrar el
@@ -42,7 +43,7 @@ Ninguna. No existen specs en `openspec/specs/`, así que ninguna se ve afectada.
 
 - Instalar shadcn/ui (llegará con el primer componente que lo necesite, justificado en su design.md).
 - Playwright, el guardián automático de clases del hook `pre-commit` y el test de contraste.
-- Tema oscuro y valores de `prefers-reduced-motion` (movimiento.md).
+- Tema oscuro.
 - Pantallas de negocio y la sustitución de `src/app/page.tsx`.
 - Comportamiento del campo de monto al salir (reformateo a "25,50"), validación al enviar y foco al
   primer campo inválido: llegan con el formulario de registro.

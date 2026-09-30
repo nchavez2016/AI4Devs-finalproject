@@ -14,7 +14,8 @@ tipografia-y-espacio.md (4–5), componentes.md (7.1, 7.2, 7.5).
 con `@keyframes giro` y `resaltado` dentro del bloque → `:root` con duraciones y `--foco-separacion`
 → redefiniciones de los tokens "→" en `:root` bajo `@variant escritorio` / `@variant amplio` →
 `@layer base`: `color-scheme: light`, fondo y tinta del `body`, y `:focus-visible` global
-(`outline` de `--default-outline-width` en `--color-ring`, `outline-offset: var(--foco-separacion)`).
+(`outline` de `--default-outline-width` en `--color-ring`, `outline-offset: var(--foco-separacion)`) → `@media (prefers-reduced-motion: reduce)` que solo
+redefine en `:root` los tokens de movimiento (movimiento.md, 6), sin tocar componentes.
 Alternativa descartada: `@theme inline` con variables intermedias (como la plantilla): duplica
 cada token y un tema no podría redefinirlo en `:root`.
 

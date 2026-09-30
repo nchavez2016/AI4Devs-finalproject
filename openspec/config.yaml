@@ -47,6 +47,7 @@ operations:
       - El test, la casilla marcada en tasks.md y progress.md actualizado van en el mismo commit. Si un REFACTOR no produce cambios, márcalo en el mismo commit que su GREEN.
       - Al terminar cada grupo, detente con un resumen de máximo 5 líneas que indique, por cada test, el motivo del fallo visto en RED.
       - Al retomar un change, lee primero progress.md y tasks.md, y nada más hasta que una tarea lo requiera.
+      - Antes de detenerte al final de un grupo, comprueba que todas las subtareas realizadas de ese grupo están marcadas con [x] en tasks.md; si falta alguna, márcala en el mismo commit.
   archive:
     guidance:
       - Si no hay constancia de que se ejecutó /opsx:verify para este change, pregunta antes de archivar.
