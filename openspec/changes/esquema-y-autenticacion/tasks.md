@@ -93,7 +93,7 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 - [x] 4.14 RED — `src/app/login/FormularioLogin.test.tsx`, test "muestra el mensaje genérico de credenciales incorrectas" (con la Server Action `iniciarSesion` simulada).
 - [x] 4.15 GREEN — Server Action `iniciarSesion` en `acciones.ts` (`signIn` con `redirectTo: "/panel"`; mapea `CredentialsSignin` al mensaje genérico), `src/app/login/page.tsx` y `FormularioLogin.tsx` (mismos componentes que el registro, enlace a `/registro`). Test en verde. (El test de 4.14 mockea `iniciarSesion` entera, así que su `try/catch` de `CredentialsSignin` quedaba sin test; se añadió un test propio en `acciones.test.ts` y se verificó por mutación.)
 - [x] 4.16 REFACTOR — test en verde.
-- [ ] 4.17 Eliminar `src/app/diseno/`; verificar con una búsqueda que nada la referencia y que `npm run build` termina sin errores (con `DATABASE_URL`/`AUTH_SECRET` disponibles; si `build` no puede ejecutarse por falta de `AUTH_SECRET`, dejarlo anotado para 5.2). Suite completa (cierre de grupo).
+- [x] 4.17 Eliminar `src/app/diseno/`; verificar con una búsqueda que nada la referencia y que `npm run build` termina sin errores (con `DATABASE_URL`/`AUTH_SECRET` disponibles; si `build` no puede ejecutarse por falta de `AUTH_SECRET`, dejarlo anotado para 5.2). Suite completa (cierre de grupo). (`npm run build` falla ahora mismo por falta de `AUTH_SECRET` en `.env`, como anticipaba la tarea; queda pendiente de verificar en 5.2, tras la 5.1 [HUMANO].)
 
 ## 5. [HUMANO] Secreto, arranque y prueba manual
 

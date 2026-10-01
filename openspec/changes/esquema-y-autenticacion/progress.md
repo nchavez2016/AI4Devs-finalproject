@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 4.17 eliminar src/app/diseno/ y npm run build (cierre de grupo)
-- Decisiones: iniciarSesion (con su try/catch de CredentialsSignin) tiene test propio en acciones.test.ts, verificado por mutación, además del test de componente de FormularioLogin
+- Siguiente: 5.1 [HUMANO] añadir AUTH_SECRET al .env
+- Decisiones: grupo 4 cerrado (78/82 tareas); src/app/diseno/ eliminada (nada la referenciaba); npm run build falla por falta de AUTH_SECRET, como anticipaba la tarea — pendiente de verificar en 5.2
 - Discrepancias: ninguna
