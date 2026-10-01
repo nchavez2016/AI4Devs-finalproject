@@ -1,5 +1,5 @@
 # Progreso: esquema-y-autenticacion
 
-- Siguiente: 5.1 [HUMANO] añadir AUTH_SECRET al .env
-- Decisiones: grupo 4 cerrado (78/82 tareas); src/app/diseno/ eliminada (nada la referenciaba); npm run build falla por falta de AUTH_SECRET, como anticipaba la tarea — pendiente de verificar en 5.2
+- Siguiente: ninguna (todas las tareas completadas, cambio listo para verificación final y archivo)
+- Decisiones: grupo 5 cerrado (82/82 tareas); pruebas manuales completadas por el usuario; verificación técnica superada (lint, typecheck, tests y validación strict sin errores)
 - Discrepancias: ninguna

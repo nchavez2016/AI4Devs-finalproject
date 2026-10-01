@@ -97,7 +97,7 @@ Los tests `*.int.test.ts` se ejecutan contra la base de `TEST_DATABASE_URL` (por
 
 ## 5. [HUMANO] Secreto, arranque y prueba manual
 
-- [ ] 5.1 [HUMANO] Añadir `AUTH_SECRET` al `.env` siguiendo `.env.example`.
-- [ ] 5.2 [HUMANO] `docker compose up -d` y `npm run dev`; verificar que arranca sin errores de configuración y que `npm run build` termina bien.
-- [ ] 5.3 [HUMANO] Flujo manual: `/` → `/login`; registrarse → `/panel` muestra el negocio; cerrar sesión → `/login`; abrir `/panel` sin sesión → `/login`; login con contraseña errónea → mensaje genérico; login correcto → `/panel`. En la base de desarrollo, el `password_hash` empieza por `scrypt$` y el usuario tiene 7 categorías. Además, registrar un segundo usuario B y comprobar que `/panel` muestra el negocio de B y no el de A.
-- [ ] 5.4 Verificación final (agente): `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate esquema-y-autenticacion --strict`, todo sin errores.
+- [x] 5.1 [HUMANO] Añadir `AUTH_SECRET` al `.env` siguiendo `.env.example`.
+- [x] 5.2 [HUMANO] `docker compose up -d` y `npm run dev`; verificar que arranca sin errores de configuración y que `npm run build` termina bien.
+- [x] 5.3 [HUMANO] Flujo manual: `/` → `/login`; registrarse → `/panel` muestra el negocio; cerrar sesión → `/login`; abrir `/panel` sin sesión → `/login`; login con contraseña errónea → mensaje genérico; login correcto → `/panel`. En la base de desarrollo, el `password_hash` empieza por `scrypt$` y el usuario tiene 7 categorías. Además, registrar un segundo usuario B y comprobar que `/panel` muestra el negocio de B y no el de A.
+- [x] 5.4 Verificación final (agente): `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate esquema-y-autenticacion --strict`, todo sin errores.

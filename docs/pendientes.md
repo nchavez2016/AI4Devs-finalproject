@@ -9,7 +9,7 @@
 - Decisión neutra `ask` del adaptador de Antigravity: si genera demasiadas confirmaciones, evaluar cambiarla.
 - Valorar eliminar `progress.md` y dejar `tasks.md` + `git log` como memoria.
 - Valorar proteger `.husky/` de ediciones del agente.
-
+- Aviso de Vite (configLoader native): importar ./src/test/bd/url con extensión o convertirlo a .mjs.
 ## Diseño
 - Guardián automático de clases del tema por defecto en el pre-commit.
 - Test automático de contraste de los tokens.
