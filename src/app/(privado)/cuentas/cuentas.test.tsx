@@ -206,4 +206,24 @@ describe('cuentas', () => {
       screen.getByText('Escribe un saldo con hasta 2 decimales, por ejemplo 500.00')
     ).toBeTruthy()
   })
+
+  it('Pantalla de cuentas limita el ancho del contenido y del formulario', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
+    listarCuentasSimulado.mockResolvedValue([])
+
+    const { cargarCuentas } = await import('@/server/cuentas/pantalla')
+    const { ContenidoCuentas } = await import('./ContenidoCuentas')
+
+    const { container } = render(<ContenidoCuentas {...(await cargarCuentas())} />)
+
+    const contenedorContenido = container.querySelector('.max-w-contenido')
+    expect(contenedorContenido).toBeTruthy()
+
+    const contenedorFormulario = container.querySelector('.max-w-formulario')
+    expect(contenedorFormulario).toBeTruthy()
+
+    const form = contenedorFormulario?.querySelector('form')
+    expect(form).toBeTruthy()
+    expect(contenedorContenido?.contains(contenedorFormulario)).toBe(true)
+  })
 })

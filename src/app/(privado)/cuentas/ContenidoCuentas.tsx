@@ -26,55 +26,59 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
   }
 
   return (
-    <main className="flex flex-col gap-seccion px-pagina py-seccion bg-background text-foreground min-h-full">
-      <EncabezadoPagina
-        titulo="Cuentas"
-        proposito="Aquí registras dónde tienes tu dinero: bancos, efectivo y billeteras digitales."
-        volverAlPanel
-      />
+    <main className="px-pagina py-seccion bg-background text-foreground min-h-full">
+      <div className="w-full max-w-contenido mx-auto flex flex-col gap-seccion">
+        <EncabezadoPagina
+          titulo="Cuentas"
+          proposito="Aquí registras dónde tienes tu dinero: bancos, efectivo y billeteras digitales."
+          volverAlPanel
+        />
 
-      <div aria-live="polite" className="text-detalle text-muted-foreground">
-        {estado.exito && 'Cuenta creada'}
-      </div>
-
-      {cuentas.length === 0 ? (
-        <div className="flex flex-col items-start gap-entre-campos">
-          <p className="text-cuerpo text-muted-foreground">Aún no tienes cuentas</p>
-          <Button type="button" onClick={enfocarNombre}>
-            Crear mi primera cuenta
-          </Button>
+        <div aria-live="polite" className="text-detalle text-muted-foreground">
+          {estado.exito && 'Cuenta creada'}
         </div>
-      ) : (
-        <ul aria-label="Cuentas" className="flex flex-col">
-          {cuentas.map((cuenta) => (
-            <li
-              key={cuenta.id}
-              className={[
-                'flex items-center justify-between gap-seccion px-fila-x py-fila-y border-b border-border',
-                cuenta.id === estado.idCreado && 'animate-resaltado',
-              ]
-                .filter(Boolean)
-                .join(' ')}
-            >
-              <div className="flex flex-col">
-                <span className="text-cuerpo font-control text-foreground">{cuenta.nombre}</span>
-                <span className="text-detalle text-muted-foreground">
-                  {etiquetasTipo[cuenta.tipo]}
-                </span>
-              </div>
-              <Importe valor={cuenta.saldo} tipo="saldo" tamano="importe-resumen" />
-            </li>
-          ))}
-        </ul>
-      )}
 
-      <FormularioCuenta
-        key={JSON.stringify(estado)}
-        formularioRef={formularioRef}
-        estado={estado}
-        accion={accion}
-        pendiente={pendiente}
-      />
+        {cuentas.length === 0 ? (
+          <div className="flex flex-col items-start gap-entre-campos">
+            <p className="text-cuerpo text-muted-foreground">Aún no tienes cuentas</p>
+            <Button type="button" onClick={enfocarNombre}>
+              Crear mi primera cuenta
+            </Button>
+          </div>
+        ) : (
+          <ul aria-label="Cuentas" className="flex flex-col">
+            {cuentas.map((cuenta) => (
+              <li
+                key={cuenta.id}
+                className={[
+                  'flex items-center justify-between gap-seccion px-fila-x py-fila-y border-b border-border',
+                  cuenta.id === estado.idCreado && 'animate-resaltado',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+              >
+                <div className="flex flex-col">
+                  <span className="text-cuerpo font-control text-foreground">{cuenta.nombre}</span>
+                  <span className="text-detalle text-muted-foreground">
+                    {etiquetasTipo[cuenta.tipo]}
+                  </span>
+                </div>
+                <Importe valor={cuenta.saldo} tipo="saldo" tamano="importe-resumen" />
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="w-full max-w-formulario">
+          <FormularioCuenta
+            key={JSON.stringify(estado)}
+            formularioRef={formularioRef}
+            estado={estado}
+            accion={accion}
+            pendiente={pendiente}
+          />
+        </div>
+      </div>
     </main>
   )
 }
