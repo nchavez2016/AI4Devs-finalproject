@@ -20,6 +20,9 @@ export function ContenidoCategorias({ ingreso, gasto }: DatosCategorias) {
   return (
     <main className="flex flex-col gap-seccion px-pagina py-seccion bg-background text-foreground min-h-full">
       <h1 className="font-titulo text-titulo-pagina text-foreground">Categorías</h1>
+      <p className="text-cuerpo text-muted-foreground">
+        Aquí defines cómo clasificas tus ingresos y tus gastos.
+      </p>
 
       <div aria-live="polite" className="text-detalle text-muted-foreground">
         {estado.exito && 'Categoría creada'}

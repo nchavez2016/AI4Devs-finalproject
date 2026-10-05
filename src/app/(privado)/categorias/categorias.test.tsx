@@ -112,6 +112,16 @@ describe('categorias', () => {
     )
   })
 
+  it('Pantalla de categorías explica para qué sirve', async () => {
+    const { ContenidoCategorias } = await import('./ContenidoCategorias')
+
+    render(<ContenidoCategorias ingreso={[]} gasto={[]} />)
+
+    expect(
+      screen.getByRole('heading', { level: 1 }).nextElementSibling?.textContent
+    ).toBe('Aquí defines cómo clasificas tus ingresos y tus gastos.')
+  })
+
   it('Formulario de categoría muestra el error junto al nombre', async () => {
     const { FormularioCategoria } = await import('./FormularioCategoria')
 

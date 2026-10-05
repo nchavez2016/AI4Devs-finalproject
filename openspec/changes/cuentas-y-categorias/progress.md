@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 4.7 RED — `categorias.test.tsx`, test "Pantalla de categorías explica para qué sirve" (texto "Aquí defines cómo clasificas tus ingresos y tus gastos." justo después del `h1`).
-- Decisiones: cada ciclo RED/GREEN/REFACTOR va en un commit con la suite en verde; el RED se registra en el cuerpo del commit. Las mutaciones se hacen con `docker exec cuadre-db psql` sobre `cuadre_test` y se restauran antes del commit. Frase guía: `p` justo después del `h1`. Enlace "Volver al panel": `Link` terciario antes del `h1`, flecha con `aria-hidden` (design i). Pantallas de cuentas y categorías: mismo patrón.
+- Siguiente: 4.10 RED — `categorias.test.tsx`, test "Pantalla de categorías enlaza de vuelta al panel" (mismas comprobaciones que 4.4).
+- Decisiones: cada ciclo RED/GREEN/REFACTOR va en un commit con la suite en verde; el RED se registra en el cuerpo del commit. Frase guía: `p` justo después del `h1`. Enlace "Volver al panel": `Link` terciario antes del `h1`, flecha con `aria-hidden` (design i).
 - Discrepancias: el pre-commit ejecuta la suite completa, así que un RED no puede commitearse solo. El hook bloquea escribir archivos nuevos en `prisma/migrations/`. Las mutaciones que quitan `usuario_id` del índice rompen también el registro de los tests de 2.28, que usan seed.
