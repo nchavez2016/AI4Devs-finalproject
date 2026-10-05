@@ -1,6 +1,7 @@
 import { esquemaRegistro } from './esquemas'
 import { hashear } from './password'
 import { EmailDuplicadoError, usuarioRepository } from '@/server/repositories/usuarioRepository'
+import { agruparErroresPorCampo } from '@/server/validacion'
 
 export type ResultadoRegistro =
   | {
@@ -8,18 +9,6 @@ export type ResultadoRegistro =
       usuario: { id: string; nombre: string; nombreNegocio: string; email: string }
     }
   | { ok: false; errores: Record<string, string[]> }
-
-function agruparErroresPorCampo(error: { issues: { path: PropertyKey[]; message: string }[] }) {
-  const errores: Record<string, string[]> = {}
-
-  for (const issue of error.issues) {
-    const campo = issue.path.join('.')
-    errores[campo] ??= []
-    errores[campo].push(issue.message)
-  }
-
-  return errores
-}
 
 export async function registrarUsuario(datosSinValidar: unknown): Promise<ResultadoRegistro> {
   const validacion = esquemaRegistro.safeParse(datosSinValidar)

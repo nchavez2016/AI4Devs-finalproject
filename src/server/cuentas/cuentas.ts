@@ -1,5 +1,6 @@
 import { Prisma, TipoCuenta } from '@/generated/prisma/client'
 import { cuentaRepository } from '@/server/repositories/cuentaRepository'
+import { agruparErroresPorCampo } from '@/server/validacion'
 import { esquemaCrearCuenta } from './esquemas'
 
 export interface CuentaItem {
@@ -28,7 +29,7 @@ export async function crearCuenta(
   if (!validacion.success) {
     return {
       ok: false,
-      errores: {},
+      errores: agruparErroresPorCampo(validacion.error),
     }
   }
 

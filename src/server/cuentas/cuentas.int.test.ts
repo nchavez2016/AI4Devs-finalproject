@@ -115,4 +115,29 @@ describe('cuentas', () => {
       }),
     ])
   })
+
+  it('Crear cuenta rechazada por nombre vacío', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCuenta(registro.usuario.id, {
+      nombre: '   ',
+      tipo: 'BANCO',
+      saldoInicial: '500.00',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.errores.nombre).toBeDefined()
+      expect(resultado.errores.nombre?.length).toBeGreaterThan(0)
+    }
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toHaveLength(0)
+  })
 })

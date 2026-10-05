@@ -22,9 +22,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.10 RED — mismo archivo, test "Saldo inicial con coma decimal se acepta".
 - [x] 1.11 GREEN — `esquemas.ts`: quitar espacios y cambiar coma por punto. Test en verde.
 - [x] 1.12 REFACTOR — test en verde.
-- [ ] 1.13 RED — mismo archivo, test "Crear cuenta rechazada por nombre vacío".
-- [ ] 1.14 GREEN — `esquemas.ts`: el nombre se recorta y exige al menos 1 carácter; `cuentas.ts` devuelve `{ ok: false, errores }` agrupados por campo. Test en verde.
-- [ ] 1.15 REFACTOR — mover `agruparErroresPorCampo` de `registro.ts` a `src/server/validacion.ts` y usarla en los dos casos de uso (design d). Verde este test y también `src/server/auth/registro.int.test.ts`.
+- [x] 1.13 RED — mismo archivo, test "Crear cuenta rechazada por nombre vacío".
+- [x] 1.14 GREEN — `esquemas.ts`: el nombre se recorta y exige al menos 1 carácter; `cuentas.ts` devuelve `{ ok: false, errores }` agrupados por campo. Test en verde.
+- [x] 1.15 REFACTOR — mover `agruparErroresPorCampo` de `registro.ts` a `src/server/validacion.ts` y usarla en los dos casos de uso (design d). Verde este test y también `src/server/auth/registro.int.test.ts`.
 - [ ] 1.16 RED — mismo archivo, test "Longitud máxima del nombre de cuenta es 150 caracteres".
 - [ ] 1.17 GREEN — `esquemas.ts`: máximo 150 caracteres después de recortar, con el mensaje "El nombre puede tener como máximo 150 caracteres". Test en verde.
 - [ ] 1.18 REFACTOR — test en verde.
