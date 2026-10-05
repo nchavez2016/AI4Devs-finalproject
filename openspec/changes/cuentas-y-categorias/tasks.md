@@ -165,9 +165,24 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 3.43 GREEN — `src/app/(privado)/categorias/error.tsx`. Test en verde.
 - [x] 3.44 REFACTOR — test en verde; suite completa (cierre de grupo).
 
-## 4. Prueba manual y verificación final
+## 4. Navegación y guía
 
-- [ ] 4.1 [HUMANO] Con `docker compose up -d` y `npm run dev`:
+- [x] 4.1 RED — `src/app/(privado)/cuentas/cuentas.test.tsx`, test "Pantalla de cuentas explica para qué sirve": bajo el `h1` aparece "Aquí registras dónde tienes tu dinero: bancos, efectivo y billeteras digitales.", también sin cuentas. Debe fallar porque el texto no existe.
+- [x] 4.2 GREEN — `ContenidoCuentas.tsx`: `p` justo después del `h1` (`text-cuerpo`, `text-muted-foreground`). Test en verde.
+- [x] 4.3 REFACTOR — test en verde; solo tokens.
+- [ ] 4.4 RED — mismo archivo, test "Pantalla de cuentas enlaza de vuelta al panel": hay un enlace de nombre accesible "Volver al panel" con `href="/panel"`, y al enfocarlo queda como `document.activeElement`. Debe fallar porque el enlace no existe.
+- [ ] 4.5 GREEN — `ContenidoCuentas.tsx`: `Link` de `next/link` antes del `h1`, con estilo terciario (`text-primary`, `hover:bg-muted`, `text-cuerpo`, `font-control`, `rounded-control`) y la flecha "←" con `aria-hidden`. Test en verde.
+- [ ] 4.6 REFACTOR — test en verde; solo tokens.
+- [ ] 4.7 RED — `src/app/(privado)/categorias/categorias.test.tsx`, test "Pantalla de categorías explica para qué sirve": bajo el `h1` aparece "Aquí defines cómo clasificas tus ingresos y tus gastos.". Debe fallar porque el texto no existe.
+- [ ] 4.8 GREEN — `ContenidoCategorias.tsx`: el mismo `p` que en 4.2. Test en verde.
+- [ ] 4.9 REFACTOR — test en verde.
+- [ ] 4.10 RED — mismo archivo, test "Pantalla de categorías enlaza de vuelta al panel" (mismas comprobaciones que 4.4).
+- [ ] 4.11 GREEN — `ContenidoCategorias.tsx`: el mismo enlace que en 4.5. Test en verde.
+- [ ] 4.12 REFACTOR — tests en verde; no se extrae un componente para el enlace (dos usos, design i); suite completa (cierre de grupo).
+
+## 5. Prueba manual y verificación final
+
+- [ ] 5.1 [HUMANO] Con `docker compose up -d` y `npm run dev`:
   - (a) Registrar a A y entrar a Cuentas desde el panel: ver el estado vacío y que "Crear cuenta" enfoca el nombre.
   - (b) Crear "  Banco Pichincha  " con 500.00: se guarda sin los espacios, se anuncia, se resalta y muestra $500,00.
   - (c) Intentar crear "banco PICHINCHA": error "Ya tienes una cuenta con ese nombre".
@@ -178,4 +193,5 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
   - (h) Detener `cuadre-db` y enviar el formulario: ver el aviso y que los datos se conservan.
   - (i) En Categorías: ver las 7 por defecto, crear "Publicidad" (gasto), intentar "PUBLICIDAD" (gasto) y " ventas " (ingreso), y crear "Otros" (ingreso).
   - (j) Registrar a B: no ve nada de A y puede crear su propia cuenta "Banco Pichincha" y su categoría "Publicidad".
-- [ ] 4.2 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate cuentas-y-categorias --strict`; todo sin errores.
+  - (k) En Cuentas y en Categorías: leer la frase bajo el título, y llegar con Tab a "← Volver al panel" y activarlo con Enter.
+- [ ] 5.2 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate cuentas-y-categorias --strict`; todo sin errores.

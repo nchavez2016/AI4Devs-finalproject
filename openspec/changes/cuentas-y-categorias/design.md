@@ -124,6 +124,13 @@ mostrar nada antes de 400 ms. Se añaden a `globals.css` y a `tokens.md`:
 nombre con `localeCompare('es')` en el caso de uso, porque la collation de Postgres depende
 de la instalación.
 
+**i) Navegación y guía.** `/cuentas` y `/categorias` muestran bajo el `h1` una frase concreta
+que dice para qué sirve la pantalla (`text-cuerpo`, `muted-foreground`; tono de estados.md) y,
+antes del `h1`, un `Link` terciario "← Volver al panel" a `/panel` (componentes.md). La flecha
+lleva `aria-hidden` para que el nombre accesible sea "Volver al panel". No se extrae un
+componente compartido: son dos usos, y la regla del change es extraer al tercero. No añade
+requisitos a las specs: es navegación y texto de apoyo, sin comportamiento de dominio.
+
 ## Risks / Trade-offs
 
 - [Prisma 7.10 no está comprobado con `@db.Citext` en este proyecto] → La primera tarea de

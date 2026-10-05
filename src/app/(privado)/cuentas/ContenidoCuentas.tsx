@@ -27,6 +27,9 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
   return (
     <main className="flex flex-col gap-seccion px-pagina py-seccion bg-background text-foreground min-h-full">
       <h1 className="font-titulo text-titulo-pagina text-foreground">Cuentas</h1>
+      <p className="text-cuerpo text-muted-foreground">
+        Aquí registras dónde tienes tu dinero: bancos, efectivo y billeteras digitales.
+      </p>
 
       <div aria-live="polite" className="text-detalle text-muted-foreground">
         {estado.exito && 'Cuenta creada'}

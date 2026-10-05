@@ -53,6 +53,30 @@ describe('cuentas', () => {
     expect(lista.getByText(formatearImporte('20.00', 'saldo'))).toBeTruthy()
   })
 
+  it('Pantalla de cuentas explica para qué sirve', async () => {
+    const { cargarCuentas } = await import('@/server/cuentas/pantalla')
+    const { ContenidoCuentas } = await import('./ContenidoCuentas')
+    const explicacion =
+      'Aquí registras dónde tienes tu dinero: bancos, efectivo y billeteras digitales.'
+
+    authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
+
+    listarCuentasSimulado.mockResolvedValueOnce([])
+    const vacia = render(<ContenidoCuentas {...(await cargarCuentas())} />)
+    expect(
+      screen.getByRole('heading', { level: 1 }).nextElementSibling?.textContent
+    ).toBe(explicacion)
+    vacia.unmount()
+
+    listarCuentasSimulado.mockResolvedValueOnce([
+      { id: 'c1', nombre: 'Banco Pichincha', tipo: 'BANCO', saldo: '500.00', creadoEn: new Date() },
+    ])
+    render(<ContenidoCuentas {...(await cargarCuentas())} />)
+    expect(
+      screen.getByRole('heading', { level: 1 }).nextElementSibling?.textContent
+    ).toBe(explicacion)
+  })
+
   it('Pantalla de cuentas sin cuentas muestra el estado vacío', async () => {
     authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
     listarCuentasSimulado.mockResolvedValue([])
