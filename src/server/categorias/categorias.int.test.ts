@@ -83,4 +83,24 @@ describe('categorias', () => {
     const nombresIngreso = categorias.ingreso.map((c) => c.nombre)
     expect(nombresIngreso).toContain('Servicios técnicos')
   })
+
+  it('Crear categoría rechazada por nombre vacío', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCategoria(registro.usuario.id, {
+      nombre: '   ',
+      tipo: 'GASTO',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.errores.nombre).toEqual(['El nombre es obligatorio'])
+    }
+  })
 })

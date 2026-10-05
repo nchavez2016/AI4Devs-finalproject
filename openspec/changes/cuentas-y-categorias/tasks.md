@@ -79,9 +79,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 2.7 RED — mismo archivo, test "Crear una categoría de ingreso". Si pasa sin cambios, forzar el RED.
 - [x] 2.8 GREEN — ajustar si hace falta. Test en verde.
 - [x] 2.9 REFACTOR — test en verde.
-- [ ] 2.10 RED — mismo archivo, test "Crear categoría rechazada por nombre vacío".
-- [ ] 2.11 GREEN — `esquemas.ts`: mínimo 1 carácter; errores con `agruparErroresPorCampo`. Test en verde.
-- [ ] 2.12 REFACTOR — test en verde.
+- [x] 2.10 RED — mismo archivo, test "Crear categoría rechazada por nombre vacío".
+- [x] 2.11 GREEN — `esquemas.ts`: mínimo 1 carácter; errores con `agruparErroresPorCampo`. Test en verde.
+- [x] 2.12 REFACTOR — test en verde.
 - [ ] 2.13 RED — mismo archivo, test "Longitud máxima del nombre de categoría es 150 caracteres".
 - [ ] 2.14 GREEN — `esquemas.ts`: máximo 150 caracteres con el mismo mensaje que cuentas. Test en verde.
 - [ ] 2.15 REFACTOR — test en verde; si el esquema del nombre es idéntico en los dos dominios, extraerlo a `src/server/validacion.ts`.
