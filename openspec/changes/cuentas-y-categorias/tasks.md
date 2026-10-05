@@ -191,8 +191,8 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 5.7 RED — mismo archivo, test "EncabezadoPagina muestra la acción primaria solo si se pasa": con `accion` (un `Button` primario), el botón está dentro del `header`; sin la prop, el `header` no tiene botones.
 - [x] 5.8 GREEN — prop opcional `accion: ReactNode`, alineada con el título (`flex`, `justify-between`, `gap-seccion`). Test en verde.
 - [x] 5.9 REFACTOR — test en verde.
-- [ ] 5.10 CARACTERIZACIÓN — ejecutar `cuentas.test.tsx` y `categorias.test.tsx` y confirmar que están en verde antes de tocar `Contenido*.tsx`.
-- [ ] 5.11 REFACTOR — `ContenidoCuentas.tsx` y `ContenidoCategorias.tsx` usan `EncabezadoPagina` con `volverAlPanel` y su frase actual, sin `accion` (design j). Se borra el marcado duplicado. Los tests de 4.1, 4.4, 4.7 y 4.10 siguen en verde sin cambios.
+- [x] 5.10 CARACTERIZACIÓN — ejecutar `cuentas.test.tsx` y `categorias.test.tsx` y confirmar que están en verde antes de tocar `Contenido*.tsx`.
+- [x] 5.11 REFACTOR — `ContenidoCuentas.tsx` y `ContenidoCategorias.tsx` usan `EncabezadoPagina` con `volverAlPanel` y su frase actual, sin `accion` (design j). Se borra el marcado duplicado. Los tests de 4.1, 4.4, 4.7 y 4.10 siguen en verde sin cambios.
 - [ ] 5.12 RED — `cuentas.test.tsx`, test "Pantalla de cuentas limita el ancho del contenido y del formulario": el contenido está dentro de un contenedor `max-w-contenido` y el `form` dentro de uno `max-w-formulario`. Debe fallar porque hoy ocupan todo el ancho.
 - [ ] 5.13 GREEN — `ContenidoCuentas.tsx`: contenedor `w-full max-w-contenido mx-auto` dentro de `main`, y el formulario envuelto en `w-full max-w-formulario`. Test en verde.
 - [ ] 5.14 REFACTOR — tests en verde; solo tokens.

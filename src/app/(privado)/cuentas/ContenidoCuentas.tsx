@@ -1,8 +1,8 @@
 'use client'
 
 import { useActionState, useRef } from 'react'
-import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import { EncabezadoPagina } from '@/components/EncabezadoPagina'
 import { Importe } from '@/components/ui/Importe'
 import { crearCuentaAccion } from '@/server/cuentas/acciones'
 import type { DatosCuentas } from '@/server/cuentas/pantalla'
@@ -27,18 +27,11 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
 
   return (
     <main className="flex flex-col gap-seccion px-pagina py-seccion bg-background text-foreground min-h-full">
-      <Link
-        href="/panel"
-        className="self-start inline-flex items-center gap-icono-texto h-alto-control px-control-x rounded-control text-cuerpo font-control text-primary hover:bg-muted transition-colors"
-      >
-        <span aria-hidden="true">←</span>
-        Volver al panel
-      </Link>
-
-      <h1 className="font-titulo text-titulo-pagina text-foreground">Cuentas</h1>
-      <p className="text-cuerpo text-muted-foreground">
-        Aquí registras dónde tienes tu dinero: bancos, efectivo y billeteras digitales.
-      </p>
+      <EncabezadoPagina
+        titulo="Cuentas"
+        proposito="Aquí registras dónde tienes tu dinero: bancos, efectivo y billeteras digitales."
+        volverAlPanel
+      />
 
       <div aria-live="polite" className="text-detalle text-muted-foreground">
         {estado.exito && 'Cuenta creada'}
