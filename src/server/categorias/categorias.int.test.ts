@@ -192,6 +192,29 @@ describe('categorias', () => {
     }
   })
 
+  it('Un usuario no ve las categorías de otro', async () => {
+    const ana = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    const luis = await registrarUsuario({
+      nombre: 'Luis',
+      nombreNegocio: 'Tienda Luis',
+      email: 'luis@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!ana.ok || !luis.ok) throw new Error('Falló el registro')
+
+    await crearCategoria(ana.usuario.id, { nombre: 'Publicidad', tipo: 'GASTO' })
+
+    const deLuis = await listarCategorias(luis.usuario.id)
+    const nombres = [...deLuis.ingreso, ...deLuis.gasto].map((c) => c.nombre)
+    expect(nombres).not.toContain('Publicidad')
+    expect(deLuis.gasto).toHaveLength(5)
+  })
+
   it('Longitud máxima del nombre de categoría es 150 caracteres', async () => {
     const registro = await registrarUsuario({
       nombre: 'Ana',
