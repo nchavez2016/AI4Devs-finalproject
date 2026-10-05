@@ -404,7 +404,9 @@ un usuario.
 digital). Permite ver el saldo disponible por cada una.
 - `id` (PK): identificador de la cuenta.
 - `usuario_id` (FK → USUARIO): dueño de la cuenta. NOT NULL.
-- `nombre`: nombre visible (por ejemplo "Banco Pichincha", "Efectivo"). NOT NULL.
+- `nombre`: nombre visible (por ejemplo "Banco Pichincha", "Efectivo"). NOT NULL,
+  de tipo `citext` (sin distinguir mayúsculas), sin espacios al inicio ni al final,
+  de 1 a 150 caracteres. ÚNICO por usuario: `(usuario_id, nombre)`.
 - `tipo`: clasificación de la cuenta (por ejemplo banco, efectivo, digital).
 - `saldo_inicial`: saldo con el que arranca la cuenta al crearla. DEFAULT 0. El
   saldo actual se calcula sumando este valor y todas sus transacciones.
@@ -418,7 +420,9 @@ consigo misma (una categoría puede tener una categoría padre).
 - `usuario_id` (FK → USUARIO): dueño de la categoría. NOT NULL.
 - `categoria_padre_id` (FK → CATEGORIA): categoría padre, si es una subcategoría.
   NULLABLE (si es nulo, es una categoría de primer nivel).
-- `nombre`: nombre de la categoría. NOT NULL.
+- `nombre`: nombre de la categoría. NOT NULL, de tipo `citext` (sin distinguir
+  mayúsculas), sin espacios al inicio ni al final, de 1 a 150 caracteres. ÚNICO por
+  usuario y tipo: `(usuario_id, tipo, nombre)`.
 - `tipo`: indica si aplica a ingresos o a gastos.
 - `creado_en`: fecha de creación. NOT NULL, DEFAULT ahora.
 - Relaciones: N:1 con USUARIO; auto-relación 1:N (subcategorías); 1:N con
