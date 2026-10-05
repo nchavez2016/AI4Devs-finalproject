@@ -28,6 +28,10 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
     <main className="flex flex-col gap-seccion px-pagina py-seccion bg-background text-foreground min-h-full">
       <h1 className="font-titulo text-titulo-pagina text-foreground">Cuentas</h1>
 
+      <div aria-live="polite" className="text-detalle text-muted-foreground">
+        {estado.exito && 'Cuenta creada'}
+      </div>
+
       {cuentas.length === 0 ? (
         <div className="flex flex-col items-start gap-entre-campos">
           <p className="text-cuerpo text-muted-foreground">Aún no tienes cuentas</p>
@@ -40,7 +44,12 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
           {cuentas.map((cuenta) => (
             <li
               key={cuenta.id}
-              className="flex items-center justify-between gap-seccion px-fila-x py-fila-y border-b border-border"
+              className={[
+                'flex items-center justify-between gap-seccion px-fila-x py-fila-y border-b border-border',
+                cuenta.id === estado.idCreado && 'animate-resaltado',
+              ]
+                .filter(Boolean)
+                .join(' ')}
             >
               <div className="flex flex-col">
                 <span className="text-cuerpo font-control text-foreground">{cuenta.nombre}</span>

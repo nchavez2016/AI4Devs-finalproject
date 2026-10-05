@@ -133,9 +133,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 3.11 RED — mismo archivo, test "Error al guardar la cuenta conserva los datos escritos", y en `acciones.test.ts` el test de apoyo "crearCuentaAccion convierte un error inesperado en el aviso y conserva los valores".
 - [x] 3.12 GREEN — `catch` en `acciones.ts` → `{ mensaje, valores }`; en `FormularioCuenta.tsx`, el aviso `role="alert"` (`negativo-fondo`, `destructive`) y `defaultValue` + `key` (design e). Tests en verde.
 - [x] 3.13 REFACTOR — tests en verde.
-- [ ] 3.14 RED — mismo archivo, test "Cuenta creada se anuncia y se resalta en la lista", y en `acciones.test.ts` el test de apoyo "crearCuentaAccion revalida /cuentas y devuelve el id creado".
-- [ ] 3.15 GREEN — `revalidatePath('/cuentas')` + `{ exito, idCreado }`, la región `aria-live` y `animate-resaltado` en la fila. Tests en verde.
-- [ ] 3.16 REFACTOR — tests en verde.
+- [x] 3.14 RED — mismo archivo, test "Cuenta creada se anuncia y se resalta en la lista", y en `acciones.test.ts` el test de apoyo "crearCuentaAccion revalida /cuentas y devuelve el id creado".
+- [x] 3.15 GREEN — `revalidatePath('/cuentas')` + `{ exito, idCreado }`, la región `aria-live` y `animate-resaltado` en la fila. Tests en verde.
+- [x] 3.16 REFACTOR — tests en verde.
 - [ ] 3.17 RED — `src/app/(privado)/cuentas/estados.test.tsx`, test "Pantalla de cuentas en carga muestra un esqueleto ocupado".
 - [ ] 3.18 GREEN — `src/app/(privado)/cuentas/loading.tsx` (filas `alto-fila` en `muted`, `aria-busy`, `animate-esqueleto`). Test en verde.
 - [ ] 3.19 REFACTOR — test en verde.

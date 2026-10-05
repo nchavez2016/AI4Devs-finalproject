@@ -1,8 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
-import { render, screen, within } from '@testing-library/react'
+import { act, fireEvent, render, screen, within } from '@testing-library/react'
 
 const authSimulado = vi.fn()
 const listarCuentasSimulado = vi.fn()
+const crearCuentaAccionSimulada = vi.fn()
 
 vi.mock('@/auth', () => ({
   auth: () => authSimulado(),
@@ -10,6 +11,10 @@ vi.mock('@/auth', () => ({
 
 vi.mock('@/server/cuentas/cuentas', () => ({
   listarCuentas: (...args: unknown[]) => listarCuentasSimulado(...args),
+}))
+
+vi.mock('@/server/cuentas/acciones', () => ({
+  crearCuentaAccion: (...args: unknown[]) => crearCuentaAccionSimulada(...args),
 }))
 
 describe('cuentas', () => {
@@ -66,6 +71,34 @@ describe('cuentas', () => {
     expect(document.activeElement).toBe(
       screen.getByRole('textbox', { name: 'Nombre' })
     )
+  })
+
+  it('Cuenta creada se anuncia y se resalta en la lista', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
+    listarCuentasSimulado.mockResolvedValue([
+      { id: 'c1', nombre: 'Banco Pichincha', tipo: 'BANCO', saldo: '500.00', creadoEn: new Date() },
+      { id: 'c2', nombre: 'Caja chica', tipo: 'EFECTIVO', saldo: '20.00', creadoEn: new Date() },
+    ])
+    crearCuentaAccionSimulada.mockResolvedValue({ exito: true, idCreado: 'c2' })
+
+    const { cargarCuentas } = await import('@/server/cuentas/pantalla')
+    const { ContenidoCuentas } = await import('./ContenidoCuentas')
+
+    const datos = await cargarCuentas()
+    render(<ContenidoCuentas {...datos} />)
+
+    const formulario = screen.getByRole('button', { name: 'Crear cuenta' }).closest('form')!
+    await act(async () => {
+      fireEvent.submit(formulario)
+    })
+
+    expect(screen.getByText('Cuenta creada').closest('[aria-live]')).toBeTruthy()
+
+    const filaNueva = screen.getByText('Caja chica').closest('li')!
+    expect(filaNueva.className).toContain('animate-resaltado')
+
+    const filaAnterior = screen.getByText('Banco Pichincha').closest('li')!
+    expect(filaAnterior.className).not.toContain('animate-resaltado')
   })
 
   it('Error al guardar la cuenta conserva los datos escritos', async () => {

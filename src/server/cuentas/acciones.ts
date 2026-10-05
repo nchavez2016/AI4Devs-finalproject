@@ -1,5 +1,6 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import { exigirUsuarioId } from '@/server/auth/sesion'
 import { crearCuenta } from './cuentas'
 
@@ -34,14 +35,9 @@ export async function crearCuentaAccion(
     saldoInicial: formData.get('saldoInicial'),
   }
 
+  let resultado
   try {
-    const resultado = await crearCuenta(usuarioId, datos)
-
-    if (!resultado.ok) {
-      return { errores: resultado.errores }
-    }
-
-    return { exito: true, idCreado: resultado.cuenta.id }
+    resultado = await crearCuenta(usuarioId, datos)
   } catch {
     return {
       mensaje: 'No pudimos guardar la cuenta. Inténtalo de nuevo.',
@@ -52,4 +48,11 @@ export async function crearCuentaAccion(
       },
     }
   }
+
+  if (!resultado.ok) {
+    return { errores: resultado.errores }
+  }
+
+  revalidatePath('/cuentas')
+  return { exito: true, idCreado: resultado.cuenta.id }
 }

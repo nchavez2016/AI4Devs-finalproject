@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const authSimulado = vi.fn()
 const redirectSimulado = vi.fn()
 const crearCuentaSimulado = vi.fn()
+const revalidatePathSimulado = vi.fn()
 
 vi.mock('@/auth', () => ({
   auth: () => authSimulado(),
@@ -10,6 +11,10 @@ vi.mock('@/auth', () => ({
 
 vi.mock('next/navigation', () => ({
   redirect: (url: string) => redirectSimulado(url),
+}))
+
+vi.mock('next/cache', () => ({
+  revalidatePath: (...args: unknown[]) => revalidatePathSimulado(...args),
 }))
 
 vi.mock('./cuentas', () => ({
@@ -89,6 +94,32 @@ describe('crearCuentaAccion', () => {
       mensaje: 'No pudimos guardar la cuenta. Inténtalo de nuevo.',
       valores: { nombre: 'Banco Pichincha', tipo: 'DIGITAL', saldoInicial: '500,50' },
     })
+  })
+
+  it('crearCuentaAccion revalida /cuentas y devuelve el id creado', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usuario-a' } })
+    crearCuentaSimulado.mockResolvedValue({
+      ok: true,
+      cuenta: {
+        id: 'c1',
+        nombre: 'Banco Pichincha',
+        tipo: 'BANCO',
+        saldo: '500.00',
+        creadoEn: new Date(),
+      },
+    })
+
+    const { crearCuentaAccion } = await import('./acciones')
+
+    const formData = new FormData()
+    formData.set('nombre', 'Banco Pichincha')
+    formData.set('tipo', 'BANCO')
+    formData.set('saldoInicial', '500.00')
+
+    const estado = await crearCuentaAccion(undefined, formData)
+
+    expect(revalidatePathSimulado).toHaveBeenCalledWith('/cuentas')
+    expect(estado).toEqual({ exito: true, idCreado: 'c1' })
   })
 
   it('Crear una cuenta sin sesión redirige al login', async () => {
