@@ -176,9 +176,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 4.7 RED — `src/app/(privado)/categorias/categorias.test.tsx`, test "Pantalla de categorías explica para qué sirve": bajo el `h1` aparece "Aquí defines cómo clasificas tus ingresos y tus gastos.". Debe fallar porque el texto no existe.
 - [x] 4.8 GREEN — `ContenidoCategorias.tsx`: el mismo `p` que en 4.2. Test en verde.
 - [x] 4.9 REFACTOR — test en verde.
-- [ ] 4.10 RED — mismo archivo, test "Pantalla de categorías enlaza de vuelta al panel" (mismas comprobaciones que 4.4).
-- [ ] 4.11 GREEN — `ContenidoCategorias.tsx`: el mismo enlace que en 4.5. Test en verde.
-- [ ] 4.12 REFACTOR — tests en verde; no se extrae un componente para el enlace (dos usos, design i); suite completa (cierre de grupo).
+- [x] 4.10 RED — mismo archivo, test "Pantalla de categorías enlaza de vuelta al panel" (mismas comprobaciones que 4.4).
+- [x] 4.11 GREEN — `ContenidoCategorias.tsx`: el mismo enlace que en 4.5. Test en verde.
+- [x] 4.12 REFACTOR — tests en verde; no se extrae un componente para el enlace (dos usos, design i); suite completa (cierre de grupo).
 
 ## 5. Prueba manual y verificación final
 

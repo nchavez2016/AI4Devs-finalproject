@@ -1,6 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
+import Link from 'next/link'
 import { crearCategoriaAccion } from '@/server/categorias/acciones'
 import type { DatosCategorias } from '@/server/categorias/pantalla'
 import { FormularioCategoria } from './FormularioCategoria'
@@ -19,6 +20,14 @@ export function ContenidoCategorias({ ingreso, gasto }: DatosCategorias) {
 
   return (
     <main className="flex flex-col gap-seccion px-pagina py-seccion bg-background text-foreground min-h-full">
+      <Link
+        href="/panel"
+        className="self-start inline-flex items-center gap-icono-texto h-alto-control px-control-x rounded-control text-cuerpo font-control text-primary hover:bg-muted transition-colors"
+      >
+        <span aria-hidden="true">←</span>
+        Volver al panel
+      </Link>
+
       <h1 className="font-titulo text-titulo-pagina text-foreground">Categorías</h1>
       <p className="text-cuerpo text-muted-foreground">
         Aquí defines cómo clasificas tus ingresos y tus gastos.
