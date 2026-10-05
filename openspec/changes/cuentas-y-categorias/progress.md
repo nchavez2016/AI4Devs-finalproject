@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 1.10 RED — test "Saldo inicial con coma decimal se acepta"
+- Siguiente: 1.13 RED — test "Crear cuenta rechazada por nombre vacío"
 - Decisiones: ninguna
 - Discrepancias: ninguna

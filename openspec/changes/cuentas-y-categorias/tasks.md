@@ -19,9 +19,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.7 RED — mismo archivo, test "Crear una cuenta con saldo inicial negativo". Si pasa sin cambios, forzar el RED.
 - [x] 1.8 GREEN — `esquemas.ts`: signo opcional. Test en verde.
 - [x] 1.9 REFACTOR — test en verde.
-- [ ] 1.10 RED — mismo archivo, test "Saldo inicial con coma decimal se acepta".
-- [ ] 1.11 GREEN — `esquemas.ts`: quitar espacios y cambiar coma por punto. Test en verde.
-- [ ] 1.12 REFACTOR — test en verde.
+- [x] 1.10 RED — mismo archivo, test "Saldo inicial con coma decimal se acepta".
+- [x] 1.11 GREEN — `esquemas.ts`: quitar espacios y cambiar coma por punto. Test en verde.
+- [x] 1.12 REFACTOR — test en verde.
 - [ ] 1.13 RED — mismo archivo, test "Crear cuenta rechazada por nombre vacío".
 - [ ] 1.14 GREEN — `esquemas.ts`: el nombre se recorta y exige al menos 1 carácter; `cuentas.ts` devuelve `{ ok: false, errores }` agrupados por campo. Test en verde.
 - [ ] 1.15 REFACTOR — mover `agruparErroresPorCampo` de `registro.ts` a `src/server/validacion.ts` y usarla en los dos casos de uso (design d). Verde este test y también `src/server/auth/registro.int.test.ts`.

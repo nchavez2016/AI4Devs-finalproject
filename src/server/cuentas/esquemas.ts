@@ -3,7 +3,10 @@ import { z } from 'zod'
 export const esquemaCrearCuenta = z.object({
   nombre: z.string(),
   tipo: z.enum(['BANCO', 'EFECTIVO', 'DIGITAL']),
-  saldoInicial: z.string().transform((valor) => (valor === '' ? '0.00' : valor)),
+  saldoInicial: z.string().transform((valor) => {
+    const limpio = valor.trim().replace(',', '.')
+    return limpio === '' ? '0.00' : limpio
+  }),
 })
 
 export type DatosCrearCuenta = z.infer<typeof esquemaCrearCuenta>

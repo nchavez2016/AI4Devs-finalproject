@@ -88,4 +88,31 @@ describe('cuentas', () => {
       }),
     ])
   })
+
+  it('Saldo inicial con coma decimal se acepta', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCuenta(registro.usuario.id, {
+      nombre: 'Billetera',
+      tipo: 'DIGITAL',
+      saldoInicial: ' 1250,75 ',
+    })
+
+    expect(resultado.ok).toBe(true)
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toEqual([
+      expect.objectContaining({
+        nombre: 'Billetera',
+        tipo: 'DIGITAL',
+        saldo: '1250.75',
+      }),
+    ])
+  })
 })
