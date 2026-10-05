@@ -188,9 +188,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 5.4 RED — mismo archivo, test "EncabezadoPagina muestra el enlace al panel solo si se pide": con `volverAlPanel`, enlace de nombre accesible "Volver al panel" a `/panel` antes del `h1`; sin la prop, ningún enlace.
 - [x] 5.5 GREEN — el `Link` terciario de design i pasa al componente. Test en verde.
 - [x] 5.6 REFACTOR — test en verde.
-- [ ] 5.7 RED — mismo archivo, test "EncabezadoPagina muestra la acción primaria solo si se pasa": con `accion` (un `Button` primario), el botón está dentro del `header`; sin la prop, el `header` no tiene botones.
-- [ ] 5.8 GREEN — prop opcional `accion: ReactNode`, alineada con el título (`flex`, `justify-between`, `gap-seccion`). Test en verde.
-- [ ] 5.9 REFACTOR — test en verde.
+- [x] 5.7 RED — mismo archivo, test "EncabezadoPagina muestra la acción primaria solo si se pasa": con `accion` (un `Button` primario), el botón está dentro del `header`; sin la prop, el `header` no tiene botones.
+- [x] 5.8 GREEN — prop opcional `accion: ReactNode`, alineada con el título (`flex`, `justify-between`, `gap-seccion`). Test en verde.
+- [x] 5.9 REFACTOR — test en verde.
 - [ ] 5.10 CARACTERIZACIÓN — ejecutar `cuentas.test.tsx` y `categorias.test.tsx` y confirmar que están en verde antes de tocar `Contenido*.tsx`.
 - [ ] 5.11 REFACTOR — `ContenidoCuentas.tsx` y `ContenidoCategorias.tsx` usan `EncabezadoPagina` con `volverAlPanel` y su frase actual, sin `accion` (design j). Se borra el marcado duplicado. Los tests de 4.1, 4.4, 4.7 y 4.10 siguen en verde sin cambios.
 - [ ] 5.12 RED — `cuentas.test.tsx`, test "Pantalla de cuentas limita el ancho del contenido y del formulario": el contenido está dentro de un contenedor `max-w-contenido` y el `form` dentro de uno `max-w-formulario`. Debe fallar porque hoy ocupan todo el ancho.

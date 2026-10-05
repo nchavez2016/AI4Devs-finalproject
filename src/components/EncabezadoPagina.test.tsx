@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
+import { Button } from '@/components/ui/Button'
 import { EncabezadoPagina } from './EncabezadoPagina'
 
 describe('EncabezadoPagina', () => {
@@ -43,5 +44,30 @@ describe('EncabezadoPagina', () => {
     )
 
     expect(screen.queryByRole('link', { name: 'Volver al panel' })).toBeNull()
+  })
+
+  it('EncabezadoPagina muestra la acción primaria solo si se pasa', () => {
+    const { unmount } = render(
+      <EncabezadoPagina
+        titulo="Cuentas"
+        proposito="Propósito"
+        accion={<Button>Nueva cuenta</Button>}
+      />
+    )
+
+    const header = screen.getByRole('banner')
+    const boton = within(header).getByRole('button', { name: 'Nueva cuenta' })
+    expect(boton).toBeTruthy()
+
+    unmount()
+
+    render(
+      <EncabezadoPagina
+        titulo="Cuentas"
+        proposito="Propósito"
+      />
+    )
+
+    expect(within(screen.getByRole('banner')).queryByRole('button')).toBeNull()
   })
 })

@@ -1,15 +1,18 @@
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 
 interface EncabezadoPaginaProps {
   titulo: string
   proposito: string
   volverAlPanel?: boolean
+  accion?: ReactNode
 }
 
 export function EncabezadoPagina({
   titulo,
   proposito,
   volverAlPanel,
+  accion,
 }: EncabezadoPaginaProps) {
   return (
     <header className="flex flex-col gap-entre-campos">
@@ -22,8 +25,13 @@ export function EncabezadoPagina({
           Volver al panel
         </Link>
       )}
-      <h1 className="font-titulo text-titulo-pagina text-foreground">{titulo}</h1>
-      <p className="text-cuerpo text-muted-foreground">{proposito}</p>
+      <div className="flex items-start justify-between gap-seccion">
+        <div className="flex flex-col gap-entre-campos">
+          <h1 className="font-titulo text-titulo-pagina text-foreground">{titulo}</h1>
+          <p className="text-cuerpo text-muted-foreground">{proposito}</p>
+        </div>
+        {accion}
+      </div>
     </header>
   )
 }
