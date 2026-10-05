@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { limpiarBD } from '@/test/bd/limpiar'
 import { registrarUsuario } from '@/server/auth/registro'
+import { crearUsuarioSinCategorias } from '@/test/bd/usuarios'
 import { crearCategoria, listarCategorias } from './categorias'
 
 beforeEach(async () => {
@@ -213,6 +214,31 @@ describe('categorias', () => {
     const nombres = [...deLuis.ingreso, ...deLuis.gasto].map((c) => c.nombre)
     expect(nombres).not.toContain('Publicidad')
     expect(deLuis.gasto).toHaveLength(5)
+  })
+
+  it('El nombre de una categoría de otro usuario no cuenta como duplicado', async () => {
+    const ana = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!ana.ok) throw new Error('Falló el registro')
+
+    // Sin categorías por defecto: el resultado solo depende de la categoría de Ana.
+    const luisId = await crearUsuarioSinCategorias(process.env.DATABASE_URL!, {
+      nombre: 'Luis',
+      nombreNegocio: 'Tienda Luis',
+      email: 'luis@tienda.ec',
+    })
+
+    await crearCategoria(ana.usuario.id, { nombre: 'Publicidad', tipo: 'GASTO' })
+    const resultado = await crearCategoria(luisId, {
+      nombre: 'Publicidad',
+      tipo: 'GASTO',
+    })
+
+    expect(resultado.ok).toBe(true)
   })
 
   it('Longitud máxima del nombre de categoría es 150 caracteres', async () => {

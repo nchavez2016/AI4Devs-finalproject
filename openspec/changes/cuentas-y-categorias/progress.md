@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 2.31 RED — mismo archivo, test "El nombre de una categoría de otro usuario no cuenta como duplicado" (forzar con la mutación del índice sin `usuario_id`).
-- Decisiones: cada ciclo RED/GREEN/REFACTOR va en un commit con la suite en verde; el RED se registra en el cuerpo del commit. Las mutaciones se hacen con `docker exec cuadre-db psql` sobre `cuadre_test` y se restauran antes del commit. Esquema de nombre compartido en `src/server/validacion.ts`.
-- Discrepancias: el pre-commit ejecuta la suite completa, así que un RED no puede commitearse solo. El hook bloquea escribir archivos nuevos en `prisma/migrations/`.
+- Siguiente: 2.34 RED — `src/server/categorias/acciones.test.ts`, test "La categoría se crea siempre para el usuario de la sesión". Debe fallar porque `acciones.ts` no existe.
+- Decisiones: cada ciclo RED/GREEN/REFACTOR va en un commit con la suite en verde; el RED se registra en el cuerpo del commit. Las mutaciones se hacen con `docker exec cuadre-db psql` sobre `cuadre_test` y se restauran antes del commit. Esquema de nombre compartido en `src/server/validacion.ts`. Tests de aislamiento entre usuarios: el segundo usuario se crea con `crearUsuarioSinCategorias` (`src/test/bd/usuarios.ts`), sin seed.
+- Discrepancias: el pre-commit ejecuta la suite completa, así que un RED no puede commitearse solo. El hook bloquea escribir archivos nuevos en `prisma/migrations/`. Las mutaciones que quitan `usuario_id` del índice rompen también el registro de los tests de 2.28, que usan seed.
