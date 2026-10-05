@@ -47,4 +47,24 @@ describe('cuentas', () => {
     expect(lista.getByText('Efectivo')).toBeTruthy()
     expect(lista.getByText(formatearImporte('20.00', 'saldo'))).toBeTruthy()
   })
+
+  it('Pantalla de cuentas sin cuentas muestra el estado vacío', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
+    listarCuentasSimulado.mockResolvedValue([])
+
+    const { cargarCuentas } = await import('@/server/cuentas/pantalla')
+    const { ContenidoCuentas } = await import('./ContenidoCuentas')
+
+    const datos = await cargarCuentas()
+    render(<ContenidoCuentas {...datos} />)
+
+    expect(screen.getByText('Aún no tienes cuentas')).toBeTruthy()
+
+    const boton = screen.getByRole('button', { name: 'Crear mi primera cuenta' })
+    boton.click()
+
+    expect(document.activeElement).toBe(
+      screen.getByRole('textbox', { name: 'Nombre' })
+    )
+  })
 })

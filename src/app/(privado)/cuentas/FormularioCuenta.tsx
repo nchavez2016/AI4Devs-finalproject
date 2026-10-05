@@ -1,14 +1,16 @@
+import type { RefObject } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Campo } from '@/components/ui/Campo'
 
 export interface FormularioCuentaProps {
+  formularioRef: RefObject<HTMLFormElement | null>
   accion: (payload: FormData) => void
   pendiente: boolean
 }
 
-export function FormularioCuenta({ accion, pendiente }: FormularioCuentaProps) {
+export function FormularioCuenta({ formularioRef, accion, pendiente }: FormularioCuentaProps) {
   return (
-    <form action={accion} className="flex flex-col gap-entre-campos">
+    <form ref={formularioRef} action={accion} className="flex flex-col gap-entre-campos">
       <Campo etiqueta="Nombre" name="nombre" />
 
       <div className="flex flex-col gap-etiqueta">

@@ -1,6 +1,7 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useRef } from 'react'
+import { Button } from '@/components/ui/Button'
 import { Importe } from '@/components/ui/Importe'
 import { crearCuentaAccion } from '@/server/cuentas/acciones'
 import type { DatosCuentas } from '@/server/cuentas/pantalla'
@@ -14,29 +15,46 @@ const etiquetasTipo = {
 
 export function ContenidoCuentas({ cuentas }: DatosCuentas) {
   const [, accion, pendiente] = useActionState(crearCuentaAccion, {})
+  const formularioRef = useRef<HTMLFormElement>(null)
+
+  function enfocarNombre() {
+    const campo = formularioRef.current?.elements.namedItem('nombre')
+    if (campo instanceof HTMLInputElement) {
+      campo.focus()
+    }
+  }
 
   return (
     <main className="flex flex-col gap-seccion px-pagina py-seccion bg-background text-foreground min-h-full">
       <h1 className="font-titulo text-titulo-pagina text-foreground">Cuentas</h1>
 
-      <ul aria-label="Cuentas" className="flex flex-col">
-        {cuentas.map((cuenta) => (
-          <li
-            key={cuenta.id}
-            className="flex items-center justify-between gap-seccion px-fila-x py-fila-y border-b border-border"
-          >
-            <div className="flex flex-col">
-              <span className="text-cuerpo font-control text-foreground">{cuenta.nombre}</span>
-              <span className="text-detalle text-muted-foreground">
-                {etiquetasTipo[cuenta.tipo]}
-              </span>
-            </div>
-            <Importe valor={cuenta.saldo} tipo="saldo" tamano="importe-resumen" />
-          </li>
-        ))}
-      </ul>
+      {cuentas.length === 0 ? (
+        <div className="flex flex-col items-start gap-entre-campos">
+          <p className="text-cuerpo text-muted-foreground">Aún no tienes cuentas</p>
+          <Button type="button" onClick={enfocarNombre}>
+            Crear mi primera cuenta
+          </Button>
+        </div>
+      ) : (
+        <ul aria-label="Cuentas" className="flex flex-col">
+          {cuentas.map((cuenta) => (
+            <li
+              key={cuenta.id}
+              className="flex items-center justify-between gap-seccion px-fila-x py-fila-y border-b border-border"
+            >
+              <div className="flex flex-col">
+                <span className="text-cuerpo font-control text-foreground">{cuenta.nombre}</span>
+                <span className="text-detalle text-muted-foreground">
+                  {etiquetasTipo[cuenta.tipo]}
+                </span>
+              </div>
+              <Importe valor={cuenta.saldo} tipo="saldo" tamano="importe-resumen" />
+            </li>
+          ))}
+        </ul>
+      )}
 
-      <FormularioCuenta accion={accion} pendiente={pendiente} />
+      <FormularioCuenta formularioRef={formularioRef} accion={accion} pendiente={pendiente} />
     </main>
   )
 }
