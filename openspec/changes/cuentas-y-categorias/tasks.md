@@ -180,9 +180,29 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 4.11 GREEN — `ContenidoCategorias.tsx`: el mismo enlace que en 4.5. Test en verde.
 - [x] 4.12 REFACTOR — tests en verde; no se extrae un componente para el enlace (dos usos, design i); suite completa (cierre de grupo).
 
-## 5. Prueba manual y verificación final
+## 5. Armazón de página
 
-- [ ] 5.1 [HUMANO] Con `docker compose up -d` y `npm run dev`:
+- [ ] 5.1 RED — `src/components/EncabezadoPagina.test.tsx`, test "EncabezadoPagina muestra el título y la frase de propósito": hay un `h1` con el título y su hermano siguiente es la frase. Debe fallar porque el componente no existe.
+- [ ] 5.2 GREEN — `src/components/EncabezadoPagina.tsx`: `header` con `h1` (`font-titulo`, `text-titulo-pagina`) y `p` (`text-cuerpo`, `text-muted-foreground`); props `titulo` y `proposito`. Test en verde.
+- [ ] 5.3 REFACTOR — test en verde; solo tokens.
+- [ ] 5.4 RED — mismo archivo, test "EncabezadoPagina muestra el enlace al panel solo si se pide": con `volverAlPanel`, enlace de nombre accesible "Volver al panel" a `/panel` antes del `h1`; sin la prop, ningún enlace.
+- [ ] 5.5 GREEN — el `Link` terciario de design i pasa al componente. Test en verde.
+- [ ] 5.6 REFACTOR — test en verde.
+- [ ] 5.7 RED — mismo archivo, test "EncabezadoPagina muestra la acción primaria solo si se pasa": con `accion` (un `Button` primario), el botón está dentro del `header`; sin la prop, el `header` no tiene botones.
+- [ ] 5.8 GREEN — prop opcional `accion: ReactNode`, alineada con el título (`flex`, `justify-between`, `gap-seccion`). Test en verde.
+- [ ] 5.9 REFACTOR — test en verde.
+- [ ] 5.10 CARACTERIZACIÓN — ejecutar `cuentas.test.tsx` y `categorias.test.tsx` y confirmar que están en verde antes de tocar `Contenido*.tsx`.
+- [ ] 5.11 REFACTOR — `ContenidoCuentas.tsx` y `ContenidoCategorias.tsx` usan `EncabezadoPagina` con `volverAlPanel` y su frase actual, sin `accion` (design j). Se borra el marcado duplicado. Los tests de 4.1, 4.4, 4.7 y 4.10 siguen en verde sin cambios.
+- [ ] 5.12 RED — `cuentas.test.tsx`, test "Pantalla de cuentas limita el ancho del contenido y del formulario": el contenido está dentro de un contenedor `max-w-contenido` y el `form` dentro de uno `max-w-formulario`. Debe fallar porque hoy ocupan todo el ancho.
+- [ ] 5.13 GREEN — `ContenidoCuentas.tsx`: contenedor `w-full max-w-contenido mx-auto` dentro de `main`, y el formulario envuelto en `w-full max-w-formulario`. Test en verde.
+- [ ] 5.14 REFACTOR — tests en verde; solo tokens.
+- [ ] 5.15 RED — `categorias.test.tsx`, test "Pantalla de categorías limita el ancho del contenido y del formulario" (mismas comprobaciones que 5.12).
+- [ ] 5.16 GREEN — `ContenidoCategorias.tsx`: los mismos contenedores. Test en verde.
+- [ ] 5.17 REFACTOR — tests en verde; `npm run build`; suite completa (cierre de grupo).
+
+## 6. Prueba manual y verificación final
+
+- [ ] 6.1 [HUMANO] Con `docker compose up -d` y `npm run dev`:
   - (a) Registrar a A y entrar a Cuentas desde el panel: ver el estado vacío y que "Crear cuenta" enfoca el nombre.
   - (b) Crear "  Banco Pichincha  " con 500.00: se guarda sin los espacios, se anuncia, se resalta y muestra $500,00.
   - (c) Intentar crear "banco PICHINCHA": error "Ya tienes una cuenta con ese nombre".
@@ -194,4 +214,5 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
   - (i) En Categorías: ver las 7 por defecto, crear "Publicidad" (gasto), intentar "PUBLICIDAD" (gasto) y " ventas " (ingreso), y crear "Otros" (ingreso).
   - (j) Registrar a B: no ve nada de A y puede crear su propia cuenta "Banco Pichincha" y su categoría "Publicidad".
   - (k) En Cuentas y en Categorías: leer la frase bajo el título, y llegar con Tab a "← Volver al panel" y activarlo con Enter.
-- [ ] 5.2 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate cuentas-y-categorias --strict`; todo sin errores.
+  - (l) En una ventana ancha (escritorio): el formulario no pasa de unos 480 px y el contenido queda centrado con un ancho máximo.
+- [ ] 6.2 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate cuentas-y-categorias --strict`; todo sin errores.

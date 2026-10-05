@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 5.1 [HUMANO] — prueba manual con `docker compose up -d` y `npm run dev` (pasos a–k en tasks.md). Pendiente de la persona; no se continúa sin su resultado.
+- Siguiente: 5.1 RED — `src/components/EncabezadoPagina.test.tsx`, test "EncabezadoPagina muestra el título y la frase de propósito" (grupo 5, Armazón de página; la verificación final pasa al grupo 6).
 - Decisiones: cada ciclo RED/GREEN/REFACTOR va en un commit con la suite en verde; el RED se registra en el cuerpo del commit. Frase guía: `p` justo después del `h1`. Enlace "Volver al panel": `Link` terciario antes del `h1`, flecha con `aria-hidden` (design i). El enlace no se extrae a componente compartido (dos usos).
 - Discrepancias: el pre-commit ejecuta la suite completa, así que un RED no puede commitearse solo. El hook bloquea escribir archivos nuevos en `prisma/migrations/`. Las mutaciones que quitan `usuario_id` del índice rompen también el registro de los tests de 2.28, que usan seed.

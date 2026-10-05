@@ -131,6 +131,19 @@ lleva `aria-hidden` para que el nombre accesible sea "Volver al panel". No se ex
 componente compartido: son dos usos, y la regla del change es extraer al tercero. No añade
 requisitos a las specs: es navegación y texto de apoyo, sin comportamiento de dominio.
 
+**j) Armazón de página.** Decisión del humano: se crea `src/components/EncabezadoPagina.tsx`
+(título, frase de propósito, enlace opcional "← Volver al panel" y acción opcional), aunque
+solo hay dos pantallas. Esto reemplaza la parte de design i que dejaba el enlace sin extraer.
+- El orden se mantiene: enlace, `h1` y la frase como hermano siguiente del `h1`, para que los
+  tests del grupo 4 sigan en verde sin cambios.
+- `accion` es un `ReactNode` que pasa quien lo usa. Cuentas y categorías **no** la usan:
+  componentes.md permite un solo botón primario por vista, y cada una ya tiene el de su
+  formulario.
+- Anchos: el contenido va en `max-w-contenido` centrado y cada formulario en
+  `max-w-formulario` (tokens `--container-*` de tokens.md 3.3.4). `loading.tsx` y
+  `error.tsx` no se tocan.
+- Sin dependencias nuevas ni cambios en las specs: es presentación.
+
 ## Risks / Trade-offs
 
 - [Prisma 7.10 no está comprobado con `@db.Citext` en este proyecto] → La primera tarea de
