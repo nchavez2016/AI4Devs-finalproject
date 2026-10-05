@@ -140,4 +140,41 @@ describe('cuentas', () => {
     const cuentas = await listarCuentas(registro.usuario.id)
     expect(cuentas).toHaveLength(0)
   })
+
+  it('Longitud máxima del nombre de cuenta es 150 caracteres', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const nombre150 = `  ${'a'.repeat(150)}  `
+    const resultado1 = await crearCuenta(registro.usuario.id, {
+      nombre: nombre150,
+      tipo: 'BANCO',
+      saldoInicial: '500.00',
+    })
+
+    expect(resultado1.ok).toBe(true)
+
+    const nombre151 = 'b'.repeat(151)
+    const resultado2 = await crearCuenta(registro.usuario.id, {
+      nombre: nombre151,
+      tipo: 'BANCO',
+      saldoInicial: '500.00',
+    })
+
+    expect(resultado2.ok).toBe(false)
+    if (!resultado2.ok) {
+      expect(resultado2.errores.nombre).toEqual([
+        'El nombre puede tener como máximo 150 caracteres',
+      ])
+    }
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toHaveLength(1)
+    expect(cuentas[0].nombre).toBe('a'.repeat(150))
+  })
 })

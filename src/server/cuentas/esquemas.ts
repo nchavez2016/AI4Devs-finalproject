@@ -1,7 +1,11 @@
 import { z } from 'zod'
 
 export const esquemaCrearCuenta = z.object({
-  nombre: z.string().trim().min(1, 'El nombre es obligatorio'),
+  nombre: z
+    .string()
+    .trim()
+    .min(1, 'El nombre es obligatorio')
+    .max(150, 'El nombre puede tener como máximo 150 caracteres'),
   tipo: z.enum(['BANCO', 'EFECTIVO', 'DIGITAL']),
   saldoInicial: z.string().transform((valor) => {
     const limpio = valor.trim().replace(',', '.')

@@ -25,9 +25,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.13 RED — mismo archivo, test "Crear cuenta rechazada por nombre vacío".
 - [x] 1.14 GREEN — `esquemas.ts`: el nombre se recorta y exige al menos 1 carácter; `cuentas.ts` devuelve `{ ok: false, errores }` agrupados por campo. Test en verde.
 - [x] 1.15 REFACTOR — mover `agruparErroresPorCampo` de `registro.ts` a `src/server/validacion.ts` y usarla en los dos casos de uso (design d). Verde este test y también `src/server/auth/registro.int.test.ts`.
-- [ ] 1.16 RED — mismo archivo, test "Longitud máxima del nombre de cuenta es 150 caracteres".
-- [ ] 1.17 GREEN — `esquemas.ts`: máximo 150 caracteres después de recortar, con el mensaje "El nombre puede tener como máximo 150 caracteres". Test en verde.
-- [ ] 1.18 REFACTOR — test en verde.
+- [x] 1.16 RED — mismo archivo, test "Longitud máxima del nombre de cuenta es 150 caracteres".
+- [x] 1.17 GREEN — `esquemas.ts`: máximo 150 caracteres después de recortar, con el mensaje "El nombre puede tener como máximo 150 caracteres". Test en verde.
+- [x] 1.18 REFACTOR — test en verde.
 - [ ] 1.19 RED — mismo archivo, test "Crear cuenta rechazada por saldo inicial inválido" (`"abc"`, `"10.555"`, `"1.000,00"`, `"1000000000000.00"`).
 - [ ] 1.20 GREEN — `esquemas.ts`: regex de design b y mensaje "Escribe un saldo con hasta 2 decimales, por ejemplo 500.00". Test en verde. Verificar por mutación cada parte de la regex que el test no haya exigido.
 - [ ] 1.21 REFACTOR — test en verde.
