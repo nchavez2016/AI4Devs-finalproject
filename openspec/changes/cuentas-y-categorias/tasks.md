@@ -136,9 +136,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 3.14 RED — mismo archivo, test "Cuenta creada se anuncia y se resalta en la lista", y en `acciones.test.ts` el test de apoyo "crearCuentaAccion revalida /cuentas y devuelve el id creado".
 - [x] 3.15 GREEN — `revalidatePath('/cuentas')` + `{ exito, idCreado }`, la región `aria-live` y `animate-resaltado` en la fila. Tests en verde.
 - [x] 3.16 REFACTOR — tests en verde.
-- [ ] 3.17 RED — `src/app/(privado)/cuentas/estados.test.tsx`, test "Pantalla de cuentas en carga muestra un esqueleto ocupado".
-- [ ] 3.18 GREEN — `src/app/(privado)/cuentas/loading.tsx` (filas `alto-fila` en `muted`, `aria-busy`, `animate-esqueleto`). Test en verde.
-- [ ] 3.19 REFACTOR — test en verde.
+- [x] 3.17 RED — `src/app/(privado)/cuentas/estados.test.tsx`, test "Pantalla de cuentas en carga muestra un esqueleto ocupado".
+- [x] 3.18 GREEN — `src/app/(privado)/cuentas/loading.tsx` (filas `alto-fila` en `muted`, `aria-busy`, `animate-esqueleto`). Test en verde.
+- [x] 3.19 REFACTOR — test en verde.
 - [ ] 3.20 RED — mismo archivo, test "Error al cargar las cuentas ofrece reintentar" (pulsar "Reintentar" llama a `retry`).
 - [ ] 3.21 GREEN — `src/app/(privado)/cuentas/error.tsx`. Test en verde.
 - [ ] 3.22 REFACTOR — test en verde.
