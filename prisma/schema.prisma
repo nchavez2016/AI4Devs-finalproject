@@ -39,7 +39,7 @@ model Usuario {
 model Cuenta {
   id           String     @id @default(cuid())
   usuarioId    String     @map("usuario_id")
-  nombre       String
+  nombre       String     @db.Citext
   tipo         TipoCuenta
   // El saldo actual se calcula (saldo_inicial + ingresos − gastos); no se almacena.
   saldoInicial Decimal    @default(0) @map("saldo_inicial") @db.Decimal(14, 2)
@@ -48,6 +48,7 @@ model Cuenta {
   usuario       Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   transacciones Transaccion[]
 
+  @@unique([usuarioId, nombre])
   @@index([usuarioId])
   @@map("cuentas")
 }

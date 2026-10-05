@@ -34,8 +34,8 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.22 RED — mismo archivo, test "Crear cuenta rechazada por tipo inválido".
 - [x] 1.23 GREEN — `esquemas.ts`: `z.enum(['BANCO','EFECTIVO','DIGITAL'])` con el mensaje "Elige un tipo de cuenta". Test en verde.
 - [x] 1.24 REFACTOR — test en verde.
-- [ ] 1.25 RED — mismo archivo, test "Crear cuenta rechazada por nombre duplicado". Debe fallar porque se crea una segunda cuenta.
-- [ ] 1.26 GREEN — design c, en este orden:
+- [x] 1.25 RED — mismo archivo, test "Crear cuenta rechazada por nombre duplicado". Debe fallar porque se crea una segunda cuenta.
+- [x] 1.26 GREEN — design c, en este orden:
   - (1) En `prisma/schema.prisma`, `Cuenta.nombre` pasa a `@db.Citext` y se añade `@@unique([usuarioId, nombre])`. Ejecutar `npx prisma validate`; si lo rechaza, detenerse y consultar.
   - (2) `npx prisma migrate dev --name nombre-unico-cuentas --create-only`.
   - (3) Añadir `CREATE EXTENSION IF NOT EXISTS citext;` al principio del SQL generado.
@@ -45,7 +45,7 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
   - (7) `crearCuenta` devuelve "Ya tienes una cuenta con ese nombre" en `nombre`.
 
   Test en verde, y `docker exec cuadre-db psql -U cuadre -d cuadre_test -c "\d cuentas"` muestra `nombre` como `citext` y el índice único.
-- [ ] 1.27 REFACTOR — test en verde.
+- [x] 1.27 REFACTOR — test en verde.
 - [ ] 1.28 RED — mismo archivo, test "Cuentas duplicadas rechazadas aunque se envíen a la vez" (`Promise.all` de las dos creaciones). Pasará gracias al índice: forzar el RED con la mutación del índice (borrarlo).
 - [ ] 1.29 GREEN — sin cambios si el índice de 1.26 ya lo cumple. Test en verde.
 - [ ] 1.30 REFACTOR — test en verde.

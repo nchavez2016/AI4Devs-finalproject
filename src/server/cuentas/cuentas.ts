@@ -1,5 +1,8 @@
 import { Prisma, TipoCuenta } from '@/generated/prisma/client'
-import { cuentaRepository } from '@/server/repositories/cuentaRepository'
+import {
+  cuentaRepository,
+  NombreDuplicadoError,
+} from '@/server/repositories/cuentaRepository'
 import { agruparErroresPorCampo } from '@/server/validacion'
 import { esquemaCrearCuenta } from './esquemas'
 
@@ -36,12 +39,24 @@ export async function crearCuenta(
   const datos = validacion.data
   const saldoInicial = new Prisma.Decimal(datos.saldoInicial)
 
-  const cuenta = await cuentaRepository.crear({
-    usuarioId,
-    nombre: datos.nombre,
-    tipo: datos.tipo,
-    saldoInicial,
-  })
+  let cuenta
+  try {
+    cuenta = await cuentaRepository.crear({
+      usuarioId,
+      nombre: datos.nombre,
+      tipo: datos.tipo,
+      saldoInicial,
+    })
+  } catch (error) {
+    if (error instanceof NombreDuplicadoError) {
+      return {
+        ok: false,
+        errores: { nombre: ['Ya tienes una cuenta con ese nombre'] },
+      }
+    }
+
+    throw error
+  }
 
   return {
     ok: true,

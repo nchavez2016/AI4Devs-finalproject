@@ -231,4 +231,34 @@ describe('cuentas', () => {
     const cuentas = await listarCuentas(registro.usuario.id)
     expect(cuentas).toHaveLength(0)
   })
+
+  it('Crear cuenta rechazada por nombre duplicado', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    await crearCuenta(registro.usuario.id, {
+      nombre: 'Banco Pichincha',
+      tipo: 'BANCO',
+      saldoInicial: '500.00',
+    })
+
+    const resultado = await crearCuenta(registro.usuario.id, {
+      nombre: ' banco PICHINCHA ',
+      tipo: 'DIGITAL',
+      saldoInicial: '100.00',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.errores.nombre).toEqual(['Ya tienes una cuenta con ese nombre'])
+    }
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toHaveLength(1)
+  })
 })
