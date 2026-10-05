@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { cerrarSesion } from '@/server/auth/acciones'
 import type { DatosPanel } from '@/server/panel'
@@ -13,6 +14,14 @@ export function ContenidoPanel({ nombreNegocio }: DatosPanel) {
           </Button>
         </form>
       </header>
+      <nav aria-label="Secciones" className="flex gap-fila-x">
+        <Link href="/cuentas" className="text-cuerpo font-control text-primary">
+          Cuentas
+        </Link>
+        <Link href="/categorias" className="text-cuerpo font-control text-primary">
+          Categorías
+        </Link>
+      </nav>
     </main>
   )
 }

@@ -142,10 +142,10 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 3.20 RED — mismo archivo, test "Error al cargar las cuentas ofrece reintentar" (pulsar "Reintentar" llama a `retry`).
 - [x] 3.21 GREEN — `src/app/(privado)/cuentas/error.tsx`. Test en verde.
 - [x] 3.22 REFACTOR — test en verde.
-- [ ] 3.23 CARACTERIZACIÓN — ejecutar `src/app/(privado)/panel/panel.test.tsx` y confirmar que está en verde antes de tocar `ContenidoPanel.tsx`.
-- [ ] 3.24 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel enlaza a cuentas y categorías".
-- [ ] 3.25 GREEN — dos `Link` en `ContenidoPanel.tsx`. Tests del panel en verde.
-- [ ] 3.26 REFACTOR — tests en verde.
+- [x] 3.23 CARACTERIZACIÓN — ejecutar `src/app/(privado)/panel/panel.test.tsx` y confirmar que está en verde antes de tocar `ContenidoPanel.tsx`.
+- [x] 3.24 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel enlaza a cuentas y categorías".
+- [x] 3.25 GREEN — dos `Link` en `ContenidoPanel.tsx`. Tests del panel en verde.
+- [x] 3.26 REFACTOR — tests en verde.
 - [ ] 3.27 RED — `src/app/(privado)/categorias/categorias.test.tsx`, test "Pantalla de categorías muestra las de ingreso y las de gasto por separado" (patrón de 3.2). Debe fallar porque no existen.
 - [ ] 3.28 GREEN — `src/server/categorias/pantalla.ts` (`cargarCategorias`), `page.tsx`, `ContenidoCategorias.tsx` y `FormularioCategoria.tsx`. Test en verde.
 - [ ] 3.29 REFACTOR — test en verde; extraer piezas comunes con cuentas solo si se repiten de forma literal.

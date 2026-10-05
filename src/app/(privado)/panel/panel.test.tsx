@@ -31,4 +31,15 @@ describe('panel', () => {
     expect(screen.getByText('Tienda Ana')).toBeTruthy()
     expect(screen.queryByText('Taller Beto')).toBeNull()
   })
+
+  it('El panel enlaza a cuentas y categorías', async () => {
+    const { ContenidoPanel } = await import('./ContenidoPanel')
+
+    render(<ContenidoPanel nombreNegocio="Tienda Ana" />)
+
+    expect(screen.getByRole('link', { name: 'Cuentas' }).getAttribute('href')).toBe('/cuentas')
+    expect(screen.getByRole('link', { name: 'Categorías' }).getAttribute('href')).toBe(
+      '/categorias'
+    )
+  })
 })
