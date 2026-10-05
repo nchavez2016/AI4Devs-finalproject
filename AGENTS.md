@@ -53,6 +53,7 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
 - SÍ: nombres del dominio en español (Usuario, Cuenta, Categoria, Transaccion); camelCase en
   TypeScript y snake_case en la BD con `@map`.
 - SÍ: los estilos usan solo los tokens definidos en `docs/diseno/sistema/` (punto de entrada: `README.md`). NO: ningún valor visual literal.
+- Al crear o modificar pantallas, carga la skill ux-cuadre
 
 ## Gotchas del stack
 - Prisma fijado en 7.10.0 exacta. NO actualizar a Prisma 8.
@@ -74,7 +75,7 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
 ## Commits y ramas
 - Se trabaja en la rama de la entrega actual (`feature/entrega-N-NCH`). Nunca en `main`
   (lo bloquea el hook de pre-commit).
-- Durante la aplicación de un change: un commit por subtarea, formato Conventional Commits.
+- Durante la aplicación de un change: un commit por subtarea RED/GREEN, con el test y el código juntos y la suite en verde, formato Conventional Commits.
   Fuera de eso: solo con orden explícita.
 - Nunca push, merge ni cambio de rama: los hace el humano.
 
@@ -96,3 +97,4 @@ Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, a
 - Crear y editar archivos solo con las herramientas de edición, nunca con redirecciones de terminal (`>`, `>>`, `tee`, heredoc).
 - Si un hook o una protección devuelve un error, detente y avisa al usuario. No continúes.
 - No borrar, mover ni reescribir archivos que no estén en un commit (compruébalo con `git status`) sin confirmación del usuario.
+- Las migraciones nuevas las crea y revisa el humano (el hook bloquea escribir en prisma/migrations/).

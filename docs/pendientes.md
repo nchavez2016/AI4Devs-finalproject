@@ -16,6 +16,7 @@
 - Skill `ux-cuadre` y subagente revisor de UX (y comprobación de sincronía si se duplican skills propias).
 - Componentes que faltan: selector de tipo, tarjeta, lista y tabla de movimientos, "Totales con etiqueta" de Importe.
 - Formulario: reformateo del monto al salir, validación al enviar y foco al primer campo inválido.
+- Antigravity en Windows pide permiso para comandos con argumentos aunque su prefijo esté en la lista y en el hook (git log, git diff, npx vitest run...). Usar Claude Code para ciclos largos de apply. Revisar si una versión futura respeta el allow del hook.
 
 ## Producto
 - Editar y eliminar movimientos (HU-005).
@@ -24,3 +25,9 @@
 
 ## Entrega final
 - Playwright (E2E), GitHub Actions, despliegue en Vercel + Neon y `prompts.md`.
+
+## Guardia
+- Permitir que el agente cree migraciones nuevas en prisma/migrations/ y bloquear solo editar las existentes (hoy las crea el humano).
+
+## Despliegue
+- Comprobar que la extensión `citext` (nombres de categoría sin distinguir mayúsculas) esté disponible en Neon antes de migrar.

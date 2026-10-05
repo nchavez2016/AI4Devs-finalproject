@@ -31,6 +31,7 @@ rules:
     - Si se toca código existente sin tests, añadir antes una subtarea CARACTERIZACIÓN que capture el comportamiento actual.
     - Las tareas de migración incluyen ejecutar prisma generate.
     - La última tarea del change ejecuta lint, comprobación de tipos, suite completa de tests y openspec validate --strict.
+    - "Toda tarea que cree una migración de Prisma se marca [HUMANO]: la persona la genera con migrate dev --create-only, la revisa y la aplica; el agente se detiene antes."
 
 operations:
   apply:
@@ -48,6 +49,7 @@ operations:
       - Al terminar cada grupo, detente con un resumen de máximo 5 líneas que indique, por cada test, el motivo del fallo visto en RED.
       - Al retomar un change, lee primero progress.md y tasks.md, y nada más hasta que una tarea lo requiera.
       - Antes de detenerte al final de un grupo, comprueba que todas las subtareas realizadas de ese grupo están marcadas con [x] en tasks.md; si falta alguna, márcala en el mismo commit.
+      - "Con el hook de pre-commit ejecutando la suite completa, el RED no se commitea solo: ejecuta el test, confirma que falla por la razón esperada, anota el motivo en progress.md y haz un único commit con el test y su GREEN en verde."
   archive:
     guidance:
       - Si no hay constancia de que se ejecutó /opsx:verify para este change, pregunta antes de archivar.
