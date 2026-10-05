@@ -148,6 +148,28 @@ describe('categorias', () => {
     expect(publicidad).toHaveLength(1)
   })
 
+  it('Mismo nombre permitido en el otro tipo', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const gasto = await crearCategoria(registro.usuario.id, {
+      nombre: 'Publicidad',
+      tipo: 'GASTO',
+    })
+    const ingreso = await crearCategoria(registro.usuario.id, {
+      nombre: 'Publicidad',
+      tipo: 'INGRESO',
+    })
+
+    expect(gasto.ok).toBe(true)
+    expect(ingreso.ok).toBe(true)
+  })
+
   it('Longitud máxima del nombre de categoría es 150 caracteres', async () => {
     const registro = await registrarUsuario({
       nombre: 'Ana',
