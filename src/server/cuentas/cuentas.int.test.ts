@@ -34,4 +34,31 @@ describe('cuentas', () => {
       }),
     ])
   })
+
+  it('Crear una cuenta sin saldo inicial la deja en 0.00', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCuenta(registro.usuario.id, {
+      nombre: 'Efectivo',
+      tipo: 'EFECTIVO',
+      saldoInicial: '',
+    })
+
+    expect(resultado.ok).toBe(true)
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toEqual([
+      expect.objectContaining({
+        nombre: 'Efectivo',
+        tipo: 'EFECTIVO',
+        saldo: '0.00',
+      }),
+    ])
+  })
 })
