@@ -158,12 +158,12 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 3.36 RED — mismo archivo, test "Categoría creada se anuncia y se resalta en la lista", y en `acciones.test.ts` el test de apoyo "crearCategoriaAccion revalida /categorias y devuelve el id creado".
 - [x] 3.37 GREEN — `revalidatePath('/categorias')`, `aria-live` y resaltado. Tests en verde.
 - [x] 3.38 REFACTOR — tests en verde.
-- [ ] 3.39 RED — `src/app/(privado)/categorias/estados.test.tsx`, test "Pantalla de categorías en carga muestra un esqueleto ocupado".
-- [ ] 3.40 GREEN — `src/app/(privado)/categorias/loading.tsx`. Test en verde.
-- [ ] 3.41 REFACTOR — test en verde.
-- [ ] 3.42 RED — mismo archivo, test "Error al cargar las categorías ofrece reintentar".
-- [ ] 3.43 GREEN — `src/app/(privado)/categorias/error.tsx`. Test en verde.
-- [ ] 3.44 REFACTOR — test en verde; suite completa (cierre de grupo).
+- [x] 3.39 RED — `src/app/(privado)/categorias/estados.test.tsx`, test "Pantalla de categorías en carga muestra un esqueleto ocupado".
+- [x] 3.40 GREEN — `src/app/(privado)/categorias/loading.tsx`. Test en verde.
+- [x] 3.41 REFACTOR — test en verde.
+- [x] 3.42 RED — mismo archivo, test "Error al cargar las categorías ofrece reintentar".
+- [x] 3.43 GREEN — `src/app/(privado)/categorias/error.tsx`. Test en verde.
+- [x] 3.44 REFACTOR — test en verde; suite completa (cierre de grupo).
 
 ## 4. Prueba manual y verificación final
 
