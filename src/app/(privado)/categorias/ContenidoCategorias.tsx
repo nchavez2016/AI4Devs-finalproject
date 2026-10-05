@@ -40,7 +40,12 @@ export function ContenidoCategorias({ ingreso, gasto }: DatosCategorias) {
         </ul>
       </section>
 
-      <FormularioCategoria estado={estado} accion={accion} pendiente={pendiente} />
+      <FormularioCategoria
+        key={JSON.stringify(estado)}
+        estado={estado}
+        accion={accion}
+        pendiente={pendiente}
+      />
     </main>
   )
 }

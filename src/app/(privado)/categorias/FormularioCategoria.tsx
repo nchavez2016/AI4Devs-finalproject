@@ -13,7 +13,21 @@ export function FormularioCategoria({ estado, accion, pendiente }: FormularioCat
 
   return (
     <form action={accion} className="flex flex-col gap-entre-campos">
-      <Campo etiqueta="Nombre" name="nombre" error={estado.errores?.nombre?.[0]} />
+      {estado.mensaje && (
+        <p
+          role="alert"
+          className="bg-negativo-fondo text-destructive rounded-control px-campo-x py-mensaje text-detalle"
+        >
+          {estado.mensaje}
+        </p>
+      )}
+
+      <Campo
+        etiqueta="Nombre"
+        name="nombre"
+        defaultValue={estado.valores?.nombre}
+        error={estado.errores?.nombre?.[0]}
+      />
 
       <div className="flex flex-col gap-etiqueta">
         <label htmlFor="tipo-categoria" className="text-etiqueta font-control text-foreground">
@@ -22,7 +36,7 @@ export function FormularioCategoria({ estado, accion, pendiente }: FormularioCat
         <select
           id="tipo-categoria"
           name="tipo"
-          defaultValue="GASTO"
+          defaultValue={estado.valores?.tipo || 'GASTO'}
           aria-invalid={errorTipo ? 'true' : undefined}
           aria-describedby={errorTipo ? 'tipo-categoria-error' : undefined}
           className={[

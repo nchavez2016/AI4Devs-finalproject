@@ -51,6 +51,31 @@ describe('categorias', () => {
     expect(gasto.queryByText('Ventas')).toBeNull()
   })
 
+  it('Error al guardar la categoría conserva los datos escritos', async () => {
+    const { FormularioCategoria } = await import('./FormularioCategoria')
+
+    render(
+      <FormularioCategoria
+        accion={() => {}}
+        pendiente={false}
+        estado={{
+          mensaje: 'No pudimos guardar la categoría. Inténtalo de nuevo.',
+          valores: { nombre: 'Publicidad', tipo: 'INGRESO' },
+        }}
+      />
+    )
+
+    expect(screen.getByRole('alert').textContent).toContain(
+      'No pudimos guardar la categoría. Inténtalo de nuevo.'
+    )
+    expect((screen.getByRole('textbox', { name: 'Nombre' }) as HTMLInputElement).value).toBe(
+      'Publicidad'
+    )
+    expect((screen.getByRole('combobox', { name: 'Tipo' }) as HTMLSelectElement).value).toBe(
+      'INGRESO'
+    )
+  })
+
   it('Formulario de categoría muestra el error junto al nombre', async () => {
     const { FormularioCategoria } = await import('./FormularioCategoria')
 

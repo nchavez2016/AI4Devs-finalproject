@@ -5,6 +5,11 @@ import { crearCategoria } from './categorias'
 
 export interface EstadoFormularioCategoria {
   errores?: Record<string, string[]>
+  mensaje?: string
+  valores?: {
+    nombre?: string
+    tipo?: string
+  }
   exito?: boolean
   idCreado?: string
 }
@@ -27,7 +32,18 @@ export async function crearCategoriaAccion(
     tipo: formData.get('tipo'),
   }
 
-  const resultado = await crearCategoria(usuarioId, datos)
+  let resultado
+  try {
+    resultado = await crearCategoria(usuarioId, datos)
+  } catch {
+    return {
+      mensaje: 'No pudimos guardar la categoría. Inténtalo de nuevo.',
+      valores: {
+        nombre: String(datos.nombre ?? ''),
+        tipo: String(datos.tipo ?? ''),
+      },
+    }
+  }
 
   if (!resultado.ok) {
     return { errores: resultado.errores }
