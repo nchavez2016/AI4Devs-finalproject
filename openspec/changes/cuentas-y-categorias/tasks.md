@@ -49,9 +49,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.28 RED — mismo archivo, test "Cuentas duplicadas rechazadas aunque se envíen a la vez" (`Promise.all` de las dos creaciones). Pasará gracias al índice: forzar el RED con la mutación del índice (borrarlo).
 - [x] 1.29 GREEN — sin cambios si el índice de 1.26 ya lo cumple. Test en verde.
 - [x] 1.30 REFACTOR — test en verde.
-- [ ] 1.31 RED — mismo archivo, test "Consultar una cuenta propia por su identificador". Debe fallar porque `obtenerCuenta` no existe.
-- [ ] 1.32 GREEN — `cuentaRepository.buscarPorId(usuarioId, id)` con `findFirst({ where: { id, usuarioId } })`, y `obtenerCuenta(usuarioId, id)` en `cuentas.ts`. Test en verde.
-- [ ] 1.33 REFACTOR — test en verde.
+- [x] 1.31 RED — mismo archivo, test "Consultar una cuenta propia por su identificador". Debe fallar porque `obtenerCuenta` no existe.
+- [x] 1.32 GREEN — `cuentaRepository.buscarPorId(usuarioId, id)` con `findFirst({ where: { id, usuarioId } })`, y `obtenerCuenta(usuarioId, id)` en `cuentas.ts`. Test en verde.
+- [x] 1.33 REFACTOR — test en verde.
 - [ ] 1.34 RED — mismo archivo, test "Un usuario no ve las cuentas de otro en su lista". Si pasa sin cambios, forzar el RED quitando `usuarioId` del filtro de `listar`, y restaurar.
 - [ ] 1.35 GREEN — corregir el filtro si hace falta. Test en verde.
 - [ ] 1.36 REFACTOR — test en verde.

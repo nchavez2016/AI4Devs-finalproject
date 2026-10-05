@@ -41,4 +41,10 @@ export const cuentaRepository = {
       orderBy: { creadoEn: 'asc' },
     })
   },
+
+  async buscarPorId(usuarioId: string, id: string) {
+    return prisma.cuenta.findFirst({
+      where: { id, usuarioId },
+    })
+  },
 }
