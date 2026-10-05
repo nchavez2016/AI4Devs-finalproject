@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 2.37 RED — mismo archivo, test "Crear una categoría sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
+- Siguiente: 2.40 Actualizar `readme.md`, sección 3.2 (CUENTA y CATEGORIA: `nombre` citext, único por usuario y por tipo en categorías, sin distinguir mayúsculas, sin espacios al inicio ni al final, 150 caracteres como máximo). Suite completa (cierre de grupo).
 - Decisiones: cada ciclo RED/GREEN/REFACTOR va en un commit con la suite en verde; el RED se registra en el cuerpo del commit. Las mutaciones se hacen con `docker exec cuadre-db psql` sobre `cuadre_test` y se restauran antes del commit. Esquema de nombre compartido en `src/server/validacion.ts`. Tests de aislamiento entre usuarios: el segundo usuario se crea con `crearUsuarioSinCategorias` (`src/test/bd/usuarios.ts`), sin seed.
 - Discrepancias: el pre-commit ejecuta la suite completa, así que un RED no puede commitearse solo. El hook bloquea escribir archivos nuevos en `prisma/migrations/`. Las mutaciones que quitan `usuario_id` del índice rompen también el registro de los tests de 2.28, que usan seed.

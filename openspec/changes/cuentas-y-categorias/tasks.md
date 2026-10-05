@@ -113,9 +113,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 2.34 RED — `src/server/categorias/acciones.test.ts`, test "La categoría se crea siempre para el usuario de la sesión". Debe fallar porque `acciones.ts` no existe.
 - [x] 2.35 GREEN — `src/server/categorias/acciones.ts` (`crearCategoriaAccion`, que lee solo `nombre` y `tipo` y usa `exigirUsuarioId`). Test en verde.
 - [x] 2.36 REFACTOR — test en verde.
-- [ ] 2.37 RED — mismo archivo, test "Crear una categoría sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
-- [ ] 2.38 GREEN — ajustar si hace falta. Test en verde.
-- [ ] 2.39 REFACTOR — test en verde.
+- [x] 2.37 RED — mismo archivo, test "Crear una categoría sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
+- [x] 2.38 GREEN — ajustar si hace falta. Test en verde.
+- [x] 2.39 REFACTOR — test en verde.
 - [ ] 2.40 Actualizar `readme.md`, sección 3.2: en CUENTA y CATEGORIA, `nombre` es `citext`, único por usuario (y por tipo en categorías) sin distinguir mayúsculas, sin espacios al inicio ni al final y con 150 caracteres como máximo. Verificar leyendo la sección. Suite completa (cierre de grupo).
 
 ## 3. Pantallas

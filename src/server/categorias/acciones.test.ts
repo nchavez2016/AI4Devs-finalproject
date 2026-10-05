@@ -50,4 +50,22 @@ describe('crearCategoriaAccion', () => {
       tipo: 'GASTO',
     })
   })
+
+  it('Crear una categoría sin sesión redirige al login', async () => {
+    authSimulado.mockResolvedValue(null)
+    redirectSimulado.mockImplementation(() => {
+      throw new Error('NEXT_REDIRECT')
+    })
+
+    const { crearCategoriaAccion } = await import('./acciones')
+
+    const formData = new FormData()
+    formData.set('nombre', 'Publicidad')
+    formData.set('tipo', 'GASTO')
+
+    await expect(crearCategoriaAccion(undefined, formData)).rejects.toThrow('NEXT_REDIRECT')
+
+    expect(redirectSimulado).toHaveBeenCalledWith('/login')
+    expect(crearCategoriaSimulado).not.toHaveBeenCalled()
+  })
 })
