@@ -1,5 +1,8 @@
 import { TipoMovimiento } from '@/generated/prisma/client'
-import { categoriaRepository } from '@/server/repositories/categoriaRepository'
+import {
+  categoriaRepository,
+  NombreDuplicadoError,
+} from '@/server/repositories/categoriaRepository'
 import { agruparErroresPorCampo } from '@/server/validacion'
 import { esquemaCrearCategoria } from './esquemas'
 
@@ -73,11 +76,28 @@ export async function crearCategoria(
   }
 
   const datos = validacion.data
-  const categoria = await categoriaRepository.crear({
-    usuarioId,
-    nombre: datos.nombre,
-    tipo: datos.tipo as TipoMovimiento,
-  })
+  const tipo = datos.tipo as TipoMovimiento
+
+  let categoria
+  try {
+    categoria = await categoriaRepository.crear({
+      usuarioId,
+      nombre: datos.nombre,
+      tipo,
+    })
+  } catch (error) {
+    if (error instanceof NombreDuplicadoError) {
+      const etiqueta = tipo === TipoMovimiento.INGRESO ? 'ingreso' : 'gasto'
+      return {
+        ok: false,
+        errores: {
+          nombre: [`Ya tienes una categoría de ${etiqueta} con ese nombre`],
+        },
+      }
+    }
+
+    throw error
+  }
 
   return {
     ok: true,

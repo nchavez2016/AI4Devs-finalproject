@@ -1,5 +1,12 @@
-import { TipoMovimiento } from '@/generated/prisma/client'
+import { Prisma, TipoMovimiento } from '@/generated/prisma/client'
 import { prisma } from './prisma'
+
+export class NombreDuplicadoError extends Error {
+  constructor() {
+    super('Ya existe una categoría con ese nombre')
+    this.name = 'NombreDuplicadoError'
+  }
+}
 
 export interface DatosCrearCategoriaRepo {
   usuarioId: string
@@ -9,13 +16,21 @@ export interface DatosCrearCategoriaRepo {
 
 export const categoriaRepository = {
   async crear(datos: DatosCrearCategoriaRepo) {
-    return prisma.categoria.create({
-      data: {
-        usuarioId: datos.usuarioId,
-        nombre: datos.nombre,
-        tipo: datos.tipo,
-      },
-    })
+    try {
+      return await prisma.categoria.create({
+        data: {
+          usuarioId: datos.usuarioId,
+          nombre: datos.nombre,
+          tipo: datos.tipo,
+        },
+      })
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+        throw new NombreDuplicadoError()
+      }
+
+      throw error
+    }
   },
 
   async listar(usuarioId: string) {

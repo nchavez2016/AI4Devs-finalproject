@@ -104,6 +104,29 @@ describe('categorias', () => {
     }
   })
 
+  it('Crear categoría rechazada por nombre duplicado en el mismo tipo', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    await crearCategoria(registro.usuario.id, { nombre: 'Publicidad', tipo: 'GASTO' })
+    const resultado = await crearCategoria(registro.usuario.id, {
+      nombre: 'publicidad',
+      tipo: 'GASTO',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.errores.nombre).toEqual([
+        'Ya tienes una categoría de gasto con ese nombre',
+      ])
+    }
+  })
+
   it('Longitud máxima del nombre de categoría es 150 caracteres', async () => {
     const registro = await registrarUsuario({
       nombre: 'Ana',

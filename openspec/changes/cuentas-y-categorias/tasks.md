@@ -85,8 +85,8 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 2.13 RED — mismo archivo, test "Longitud máxima del nombre de categoría es 150 caracteres".
 - [x] 2.14 GREEN — `esquemas.ts`: máximo 150 caracteres con el mismo mensaje que cuentas. Test en verde.
 - [x] 2.15 REFACTOR — test en verde; si el esquema del nombre es idéntico en los dos dominios, extraerlo a `src/server/validacion.ts`.
-- [ ] 2.16 RED — mismo archivo, test "Crear categoría rechazada por nombre duplicado en el mismo tipo". Debe fallar porque se crea la categoría duplicada.
-- [ ] 2.17 GREEN — design c, en este orden:
+- [x] 2.16 RED — mismo archivo, test "Crear categoría rechazada por nombre duplicado en el mismo tipo". Debe fallar porque se crea la categoría duplicada.
+- [x] 2.17 GREEN — design c, en este orden:
   - (1) En `prisma/schema.prisma`, `Categoria.nombre` pasa a `@db.Citext` y se añade `@@unique([usuarioId, tipo, nombre])`. Ejecutar `npx prisma validate`.
   - (2) `npx prisma migrate dev --name nombre-unico-categorias` (la extensión ya existe).
   - (3) `npx prisma generate`.
@@ -94,7 +94,7 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
   - (5) `crearCategoria` devuelve "Ya tienes una categoría de {ingreso|gasto} con ese nombre".
 
   Test en verde, y también `src/server/auth/registro.int.test.ts`, porque las categorías por defecto se insertan en la tabla modificada.
-- [ ] 2.18 REFACTOR — test en verde.
+- [x] 2.18 REFACTOR — test en verde.
 - [ ] 2.19 RED — mismo archivo, test "Categorías duplicadas rechazadas aunque se envíen a la vez". Pasará gracias al índice: forzar el RED con la mutación del índice (borrarlo).
 - [ ] 2.20 GREEN — sin cambios si el índice ya lo cumple. Test en verde.
 - [ ] 2.21 REFACTOR — test en verde.

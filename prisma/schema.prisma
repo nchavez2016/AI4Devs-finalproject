@@ -57,7 +57,7 @@ model Categoria {
   id               String         @id @default(cuid())
   usuarioId        String         @map("usuario_id")
   categoriaPadreId String?        @map("categoria_padre_id")
-  nombre           String
+  nombre           String         @db.Citext
   tipo             TipoMovimiento
   creadoEn         DateTime       @default(now()) @map("creado_en")
 
@@ -66,6 +66,7 @@ model Categoria {
   subcategorias  Categoria[]   @relation("Subcategorias")
   transacciones  Transaccion[]
 
+  @@unique([usuarioId, tipo, nombre])
   @@index([usuarioId])
   @@index([categoriaPadreId])
   @@map("categorias")
