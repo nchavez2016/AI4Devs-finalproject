@@ -155,9 +155,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 3.33 RED — mismo archivo, test "Error al guardar la categoría conserva los datos escritos", y en `acciones.test.ts` el test de apoyo "crearCategoriaAccion convierte un error inesperado en el aviso y conserva los valores".
 - [x] 3.34 GREEN — `catch` → `{ mensaje, valores }`, el aviso y conservar el nombre y el tipo. Tests en verde.
 - [x] 3.35 REFACTOR — tests en verde.
-- [ ] 3.36 RED — mismo archivo, test "Categoría creada se anuncia y se resalta en la lista", y en `acciones.test.ts` el test de apoyo "crearCategoriaAccion revalida /categorias y devuelve el id creado".
-- [ ] 3.37 GREEN — `revalidatePath('/categorias')`, `aria-live` y resaltado. Tests en verde.
-- [ ] 3.38 REFACTOR — tests en verde.
+- [x] 3.36 RED — mismo archivo, test "Categoría creada se anuncia y se resalta en la lista", y en `acciones.test.ts` el test de apoyo "crearCategoriaAccion revalida /categorias y devuelve el id creado".
+- [x] 3.37 GREEN — `revalidatePath('/categorias')`, `aria-live` y resaltado. Tests en verde.
+- [x] 3.38 REFACTOR — tests en verde.
 - [ ] 3.39 RED — `src/app/(privado)/categorias/estados.test.tsx`, test "Pantalla de categorías en carga muestra un esqueleto ocupado".
 - [ ] 3.40 GREEN — `src/app/(privado)/categorias/loading.tsx`. Test en verde.
 - [ ] 3.41 REFACTOR — test en verde.

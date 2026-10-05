@@ -1,5 +1,6 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import { exigirUsuarioId } from '@/server/auth/sesion'
 import { crearCategoria } from './categorias'
 
@@ -49,5 +50,6 @@ export async function crearCategoriaAccion(
     return { errores: resultado.errores }
   }
 
+  revalidatePath('/categorias')
   return { exito: true, idCreado: resultado.categoria.id }
 }

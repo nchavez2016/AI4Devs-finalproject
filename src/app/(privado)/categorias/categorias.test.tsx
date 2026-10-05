@@ -1,8 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
-import { render, screen, within } from '@testing-library/react'
+import { act, fireEvent, render, screen, within } from '@testing-library/react'
 
 const authSimulado = vi.fn()
 const listarCategoriasSimulado = vi.fn()
+const crearCategoriaAccionSimulada = vi.fn()
 
 vi.mock('@/auth', () => ({
   auth: () => authSimulado(),
@@ -10,6 +11,10 @@ vi.mock('@/auth', () => ({
 
 vi.mock('@/server/categorias/categorias', () => ({
   listarCategorias: (...args: unknown[]) => listarCategoriasSimulado(...args),
+}))
+
+vi.mock('@/server/categorias/acciones', () => ({
+  crearCategoriaAccion: (...args: unknown[]) => crearCategoriaAccionSimulada(...args),
 }))
 
 describe('categorias', () => {
@@ -49,6 +54,37 @@ describe('categorias', () => {
     const gasto = within(screen.getByRole('list', { name: 'Categorías de gasto' }))
     expect(gasto.getByText('Arriendo')).toBeTruthy()
     expect(gasto.queryByText('Ventas')).toBeNull()
+  })
+
+  it('Categoría creada se anuncia y se resalta en la lista', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
+    listarCategoriasSimulado.mockResolvedValue({
+      ingreso: [],
+      gasto: [
+        { id: 'k1', nombre: 'Arriendo', tipo: 'GASTO', categoriaPadreId: null, creadoEn: new Date() },
+        { id: 'k2', nombre: 'Publicidad', tipo: 'GASTO', categoriaPadreId: null, creadoEn: new Date() },
+      ],
+    })
+    crearCategoriaAccionSimulada.mockResolvedValue({ exito: true, idCreado: 'k2' })
+
+    const { cargarCategorias } = await import('@/server/categorias/pantalla')
+    const { ContenidoCategorias } = await import('./ContenidoCategorias')
+
+    const datos = await cargarCategorias()
+    render(<ContenidoCategorias {...datos} />)
+
+    const formulario = screen.getByRole('button', { name: 'Crear categoría' }).closest('form')!
+    await act(async () => {
+      fireEvent.submit(formulario)
+    })
+
+    expect(screen.getByText('Categoría creada').closest('[aria-live]')).toBeTruthy()
+
+    const filaNueva = screen.getByText('Publicidad').closest('li')!
+    expect(filaNueva.className).toContain('animate-resaltado')
+
+    const filaAnterior = screen.getByText('Arriendo').closest('li')!
+    expect(filaAnterior.className).not.toContain('animate-resaltado')
   })
 
   it('Error al guardar la categoría conserva los datos escritos', async () => {
