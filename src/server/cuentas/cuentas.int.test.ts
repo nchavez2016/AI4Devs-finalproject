@@ -207,4 +207,28 @@ describe('cuentas', () => {
     const cuentas = await listarCuentas(registro.usuario.id)
     expect(cuentas).toHaveLength(0)
   })
+
+  it('Crear cuenta rechazada por tipo inválido', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCuenta(registro.usuario.id, {
+      nombre: 'Visa',
+      tipo: 'TARJETA',
+      saldoInicial: '0.00',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.errores.tipo).toEqual(['Elige un tipo de cuenta'])
+    }
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toHaveLength(0)
+  })
 })

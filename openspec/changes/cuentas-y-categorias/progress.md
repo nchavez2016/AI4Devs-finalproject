@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 1.22 RED — test "Crear cuenta rechazada por tipo inválido"
+- Siguiente: 1.25 RED — test "Crear cuenta rechazada por nombre duplicado"
 - Decisiones: ninguna
 - Discrepancias: ninguna

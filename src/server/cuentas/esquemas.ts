@@ -6,7 +6,7 @@ export const esquemaCrearCuenta = z.object({
     .trim()
     .min(1, 'El nombre es obligatorio')
     .max(150, 'El nombre puede tener como máximo 150 caracteres'),
-  tipo: z.enum(['BANCO', 'EFECTIVO', 'DIGITAL']),
+  tipo: z.enum(['BANCO', 'EFECTIVO', 'DIGITAL'], 'Elige un tipo de cuenta'),
   saldoInicial: z
     .string()
     .transform((valor) => valor.trim())

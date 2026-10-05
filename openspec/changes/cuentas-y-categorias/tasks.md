@@ -31,9 +31,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.19 RED — mismo archivo, test "Crear cuenta rechazada por saldo inicial inválido" (`"abc"`, `"10.555"`, `"1.000,00"`, `"1000000000000.00"`).
 - [x] 1.20 GREEN — `esquemas.ts`: regex de design b y mensaje "Escribe un saldo con hasta 2 decimales, por ejemplo 500.00". Test en verde. Verificar por mutación cada parte de la regex que el test no haya exigido.
 - [x] 1.21 REFACTOR — test en verde.
-- [ ] 1.22 RED — mismo archivo, test "Crear cuenta rechazada por tipo inválido".
-- [ ] 1.23 GREEN — `esquemas.ts`: `z.enum(['BANCO','EFECTIVO','DIGITAL'])` con el mensaje "Elige un tipo de cuenta". Test en verde.
-- [ ] 1.24 REFACTOR — test en verde.
+- [x] 1.22 RED — mismo archivo, test "Crear cuenta rechazada por tipo inválido".
+- [x] 1.23 GREEN — `esquemas.ts`: `z.enum(['BANCO','EFECTIVO','DIGITAL'])` con el mensaje "Elige un tipo de cuenta". Test en verde.
+- [x] 1.24 REFACTOR — test en verde.
 - [ ] 1.25 RED — mismo archivo, test "Crear cuenta rechazada por nombre duplicado". Debe fallar porque se crea una segunda cuenta.
 - [ ] 1.26 GREEN — design c, en este orden:
   - (1) En `prisma/schema.prisma`, `Cuenta.nombre` pasa a `@db.Citext` y se añade `@@unique([usuarioId, nombre])`. Ejecutar `npx prisma validate`; si lo rechaza, detenerse y consultar.
