@@ -1,5 +1,7 @@
 import { TipoMovimiento } from '@/generated/prisma/client'
 import { categoriaRepository } from '@/server/repositories/categoriaRepository'
+import { agruparErroresPorCampo } from '@/server/validacion'
+import { esquemaCrearCategoria } from './esquemas'
 
 export interface CategoriaItem {
   id: string
@@ -8,6 +10,16 @@ export interface CategoriaItem {
   categoriaPadreId: string | null
   creadoEn: Date
 }
+
+export type ResultadoCrearCategoria =
+  | {
+      ok: true
+      categoria: CategoriaItem
+    }
+  | {
+      ok: false
+      errores: Record<string, string[]>
+    }
 
 export interface ListadoCategorias {
   ingreso: CategoriaItem[]
@@ -46,4 +58,29 @@ export async function listarCategorias(
     .sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
 
   return { ingreso, gasto }
+}
+
+export async function crearCategoria(
+  usuarioId: string,
+  datosSinValidar: unknown
+): Promise<ResultadoCrearCategoria> {
+  const validacion = esquemaCrearCategoria.safeParse(datosSinValidar)
+  if (!validacion.success) {
+    return {
+      ok: false,
+      errores: agruparErroresPorCampo(validacion.error),
+    }
+  }
+
+  const datos = validacion.data
+  const categoria = await categoriaRepository.crear({
+    usuarioId,
+    nombre: datos.nombre,
+    tipo: datos.tipo as TipoMovimiento,
+  })
+
+  return {
+    ok: true,
+    categoria: mapearCategoria(categoria),
+  }
 }

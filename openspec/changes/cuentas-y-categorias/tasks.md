@@ -73,9 +73,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 2.1 RED — `src/server/categorias/categorias.int.test.ts`, test "Usuario nuevo ve sus 7 categorías por defecto separadas por tipo" (el usuario se crea con `registrarUsuario`). Debe fallar porque `listarCategorias` no existe.
 - [x] 2.2 GREEN — `src/server/repositories/categoriaRepository.ts` (`listar` de primer nivel por `usuarioId`) y `src/server/categorias/categorias.ts` (`listarCategorias` → `{ ingreso, gasto }` ordenadas con `localeCompare('es')`). Test en verde.
 - [x] 2.3 REFACTOR — test en verde.
-- [ ] 2.4 RED — mismo archivo, test "Crear una categoría de gasto" (con "  Publicidad  "). Debe fallar porque `crearCategoria` no existe.
-- [ ] 2.5 GREEN — `src/server/categorias/esquemas.ts` (el nombre se recorta), `categoriaRepository.crear` y `crearCategoria(usuarioId, datos)`. Test en verde.
-- [ ] 2.6 REFACTOR — test en verde.
+- [x] 2.4 RED — mismo archivo, test "Crear una categoría de gasto" (con "  Publicidad  "). Debe fallar porque `crearCategoria` no existe.
+- [x] 2.5 GREEN — `src/server/categorias/esquemas.ts` (el nombre se recorta), `categoriaRepository.crear` y `crearCategoria(usuarioId, datos)`. Test en verde.
+- [x] 2.6 REFACTOR — test en verde.
 - [ ] 2.7 RED — mismo archivo, test "Crear una categoría de ingreso". Si pasa sin cambios, forzar el RED.
 - [ ] 2.8 GREEN — ajustar si hace falta. Test en verde.
 - [ ] 2.9 REFACTOR — test en verde.

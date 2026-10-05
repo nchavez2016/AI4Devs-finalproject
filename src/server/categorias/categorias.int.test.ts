@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { limpiarBD } from '@/test/bd/limpiar'
 import { registrarUsuario } from '@/server/auth/registro'
-import { listarCategorias } from './categorias'
+import { crearCategoria, listarCategorias } from './categorias'
 
 beforeEach(async () => {
   await limpiarBD(process.env.DATABASE_URL!)
@@ -30,5 +30,31 @@ describe('categorias', () => {
       'Otros ingresos',
       'Ventas',
     ])
+  })
+
+  it('Crear una categoría de gasto', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCategoria(registro.usuario.id, {
+      nombre: '  Publicidad  ',
+      tipo: 'GASTO',
+    })
+
+    expect(resultado.ok).toBe(true)
+    if (resultado.ok) {
+      expect(resultado.categoria.nombre).toBe('Publicidad')
+      expect(resultado.categoria.tipo).toBe('GASTO')
+      expect(resultado.categoria.categoriaPadreId).toBeNull()
+    }
+
+    const categorias = await listarCategorias(registro.usuario.id)
+    const nombresGasto = categorias.gasto.map((c) => c.nombre)
+    expect(nombresGasto).toContain('Publicidad')
   })
 })
