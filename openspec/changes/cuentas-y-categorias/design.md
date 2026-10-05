@@ -144,6 +144,17 @@ solo hay dos pantallas. Esto reemplaza la parte de design i que dejaba el enlace
   `error.tsx` no se tocan.
 - Sin dependencias nuevas ni cambios en las specs: es presentación.
 
+**k) Panel de primeros pasos.** `/panel` usa `EncabezadoPagina` con la frase "Desde aquí llegas
+a tus cuentas y a tus categorías." y muestra "Por dónde empezar", una lista fija de dos pasos
+(crear la primera cuenta, revisar las categorías).
+- El panel es la única pantalla sin "← Volver al panel": es el destino de ese enlace.
+- "Por dónde empezar" es contenido estático: no consulta datos ni cambia `cargarPanel`. El
+  dashboard lo sustituirá más adelante (ver docs/pendientes.md).
+- No usa `accion`: "Cerrar sesión" es secundario y queda fuera del encabezado.
+- El nav provisional de 3.24 ("Cuentas", "Categorías") se mantiene junto a la lista, así que los
+  enlaces se repiten de forma temporal. Se retira cuando exista la cabecera compartida de la app,
+  que es otro change.
+
 ## Risks / Trade-offs
 
 - [Prisma 7.10 no está comprobado con `@db.Citext` en este proyecto] → La primera tarea de

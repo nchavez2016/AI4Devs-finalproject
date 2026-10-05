@@ -17,6 +17,7 @@
 - Componentes que faltan: selector de tipo, tarjeta, lista y tabla de movimientos, "Totales con etiqueta" de Importe.
 - Formulario: reformateo del monto al salir, validación al enviar y foco al primer campo inválido.
 - Antigravity en Windows pide permiso para comandos con argumentos aunque su prefijo esté en la lista y en el hook (git log, git diff, npx vitest run...). Usar Claude Code para ciclos largos de apply. Revisar si una versión futura respeta el allow del hook.
+- Cabecera compartida de la app (marca, navegación, cerrar sesión) y retirar el nav provisional del panel; "Por dónde empezar" es estático y lo sustituye el dashboard.
 
 ## Producto
 - Editar y eliminar movimientos (HU-005).
