@@ -51,6 +51,24 @@ describe('crearCategoriaAccion', () => {
     })
   })
 
+  it('crearCategoriaAccion devuelve los errores por campo del caso de uso', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usuario-a' } })
+    crearCategoriaSimulado.mockResolvedValue({
+      ok: false,
+      errores: { nombre: ['El nombre es obligatorio'] },
+    })
+
+    const { crearCategoriaAccion } = await import('./acciones')
+
+    const formData = new FormData()
+    formData.set('nombre', '   ')
+    formData.set('tipo', 'GASTO')
+
+    const estado = await crearCategoriaAccion(undefined, formData)
+
+    expect(estado).toEqual({ errores: { nombre: ['El nombre es obligatorio'] } })
+  })
+
   it('Crear una categoría sin sesión redirige al login', async () => {
     authSimulado.mockResolvedValue(null)
     redirectSimulado.mockImplementation(() => {

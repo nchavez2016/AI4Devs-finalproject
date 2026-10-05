@@ -146,12 +146,12 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 3.24 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel enlaza a cuentas y categorías".
 - [x] 3.25 GREEN — dos `Link` en `ContenidoPanel.tsx`. Tests del panel en verde.
 - [x] 3.26 REFACTOR — tests en verde.
-- [ ] 3.27 RED — `src/app/(privado)/categorias/categorias.test.tsx`, test "Pantalla de categorías muestra las de ingreso y las de gasto por separado" (patrón de 3.2). Debe fallar porque no existen.
-- [ ] 3.28 GREEN — `src/server/categorias/pantalla.ts` (`cargarCategorias`), `page.tsx`, `ContenidoCategorias.tsx` y `FormularioCategoria.tsx`. Test en verde.
-- [ ] 3.29 REFACTOR — test en verde; extraer piezas comunes con cuentas solo si se repiten de forma literal.
-- [ ] 3.30 RED — mismo archivo, test "Formulario de categoría muestra el error junto al nombre", y en `src/server/categorias/acciones.test.ts` el test de apoyo "crearCategoriaAccion devuelve los errores por campo del caso de uso".
-- [ ] 3.31 GREEN — errores por campo en la acción y en el formulario. Tests en verde.
-- [ ] 3.32 REFACTOR — tests en verde.
+- [x] 3.27 RED — `src/app/(privado)/categorias/categorias.test.tsx`, test "Pantalla de categorías muestra las de ingreso y las de gasto por separado" (patrón de 3.2). Debe fallar porque no existen.
+- [x] 3.28 GREEN — `src/server/categorias/pantalla.ts` (`cargarCategorias`), `page.tsx`, `ContenidoCategorias.tsx` y `FormularioCategoria.tsx`. Test en verde.
+- [x] 3.29 REFACTOR — test en verde; extraer piezas comunes con cuentas solo si se repiten de forma literal.
+- [x] 3.30 RED — mismo archivo, test "Formulario de categoría muestra el error junto al nombre", y en `src/server/categorias/acciones.test.ts` el test de apoyo "crearCategoriaAccion devuelve los errores por campo del caso de uso".
+- [x] 3.31 GREEN — errores por campo en la acción y en el formulario. Tests en verde.
+- [x] 3.32 REFACTOR — tests en verde.
 - [ ] 3.33 RED — mismo archivo, test "Error al guardar la categoría conserva los datos escritos", y en `acciones.test.ts` el test de apoyo "crearCategoriaAccion convierte un error inesperado en el aviso y conserva los valores".
 - [ ] 3.34 GREEN — `catch` → `{ mensaje, valores }`, el aviso y conservar el nombre y el tipo. Tests en verde.
 - [ ] 3.35 REFACTOR — tests en verde.
