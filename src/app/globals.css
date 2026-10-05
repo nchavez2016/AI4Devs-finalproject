@@ -129,10 +129,20 @@
   --default-transition-timing-function: var(--ease-entrada);
   --animate-giro: giro var(--duracion-giro) linear infinite;
   --animate-resaltado: resaltado var(--duracion-resaltado-salida) var(--ease-salida) var(--duracion-resaltado);
+  --animate-esqueleto: esqueleto 0ms linear var(--duracion-espera-esqueleto) both;
 
   @keyframes giro {
     to {
       transform: rotate(360deg);
+    }
+  }
+
+  @keyframes esqueleto {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 
@@ -154,6 +164,7 @@
   --duracion-resaltado: 600ms;
   --duracion-resaltado-salida: 1000ms;
   --duracion-giro: 800ms;
+  --duracion-espera-esqueleto: 400ms;
 }
 
 @variant escritorio {

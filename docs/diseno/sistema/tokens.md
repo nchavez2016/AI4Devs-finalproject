@@ -172,12 +172,14 @@ Escala tipográfica. Cada `--text-*` define tamaño, `--text-*--line-height` y `
 | `--duracion-resaltado` | `:root` | 600ms | Tiempo que la fila nueva mantiene el resaltado fijo. |
 | `--duracion-resaltado-salida` | `:root` | 1000ms | Desvanecimiento del resaltado. |
 | `--duracion-giro` | `:root` | 800ms | Una vuelta del indicador de carga. |
+| `--duracion-espera-esqueleto` | `:root` | 400ms | Espera antes de mostrar el esqueleto de carga, para no parpadear en cargas rápidas (estados.md 9.2). |
 | `--ease-entrada` | `@theme static` | `cubic-bezier(0.2, 0, 0, 1)` | Lo que aparece: arranca rápido y frena al llegar. |
 | `--ease-salida` | `@theme static` | `cubic-bezier(0.4, 0, 1, 1)` | Lo que desaparece: se va sin frenar. |
 | `--default-transition-duration` | `@theme static` | `var(--duracion-rapida)` | Duración de cualquier `transition-*` sin duración explícita. |
 | `--default-transition-timing-function` | `@theme static` | `var(--ease-entrada)` | Curva de cualquier `transition-*` sin curva explícita. |
 | `--animate-giro` | `@theme static` | fotograma `giro` (rotación 360°), `var(--duracion-giro)`, lineal, infinito | Indicador de carga en botones. |
 | `--animate-resaltado` | `@theme static` | fotograma `resaltado` (de `--color-resaltado` a transparente), `var(--duracion-resaltado-salida)`, `var(--ease-salida)`, retardo `var(--duracion-resaltado)` | Fila recién guardada. |
+| `--animate-esqueleto` | `@theme static` | fotograma `esqueleto` (opacidad de 0 a 1), duración 0ms, retardo `var(--duracion-espera-esqueleto)`, `both` | Aparición del esqueleto de carga tras la espera. Sin pulso ni brillo. |
 
 Con `prefers-reduced-motion: reduce` solo cambian valores de estos tokens (movimiento.md, sección 6).
 
