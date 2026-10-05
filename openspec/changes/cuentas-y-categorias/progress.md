@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 2.1 RED — test "Usuario nuevo ve sus 7 categorías por defecto separadas por tipo"
+- Siguiente: 2.4 RED — test "Crear una categoría de gasto"
 - Decisiones: ninguna
 - Discrepancias: ninguna
