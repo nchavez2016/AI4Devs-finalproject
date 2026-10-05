@@ -68,6 +68,36 @@ describe('cuentas', () => {
     )
   })
 
+  it('Error al guardar la cuenta conserva los datos escritos', async () => {
+    const { createRef } = await import('react')
+    const { FormularioCuenta } = await import('./FormularioCuenta')
+
+    render(
+      <FormularioCuenta
+        formularioRef={createRef<HTMLFormElement>()}
+        accion={() => {}}
+        pendiente={false}
+        estado={{
+          mensaje: 'No pudimos guardar la cuenta. Inténtalo de nuevo.',
+          valores: { nombre: 'Banco Pichincha', tipo: 'DIGITAL', saldoInicial: '500,50' },
+        }}
+      />
+    )
+
+    expect(screen.getByRole('alert').textContent).toContain(
+      'No pudimos guardar la cuenta. Inténtalo de nuevo.'
+    )
+    expect((screen.getByRole('textbox', { name: 'Nombre' }) as HTMLInputElement).value).toBe(
+      'Banco Pichincha'
+    )
+    expect((screen.getByRole('combobox', { name: 'Tipo' }) as HTMLSelectElement).value).toBe(
+      'DIGITAL'
+    )
+    expect((screen.getByRole('textbox', { name: /Saldo inicial/ }) as HTMLInputElement).value).toBe(
+      '500,50'
+    )
+  })
+
   it('Formulario de cuenta muestra el error junto a cada campo', async () => {
     const { createRef } = await import('react')
     const { FormularioCuenta } = await import('./FormularioCuenta')

@@ -72,6 +72,25 @@ describe('crearCuentaAccion', () => {
     expect(estado).toEqual({ errores: { nombre: ['El nombre es obligatorio'] } })
   })
 
+  it('crearCuentaAccion convierte un error inesperado en el aviso y conserva los valores', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usuario-a' } })
+    crearCuentaSimulado.mockRejectedValue(new Error('conexión perdida'))
+
+    const { crearCuentaAccion } = await import('./acciones')
+
+    const formData = new FormData()
+    formData.set('nombre', 'Banco Pichincha')
+    formData.set('tipo', 'DIGITAL')
+    formData.set('saldoInicial', '500,50')
+
+    const estado = await crearCuentaAccion(undefined, formData)
+
+    expect(estado).toEqual({
+      mensaje: 'No pudimos guardar la cuenta. Inténtalo de nuevo.',
+      valores: { nombre: 'Banco Pichincha', tipo: 'DIGITAL', saldoInicial: '500,50' },
+    })
+  })
+
   it('Crear una cuenta sin sesión redirige al login', async () => {
     authSimulado.mockResolvedValue(null)
     redirectSimulado.mockImplementation(() => {

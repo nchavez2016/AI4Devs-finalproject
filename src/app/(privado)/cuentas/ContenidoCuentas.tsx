@@ -55,6 +55,7 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
       )}
 
       <FormularioCuenta
+        key={JSON.stringify(estado)}
         formularioRef={formularioRef}
         estado={estado}
         accion={accion}

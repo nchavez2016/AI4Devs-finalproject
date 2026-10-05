@@ -20,7 +20,21 @@ export function FormularioCuenta({
 
   return (
     <form ref={formularioRef} action={accion} className="flex flex-col gap-entre-campos">
-      <Campo etiqueta="Nombre" name="nombre" error={estado.errores?.nombre?.[0]} />
+      {estado.mensaje && (
+        <p
+          role="alert"
+          className="bg-negativo-fondo text-destructive rounded-control px-campo-x py-mensaje text-detalle"
+        >
+          {estado.mensaje}
+        </p>
+      )}
+
+      <Campo
+        etiqueta="Nombre"
+        name="nombre"
+        defaultValue={estado.valores?.nombre}
+        error={estado.errores?.nombre?.[0]}
+      />
 
       <div className="flex flex-col gap-etiqueta">
         <label htmlFor="tipo" className="text-etiqueta font-control text-foreground">
@@ -29,7 +43,7 @@ export function FormularioCuenta({
         <select
           id="tipo"
           name="tipo"
-          defaultValue="BANCO"
+          defaultValue={estado.valores?.tipo || 'BANCO'}
           aria-invalid={errorTipo ? 'true' : undefined}
           aria-describedby={errorTipo ? 'tipo-error' : undefined}
           className={[
@@ -53,6 +67,7 @@ export function FormularioCuenta({
         name="saldoInicial"
         monto
         opcional
+        defaultValue={estado.valores?.saldoInicial}
         error={estado.errores?.saldoInicial?.[0]}
       />
 

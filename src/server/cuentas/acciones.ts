@@ -34,11 +34,22 @@ export async function crearCuentaAccion(
     saldoInicial: formData.get('saldoInicial'),
   }
 
-  const resultado = await crearCuenta(usuarioId, datos)
+  try {
+    const resultado = await crearCuenta(usuarioId, datos)
 
-  if (!resultado.ok) {
-    return { errores: resultado.errores }
+    if (!resultado.ok) {
+      return { errores: resultado.errores }
+    }
+
+    return { exito: true, idCreado: resultado.cuenta.id }
+  } catch {
+    return {
+      mensaje: 'No pudimos guardar la cuenta. Inténtalo de nuevo.',
+      valores: {
+        nombre: String(datos.nombre ?? ''),
+        tipo: String(datos.tipo ?? ''),
+        saldoInicial: String(datos.saldoInicial ?? ''),
+      },
+    }
   }
-
-  return { exito: true, idCreado: resultado.cuenta.id }
 }
