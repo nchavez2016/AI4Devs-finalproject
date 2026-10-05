@@ -1,11 +1,8 @@
 import { z } from 'zod'
+import { esquemaNombre } from '@/server/validacion'
 
 export const esquemaCrearCuenta = z.object({
-  nombre: z
-    .string()
-    .trim()
-    .min(1, 'El nombre es obligatorio')
-    .max(150, 'El nombre puede tener como máximo 150 caracteres'),
+  nombre: esquemaNombre,
   tipo: z.enum(['BANCO', 'EFECTIVO', 'DIGITAL'], 'Elige un tipo de cuenta'),
   saldoInicial: z
     .string()

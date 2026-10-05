@@ -1,7 +1,8 @@
 import { z } from 'zod'
+import { esquemaNombre } from '@/server/validacion'
 
 export const esquemaCrearCategoria = z.object({
-  nombre: z.string().trim().min(1, 'El nombre es obligatorio'),
+  nombre: esquemaNombre,
   tipo: z.enum(['INGRESO', 'GASTO']),
 })
 

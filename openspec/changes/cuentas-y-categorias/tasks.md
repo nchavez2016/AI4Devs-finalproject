@@ -82,9 +82,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 2.10 RED — mismo archivo, test "Crear categoría rechazada por nombre vacío".
 - [x] 2.11 GREEN — `esquemas.ts`: mínimo 1 carácter; errores con `agruparErroresPorCampo`. Test en verde.
 - [x] 2.12 REFACTOR — test en verde.
-- [ ] 2.13 RED — mismo archivo, test "Longitud máxima del nombre de categoría es 150 caracteres".
-- [ ] 2.14 GREEN — `esquemas.ts`: máximo 150 caracteres con el mismo mensaje que cuentas. Test en verde.
-- [ ] 2.15 REFACTOR — test en verde; si el esquema del nombre es idéntico en los dos dominios, extraerlo a `src/server/validacion.ts`.
+- [x] 2.13 RED — mismo archivo, test "Longitud máxima del nombre de categoría es 150 caracteres".
+- [x] 2.14 GREEN — `esquemas.ts`: máximo 150 caracteres con el mismo mensaje que cuentas. Test en verde.
+- [x] 2.15 REFACTOR — test en verde; si el esquema del nombre es idéntico en los dos dominios, extraerlo a `src/server/validacion.ts`.
 - [ ] 2.16 RED — mismo archivo, test "Crear categoría rechazada por nombre duplicado en el mismo tipo". Debe fallar porque se crea la categoría duplicada.
 - [ ] 2.17 GREEN — design c, en este orden:
   - (1) En `prisma/schema.prisma`, `Categoria.nombre` pasa a `@db.Citext` y se añade `@@unique([usuarioId, tipo, nombre])`. Ejecutar `npx prisma validate`.

@@ -103,4 +103,26 @@ describe('categorias', () => {
       expect(resultado.errores.nombre).toEqual(['El nombre es obligatorio'])
     }
   })
+
+  it('Longitud máxima del nombre de categoría es 150 caracteres', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCategoria(registro.usuario.id, {
+      nombre: 'a'.repeat(151),
+      tipo: 'GASTO',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.errores.nombre).toEqual([
+        'El nombre puede tener como máximo 150 caracteres',
+      ])
+    }
+  })
 })
