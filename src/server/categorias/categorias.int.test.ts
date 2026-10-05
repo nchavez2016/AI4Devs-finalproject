@@ -127,6 +127,27 @@ describe('categorias', () => {
     }
   })
 
+  it('Categorías duplicadas rechazadas aunque se envíen a la vez', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const [primera, segunda] = await Promise.all([
+      crearCategoria(registro.usuario.id, { nombre: 'Publicidad', tipo: 'GASTO' }),
+      crearCategoria(registro.usuario.id, { nombre: 'Publicidad', tipo: 'GASTO' }),
+    ])
+
+    expect([primera.ok, segunda.ok].sort()).toEqual([false, true])
+
+    const categorias = await listarCategorias(registro.usuario.id)
+    const publicidad = categorias.gasto.filter((c) => c.nombre === 'Publicidad')
+    expect(publicidad).toHaveLength(1)
+  })
+
   it('Longitud máxima del nombre de categoría es 150 caracteres', async () => {
     const registro = await registrarUsuario({
       nombre: 'Ana',

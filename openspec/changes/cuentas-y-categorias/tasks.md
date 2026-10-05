@@ -95,9 +95,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 
   Test en verde, y también `src/server/auth/registro.int.test.ts`, porque las categorías por defecto se insertan en la tabla modificada.
 - [x] 2.18 REFACTOR — test en verde.
-- [ ] 2.19 RED — mismo archivo, test "Categorías duplicadas rechazadas aunque se envíen a la vez". Pasará gracias al índice: forzar el RED con la mutación del índice (borrarlo).
-- [ ] 2.20 GREEN — sin cambios si el índice ya lo cumple. Test en verde.
-- [ ] 2.21 REFACTOR — test en verde.
+- [x] 2.19 RED — mismo archivo, test "Categorías duplicadas rechazadas aunque se envíen a la vez". Pasará gracias al índice: forzar el RED con la mutación del índice (borrarlo).
+- [x] 2.20 GREEN — sin cambios si el índice ya lo cumple. Test en verde.
+- [x] 2.21 REFACTOR — test en verde.
 - [ ] 2.22 RED — mismo archivo, test "Mismo nombre permitido en el otro tipo". Pasará gracias al índice: forzar el RED con la mutación del índice (variante sin `tipo`).
 - [ ] 2.23 GREEN — sin cambios si el índice ya lo cumple. Test en verde.
 - [ ] 2.24 REFACTOR — test en verde.
