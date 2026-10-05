@@ -261,4 +261,39 @@ describe('cuentas', () => {
     const cuentas = await listarCuentas(registro.usuario.id)
     expect(cuentas).toHaveLength(1)
   })
+
+  it('Cuentas duplicadas rechazadas aunque se envíen a la vez', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const [resultado1, resultado2] = await Promise.all([
+      crearCuenta(registro.usuario.id, {
+        nombre: 'Caja chica',
+        tipo: 'EFECTIVO',
+        saldoInicial: '10.00',
+      }),
+      crearCuenta(registro.usuario.id, {
+        nombre: 'caja chica',
+        tipo: 'EFECTIVO',
+        saldoInicial: '20.00',
+      }),
+    ])
+
+    const exitos = [resultado1, resultado2].filter((r) => r.ok)
+    const fallos = [resultado1, resultado2].filter((r) => !r.ok)
+
+    expect(exitos).toHaveLength(1)
+    expect(fallos).toHaveLength(1)
+    if (!fallos[0].ok) {
+      expect(fallos[0].errores.nombre).toEqual(['Ya tienes una cuenta con ese nombre'])
+    }
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toHaveLength(1)
+  })
 })

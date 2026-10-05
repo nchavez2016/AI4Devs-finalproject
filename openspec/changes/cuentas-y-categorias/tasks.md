@@ -46,9 +46,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 
   Test en verde, y `docker exec cuadre-db psql -U cuadre -d cuadre_test -c "\d cuentas"` muestra `nombre` como `citext` y el índice único.
 - [x] 1.27 REFACTOR — test en verde.
-- [ ] 1.28 RED — mismo archivo, test "Cuentas duplicadas rechazadas aunque se envíen a la vez" (`Promise.all` de las dos creaciones). Pasará gracias al índice: forzar el RED con la mutación del índice (borrarlo).
-- [ ] 1.29 GREEN — sin cambios si el índice de 1.26 ya lo cumple. Test en verde.
-- [ ] 1.30 REFACTOR — test en verde.
+- [x] 1.28 RED — mismo archivo, test "Cuentas duplicadas rechazadas aunque se envíen a la vez" (`Promise.all` de las dos creaciones). Pasará gracias al índice: forzar el RED con la mutación del índice (borrarlo).
+- [x] 1.29 GREEN — sin cambios si el índice de 1.26 ya lo cumple. Test en verde.
+- [x] 1.30 REFACTOR — test en verde.
 - [ ] 1.31 RED — mismo archivo, test "Consultar una cuenta propia por su identificador". Debe fallar porque `obtenerCuenta` no existe.
 - [ ] 1.32 GREEN — `cuentaRepository.buscarPorId(usuarioId, id)` con `findFirst({ where: { id, usuarioId } })`, y `obtenerCuenta(usuarioId, id)` en `cuentas.ts`. Test en verde.
 - [ ] 1.33 REFACTOR — test en verde.
