@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 2.7 RED — test "Crear una categoría de ingreso"
+- Siguiente: 2.10 RED — mismo archivo, test "Crear categoría rechazada por nombre vacío"
 - Decisiones: ninguna
 - Discrepancias: ninguna

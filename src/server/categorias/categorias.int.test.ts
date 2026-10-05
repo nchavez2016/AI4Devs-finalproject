@@ -57,4 +57,30 @@ describe('categorias', () => {
     const nombresGasto = categorias.gasto.map((c) => c.nombre)
     expect(nombresGasto).toContain('Publicidad')
   })
+
+  it('Crear una categoría de ingreso', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCategoria(registro.usuario.id, {
+      nombre: 'Servicios técnicos',
+      tipo: 'INGRESO',
+    })
+
+    expect(resultado.ok).toBe(true)
+    if (resultado.ok) {
+      expect(resultado.categoria.nombre).toBe('Servicios técnicos')
+      expect(resultado.categoria.tipo).toBe('INGRESO')
+      expect(resultado.categoria.categoriaPadreId).toBeNull()
+    }
+
+    const categorias = await listarCategorias(registro.usuario.id)
+    const nombresIngreso = categorias.ingreso.map((c) => c.nombre)
+    expect(nombresIngreso).toContain('Servicios técnicos')
+  })
 })
