@@ -324,4 +324,36 @@ describe('cuentas', () => {
       creadoEn: expect.any(Date),
     })
   })
+
+  it('Un usuario no ve las cuentas de otro en su lista', async () => {
+    const registroA = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    const registroB = await registrarUsuario({
+      nombre: 'Beto',
+      nombreNegocio: 'Bazar Beto',
+      email: 'beto@bazar.ec',
+      password: 'clave-segura-2',
+    })
+    if (!registroA.ok || !registroB.ok) throw new Error('Falló el registro')
+
+    await crearCuenta(registroA.usuario.id, {
+      nombre: 'Banco Pichincha',
+      tipo: 'BANCO',
+      saldoInicial: '500.00',
+    })
+    await crearCuenta(registroB.usuario.id, {
+      nombre: 'Caja Beto',
+      tipo: 'EFECTIVO',
+      saldoInicial: '100.00',
+    })
+
+    const cuentasA = await listarCuentas(registroA.usuario.id)
+
+    expect(cuentasA).toHaveLength(1)
+    expect(cuentasA[0].nombre).toBe('Banco Pichincha')
+  })
 })

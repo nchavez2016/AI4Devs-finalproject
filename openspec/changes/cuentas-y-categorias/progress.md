@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 1.34 RED — test "Un usuario no ve las cuentas de otro en su lista"
+- Siguiente: 1.37 RED — test "Una cuenta de otro usuario se trata como inexistente"
 - Decisiones: ninguna
 - Discrepancias: ninguna

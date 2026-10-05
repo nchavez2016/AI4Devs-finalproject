@@ -52,9 +52,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.31 RED — mismo archivo, test "Consultar una cuenta propia por su identificador". Debe fallar porque `obtenerCuenta` no existe.
 - [x] 1.32 GREEN — `cuentaRepository.buscarPorId(usuarioId, id)` con `findFirst({ where: { id, usuarioId } })`, y `obtenerCuenta(usuarioId, id)` en `cuentas.ts`. Test en verde.
 - [x] 1.33 REFACTOR — test en verde.
-- [ ] 1.34 RED — mismo archivo, test "Un usuario no ve las cuentas de otro en su lista". Si pasa sin cambios, forzar el RED quitando `usuarioId` del filtro de `listar`, y restaurar.
-- [ ] 1.35 GREEN — corregir el filtro si hace falta. Test en verde.
-- [ ] 1.36 REFACTOR — test en verde.
+- [x] 1.34 RED — mismo archivo, test "Un usuario no ve las cuentas de otro en su lista". Si pasa sin cambios, forzar el RED quitando `usuarioId` del filtro de `listar`, y restaurar.
+- [x] 1.35 GREEN — corregir el filtro si hace falta. Test en verde.
+- [x] 1.36 REFACTOR — test en verde.
 - [ ] 1.37 RED — mismo archivo, test "Una cuenta de otro usuario se trata como inexistente". Si pasa sin cambios, forzar el RED quitando `usuarioId` de `buscarPorId`, y restaurar.
 - [ ] 1.38 GREEN — un único resultado de "no encontrada" para la cuenta ajena y la inexistente. Test en verde.
 - [ ] 1.39 REFACTOR — test en verde.
