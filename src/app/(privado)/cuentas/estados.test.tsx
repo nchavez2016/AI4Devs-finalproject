@@ -1,7 +1,20 @@
-import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { describe, expect, it, vi } from 'vitest'
+import { fireEvent, render, screen } from '@testing-library/react'
 
 describe('estados de cuentas', () => {
+  it('Error al cargar las cuentas ofrece reintentar', async () => {
+    const { default: ErrorCuentas } = await import('./error')
+    const retry = vi.fn()
+
+    render(<ErrorCuentas error={new Error('falló la base')} retry={retry} />)
+
+    expect(screen.getByText('No pudimos cargar tus cuentas.')).toBeTruthy()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Reintentar' }))
+
+    expect(retry).toHaveBeenCalledTimes(1)
+  })
+
   it('Pantalla de cuentas en carga muestra un esqueleto ocupado', async () => {
     const { default: Carga } = await import('./loading')
 

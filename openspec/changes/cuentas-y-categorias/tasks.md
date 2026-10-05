@@ -139,9 +139,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 3.17 RED — `src/app/(privado)/cuentas/estados.test.tsx`, test "Pantalla de cuentas en carga muestra un esqueleto ocupado".
 - [x] 3.18 GREEN — `src/app/(privado)/cuentas/loading.tsx` (filas `alto-fila` en `muted`, `aria-busy`, `animate-esqueleto`). Test en verde.
 - [x] 3.19 REFACTOR — test en verde.
-- [ ] 3.20 RED — mismo archivo, test "Error al cargar las cuentas ofrece reintentar" (pulsar "Reintentar" llama a `retry`).
-- [ ] 3.21 GREEN — `src/app/(privado)/cuentas/error.tsx`. Test en verde.
-- [ ] 3.22 REFACTOR — test en verde.
+- [x] 3.20 RED — mismo archivo, test "Error al cargar las cuentas ofrece reintentar" (pulsar "Reintentar" llama a `retry`).
+- [x] 3.21 GREEN — `src/app/(privado)/cuentas/error.tsx`. Test en verde.
+- [x] 3.22 REFACTOR — test en verde.
 - [ ] 3.23 CARACTERIZACIÓN — ejecutar `src/app/(privado)/panel/panel.test.tsx` y confirmar que está en verde antes de tocar `ContenidoPanel.tsx`.
 - [ ] 3.24 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel enlaza a cuentas y categorías".
 - [ ] 3.25 GREEN — dos `Link` en `ContenidoPanel.tsx`. Tests del panel en verde.
