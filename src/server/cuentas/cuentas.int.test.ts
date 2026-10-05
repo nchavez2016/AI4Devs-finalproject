@@ -177,4 +177,34 @@ describe('cuentas', () => {
     expect(cuentas).toHaveLength(1)
     expect(cuentas[0].nombre).toBe('a'.repeat(150))
   })
+
+  it('Crear cuenta rechazada por saldo inicial inválido', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const saldosInvalidos = ['abc', '10.555', '1.000,00', '1000000000000.00']
+
+    for (const saldoInicial of saldosInvalidos) {
+      const resultado = await crearCuenta(registro.usuario.id, {
+        nombre: 'Banco Pichincha',
+        tipo: 'BANCO',
+        saldoInicial,
+      })
+
+      expect(resultado.ok).toBe(false)
+      if (!resultado.ok) {
+        expect(resultado.errores.saldoInicial).toEqual([
+          'Escribe un saldo con hasta 2 decimales, por ejemplo 500.00',
+        ])
+      }
+    }
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toHaveLength(0)
+  })
 })

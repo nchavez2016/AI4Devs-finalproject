@@ -7,10 +7,19 @@ export const esquemaCrearCuenta = z.object({
     .min(1, 'El nombre es obligatorio')
     .max(150, 'El nombre puede tener como máximo 150 caracteres'),
   tipo: z.enum(['BANCO', 'EFECTIVO', 'DIGITAL']),
-  saldoInicial: z.string().transform((valor) => {
-    const limpio = valor.trim().replace(',', '.')
-    return limpio === '' ? '0.00' : limpio
-  }),
+  saldoInicial: z
+    .string()
+    .transform((valor) => valor.trim())
+    .superRefine((valor, ctx) => {
+      if (valor === '') return
+      if (!/^-?\d{1,12}([.,]\d{1,2})?$/.test(valor)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Escribe un saldo con hasta 2 decimales, por ejemplo 500.00',
+        })
+      }
+    })
+    .transform((valor) => (valor === '' ? '0.00' : valor.replace(',', '.'))),
 })
 
 export type DatosCrearCuenta = z.infer<typeof esquemaCrearCuenta>

@@ -28,9 +28,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.16 RED — mismo archivo, test "Longitud máxima del nombre de cuenta es 150 caracteres".
 - [x] 1.17 GREEN — `esquemas.ts`: máximo 150 caracteres después de recortar, con el mensaje "El nombre puede tener como máximo 150 caracteres". Test en verde.
 - [x] 1.18 REFACTOR — test en verde.
-- [ ] 1.19 RED — mismo archivo, test "Crear cuenta rechazada por saldo inicial inválido" (`"abc"`, `"10.555"`, `"1.000,00"`, `"1000000000000.00"`).
-- [ ] 1.20 GREEN — `esquemas.ts`: regex de design b y mensaje "Escribe un saldo con hasta 2 decimales, por ejemplo 500.00". Test en verde. Verificar por mutación cada parte de la regex que el test no haya exigido.
-- [ ] 1.21 REFACTOR — test en verde.
+- [x] 1.19 RED — mismo archivo, test "Crear cuenta rechazada por saldo inicial inválido" (`"abc"`, `"10.555"`, `"1.000,00"`, `"1000000000000.00"`).
+- [x] 1.20 GREEN — `esquemas.ts`: regex de design b y mensaje "Escribe un saldo con hasta 2 decimales, por ejemplo 500.00". Test en verde. Verificar por mutación cada parte de la regex que el test no haya exigido.
+- [x] 1.21 REFACTOR — test en verde.
 - [ ] 1.22 RED — mismo archivo, test "Crear cuenta rechazada por tipo inválido".
 - [ ] 1.23 GREEN — `esquemas.ts`: `z.enum(['BANCO','EFECTIVO','DIGITAL'])` con el mensaje "Elige un tipo de cuenta". Test en verde.
 - [ ] 1.24 REFACTOR — test en verde.
