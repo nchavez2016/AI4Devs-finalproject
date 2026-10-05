@@ -101,9 +101,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 2.22 RED — mismo archivo, test "Mismo nombre permitido en el otro tipo". Pasará gracias al índice: forzar el RED con la mutación del índice (variante sin `tipo`).
 - [x] 2.23 GREEN — sin cambios si el índice ya lo cumple. Test en verde.
 - [x] 2.24 REFACTOR — test en verde.
-- [ ] 2.25 RED — mismo archivo, test "Crear categoría rechazada por tipo inválido".
-- [ ] 2.26 GREEN — `z.enum(['INGRESO','GASTO'])` con el mensaje "Elige si es de ingreso o de gasto". Test en verde.
-- [ ] 2.27 REFACTOR — test en verde.
+- [x] 2.25 RED — mismo archivo, test "Crear categoría rechazada por tipo inválido".
+- [x] 2.26 GREEN — `z.enum(['INGRESO','GASTO'])` con el mensaje "Elige si es de ingreso o de gasto". Test en verde.
+- [x] 2.27 REFACTOR — test en verde.
 - [ ] 2.28 RED — mismo archivo, test "Un usuario no ve las categorías de otro". Si pasa sin cambios, forzar el RED quitando `usuarioId` del filtro, y restaurar.
 - [ ] 2.29 GREEN — corregir si hace falta. Test en verde.
 - [ ] 2.30 REFACTOR — test en verde.

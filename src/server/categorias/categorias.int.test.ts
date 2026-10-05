@@ -170,6 +170,28 @@ describe('categorias', () => {
     expect(ingreso.ok).toBe(true)
   })
 
+  it('Crear categoría rechazada por tipo inválido', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCategoria(registro.usuario.id, {
+      nombre: 'Publicidad',
+      tipo: 'OTRO',
+    })
+
+    expect(resultado.ok).toBe(false)
+    if (!resultado.ok) {
+      expect(resultado.errores.tipo).toEqual([
+        'Elige si es de ingreso o de gasto',
+      ])
+    }
+  })
+
   it('Longitud máxima del nombre de categoría es 150 caracteres', async () => {
     const registro = await registrarUsuario({
       nombre: 'Ana',
