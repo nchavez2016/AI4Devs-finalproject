@@ -14,7 +14,7 @@ const etiquetasTipo = {
 } as const
 
 export function ContenidoCuentas({ cuentas }: DatosCuentas) {
-  const [, accion, pendiente] = useActionState(crearCuentaAccion, {})
+  const [estado, accion, pendiente] = useActionState(crearCuentaAccion, {})
   const formularioRef = useRef<HTMLFormElement>(null)
 
   function enfocarNombre() {
@@ -54,7 +54,12 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
         </ul>
       )}
 
-      <FormularioCuenta formularioRef={formularioRef} accion={accion} pendiente={pendiente} />
+      <FormularioCuenta
+        formularioRef={formularioRef}
+        estado={estado}
+        accion={accion}
+        pendiente={pendiente}
+      />
     </main>
   )
 }

@@ -53,6 +53,25 @@ describe('crearCuentaAccion', () => {
     })
   })
 
+  it('crearCuentaAccion devuelve los errores por campo del caso de uso', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usuario-a' } })
+    crearCuentaSimulado.mockResolvedValue({
+      ok: false,
+      errores: { nombre: ['El nombre es obligatorio'] },
+    })
+
+    const { crearCuentaAccion } = await import('./acciones')
+
+    const formData = new FormData()
+    formData.set('nombre', '   ')
+    formData.set('tipo', 'BANCO')
+    formData.set('saldoInicial', '')
+
+    const estado = await crearCuentaAccion(undefined, formData)
+
+    expect(estado).toEqual({ errores: { nombre: ['El nombre es obligatorio'] } })
+  })
+
   it('Crear una cuenta sin sesión redirige al login', async () => {
     authSimulado.mockResolvedValue(null)
     redirectSimulado.mockImplementation(() => {

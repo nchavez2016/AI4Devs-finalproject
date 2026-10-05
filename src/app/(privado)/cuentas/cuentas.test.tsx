@@ -67,4 +67,40 @@ describe('cuentas', () => {
       screen.getByRole('textbox', { name: 'Nombre' })
     )
   })
+
+  it('Formulario de cuenta muestra el error junto a cada campo', async () => {
+    const { createRef } = await import('react')
+    const { FormularioCuenta } = await import('./FormularioCuenta')
+
+    render(
+      <FormularioCuenta
+        formularioRef={createRef<HTMLFormElement>()}
+        accion={() => {}}
+        pendiente={false}
+        estado={{
+          errores: {
+            nombre: ['El nombre es obligatorio'],
+            tipo: ['Elige un tipo de cuenta'],
+            saldoInicial: ['Escribe un saldo con hasta 2 decimales, por ejemplo 500.00'],
+          },
+        }}
+      />
+    )
+
+    const nombre = screen.getByRole('textbox', { name: 'Nombre' })
+    expect(nombre.getAttribute('aria-invalid')).toBe('true')
+    const idErrorNombre = screen.getByText('El nombre es obligatorio').closest('[id]')?.id
+    expect(idErrorNombre).toBeTruthy()
+    expect(nombre.getAttribute('aria-describedby')).toContain(idErrorNombre!)
+
+    const tipo = screen.getByRole('combobox', { name: 'Tipo' })
+    expect(tipo.getAttribute('aria-invalid')).toBe('true')
+    expect(screen.getByText('Elige un tipo de cuenta')).toBeTruthy()
+
+    const saldo = screen.getByRole('textbox', { name: /Saldo inicial/ })
+    expect(saldo.getAttribute('aria-invalid')).toBe('true')
+    expect(
+      screen.getByText('Escribe un saldo con hasta 2 decimales, por ejemplo 500.00')
+    ).toBeTruthy()
+  })
 })
