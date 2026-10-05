@@ -185,9 +185,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 5.1 RED — `src/components/EncabezadoPagina.test.tsx`, test "EncabezadoPagina muestra el título y la frase de propósito": hay un `h1` con el título y su hermano siguiente es la frase. Debe fallar porque el componente no existe.
 - [x] 5.2 GREEN — `src/components/EncabezadoPagina.tsx`: `header` con `h1` (`font-titulo`, `text-titulo-pagina`) y `p` (`text-cuerpo`, `text-muted-foreground`); props `titulo` y `proposito`. Test en verde.
 - [x] 5.3 REFACTOR — test en verde; solo tokens.
-- [ ] 5.4 RED — mismo archivo, test "EncabezadoPagina muestra el enlace al panel solo si se pide": con `volverAlPanel`, enlace de nombre accesible "Volver al panel" a `/panel` antes del `h1`; sin la prop, ningún enlace.
-- [ ] 5.5 GREEN — el `Link` terciario de design i pasa al componente. Test en verde.
-- [ ] 5.6 REFACTOR — test en verde.
+- [x] 5.4 RED — mismo archivo, test "EncabezadoPagina muestra el enlace al panel solo si se pide": con `volverAlPanel`, enlace de nombre accesible "Volver al panel" a `/panel` antes del `h1`; sin la prop, ningún enlace.
+- [x] 5.5 GREEN — el `Link` terciario de design i pasa al componente. Test en verde.
+- [x] 5.6 REFACTOR — test en verde.
 - [ ] 5.7 RED — mismo archivo, test "EncabezadoPagina muestra la acción primaria solo si se pasa": con `accion` (un `Button` primario), el botón está dentro del `header`; sin la prop, el `header` no tiene botones.
 - [ ] 5.8 GREEN — prop opcional `accion: ReactNode`, alineada con el título (`flex`, `justify-between`, `gap-seccion`). Test en verde.
 - [ ] 5.9 REFACTOR — test en verde.
