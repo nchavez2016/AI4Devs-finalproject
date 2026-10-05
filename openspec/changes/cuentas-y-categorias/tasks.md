@@ -170,9 +170,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 4.1 RED — `src/app/(privado)/cuentas/cuentas.test.tsx`, test "Pantalla de cuentas explica para qué sirve": bajo el `h1` aparece "Aquí registras dónde tienes tu dinero: bancos, efectivo y billeteras digitales.", también sin cuentas. Debe fallar porque el texto no existe.
 - [x] 4.2 GREEN — `ContenidoCuentas.tsx`: `p` justo después del `h1` (`text-cuerpo`, `text-muted-foreground`). Test en verde.
 - [x] 4.3 REFACTOR — test en verde; solo tokens.
-- [ ] 4.4 RED — mismo archivo, test "Pantalla de cuentas enlaza de vuelta al panel": hay un enlace de nombre accesible "Volver al panel" con `href="/panel"`, y al enfocarlo queda como `document.activeElement`. Debe fallar porque el enlace no existe.
-- [ ] 4.5 GREEN — `ContenidoCuentas.tsx`: `Link` de `next/link` antes del `h1`, con estilo terciario (`text-primary`, `hover:bg-muted`, `text-cuerpo`, `font-control`, `rounded-control`) y la flecha "←" con `aria-hidden`. Test en verde.
-- [ ] 4.6 REFACTOR — test en verde; solo tokens.
+- [x] 4.4 RED — mismo archivo, test "Pantalla de cuentas enlaza de vuelta al panel": hay un enlace de nombre accesible "Volver al panel" con `href="/panel"`, y al enfocarlo queda como `document.activeElement`. Debe fallar porque el enlace no existe.
+- [x] 4.5 GREEN — `ContenidoCuentas.tsx`: `Link` de `next/link` antes del `h1`, con estilo terciario (`text-primary`, `hover:bg-muted`, `text-cuerpo`, `font-control`, `rounded-control`) y la flecha "←" con `aria-hidden`. Test en verde.
+- [x] 4.6 REFACTOR — test en verde; solo tokens.
 - [ ] 4.7 RED — `src/app/(privado)/categorias/categorias.test.tsx`, test "Pantalla de categorías explica para qué sirve": bajo el `h1` aparece "Aquí defines cómo clasificas tus ingresos y tus gastos.". Debe fallar porque el texto no existe.
 - [ ] 4.8 GREEN — `ContenidoCategorias.tsx`: el mismo `p` que en 4.2. Test en verde.
 - [ ] 4.9 REFACTOR — test en verde.
