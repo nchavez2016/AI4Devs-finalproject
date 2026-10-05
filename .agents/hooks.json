@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/agents/claude-adapter.mjs\"",
+            "command": "node ../scripts/agents/antigravity-adapter.mjs",
             "timeout": 10
           }
         ]

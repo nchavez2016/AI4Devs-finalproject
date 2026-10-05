@@ -91,8 +91,8 @@ describe('antigravity-adapter', () => {
     });
   });
 
-  describe('responde ask cuando no hay nada que bloquear', () => {
-    it('responde ask para comando seguro', async () => {
+  describe('responde ask o allow dependiendo de la lista permitida cuando no hay nada que bloquear', () => {
+    it('responde ask para comando seguro que no está en la lista de permitidos', async () => {
       const resultado = await runAdapter({
         toolCall: {
           name: 'run_command',
@@ -102,6 +102,72 @@ describe('antigravity-adapter', () => {
       const response = JSON.parse(resultado.stdout);
       expect(response.decision).toBe('ask');
     });
+
+    it('responde allow para comandos en la lista de permitidos', async () => {
+      const resultado = await runAdapter({
+        toolCall: {
+          name: 'run_command',
+          args: { CommandLine: 'npm run test:run' },
+        },
+      });
+      const response = JSON.parse(resultado.stdout);
+      expect(response.decision).toBe('allow');
+    });
+
+    it('responde allow para comandos encadenados donde todos están permitidos', async () => {
+      const resultado = await runAdapter({
+        toolCall: {
+          name: 'run_command',          
+		  args: { CommandLine: 'npm run test:run && npx prisma generate' },
+        },
+      });
+      const response = JSON.parse(resultado.stdout);
+      expect(response.decision).toBe('allow');
+    });
+
+    it('responde ask para comandos encadenados donde uno no está permitido', async () => {
+      const resultado = await runAdapter({
+        toolCall: {
+          name: 'run_command',
+          args: { CommandLine: 'npm run test && ls' },
+        },
+      });
+      const response = JSON.parse(resultado.stdout);
+      expect(response.decision).toBe('ask');
+    });
+	    it('responde ask para un comando destructivo de prisma que no está en la lista', async () => {
+      const resultado = await runAdapter({
+        toolCall: {
+          name: 'run_command',
+          args: { CommandLine: 'npx prisma migrate reset' },
+        },
+      });
+      const response = JSON.parse(resultado.stdout);
+      expect(response.decision).toBe('ask');
+    });
+
+    it('responde ask si el comando permitido lleva una sustitución de comando', async () => {
+      const resultado = await runAdapter({
+        toolCall: {
+          name: 'run_command',
+          args: { CommandLine: 'npm run lint $(echo x)' },
+        },
+      });
+      const response = JSON.parse(resultado.stdout);
+      expect(response.decision).toBe('ask');
+    });
+
+    it('responde ask si el comando permitido redirige su salida a un archivo', async () => {
+      const resultado = await runAdapter({
+        toolCall: {
+          name: 'run_command',
+          args: { CommandLine: 'npm run lint > salida.txt' },
+        },
+      });
+      const response = JSON.parse(resultado.stdout);
+      expect(response.decision).toBe('ask');
+    });
+	
   });
 
   describe('responde deny ante entrada inválida o toolCall.name desconocido', () => {
