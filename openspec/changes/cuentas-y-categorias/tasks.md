@@ -64,9 +64,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.43 RED — `src/server/cuentas/acciones.test.ts`, test "La cuenta se crea siempre para el usuario de la sesión": con la sesión de A y un `usuarioId` de B en el `FormData`, `crearCuenta` se llama con el id de A. Debe fallar porque `acciones.ts` no existe.
 - [x] 1.44 GREEN — `src/server/auth/sesion.ts` (`exigirUsuarioId`) y `src/server/cuentas/acciones.ts` (`'use server'`, `crearCuentaAccion`, que lee solo `nombre`, `tipo` y `saldoInicial`). Test en verde.
 - [x] 1.45 REFACTOR — test en verde.
-- [ ] 1.46 RED — mismo archivo, test "Crear una cuenta sin sesión redirige al login": si `auth` devuelve `null`, se llama a `redirect('/login')` y no se llama a `crearCuenta`. Si pasa sin cambios, forzar el RED.
-- [ ] 1.47 GREEN — `exigirUsuarioId` fuera del `try` (design e). Test en verde.
-- [ ] 1.48 REFACTOR — test en verde; suite completa (cierre de grupo).
+- [x] 1.46 RED — mismo archivo, test "Crear una cuenta sin sesión redirige al login": si `auth` devuelve `null`, se llama a `redirect('/login')` y no se llama a `crearCuenta`. Si pasa sin cambios, forzar el RED.
+- [x] 1.47 GREEN — `exigirUsuarioId` fuera del `try` (design e). Test en verde.
+- [x] 1.48 REFACTOR — test en verde; suite completa (cierre de grupo).
 
 ## 2. Categorías: repositorio, caso de uso y acción
 
