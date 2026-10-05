@@ -385,4 +385,40 @@ describe('cuentas', () => {
     expect(cuentaAjena).toBeNull()
     expect(cuentaInexistente).toBeNull()
   })
+
+  it('El nombre de una cuenta de otro usuario no cuenta como duplicado', async () => {
+    const registroA = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    const registroB = await registrarUsuario({
+      nombre: 'Beto',
+      nombreNegocio: 'Bazar Beto',
+      email: 'beto@bazar.ec',
+      password: 'clave-segura-2',
+    })
+    if (!registroA.ok || !registroB.ok) throw new Error('Falló el registro')
+
+    const resultadoA = await crearCuenta(registroA.usuario.id, {
+      nombre: 'Banco Pichincha',
+      tipo: 'BANCO',
+      saldoInicial: '500.00',
+    })
+    expect(resultadoA.ok).toBe(true)
+
+    const resultadoB = await crearCuenta(registroB.usuario.id, {
+      nombre: 'Banco Pichincha',
+      tipo: 'BANCO',
+      saldoInicial: '200.00',
+    })
+    expect(resultadoB.ok).toBe(true)
+
+    const cuentasA = await listarCuentas(registroA.usuario.id)
+    const cuentasB = await listarCuentas(registroB.usuario.id)
+
+    expect(cuentasA).toHaveLength(1)
+    expect(cuentasB).toHaveLength(1)
+  })
 })
