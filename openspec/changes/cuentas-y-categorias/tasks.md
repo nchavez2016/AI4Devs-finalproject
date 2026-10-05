@@ -121,9 +121,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 ## 3. Pantallas
 
 - [x] 3.1 Añadir `--duracion-espera-esqueleto` y `--animate-esqueleto` (fotograma `esqueleto`) a `src/app/globals.css` y documentarlos en `docs/diseno/sistema/tokens.md` (design g). Verificar con `npm run build`, y que `tokens.md` los lista.
-- [ ] 3.2 RED — `src/app/(privado)/cuentas/cuentas.test.tsx`, test "Pantalla de cuentas muestra cada cuenta con su tipo y saldo": simula `@/auth` y `@/server/cuentas/cuentas`, llama a `cargarCuentas()` y pinta `ContenidoCuentas` (patrón de `panel.test.tsx`). Debe fallar porque no existen.
-- [ ] 3.3 GREEN — `src/server/cuentas/pantalla.ts` (`cargarCuentas`), `src/app/(privado)/cuentas/page.tsx`, `ContenidoCuentas.tsx` (cliente, design f) y `FormularioCuenta.tsx`, usando `Importe`, `Campo` y `Button`. Test en verde.
-- [ ] 3.4 REFACTOR — test en verde; solo tokens.
+- [x] 3.2 RED — `src/app/(privado)/cuentas/cuentas.test.tsx`, test "Pantalla de cuentas muestra cada cuenta con su tipo y saldo": simula `@/auth` y `@/server/cuentas/cuentas`, llama a `cargarCuentas()` y pinta `ContenidoCuentas` (patrón de `panel.test.tsx`). Debe fallar porque no existen.
+- [x] 3.3 GREEN — `src/server/cuentas/pantalla.ts` (`cargarCuentas`), `src/app/(privado)/cuentas/page.tsx`, `ContenidoCuentas.tsx` (cliente, design f) y `FormularioCuenta.tsx`, usando `Importe`, `Campo` y `Button`. Test en verde.
+- [x] 3.4 REFACTOR — test en verde; solo tokens.
 - [ ] 3.5 RED — mismo archivo, test "Pantalla de cuentas sin cuentas muestra el estado vacío" (el botón enfoca el campo nombre).
 - [ ] 3.6 GREEN — estado vacío en `ContenidoCuentas.tsx`. Test en verde.
 - [ ] 3.7 REFACTOR — test en verde.
