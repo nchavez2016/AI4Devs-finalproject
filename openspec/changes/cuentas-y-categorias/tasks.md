@@ -61,9 +61,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.40 RED — mismo archivo, test "El nombre de una cuenta de otro usuario no cuenta como duplicado". Pasará gracias al índice: forzar el RED con la mutación del índice (variante sin `usuario_id`).
 - [x] 1.41 GREEN — sin cambios si el índice ya lo cumple. Test en verde.
 - [x] 1.42 REFACTOR — test en verde.
-- [ ] 1.43 RED — `src/server/cuentas/acciones.test.ts`, test "La cuenta se crea siempre para el usuario de la sesión": con la sesión de A y un `usuarioId` de B en el `FormData`, `crearCuenta` se llama con el id de A. Debe fallar porque `acciones.ts` no existe.
-- [ ] 1.44 GREEN — `src/server/auth/sesion.ts` (`exigirUsuarioId`) y `src/server/cuentas/acciones.ts` (`'use server'`, `crearCuentaAccion`, que lee solo `nombre`, `tipo` y `saldoInicial`). Test en verde.
-- [ ] 1.45 REFACTOR — test en verde.
+- [x] 1.43 RED — `src/server/cuentas/acciones.test.ts`, test "La cuenta se crea siempre para el usuario de la sesión": con la sesión de A y un `usuarioId` de B en el `FormData`, `crearCuenta` se llama con el id de A. Debe fallar porque `acciones.ts` no existe.
+- [x] 1.44 GREEN — `src/server/auth/sesion.ts` (`exigirUsuarioId`) y `src/server/cuentas/acciones.ts` (`'use server'`, `crearCuentaAccion`, que lee solo `nombre`, `tipo` y `saldoInicial`). Test en verde.
+- [x] 1.45 REFACTOR — test en verde.
 - [ ] 1.46 RED — mismo archivo, test "Crear una cuenta sin sesión redirige al login": si `auth` devuelve `null`, se llama a `redirect('/login')` y no se llama a `crearCuenta`. Si pasa sin cambios, forzar el RED.
 - [ ] 1.47 GREEN — `exigirUsuarioId` fuera del `try` (design e). Test en verde.
 - [ ] 1.48 REFACTOR — test en verde; suite completa (cierre de grupo).

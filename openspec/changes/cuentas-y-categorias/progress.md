@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 1.43 RED — test "La cuenta se crea siempre para el usuario de la sesión"
+- Siguiente: 1.46 RED — test "Crear una cuenta sin sesión redirige al login"
 - Decisiones: ninguna
 - Discrepancias: ninguna
