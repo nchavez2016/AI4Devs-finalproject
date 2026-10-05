@@ -16,9 +16,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.4 RED — mismo archivo, test "Crear una cuenta sin saldo inicial la deja en 0.00".
 - [x] 1.5 GREEN — `esquemas.ts`: `""` → `"0.00"`. Test en verde.
 - [x] 1.6 REFACTOR — test en verde.
-- [ ] 1.7 RED — mismo archivo, test "Crear una cuenta con saldo inicial negativo". Si pasa sin cambios, forzar el RED.
-- [ ] 1.8 GREEN — `esquemas.ts`: signo opcional. Test en verde.
-- [ ] 1.9 REFACTOR — test en verde.
+- [x] 1.7 RED — mismo archivo, test "Crear una cuenta con saldo inicial negativo". Si pasa sin cambios, forzar el RED.
+- [x] 1.8 GREEN — `esquemas.ts`: signo opcional. Test en verde.
+- [x] 1.9 REFACTOR — test en verde.
 - [ ] 1.10 RED — mismo archivo, test "Saldo inicial con coma decimal se acepta".
 - [ ] 1.11 GREEN — `esquemas.ts`: quitar espacios y cambiar coma por punto. Test en verde.
 - [ ] 1.12 REFACTOR — test en verde.

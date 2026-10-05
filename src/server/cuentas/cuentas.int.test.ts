@@ -61,4 +61,31 @@ describe('cuentas', () => {
       }),
     ])
   })
+
+  it('Crear una cuenta con saldo inicial negativo', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCuenta(registro.usuario.id, {
+      nombre: 'Banco Guayaquil',
+      tipo: 'BANCO',
+      saldoInicial: '-120.00',
+    })
+
+    expect(resultado.ok).toBe(true)
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toEqual([
+      expect.objectContaining({
+        nombre: 'Banco Guayaquil',
+        tipo: 'BANCO',
+        saldo: '-120.00',
+      }),
+    ])
+  })
 })

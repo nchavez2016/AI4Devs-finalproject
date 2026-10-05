@@ -1,4 +1,4 @@
 # Progreso: cuentas-y-categorias
-- Siguiente: 1.7 RED — test "Crear una cuenta con saldo inicial negativo"
+- Siguiente: 1.10 RED — test "Saldo inicial con coma decimal se acepta"
 - Decisiones: ninguna
 - Discrepancias: ninguna
