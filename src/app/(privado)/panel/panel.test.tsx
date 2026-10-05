@@ -7,6 +7,10 @@ vi.mock('@/auth', () => ({
   auth: authSimulado,
 }))
 
+vi.mock('@/server/auth/acciones', () => ({
+  cerrarSesion: vi.fn(),
+}))
+
 describe('panel', () => {
   it('El panel muestra el negocio del usuario autenticado', async () => {
     authSimulado.mockResolvedValue({
