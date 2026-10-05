@@ -356,4 +356,33 @@ describe('cuentas', () => {
     expect(cuentasA).toHaveLength(1)
     expect(cuentasA[0].nombre).toBe('Banco Pichincha')
   })
+
+  it('Una cuenta de otro usuario se trata como inexistente', async () => {
+    const registroA = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    const registroB = await registrarUsuario({
+      nombre: 'Beto',
+      nombreNegocio: 'Bazar Beto',
+      email: 'beto@bazar.ec',
+      password: 'clave-segura-2',
+    })
+    if (!registroA.ok || !registroB.ok) throw new Error('Falló el registro')
+
+    const resultadoCuentaB = await crearCuenta(registroB.usuario.id, {
+      nombre: 'Caja Beto',
+      tipo: 'EFECTIVO',
+      saldoInicial: '100.00',
+    })
+    if (!resultadoCuentaB.ok) throw new Error('Falló la creación de cuenta')
+
+    const cuentaAjena = await obtenerCuenta(registroA.usuario.id, resultadoCuentaB.cuenta.id)
+    const cuentaInexistente = await obtenerCuenta(registroA.usuario.id, 'cmu0000000000000000000000')
+
+    expect(cuentaAjena).toBeNull()
+    expect(cuentaInexistente).toBeNull()
+  })
 })

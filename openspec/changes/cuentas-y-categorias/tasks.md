@@ -55,9 +55,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 1.34 RED — mismo archivo, test "Un usuario no ve las cuentas de otro en su lista". Si pasa sin cambios, forzar el RED quitando `usuarioId` del filtro de `listar`, y restaurar.
 - [x] 1.35 GREEN — corregir el filtro si hace falta. Test en verde.
 - [x] 1.36 REFACTOR — test en verde.
-- [ ] 1.37 RED — mismo archivo, test "Una cuenta de otro usuario se trata como inexistente". Si pasa sin cambios, forzar el RED quitando `usuarioId` de `buscarPorId`, y restaurar.
-- [ ] 1.38 GREEN — un único resultado de "no encontrada" para la cuenta ajena y la inexistente. Test en verde.
-- [ ] 1.39 REFACTOR — test en verde.
+- [x] 1.37 RED — mismo archivo, test "Una cuenta de otro usuario se trata como inexistente". Si pasa sin cambios, forzar el RED quitando `usuarioId` de `buscarPorId`, y restaurar.
+- [x] 1.38 GREEN — un único resultado de "no encontrada" para la cuenta ajena y la inexistente. Test en verde.
+- [x] 1.39 REFACTOR — test en verde.
 - [ ] 1.40 RED — mismo archivo, test "El nombre de una cuenta de otro usuario no cuenta como duplicado". Pasará gracias al índice: forzar el RED con la mutación del índice (variante sin `usuario_id`).
 - [ ] 1.41 GREEN — sin cambios si el índice ya lo cumple. Test en verde.
 - [ ] 1.42 REFACTOR — test en verde.
