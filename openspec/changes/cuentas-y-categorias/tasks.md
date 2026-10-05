@@ -110,9 +110,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 2.31 RED — mismo archivo, test "El nombre de una categoría de otro usuario no cuenta como duplicado". Pasará gracias al índice: forzar el RED con la mutación del índice (variante sin `usuario_id`).
 - [x] 2.32 GREEN — sin cambios si el índice ya lo cumple. Test en verde.
 - [x] 2.33 REFACTOR — test en verde.
-- [ ] 2.34 RED — `src/server/categorias/acciones.test.ts`, test "La categoría se crea siempre para el usuario de la sesión". Debe fallar porque `acciones.ts` no existe.
-- [ ] 2.35 GREEN — `src/server/categorias/acciones.ts` (`crearCategoriaAccion`, que lee solo `nombre` y `tipo` y usa `exigirUsuarioId`). Test en verde.
-- [ ] 2.36 REFACTOR — test en verde.
+- [x] 2.34 RED — `src/server/categorias/acciones.test.ts`, test "La categoría se crea siempre para el usuario de la sesión". Debe fallar porque `acciones.ts` no existe.
+- [x] 2.35 GREEN — `src/server/categorias/acciones.ts` (`crearCategoriaAccion`, que lee solo `nombre` y `tipo` y usa `exigirUsuarioId`). Test en verde.
+- [x] 2.36 REFACTOR — test en verde.
 - [ ] 2.37 RED — mismo archivo, test "Crear una categoría sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
 - [ ] 2.38 GREEN — ajustar si hace falta. Test en verde.
 - [ ] 2.39 REFACTOR — test en verde.
