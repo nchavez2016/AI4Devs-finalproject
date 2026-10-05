@@ -10,9 +10,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 
 ## 1. Cuentas: repositorio, caso de uso y acción
 
-- [ ] 1.1 RED — `src/server/cuentas/cuentas.int.test.ts`, test "Crear una cuenta con saldo inicial 500.00". Debe fallar porque `crearCuenta` no existe.
-- [ ] 1.2 GREEN — `src/server/cuentas/esquemas.ts` (Zod: nombre, tipo, saldo inicial en texto), `src/server/repositories/cuentaRepository.ts` (`crear`, `listar` por `usuarioId`, construye el `Prisma.Decimal`) y `src/server/cuentas/cuentas.ts` (`crearCuenta(usuarioId, datos)`, `listarCuentas(usuarioId)` → `saldo: string`, design b). Test en verde.
-- [ ] 1.3 REFACTOR — test en verde.
+- [x] 1.1 RED — `src/server/cuentas/cuentas.int.test.ts`, test "Crear una cuenta con saldo inicial 500.00". Debe fallar porque `crearCuenta` no existe.
+- [x] 1.2 GREEN — `src/server/cuentas/esquemas.ts` (Zod: nombre, tipo, saldo inicial en texto), `src/server/repositories/cuentaRepository.ts` (`crear`, `listar` por `usuarioId`, construye el `Prisma.Decimal`) y `src/server/cuentas/cuentas.ts` (`crearCuenta(usuarioId, datos)`, `listarCuentas(usuarioId)` → `saldo: string`, design b). Test en verde.
+- [x] 1.3 REFACTOR — test en verde.
 - [ ] 1.4 RED — mismo archivo, test "Crear una cuenta sin saldo inicial la deja en 0.00".
 - [ ] 1.5 GREEN — `esquemas.ts`: `""` → `"0.00"`. Test en verde.
 - [ ] 1.6 REFACTOR — test en verde.

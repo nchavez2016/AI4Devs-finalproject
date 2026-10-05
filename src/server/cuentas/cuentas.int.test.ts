@@ -1,0 +1,37 @@
+import { beforeEach, describe, expect, it } from 'vitest'
+import { limpiarBD } from '@/test/bd/limpiar'
+import { registrarUsuario } from '@/server/auth/registro'
+import { crearCuenta, listarCuentas } from './cuentas'
+
+beforeEach(async () => {
+  await limpiarBD(process.env.DATABASE_URL!)
+})
+
+describe('cuentas', () => {
+  it('Crear una cuenta con saldo inicial 500.00', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+
+    const resultado = await crearCuenta(registro.usuario.id, {
+      nombre: 'Banco Pichincha',
+      tipo: 'BANCO',
+      saldoInicial: '500.00',
+    })
+
+    expect(resultado.ok).toBe(true)
+
+    const cuentas = await listarCuentas(registro.usuario.id)
+    expect(cuentas).toEqual([
+      expect.objectContaining({
+        nombre: 'Banco Pichincha',
+        tipo: 'BANCO',
+        saldo: '500.00',
+      }),
+    ])
+  })
+})
