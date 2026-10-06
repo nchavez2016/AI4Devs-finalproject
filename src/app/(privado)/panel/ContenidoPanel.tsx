@@ -22,6 +22,23 @@ export function ContenidoPanel({ nombreNegocio }: DatosPanel) {
           Categorías
         </Link>
       </nav>
+      <section className="flex flex-col gap-entre-campos">
+        <h2 id="por-donde-empezar" className="font-titulo text-titulo-seccion text-foreground">
+          Por dónde empezar
+        </h2>
+        <ol aria-labelledby="por-donde-empezar" className="flex flex-col gap-entre-campos">
+          <li>
+            <Link href="/cuentas" className="text-cuerpo font-control text-primary">
+              Crea tu primera cuenta
+            </Link>
+          </li>
+          <li>
+            <Link href="/categorias" className="text-cuerpo font-control text-primary">
+              Revisa tus categorías
+            </Link>
+          </li>
+        </ol>
+      </section>
     </main>
   )
 }

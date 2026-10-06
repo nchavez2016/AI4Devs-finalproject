@@ -199,10 +199,10 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 5.15 RED — `categorias.test.tsx`, test "Pantalla de categorías limita el ancho del contenido y del formulario" (mismas comprobaciones que 5.12).
 - [x] 5.16 GREEN — `ContenidoCategorias.tsx`: los mismos contenedores. Test en verde.
 - [x] 5.17 REFACTOR — tests en verde; `npm run build`.
-- [ ] 5.18 CARACTERIZACIÓN — ejecutar `src/app/(privado)/panel/panel.test.tsx` y confirmar que está en verde antes de tocar `ContenidoPanel.tsx`.
-- [ ] 5.19 RED — mismo archivo, test "El panel muestra por dónde empezar": una lista con nombre accesible "Por dónde empezar" con dos elementos en orden: el enlace "Crea tu primera cuenta" a `/cuentas` y el enlace "Revisa tus categorías" a `/categorias`. Debe fallar porque la lista no existe.
-- [ ] 5.20 GREEN — `ContenidoPanel.tsx`: un `h2` "Por dónde empezar" (`text-titulo-seccion`) y un `ol` ligado a él con `aria-labelledby`, con enlaces `text-primary`. Es contenido estático: `cargarPanel` no cambia y no se consulta nada. Test en verde.
-- [ ] 5.21 REFACTOR — test en verde; solo tokens.
+- [x] 5.18 CARACTERIZACIÓN — ejecutar `src/app/(privado)/panel/panel.test.tsx` y confirmar que está en verde antes de tocar `ContenidoPanel.tsx`.
+- [x] 5.19 RED — mismo archivo, test "El panel muestra por dónde empezar": una lista con nombre accesible "Por dónde empezar" con dos elementos en orden: el enlace "Crea tu primera cuenta" a `/cuentas` y el enlace "Revisa tus categorías" a `/categorias`. Debe fallar porque la lista no existe.
+- [x] 5.20 GREEN — `ContenidoPanel.tsx`: un `h2` "Por dónde empezar" (`text-titulo-seccion`) y un `ol` ligado a él con `aria-labelledby`, con enlaces `text-primary`. Es contenido estático: `cargarPanel` no cambia y no se consulta nada. Test en verde.
+- [x] 5.21 REFACTOR — test en verde; solo tokens.
 - [ ] 5.22 RED — mismo archivo, test "El panel usa el encabezado de página": el `h1` es el nombre del negocio, su hermano siguiente es la frase "Desde aquí llegas a tus cuentas y a tus categorías.", y no hay enlace "Volver al panel". Debe fallar porque la frase no existe.
 - [ ] 5.23 GREEN — `ContenidoPanel.tsx` usa `EncabezadoPagina` sin `volverAlPanel` ni `accion`, dentro de un contenedor `max-w-contenido`. "Cerrar sesión" sigue como botón secundario, fuera del encabezado (design k). El nav provisional de 3.24 y sus tests se mantienen sin cambios. Los tests anteriores del panel siguen en verde.
 - [ ] 5.24 REFACTOR — tests en verde, `npm run build` y suite completa (cierre de grupo).
