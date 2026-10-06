@@ -196,9 +196,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 - [x] 5.12 RED — `cuentas.test.tsx`, test "Pantalla de cuentas limita el ancho del contenido y del formulario": el contenido está dentro de un contenedor `max-w-contenido` y el `form` dentro de uno `max-w-formulario`. Debe fallar porque hoy ocupan todo el ancho.
 - [x] 5.13 GREEN — `ContenidoCuentas.tsx`: contenedor `w-full max-w-contenido mx-auto` dentro de `main`, y el formulario envuelto en `w-full max-w-formulario`. Test en verde.
 - [x] 5.14 REFACTOR — tests en verde; solo tokens.
-- [ ] 5.15 RED — `categorias.test.tsx`, test "Pantalla de categorías limita el ancho del contenido y del formulario" (mismas comprobaciones que 5.12).
-- [ ] 5.16 GREEN — `ContenidoCategorias.tsx`: los mismos contenedores. Test en verde.
-- [ ] 5.17 REFACTOR — tests en verde; `npm run build`.
+- [x] 5.15 RED — `categorias.test.tsx`, test "Pantalla de categorías limita el ancho del contenido y del formulario" (mismas comprobaciones que 5.12).
+- [x] 5.16 GREEN — `ContenidoCategorias.tsx`: los mismos contenedores. Test en verde.
+- [x] 5.17 REFACTOR — tests en verde; `npm run build`.
 - [ ] 5.18 CARACTERIZACIÓN — ejecutar `src/app/(privado)/panel/panel.test.tsx` y confirmar que está en verde antes de tocar `ContenidoPanel.tsx`.
 - [ ] 5.19 RED — mismo archivo, test "El panel muestra por dónde empezar": una lista con nombre accesible "Por dónde empezar" con dos elementos en orden: el enlace "Crea tu primera cuenta" a `/cuentas` y el enlace "Revisa tus categorías" a `/categorias`. Debe fallar porque la lista no existe.
 - [ ] 5.20 GREEN — `ContenidoPanel.tsx`: un `h2` "Por dónde empezar" (`text-titulo-seccion`) y un `ol` ligado a él con `aria-labelledby`, con enlaces `text-primary`. Es contenido estático: `cargarPanel` no cambia y no se consulta nada. Test en verde.

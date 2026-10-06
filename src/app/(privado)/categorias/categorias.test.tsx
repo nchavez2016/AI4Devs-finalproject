@@ -151,4 +151,20 @@ describe('categorias', () => {
     expect(idError).toBeTruthy()
     expect(nombre.getAttribute('aria-describedby')).toContain(idError!)
   })
+
+  it('Pantalla de categorías limita el ancho del contenido y del formulario', async () => {
+    const { ContenidoCategorias } = await import('./ContenidoCategorias')
+
+    const { container } = render(<ContenidoCategorias ingreso={[]} gasto={[]} />)
+
+    const contenedorContenido = container.querySelector('.max-w-contenido')
+    expect(contenedorContenido).toBeTruthy()
+
+    const contenedorFormulario = container.querySelector('.max-w-formulario')
+    expect(contenedorFormulario).toBeTruthy()
+
+    const form = contenedorFormulario?.querySelector('form')
+    expect(form).toBeTruthy()
+    expect(contenedorContenido?.contains(contenedorFormulario)).toBe(true)
+  })
 })
