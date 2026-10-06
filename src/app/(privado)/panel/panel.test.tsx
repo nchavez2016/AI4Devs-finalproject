@@ -62,4 +62,17 @@ describe('panel', () => {
     })
     expect(enlaceCategorias.getAttribute('href')).toBe('/categorias')
   })
+
+  it('El panel usa el encabezado de página', async () => {
+    const { ContenidoPanel } = await import('./ContenidoPanel')
+
+    render(<ContenidoPanel nombreNegocio="Tienda Ana" />)
+
+    const h1 = screen.getByRole('heading', { level: 1, name: 'Tienda Ana' })
+    expect(h1).toBeTruthy()
+    expect(h1.nextElementSibling?.textContent).toBe(
+      'Desde aquí llegas a tus cuentas y a tus categorías.'
+    )
+    expect(screen.queryByRole('link', { name: 'Volver al panel' })).toBeNull()
+  })
 })
