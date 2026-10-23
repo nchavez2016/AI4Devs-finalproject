@@ -1,5 +1,19 @@
 # Cuadre — Control de gastos e ingresos
 
+## Estado del proyecto (Entrega 2, 23 de octubre de 2026)
+
+| Funcionalidad | Estado |
+|---|---|
+| Registro e inicio de sesión | ✅ Implementado |
+| Gestión de cuentas | ✅ Implementado |
+| Gestión de categorías | ✅ Implementado |
+| Registro de transacciones | ⏳ Pendiente |
+| Dashboard | ⏳ Pendiente |
+| Despliegue (Vercel + Neon) | ⏳ Pendiente |
+
+**Pendiente tras la Entrega 2:** transacciones, dashboard, despliegue en Vercel + Neon, E2E y
+GitHub Actions.
+
 ## Índice
 
 0. [Ficha del proyecto](#0-ficha-del-proyecto)
@@ -10,6 +24,7 @@
 5. [Historias de usuario](#5-historias-de-usuario)
 6. [Tickets de trabajo](#6-tickets-de-trabajo)
 7. [Pull requests](#7-pull-requests)
+8. [Flujo de trabajo con IA y arnés](#8-flujo-de-trabajo-con-ia-y-arnés)
 
 ---
 
@@ -31,7 +46,8 @@ financiero completo, con una arquitectura ordenada que deja espacio para crecer
 en el futuro.
 
 ### 0.4. URL del proyecto:
-*(Pendiente — se desplegará en Vercel en la Entrega 2. Marcador por ahora.)*
+Pendiente — despliegue previsto en Vercel + Neon para la entrega final. En la
+Entrega 2 la app se ejecuta en local siguiendo 1.4 y se prueba con 1.5.
 
 ### 0.5. URL o archivo comprimido del repositorio:
 https://github.com/nchavez2016/AI4Devs-finalproject
@@ -60,23 +76,30 @@ completo.
 
 Cada funcionalidad se marca con una etiqueta de alcance: **[MVP]** si se
 implementa en este proyecto, o **[DOCUMENTADO]** si se describe para dar contexto
-del producto pero queda fuera del alcance de esta entrega.
+del producto pero queda fuera del alcance de esta entrega. Dentro del MVP, el
+estado real a fecha de la Entrega 2 se marca con ✅ (implementado) o ⏳
+(pendiente).
 
-- **[MVP] Registro y acceso de usuario.** El usuario crea una cuenta e inicia
+- **[MVP] ✅ Registro y acceso de usuario.** El usuario crea una cuenta e inicia
   sesión; sus datos financieros son privados y solo él los ve. Al registrarse
   puede dar un nombre a su negocio o actividad, que identifica su espacio de
   trabajo.
-- **[MVP] Gestión de cuentas.** El usuario crea y administra sus cuentas de
+- **[MVP] ✅ Gestión de cuentas.** El usuario crea y administra sus cuentas de
   dinero (por ejemplo banco, efectivo, billetera digital), para saber cuánto
-  tiene disponible en cada una.
-- **[MVP] Registro de transacciones.** El usuario registra un ingreso o un gasto,
-  asociándolo a una cuenta, una categoría, un monto y una fecha; puede además
-  listar, editar y eliminar sus movimientos.
-- **[MVP] Categorización.** Cada transacción se clasifica por categoría (y
-  subcategoría), para poder analizar en qué se gana y en qué se gasta.
-- **[MVP] Dashboard.** Una pantalla de resumen muestra el saldo actual, el total
-  de ingresos y gastos del período y las principales categorías de gasto, todo
-  calculado automáticamente a partir de las transacciones.
+  tiene disponible en cada una. El saldo mostrado hoy es el saldo inicial; se
+  calculará con las transacciones cuando esa funcionalidad exista.
+- **[MVP] ⏳ Registro de transacciones.** El usuario registra un ingreso o un
+  gasto, asociándolo a una cuenta, una categoría, un monto y una fecha; puede
+  además listar, editar y eliminar sus movimientos. Pendiente para la entrega
+  final.
+- **[MVP] ✅ (parcial) Categorización.** El usuario ya puede crear y consultar
+  sus categorías de ingreso y de gasto (de primer nivel; las subcategorías
+  quedan fuera de esta entrega). Clasificar una transacción concreta depende de
+  que exista el registro de transacciones, todavía pendiente.
+- **[MVP] ⏳ Dashboard.** Una pantalla de resumen muestra el saldo actual, el
+  total de ingresos y gastos del período y las principales categorías de gasto,
+  todo calculado automáticamente a partir de las transacciones. Pendiente para
+  la entrega final.
 
 Estas funcionalidades corresponden a las historias de usuario priorizadas que se
 detallan en la sección 5.
@@ -104,31 +127,110 @@ La experiencia busca sentirse tan ágil como una hoja de cálculo pero sin su
 fragilidad: capturar un movimiento debe tomar segundos, y los números del
 resumen se actualizan solos sin fórmulas que se rompan.
 
-*(Las capturas de pantalla y/o el videotutorial del recorrido se agregarán en la
-Entrega 2, cuando exista interfaz funcional.)*
+Capturas del flujo implementado hasta la Entrega 2:
+
+| Pantalla | Captura |
+|---|---|
+| Inicio de sesión | ![Login](docs/capturas/Login.png) |
+| Panel | ![Panel](docs/capturas/Panel.png) |
+| Creación de cuenta | ![Creación de cuenta](docs/capturas/CreacionCuentaUsuario.png) |
+| Creación de categoría | ![Creación de categoría](docs/capturas/CreacionCategoriasUsuario.png) |
+
+*(Videotutorial del recorrido: pendiente de confirmar si se agrega.)*
 
 ### 1.4. Instrucciones de instalación:
 
-*(El detalle completo se completará en la Entrega 2, cuando exista código
-ejecutable.)* La instalación en local seguirá estos pasos, coherentes con la
-arquitectura descrita en la sección 2:
+Pasos comprobados contra `package.json` y `docker-compose.yml`, coherentes con la
+arquitectura de la sección 2:
 
 1. **Requisitos previos:** Node.js y Docker instalados.
-2. **Clonar el repositorio** e instalar dependencias con un solo comando
-   (`npm install`), ya que el proyecto es una única aplicación Next.js
-   (no hay carpetas de frontend y backend por separado).
-3. **Levantar la base de datos local** con Docker mediante `docker-compose up`,
-   que arranca un PostgreSQL local para desarrollo sin instalarlo manualmente.
-4. **Configurar variables de entorno** copiando `.env.example` a `.env` y
-   ajustando la cadena de conexión `DATABASE_URL`.
-5. **Aplicar migraciones y datos de ejemplo** con Prisma (`npx prisma migrate
-   dev` y el seed).
-6. **Arrancar la aplicación** con `npm run dev` (queda en `http://localhost:3000`).
+2. **Clonar el repositorio** (rama de la Entrega 2) e instalar dependencias:
+   ```
+   git clone --branch feature/entrega-2-NCH https://github.com/nchavez2016/AI4Devs-finalproject.git
+   cd AI4Devs-finalproject
+   npm install
+   ```
+   El proyecto es una única aplicación Next.js (no hay carpetas de frontend y
+   backend por separado).
+3. **Levantar la base de datos local** con Docker:
+   ```
+   docker compose up -d
+   ```
+   Arranca un contenedor `cuadre-db` con PostgreSQL 16 en el puerto 5432
+   (usuario, contraseña y base `cuadre`, definidos en `docker-compose.yml`).
+4. **Configurar variables de entorno** copiando `.env.example` a `.env`:
+   - `DATABASE_URL`: ya viene lista para la base local de Docker, no hace falta
+     tocarla en desarrollo.
+   - `AUTH_SECRET`: obligatorio, mínimo 32 caracteres. Se genera con:
+     ```
+     node -e "console.log(require('node:crypto').randomBytes(32).toString('base64'))"
+     ```
+5. **Aplicar las migraciones** con Prisma:
+   ```
+   npx prisma migrate deploy
+   npx prisma generate
+   ```
+   `migrate deploy` aplica las migraciones existentes sin crear nuevas ni hacer
+   preguntas; `migrate dev` queda para quien desarrolla cambios de esquema.
+   No existe un seed de datos de ejemplo: la base queda vacía y lista para que
+   cada usuario se registre (ver 1.5).
+6. **Arrancar la aplicación:**
+   ```
+   npm run dev
+   ```
+   Queda disponible en `http://localhost:3000`.
 
-Como exige la guía, el readme incluirá también cómo probar el MVP y las
-credenciales de acceso para la revisión. En desarrollo se usa PostgreSQL local
-(vía Docker); en producción, la misma aplicación se conecta a Neon cambiando
-únicamente la variable `DATABASE_URL`.*
+En desarrollo se usa PostgreSQL local (vía Docker); en producción (pendiente de
+confirmar, prevista en Vercel + Neon) la misma aplicación se conectaría cambiando
+únicamente `DATABASE_URL`.
+
+**Ejecutar los tests** (verificado en `package.json` y `vitest.config.mts`):
+
+```
+npm run test:run
+```
+
+Las pruebas unitarias (`*.test.ts(x)`) corren con variables de entorno
+ficticias y no tocan una base de datos real. Las de integración
+(`*.int.test.ts`) necesitan una base PostgreSQL de prueba llamada por defecto
+`cuadre_test`; se puede apuntar a otra con la variable de entorno
+`TEST_DATABASE_URL`.
+
+### 1.5. Cómo probar el MVP:
+
+**No hay usuario de demostración ni datos de ejemplo (seed).** Para revisar la
+app, regístrate con un email y contraseña nuevos: el formulario de registro crea
+tu usuario y, automáticamente, tus 7 categorías por defecto (5 de gasto y 2 de
+ingreso).
+
+**Credenciales de prueba sugeridas** (se registran una sola vez en el paso 1;
+después basta con iniciar sesión):
+
+| Campo | Valor |
+|---|---|
+| Email | `revisor@cuadre.test` |
+| Contraseña | `Revisor2026!` |
+| Nombre del negocio | `Negocio de prueba` |
+
+Recorrido sugerido, con la app corriendo (`npm run dev`) y la base levantada:
+
+1. Abre `http://localhost:3000` y entra a **Registro**. Crea un usuario con las
+   credenciales de prueba de arriba (o las tuyas).
+2. Al registrarte entras directo al **panel**, con tu nombre de negocio y los
+   enlaces a Cuentas y Categorías.
+3. Entra a **Cuentas** y crea una, por ejemplo "Banco Pichincha", tipo banco,
+   con saldo inicial 500.00. La lista muestra la cuenta con ese saldo.
+4. Intenta crear otra cuenta con el mismo nombre (sin distinguir mayúsculas):
+   el formulario rechaza el duplicado con un mensaje junto al campo.
+5. Entra a **Categorías** y confirma que ya existen 7 (Arriendo, Insumos, Otros,
+   Servicios básicos, Transporte, Otros ingresos, Ventas). Crea una propia, por
+   ejemplo "Publicidad" de tipo gasto.
+6. Intenta crear otra categoría de gasto con el mismo nombre: se rechaza igual
+   que con las cuentas.
+7. Cierra sesión desde el botón correspondiente y confirma que vuelves al login.
+
+*(Registrar transacciones y ver el dashboard quedan pendientes; no forman parte
+de este recorrido todavía.)*
 
 ---
 
@@ -190,23 +292,24 @@ esa extracción más adelante.
 
 ### 2.2. Descripción de componentes principales:
 
-**Frontend (React + Tailwind CSS + shadcn/ui).** Es la capa que ve el usuario:
-las pantallas de login, gestión de cuentas, registro de transacciones y el
-dashboard. Usa componentes de shadcn/ui (formularios, tablas, tarjetas) para una
-interfaz consistente sin diseñar cada elemento desde cero, y Tailwind para los
-estilos. Los gráficos del dashboard se dibujan con una librería de charts
-(Recharts).
+**Frontend (React + Tailwind CSS).** Es la capa que ve el usuario: las pantallas
+de login, registro, panel, cuentas y categorías, construidas hoy con
+componentes propios (`src/components/ui/`) y Tailwind para los estilos.
+shadcn/ui está aprobado para el MVP pero todavía no se ha instalado; cuando se
+necesiten componentes más complejos (tablas, gráficos) se evaluará incorporarlo.
+Los gráficos del dashboard (pendiente) se dibujan con una librería de charts
+(Recharts, aprobada y aún no instalada).
 
 **Backend (Next.js API Routes / Server Actions).** Es la lógica de servidor:
 recibe las peticiones del frontend, valida los datos, aplica las reglas de
-negocio (por ejemplo, que una transacción pertenezca al usuario autenticado y a
-una de sus cuentas) y habla con la base de datos a través de Prisma. Aquí también
-se calculan los totales y agregados que alimentan el dashboard.
+negocio (por ejemplo, que una cuenta o categoría pertenezca al usuario
+autenticado) y habla con la base de datos a través de Prisma. Aquí también se
+calcularán los totales y agregados que alimentarán el dashboard (pendiente).
 
-**Autenticación (Auth.js / NextAuth).** Gestiona el registro, el inicio de sesión
-y la sesión activa del usuario. Cada petición al backend se asocia a un usuario
-autenticado, y ese identificador es el que garantiza que cada persona solo vea
-sus propios datos.
+**Autenticación (Auth.js / next-auth v5 beta, versión exacta `5.0.0-beta.32`).**
+Gestiona el registro, el inicio de sesión y la sesión activa del usuario. Cada
+petición al backend se asocia a un usuario autenticado, y ese identificador es
+el que garantiza que cada persona solo vea sus propios datos.
 
 **Capa de datos (Prisma + PostgreSQL).** Prisma es el traductor entre el código y
 la base de datos: define el esquema (las tablas y relaciones) en un solo archivo
@@ -228,36 +331,49 @@ referencia del curso con este stack.
 ### 2.3. Descripción de alto nivel del proyecto y estructura de ficheros:
 
 El proyecto sigue la estructura estándar de una aplicación Next.js (App Router),
-organizada por responsabilidad. Estructura prevista:
+organizada por responsabilidad. Estructura actual, verificada con `git
+ls-files` (solo directorios y archivos clave; se omiten tests y archivos
+generados):
 
 ```
 cuadre/
 ├── prisma/
-│   └── schema.prisma        # Definición del modelo de datos (tablas y relaciones)
+│   ├── migrations/              # Migraciones aplicadas (no se editan a mano)
+│   └── schema.prisma            # Definición del modelo de datos
 ├── src/
-│   ├── app/                 # Rutas y páginas (App Router de Next.js)
-│   │   ├── (auth)/          # Páginas de registro e inicio de sesión
-│   │   ├── dashboard/       # Pantalla de resumen (dashboard)
-│   │   ├── cuentas/         # Gestión de cuentas
-│   │   ├── transacciones/   # Registro y listado de transacciones
-│   │   └── api/             # Endpoints de backend (API Routes)
-│   ├── components/          # Componentes de interfaz reutilizables (UI)
-│   ├── lib/                 # Utilidades: cliente Prisma, configuración de Auth.js
-│   ├── server/              # Lógica de negocio (casos de uso, cálculos)
-│   │   └── repositories/    # Acceso a datos: encapsula Prisma (patrón Repository)
-│   └── ...
-├── public/                  # Archivos estáticos
-├── .github/
-│   └── workflows/           # CI: ejecución automática de tests (GitHub Actions)
-├── docker-compose.yml       # PostgreSQL local para desarrollo (vía Docker)
-├── .env.example             # Plantilla de variables de entorno
+│   ├── app/
+│   │   ├── (privado)/
+│   │   │   ├── panel/           # Panel (dashboard provisional) ✅
+│   │   │   ├── cuentas/         # Gestión de cuentas ✅
+│   │   │   └── categorias/      # Gestión de categorías ✅
+│   │   ├── login/                ✅
+│   │   ├── registro/             ✅
+│   │   └── api/auth/[...nextauth]/route.ts  ✅
+│   ├── components/
+│   │   ├── EncabezadoPagina.tsx  ✅
+│   │   └── ui/                   # Button, Campo, Importe ✅
+│   ├── config/env.ts            # Validación de variables de entorno ✅
+│   ├── server/
+│   │   ├── auth/                 ✅
+│   │   ├── cuentas/               ✅
+│   │   ├── categorias/            ✅
+│   │   └── repositories/         # Acceso a datos: encapsula Prisma ✅
+│   ├── test/                     # Fixtures y BD de prueba (Vitest) ✅
+│   └── proxy.ts                  # Antes "middleware.ts" en Next.js 16 ✅
+├── docs/diseno/sistema/         # Tokens y sistema de diseño ✅
+├── openspec/                     # Specs y changes (OpenSpec) ✅
+├── .github/workflows/            ⏳ Pendiente (no existe aún)
+├── docker-compose.yml            ✅
+├── .env.example                  ✅
 └── readme.md
 ```
 
-La separación clave es: `app/` contiene las pantallas y los endpoints; `server/`
-contiene la lógica de negocio y, dentro de `server/repositories/`, la capa de
-acceso a datos que encapsula Prisma (patrón Repository); `lib/` reúne utilidades
-compartidas; y `prisma/` define el modelo de datos. Esto mantiene la lógica
+Pendiente: `src/app/(privado)/transacciones/` (registro de transacciones) y un
+`dashboard/` con cálculos reales; hoy existe `panel/` como pantalla de
+bienvenida provisional. La separación clave es: `app/` contiene las pantallas y
+los endpoints; `server/` contiene la lógica de negocio y, dentro de
+`server/repositories/`, la capa de acceso a datos que encapsula Prisma (patrón
+Repository); `prisma/` define el modelo de datos. Esto mantiene la lógica
 separada tanto de la presentación como del acceso a datos, de modo que una nueva
 pantalla —o el reemplazo del origen de datos por uno simulado para pruebas— no
 obliga a tocar el resto del sistema.
@@ -282,47 +398,54 @@ aplicación se conecta mediante una variable de entorno segura. Este esquema
 cumple el requisito de la entrega final de tener el proyecto desplegado y
 accesible por URL.
 
+**Estado: despliegue y GitHub Actions pendientes.**
+
 ### 2.5. Seguridad:
 
 Las prácticas de seguridad del MVP, apropiadas para una aplicación que maneja
 datos financieros personales, son:
 
-- **Autenticación de usuarios.** El acceso requiere registro e inicio de sesión
-  mediante Auth.js; las contraseñas se almacenan con hash (nunca en texto plano).
-  Todos los endpoints exigen sesión iniciada, salvo el registro y el login.
-- **Aislamiento de datos por usuario.** Toda consulta al backend se filtra por el
-  identificador del usuario autenticado, de modo que una persona nunca puede leer
-  ni modificar datos de otra. Es el control de seguridad más importante del
-  producto.
-- **Validación de entradas con Zod.** Cada dato que llega en el cuerpo de una
-  petición (montos, fechas, textos) se valida contra un esquema Zod en el
+- **✅ Autenticación de usuarios.** El acceso requiere registro e inicio de
+  sesión mediante Auth.js; las contraseñas se almacenan con hash (nunca en texto
+  plano). Las rutas privadas exigen sesión iniciada.
+- **✅ Aislamiento de datos por usuario.** Toda consulta al backend se filtra
+  por el identificador del usuario autenticado (implementado en cuentas y
+  categorías), de modo que una persona nunca puede leer ni modificar datos de
+  otra. Es el control de seguridad más importante del producto.
+- **✅ Validación de entradas con Zod.** Cada dato que llega en el cuerpo de una
+  petición (montos, nombres, tipos) se valida contra un esquema Zod en el
   servidor antes de aplicar la lógica de negocio, para rechazar datos corruptos o
   maliciosos.
-- **Protección contra inyección SQL.** El acceso a datos usa siempre consultas
+- **✅ Protección contra inyección SQL.** El acceso a datos usa siempre consultas
   parametrizadas de Prisma; nunca se arma SQL concatenando texto del usuario.
-- **Protección contra XSS.** React escapa por defecto el contenido que se
+- **✅ Protección contra XSS.** React escapa por defecto el contenido que se
   muestra, evitando la inyección de scripts en la interfaz.
-- **Variables sensibles fuera del código.** Credenciales de base de datos y claves
-  de sesión se guardan como variables de entorno, nunca en el repositorio, y no se
-  colocan datos sensibles en las URLs.
-- **Conexión cifrada.** Todo el tráfico viaja por HTTPS (provisto por Vercel) y la
-  conexión a la base de datos usa TLS.
+- **✅ Variables sensibles fuera del código.** Credenciales de base de datos y
+  claves de sesión se guardan como variables de entorno (`.env`, fuera del
+  repositorio), y no se colocan datos sensibles en las URLs.
+- **⏳ Conexión cifrada en producción.** Pendiente: depende del despliegue en
+  Vercel (HTTPS) y Neon (TLS), todavía no realizado.
 
 ### 2.6. Tests:
 
-La estrategia de pruebas para la entrega final contempla tres niveles:
+La estrategia de pruebas contempla tres niveles:
 
-- **Pruebas unitarias.** Verifican piezas aisladas de lógica de negocio, por
-  ejemplo el cálculo de los totales de ingresos, gastos y balance del período.
-- **Pruebas de integración.** Verifican que un endpoint del backend funcione de
-  extremo a extremo contra la base de datos, por ejemplo crear una transacción y
-  comprobar que queda correctamente asociada a la cuenta y al usuario.
-- **Prueba de extremo a extremo (E2E).** Verifica el flujo principal completo
-  desde el navegador: iniciar sesión, crear una cuenta, registrar una transacción
-  y ver el dashboard actualizado.
+- **✅ Pruebas unitarias.** Verifican piezas aisladas de lógica de negocio y
+  componentes (Vitest + Testing Library + jsdom), por ejemplo la validación de
+  formularios y las acciones de cuentas y categorías.
+- **✅ Pruebas de integración.** Verifican que las acciones del backend
+  funcionen de extremo a extremo contra una base de datos PostgreSQL real de
+  prueba (`*.int.test.ts`), por ejemplo crear una cuenta y comprobar su
+  aislamiento por usuario.
+- **⏳ Prueba de extremo a extremo (E2E).** Pendiente: Playwright se configurará
+  con el primer change que la necesite (ver AGENTS.md). Verificará el flujo
+  principal completo desde el navegador, incluyendo registro de transacciones y
+  dashboard una vez existan.
 
-Las pruebas se ejecutan automáticamente en cada cambio mediante GitHub Actions
-(ver 2.4).
+**⏳ GitHub Actions.** Pendiente: hoy las pruebas se ejecutan en local (hook de
+pre-commit con `npm run lint`, `typecheck` y `test:run`); la ejecución
+automática en cada push mediante GitHub Actions está prevista para la entrega
+final (ver 2.4).
 
 ---
 
@@ -652,7 +775,7 @@ se detallan las tres principales, como pide la plantilla.
 > el usuario indica el **nombre de su negocio o actividad**, que identifica su
 > espacio de trabajo y se muestra en el dashboard.
 
-### HU-001 — Registrar una transacción
+### HU-001 — Registrar una transacción ⏳ Pendiente
 
 **Como** persona que gestiona las finanzas de mi negocio
 **quiero** registrar un ingreso o un gasto con su monto, fecha, cuenta y categoría
@@ -661,7 +784,7 @@ se detallan las tres principales, como pide la plantilla.
 **Prioridad:** Must-have
 **Criterios de aceptación:**
 
-\`\`\`gherkin
+```gherkin
 Scenario: Registrar un gasto válido
   Given estoy autenticado y tengo al menos una cuenta y una categoría creadas
   When registro una transacción de tipo GASTO con monto 25.50, una fecha,
@@ -681,11 +804,11 @@ Scenario: Rechazar una transacción sin campos obligatorios
   When intento registrar una transacción sin cuenta, sin categoría o sin fecha
   Then el sistema rechaza el registro
   And señala cuáles campos son obligatorios
-\`\`\`
+```
 
 ---
 
-### HU-002 — Gestionar mis cuentas
+### HU-002 — Gestionar mis cuentas ✅ Implementado (crear y listar)
 
 **Como** persona que gestiona las finanzas de mi negocio
 **quiero** crear y administrar mis cuentas de dinero (banco, efectivo, billetera
@@ -693,10 +816,15 @@ digital)
 **para** saber cuánto tengo disponible en cada una y a dónde asignar cada
 movimiento.
 
+> Implementado hasta la Entrega 2: crear y listar cuentas, con nombre único por
+> usuario y aislamiento entre usuarios. El saldo mostrado es el saldo inicial;
+> el escenario "Ver el saldo actualizado de una cuenta" de abajo depende de las
+> transacciones, todavía pendientes.
+
 **Prioridad:** Must-have
 **Criterios de aceptación:**
 
-\`\`\`gherkin
+```gherkin
 Scenario: Crear una cuenta nueva
   Given estoy autenticado
   When creo una cuenta con nombre "Banco Pichincha", tipo "banco" y
@@ -713,11 +841,11 @@ Scenario: Evitar el acceso a cuentas de otro usuario
   Given estoy autenticado como usuario A
   When intento consultar o modificar una cuenta que pertenece al usuario B
   Then el sistema no me permite verla ni modificarla
-\`\`\`
+```
 
 ---
 
-### HU-003 — Ver el dashboard financiero
+### HU-003 — Ver el dashboard financiero ⏳ Pendiente
 
 **Como** persona que gestiona las finanzas de mi negocio
 **quiero** ver un panel de resumen con mi saldo, mis ingresos y gastos del
@@ -728,7 +856,7 @@ movimiento.
 **Prioridad:** Must-have
 **Criterios de aceptación:**
 
-\`\`\`gherkin
+```gherkin
 Scenario: Ver totales del período
   Given tengo transacciones registradas en el mes actual
   When abro el dashboard con el período "mes"
@@ -750,18 +878,21 @@ Scenario: Dashboard sin datos
   When abro el dashboard
   Then veo los totales en cero y un mensaje que me invita a registrar mi
        primera transacción
-\`\`\`
+```
 
 ---
 
 ### Historias adicionales del MVP (resumen)
 
-- **HU-004 (Must-have) — Categorizar transacciones.** Como usuario quiero crear
-  categorías y subcategorías y asignarlas a mis transacciones, para analizar en
-  qué gano y en qué gasto. (Habilita el desglose por categoría del dashboard.)
-- **HU-005 (Should-have) — Editar y eliminar transacciones.** Como usuario quiero
-  corregir o borrar un movimiento mal registrado, para mantener mis datos
-  fiables. Se implementa solo si el núcleo del MVP está estable.
+- **HU-004 (Must-have) — Categorizar transacciones. ✅ Implementado (parcial)**
+  Como usuario quiero crear categorías y subcategorías y asignarlas a mis
+  transacciones, para analizar en qué gano y en qué gasto. (Habilita el
+  desglose por categoría del dashboard.) Implementado hasta la Entrega 2: crear
+  y listar categorías de primer nivel, únicas por usuario y tipo. Las
+  subcategorías y la asignación a una transacción real quedan pendientes.
+- **HU-005 (Should-have) — Editar y eliminar transacciones. ⏳ Pendiente** Como
+  usuario quiero corregir o borrar un movimiento mal registrado, para mantener
+  mis datos fiables. Se implementa solo si el núcleo del MVP está estable.
 
 ---
 
@@ -774,7 +905,7 @@ frontend. Cada ticket incluye su Definition of Done (DoD).
 
 ---
 
-### TK-001 — Scaffold del proyecto, base de datos y autenticación
+### TK-001 — Scaffold del proyecto, base de datos y autenticación ✅ Completo
 
 **Tipo:** Configuración / Base de datos / Backend
 **Prioridad:** Alta (bloquea todo lo demás)
@@ -782,31 +913,32 @@ frontend. Cada ticket incluye su Definition of Done (DoD).
 
 **Descripción:**
 Inicializar el proyecto Next.js con TypeScript y Tailwind, configurar Prisma
-contra PostgreSQL, traducir el modelo de datos (sección 3) a \`schema.prisma\`,
+contra PostgreSQL, traducir el modelo de datos (sección 3) a `schema.prisma`,
 ejecutar la primera migración, y dejar funcionando el registro e inicio de sesión
-de usuarios con Auth.js (NextAuth).
+de usuarios con Auth.js (next-auth v5 beta).
 
 **Tareas técnicas:**
-- Inicializar proyecto Next.js (App Router) + TypeScript + Tailwind + shadcn/ui.
+- Inicializar proyecto Next.js (App Router) + TypeScript + Tailwind.
 - Configurar Prisma y la conexión a PostgreSQL mediante variable de entorno
-  \`DATABASE_URL\`.
-- Definir en \`schema.prisma\` las entidades Usuario, Cuenta, Categoria y
+  `DATABASE_URL`.
+- Definir en `schema.prisma` las entidades Usuario, Cuenta, Categoria y
   Transaccion con sus relaciones (según sección 3).
 - Ejecutar la migración inicial y verificar que las tablas existen.
 - Integrar Auth.js con registro, login y hash de contraseñas.
-- Middleware que exija sesión iniciada en las rutas privadas.
+- `proxy.ts` (equivalente a middleware en Next.js 16) que exija sesión iniciada
+  en las rutas privadas.
 
 **Definition of Done:**
-- [ ] El proyecto arranca en local con un solo comando documentado en el readme.
-- [ ] La migración de Prisma crea todas las tablas del modelo sin errores.
-- [ ] Un usuario puede registrarse, cerrar sesión y volver a iniciar sesión.
-- [ ] Las contraseñas se almacenan con hash (nunca en texto plano).
-- [ ] Una ruta privada redirige al login si no hay sesión activa.
-- [ ] Variables sensibles fuera del código, con un \`.env.example\` documentado.
+- [x] El proyecto arranca en local con un solo comando documentado en el readme.
+- [x] La migración de Prisma crea todas las tablas del modelo sin errores.
+- [x] Un usuario puede registrarse, cerrar sesión y volver a iniciar sesión.
+- [x] Las contraseñas se almacenan con hash (nunca en texto plano).
+- [x] Una ruta privada redirige al login si no hay sesión activa.
+- [x] Variables sensibles fuera del código, con un `.env.example` documentado.
 
 ---
 
-### TK-002 — API de transacciones (crear y listar)
+### TK-002 — API de transacciones (crear y listar) ⏳ Pendiente
 
 **Tipo:** Backend
 **Prioridad:** Alta
@@ -817,10 +949,10 @@ Implementar los endpoints de creación y listado de transacciones descritos en l
 sección 4, con validación de datos en el servidor y aislamiento por usuario.
 
 **Tareas técnicas:**
-- Endpoint \`POST /api/transacciones\` que valide los datos de entrada con Zod
+- Endpoint `POST /api/transacciones` que valide los datos de entrada con Zod
   (monto > 0, tipo INGRESO/GASTO, cuenta y categoría existentes y pertenecientes
   al usuario, fecha válida).
-- Endpoint \`GET /api/transacciones\` con filtros opcionales por rango de fechas,
+- Endpoint `GET /api/transacciones` con filtros opcionales por rango de fechas,
   tipo y cuenta.
 - Capa de servicio que asocie toda operación al usuario autenticado.
 - Acceso a datos a través de un repositorio (`TransaccionRepository`) que
@@ -840,14 +972,14 @@ sección 4, con validación de datos en el servidor y aislamiento por usuario.
 
 ---
 
-### TK-003 — Pantalla de dashboard
+### TK-003 — Pantalla de dashboard ⏳ Pendiente
 
 **Tipo:** Frontend
 **Prioridad:** Alta
 **Historia relacionada:** HU-003
 
 **Descripción:**
-Construir la pantalla de dashboard que consume el endpoint \`GET /api/dashboard\`
+Construir la pantalla de dashboard que consume el endpoint `GET /api/dashboard`
 y muestra los totales del período, el saldo por cuenta y las principales
 categorías de gasto, con un estado vacío para usuarios nuevos.
 
@@ -877,6 +1009,50 @@ categorías de gasto, con un estado vacío para usuarios nuevos.
 > Esta sección se completa durante las Entregas 2 y final, documentando los
 > Pull Requests principales del desarrollo.
 
-- **PR 1:** _(pendiente — Entrega 2)_
-- **PR 2:** _(pendiente — Entrega 2)_
+- **PR Entrega 2:** rama `feature/entrega-2-NCH` — scaffold, autenticación,
+  cuentas y categorías. _(Enlace al PR: pendiente de abrir tras el push.)_
+- **PR 2:** _(pendiente — Entrega final)_
 - **PR 3:** _(pendiente — Entrega final)_
+
+---
+
+## 8. Flujo de trabajo con IA y arnés
+
+Este proyecto se desarrolla con asistencia de agentes de IA (Claude Code y
+Antigravity) bajo un arnés de reglas y hooks que exige trazabilidad y TDD. El
+detalle completo vive en [AGENTS.md](AGENTS.md); aquí solo un resumen.
+
+**Fuente única de reglas.** `AGENTS.md` es el documento de reglas para
+cualquier agente; `CLAUDE.md` solo lo referencia (`@AGENTS.md`) para que Claude
+Code lo cargue, sin duplicar contenido.
+
+**Flujo OpenSpec: proponer → aplicar → verificar → archivar.** Ningún código de
+producción se escribe sin un *change* aprobado en `openspec/changes/` (reglas
+en `openspec/config.yaml`). Cada escenario Given/When/Then de una spec exige un
+test con su nombre exacto, y se implementa en TDD estricto: RED (test que
+falla por el motivo esperado) → GREEN (mínimo código) → REFACTOR, una subtarea
+a la vez, un commit por subtarea.
+
+**Hooks que bloquean, y qué impiden:**
+- `.husky/pre-commit` y `pre-merge-commit`: no permiten commits en `main`, y
+  corren `npm run lint`, `npx tsc --noEmit` y `npm run test:run` antes de cada
+  commit (la suite debe estar en verde).
+- `scripts/agents/guard-core.mjs` (vía `.claude/settings.json` en Claude Code y
+  `.agents/hooks.json` en Antigravity): bloquea que un agente lea, edite o
+  ejecute comandos sobre `.env*`, `.claude/`, `.git/`, `scripts/agents/`,
+  `.agents/hooks.json` o migraciones ya aplicadas en `prisma/migrations/`;
+  también bloquea `git push/reset/clean/checkout/switch/merge/rebase`,
+  `--no-verify` y `npm audit fix`.
+
+**Modelos por fase, prompts clave y ajustes humanos:** ver
+[prompts.md](prompts.md#2-modelos-utilizados-por-fase).
+
+**Límites conocidos** (ver `docs/pendientes.md` para el detalle y más):
+- Antigravity en Windows pide confirmación para comandos con argumentos aunque
+  su prefijo esté en la lista de permitidos; para ciclos largos de `apply` se
+  prefiere Claude Code.
+- Los workflows de Antigravity (`.agents/workflows/`) se retiran el
+  1-nov-2026; tras esa fecha habrá que revisar la migración a las skills
+  `openspec-*`.
+- El traspaso entre herramientas exige hacer commit antes de cambiar de
+  agente, y leer `progress.md` y `tasks.md` al retomar.
