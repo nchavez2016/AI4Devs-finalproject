@@ -223,7 +223,7 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
   - (k) En Cuentas y en Categorías: leer la frase bajo el título, y llegar con Tab a "← Volver al panel" y activarlo con Enter.
   - (l) En una ventana ancha (escritorio): el formulario no pasa de unos 480 px y el contenido queda centrado con un ancho máximo.
   - (m) En el panel: ver "Por dónde empezar", y llegar a cada pantalla desde ahí.
-- [ ] 6.2 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate cuentas-y-categorias --strict`; todo sin errores.
+- [x] 6.2 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate cuentas-y-categorias --strict`; todo sin errores.
 
 ## 7. Login: error inesperado al iniciar sesión
 
