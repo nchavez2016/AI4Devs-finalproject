@@ -116,7 +116,7 @@ un estado de carga, uno de error y uno de éxito.
 #### Scenario: Error al guardar la categoría conserva los datos escritos
 - **GIVEN** el usuario escribió el nombre "Publicidad" y eligió el tipo gasto
 - **WHEN** el guardado falla por un error del servidor
-- **THEN** ve, encima del botón, un aviso con role="alert": "No se pudo guardar la categoría. Revisa tu conexión y vuelve a intentarlo."
+- **THEN** ve, encima del botón, un aviso con role="alert": "No pudimos guardar la categoría. Inténtalo de nuevo."
 - **AND** el formulario conserva el nombre "Publicidad" y el tipo gasto
 
 #### Scenario: Categoría creada se anuncia y se resalta en la lista
@@ -133,5 +133,5 @@ un estado de carga, uno de error y uno de éxito.
 #### Scenario: Error al cargar las categorías ofrece reintentar
 - **GIVEN** la carga de las categorías falló
 - **WHEN** se muestra la pantalla
-- **THEN** ve "No se pudieron cargar tus categorías." y un botón secundario "Reintentar"
+- **THEN** ve "No pudimos cargar tus categorías." y un botón secundario "Reintentar"
 - **AND** al pulsarlo se vuelve a intentar la carga

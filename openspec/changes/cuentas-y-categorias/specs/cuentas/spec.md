@@ -140,7 +140,7 @@ vacío, uno de carga, uno de error y uno de éxito.
 #### Scenario: Error al guardar la cuenta conserva los datos escritos
 - **GIVEN** el usuario escribió nombre "Banco Pichincha" y saldo inicial "500.00"
 - **WHEN** el guardado falla por un error del servidor
-- **THEN** ve, encima del botón, un aviso con role="alert": "No se pudo guardar la cuenta. Revisa tu conexión y vuelve a intentarlo."
+- **THEN** ve, encima del botón, un aviso con role="alert": "No pudimos guardar la cuenta. Inténtalo de nuevo."
 - **AND** los campos conservan "Banco Pichincha" y "500.00"
 
 #### Scenario: Cuenta creada se anuncia y se resalta en la lista
@@ -157,7 +157,7 @@ vacío, uno de carga, uno de error y uno de éxito.
 #### Scenario: Error al cargar las cuentas ofrece reintentar
 - **GIVEN** la carga de las cuentas falló
 - **WHEN** se muestra la pantalla
-- **THEN** ve "No se pudieron cargar tus cuentas." y un botón secundario "Reintentar"
+- **THEN** ve "No pudimos cargar tus cuentas." y un botón secundario "Reintentar"
 - **AND** al pulsarlo se vuelve a intentar la carga
 
 ### Requirement: Acceso desde el panel
