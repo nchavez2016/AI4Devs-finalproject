@@ -6,6 +6,17 @@ import { registrarUsuario } from './registro'
 
 // Mismo mensaje que credenciales.ts: no revela si el email existe.
 const MENSAJE_CREDENCIALES_INCORRECTAS = 'Email o contraseña incorrectos'
+const MENSAJE_ERROR_INESPERADO = 'No pudimos iniciar tu sesión. Inténtalo de nuevo.'
+
+function esErrorDeRedireccion(error: unknown): boolean {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    'digest' in error &&
+    typeof (error as { digest: unknown }).digest === 'string' &&
+    (error as { digest: string }).digest.startsWith('NEXT_REDIRECT')
+  )
+}
 
 export interface EstadoFormularioRegistro {
   errores: Record<string, string[]>
@@ -56,7 +67,13 @@ export async function iniciarSesion(
       return { mensaje: MENSAJE_CREDENCIALES_INCORRECTAS }
     }
 
-    throw error
+    // signIn() con redirectTo lanza esta misma excepción cuando SÍ tiene éxito,
+    // para ejecutar la redirección; no es un error y no debe atraparse.
+    if (esErrorDeRedireccion(error)) {
+      throw error
+    }
+
+    return { mensaje: MENSAJE_ERROR_INESPERADO }
   }
 
   return {}

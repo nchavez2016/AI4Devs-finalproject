@@ -34,8 +34,10 @@ mínima de HU-004, con aislamiento por usuario.
   tipo, aislamiento, y su pantalla.
 
 ### Modified Capabilities
-- Ninguna. Las rutas nuevas ya quedan protegidas por `autenticacion`, y las 7 categorías por
-  defecto ya cumplen la unicidad.
+- `autenticacion`: el login ya no relanza errores inesperados (p. ej. la base de datos
+  caída); los convierte en un mensaje genérico, como el resto de las acciones de este change.
+  Las rutas nuevas ya quedan protegidas por `autenticacion`, y las 7 categorías por defecto ya
+  cumplen la unicidad.
 
 ## Impact
 
@@ -45,6 +47,7 @@ mínima de HU-004, con aislamiento por usuario.
   - `src/app/(privado)/cuentas/` y `src/app/(privado)/categorias/`.
 - Modificado:
   - `prisma/schema.prisma` y dos migraciones nuevas.
+  - `src/server/auth/acciones.ts` (mensaje genérico ante un error inesperado del login).
   - `ContenidoPanel.tsx` (enlaces).
   - `globals.css` y `tokens.md` (un token).
   - `readme.md`, sección 3 (unicidad y longitud de los nombres).

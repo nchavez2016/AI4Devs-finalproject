@@ -209,7 +209,7 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
 
 ## 6. Prueba manual y verificación final
 
-- [ ] 6.1 [HUMANO] Con `docker compose up -d` y `npm run dev`:
+- [x] 6.1 [HUMANO] Con `docker compose up -d` y `npm run dev`:
   - (a) Registrar a A y entrar a Cuentas desde el panel: ver el estado vacío y que "Crear cuenta" enfoca el nombre.
   - (b) Crear "  Banco Pichincha  " con 500.00: se guarda sin los espacios, se anuncia, se resalta y muestra $500,00.
   - (c) Intentar crear "banco PICHINCHA": error "Ya tienes una cuenta con ese nombre".
@@ -224,3 +224,9 @@ temporalmente el índice único por la variante indicada, ver fallar el test y r
   - (l) En una ventana ancha (escritorio): el formulario no pasa de unos 480 px y el contenido queda centrado con un ancho máximo.
   - (m) En el panel: ver "Por dónde empezar", y llegar a cada pantalla desde ahí.
 - [ ] 6.2 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate cuentas-y-categorias --strict`; todo sin errores.
+
+## 7. Login: error inesperado al iniciar sesión
+
+- [x] 7.1 RED — `src/server/auth/acciones.test.ts`, test "iniciarSesion convierte un error inesperado en un mensaje genérico": `signIn` rechaza con un `Error` genérico (no `CredentialsSignin`, p. ej. un fallo de conexión a la base). `iniciarSesion` no debe relanzarlo. Debe fallar porque hoy se relanza (acciones.ts:59).
+- [x] 7.2 GREEN — `acciones.ts`: en el catch de `iniciarSesion`, si el error no es `CredentialsSignin`, devolver `{ mensaje: 'No pudimos iniciar tu sesión. Inténtalo de nuevo.' }` en vez de relanzar (mismo patrón que `crearCuentaAccion`/`crearCategoriaAccion`, design e). Test en verde.
+- [x] 7.3 REFACTOR — test en verde; suite completa (cierre de grupo).

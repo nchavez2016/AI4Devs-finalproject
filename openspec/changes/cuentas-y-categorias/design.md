@@ -92,6 +92,10 @@ debe resistir envíos simultáneos, así que la garantiza la base y no el códig
   que se llama fuera del `try`, porque `redirect` lanza.
 - Si el caso de uso lanza un error inesperado, devuelven `{ mensaje, valores }`.
 - Si tienen éxito, llaman a `revalidatePath` y devuelven `{ exito, idCreado }`.
+- El login (`iniciarSesion`) sigue el mismo patrón: cualquier error que no sea
+  `CredentialsSignin` se convierte en `{ mensaje }` genérico, sin relanzar — excepto la
+  excepción de redirección que `signIn({ redirectTo })` lanza en el camino de éxito
+  (`digest` que empieza en `NEXT_REDIRECT`), que debe relanzarse intacta.
 
 React 19 vacía el formulario después de cada acción. Por eso el formulario usa
 `defaultValue` desde `estado.valores` y una `key` que cambia con cada respuesta, para que lo

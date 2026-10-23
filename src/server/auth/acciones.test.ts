@@ -60,4 +60,33 @@ describe('iniciarSesion', () => {
 
     expect(estado.mensaje).toBe('Email o contraseña incorrectos')
   })
+
+  it('iniciarSesion convierte un error inesperado en un mensaje genérico', async () => {
+    signInSimulado.mockRejectedValue(new Error('la base de datos no responde'))
+
+    const { iniciarSesion } = await import('./acciones')
+
+    const formData = new FormData()
+    formData.set('email', 'ana@tienda.ec')
+    formData.set('password', 'otra-clave-99')
+
+    const estado = await iniciarSesion(undefined, formData)
+
+    expect(estado.mensaje).toBe('No pudimos iniciar tu sesión. Inténtalo de nuevo.')
+  })
+
+  it('iniciarSesion deja pasar la redirección de un inicio de sesión exitoso', async () => {
+    const errorDeRedireccion = Object.assign(new Error('NEXT_REDIRECT'), {
+      digest: 'NEXT_REDIRECT;push;/panel;307;',
+    })
+    signInSimulado.mockRejectedValue(errorDeRedireccion)
+
+    const { iniciarSesion } = await import('./acciones')
+
+    const formData = new FormData()
+    formData.set('email', 'ana@tienda.ec')
+    formData.set('password', 'otra-clave-99')
+
+    await expect(iniciarSesion(undefined, formData)).rejects.toBe(errorDeRedireccion)
+  })
 })
