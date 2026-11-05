@@ -131,9 +131,9 @@
 
 ## 21. Escenario: El formulario de registro enfoca el primer campo con error
 
-- [ ] 21.1 RED — `src/app/registro/FormularioRegistro.test.tsx`: "El formulario de registro enfoca el primer campo con error".
-- [ ] 21.2 GREEN — `useFocoPrimerError` en `FormularioRegistro.tsx`.
-- [ ] 21.3 REFACTOR
+- [x] 21.1 RED — `src/app/registro/FormularioRegistro.test.tsx`: "El formulario de registro enfoca el primer campo con error".
+- [x] 21.2 GREEN — `useFocoPrimerError` en `FormularioRegistro.tsx`.
+- [x] 21.3 REFACTOR
 
 ## 22. Escenario: Pantalla de cuentas muestra la lista y el formulario en dos columnas
 

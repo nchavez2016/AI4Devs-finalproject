@@ -30,4 +30,22 @@ describe('FormularioRegistro', () => {
     expect(screen.getByText('El email no tiene un formato válido')).toBeTruthy()
     expect(screen.getByText('La contraseña debe tener al menos 8 caracteres')).toBeTruthy()
   })
+
+  it('El formulario de registro enfoca el primer campo con error', async () => {
+    registrarSimulado.mockResolvedValue({
+      errores: {
+        email: ['El email no tiene un formato válido'],
+        password: ['La contraseña debe tener al menos 8 caracteres'],
+      },
+    })
+
+    const { FormularioRegistro } = await import('./FormularioRegistro')
+    render(<FormularioRegistro />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Registrarme' }))
+
+    await waitFor(() => {
+      expect(document.activeElement).toBe(screen.getByRole('textbox', { name: 'Email' }))
+    })
+  })
 })

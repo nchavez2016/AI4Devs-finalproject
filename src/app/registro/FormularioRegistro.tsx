@@ -1,7 +1,8 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useRef } from 'react'
 import Link from 'next/link'
+import { useFocoPrimerError } from '@/components/formularios/useFocoPrimerError'
 import { Campo } from '@/components/ui/Campo'
 import { Button } from '@/components/ui/Button'
 import { registrar, type EstadoFormularioRegistro } from '@/server/auth/acciones'
@@ -10,9 +11,16 @@ const ESTADO_INICIAL: EstadoFormularioRegistro = { errores: {} }
 
 export function FormularioRegistro() {
   const [estado, accion, pendiente] = useActionState(registrar, ESTADO_INICIAL)
+  const formularioRef = useRef<HTMLFormElement>(null)
+  useFocoPrimerError(formularioRef, estado)
 
   return (
-    <form action={accion} noValidate className="flex flex-col gap-entre-campos">
+    <form
+      ref={formularioRef}
+      action={accion}
+      noValidate
+      className="flex flex-col gap-entre-campos"
+    >
       <Campo
         etiqueta="Nombre"
         name="nombre"
