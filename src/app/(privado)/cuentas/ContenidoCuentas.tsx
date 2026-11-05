@@ -42,7 +42,7 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
           {cuentas.length === 0 ? (
             <div className="flex flex-col items-start gap-entre-campos">
               <p className="text-cuerpo text-muted-foreground">Aún no tienes cuentas</p>
-              <Button type="button" onClick={enfocarNombre}>
+              <Button type="button" variante="secundario" onClick={enfocarNombre}>
                 Crear mi primera cuenta
               </Button>
             </div>

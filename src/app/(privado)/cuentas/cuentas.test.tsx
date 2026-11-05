@@ -90,6 +90,8 @@ describe('cuentas', () => {
     expect(screen.getByText('Aún no tienes cuentas')).toBeTruthy()
 
     const boton = screen.getByRole('button', { name: 'Crear mi primera cuenta' })
+    expect(boton.className).toContain('bg-secondary')
+    expect(boton.className).not.toContain('bg-primary')
     boton.click()
 
     expect(document.activeElement).toBe(

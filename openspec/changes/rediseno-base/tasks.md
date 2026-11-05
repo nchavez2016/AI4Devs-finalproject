@@ -144,9 +144,9 @@
 
 ## 23. Escenario: Pantalla de cuentas sin cuentas muestra el estado vacío (requiere 0.1)
 
-- [ ] 23.1 RED — Con la ampliación confirmada en 0.1, `cuentas.test.tsx`: "Pantalla de cuentas sin cuentas muestra el estado vacío" comprueba que el botón es secundario.
-- [ ] 23.2 GREEN — `variante="secundario"` en el botón del estado vacío de `ContenidoCuentas.tsx`.
-- [ ] 23.3 REFACTOR
+- [x] 23.1 RED — Con la ampliación confirmada en 0.1, `cuentas.test.tsx`: "Pantalla de cuentas sin cuentas muestra el estado vacío" comprueba que el botón es secundario.
+- [x] 23.2 GREEN — `variante="secundario"` en el botón del estado vacío de `ContenidoCuentas.tsx`.
+- [x] 23.3 REFACTOR
 
 ## 24. Escenario: Pantalla de categorías muestra las listas y el formulario en dos columnas
 
