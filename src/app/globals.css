@@ -277,6 +277,16 @@
   [data-tarjeta-enlace] :focus-visible {
     outline: none;
   }
+
+  /* El foco del campo de monto lo lleva el contenedor con borde (componentes.md, 7.2). */
+  [data-campo-monto]:has(:focus-visible) {
+    outline: var(--default-outline-width) solid var(--color-ring);
+    outline-offset: var(--foco-separacion);
+  }
+
+  [data-campo-monto] :focus-visible {
+    outline: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -81,10 +81,10 @@
 
 ## 13. Escenario: El campo de monto muestra el prefijo dentro del control
 
-- [ ] 13.1 CARACTERIZACIÓN — Ejecutar `src/components/ui/Campo.test.tsx` en verde.
-- [ ] 13.2 RED — `src/components/ui/Campo.test.tsx`: "El campo de monto muestra el prefijo dentro del control".
-- [ ] 13.3 GREEN — `src/components/ui/Campo.tsx`: borde en el contenedor con `focus-within` (design.md D5).
-- [ ] 13.4 REFACTOR
+- [x] 13.1 CARACTERIZACIÓN — Ejecutar `src/components/ui/Campo.test.tsx` en verde.
+- [x] 13.2 RED — `src/components/ui/Campo.test.tsx`: "El campo de monto muestra el prefijo dentro del control".
+- [x] 13.3 GREEN — `src/components/ui/Campo.tsx`: borde en el contenedor con `focus-within` (design.md D5).
+- [x] 13.4 REFACTOR
 
 ## 14. Escenario: El campo de monto con error marca el control completo
 

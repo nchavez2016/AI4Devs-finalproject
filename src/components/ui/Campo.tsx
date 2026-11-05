@@ -37,10 +37,10 @@ export function Campo({
       aria-invalid={error ? 'true' : undefined}
       inputMode={inputMode}
       className={[
-        'bg-card border rounded-control h-alto-campo px-campo-x text-foreground',
+        monto
+          ? 'h-alto-campo w-full min-w-ninguno bg-transparent text-foreground'
+          : `bg-card border ${claseBorde} rounded-control h-alto-campo px-campo-x text-foreground`,
         claseTexto,
-        claseBorde,
-        monto && 'w-full',
         classNameProp,
       ]
         .filter(Boolean)
@@ -55,7 +55,10 @@ export function Campo({
         {textoEtiqueta}
       </label>
       {monto ? (
-        <div className="flex items-center gap-campo-x">
+        <div
+          data-campo-monto=""
+          className="flex items-center gap-campo-x rounded-control border border-input bg-card px-campo-x"
+        >
           <span
             className="text-importe-campo font-control text-muted-foreground select-none"
             aria-hidden="true"

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { Campo } from './Campo'
 
 describe('Campo', () => {
@@ -59,5 +59,18 @@ describe('Campo', () => {
     expect(input.className).toContain('text-importe-campo')
     expect(input.value).toBe('')
     expect(container.textContent).toContain('$')
+  })
+
+  it('El campo de monto muestra el prefijo dentro del control', () => {
+    render(<Campo etiqueta="Saldo inicial" name="saldoInicial" monto opcional />)
+
+    const input = screen.getByLabelText('Saldo inicial (opcional)') as HTMLInputElement
+    const contenedor = input.parentElement!
+    expect(contenedor.textContent).toContain('$')
+    expect(contenedor.className).toMatch(/(^|\s)border(\s|$)/)
+    expect(input.className).not.toMatch(/(^|\s)border/)
+
+    fireEvent.change(input, { target: { value: '500.00' } })
+    expect(input.value).toBe('500.00')
   })
 })
