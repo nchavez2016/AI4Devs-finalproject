@@ -17,11 +17,11 @@ los componentes, y shadcn/ui adoptado solo donde ahorra trabajo real.
 
 **D1. Dependencias aprobadas por el humano, con versión exacta.**
 
-| Paquete | Para qué | Alternativa descartada |
+| Paquete (instalado) | Para qué | Alternativa descartada |
 |---|---|---|
-| `lucide-react` | Iconos de trazo, uno por import, `aria-hidden` y clase `size-icono` | SVG a mano: sin coherencia de trazo y más código que mantener |
-| `@radix-ui/react-dialog` | Base del Sheet (menú móvil): foco atrapado, Escape y retorno del foco | Paquete `radix-ui` completo: trae primitivas que no se usan |
-| `clsx` | `cn()` de los componentes de shadcn/ui | — |
+| `lucide-react` 1.69.0 | Iconos de trazo, uno por import, `aria-hidden` y clase `size-icono` | SVG a mano: sin coherencia de trazo y más código que mantener |
+| `@radix-ui/react-dialog` 1.3.1 | Base del Sheet (menú móvil): foco atrapado, Escape y retorno del foco | Paquete `radix-ui` completo: trae primitivas que no se usan |
+| `clsx` 2.1.1 | `cn()` de los componentes de shadcn/ui | — |
 
 - **Componentes de shadcn/ui en este change: solo Sheet** (menú móvil). Los selectores son un
   `select` nativo con tokens y la tabla de movimientos es propia (componentes.md 7.4), no la de
