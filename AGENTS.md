@@ -101,4 +101,9 @@ Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, a
 
 ## Registro de IA
 - Al archivar un change, crea `docs/ia/fichas/<change>.md` con la plantilla `docs/ia/plantilla-ficha.md`.
-- Completa fase, herramienta, prompt clave y resultado. Deja "Modelo" y "Ajuste humano" con el texto `COMPLETAR (humano)`.
+- Completa fase, herramienta, resultado, y el prompt clave tomándolo de `docs/ia/registro-prompts.jsonl` (prompts de la sesión del change).
+- En "Ajuste humano" redacta un BORRADOR con las correcciones que el humano pidió durante el change (prompts de corrección, tareas cambiadas en tasks.md). Márcalo `BORRADOR (humano valida)`.
+- Máximo 40 líneas por ficha.
+- "Prompt clave": máximo 10 líneas, solo lo esencial, más `session_id` y `prompt_id` para rastrearlo. No pegar prompts completos.
+- "Ajuste humano": máximo 3 viñetas.
+- Añadir "Tests: iteraciones hasta pasar" y "Salió bien a la primera: sí/no". Eso te da las métricas que `prompts.md` §7 pide.

@@ -15,7 +15,7 @@ actualiza en cada entrega.
 | Herramienta | Versión | Rol en el proyecto |
 |---|---|---|
 | **Claude (chat)** | — | Razonamiento, documentación (PRD, readme) y tutoría basada en el material del curso. No escribe en el repositorio. |
-| **Claude Code** | 2.1.285 | Agente de terminal para el trabajo pesado: proponer changes, ciclos largos de `apply` en TDD, refactors. |
+| **Claude Code** | 2.1.317 | Agente de terminal para el trabajo pesado: proponer changes, ciclos largos de `apply` en TDD, refactors. |
 | **Google Antigravity (IDE)** | — | Entorno de trabajo diario: leer código, ediciones puntuales, revisión visual de lo que produce Claude Code. Sustituye a Cursor manteniendo el mismo proceso del máster. |
 | **OpenSpec** | 1.13.2 | Spec-Driven Development: cada funcionalidad nace como un *change* (proposal, specs, tasks) antes de escribir código. |
 | **Husky + guardia propia** | — | Hooks que bloquean commits inseguros y acciones peligrosas de los agentes (ver sección 3). |
