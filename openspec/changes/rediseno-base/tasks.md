@@ -113,9 +113,9 @@
 
 ## 18. Escenario: Si solo falla un campo posterior, el foco va a ese campo
 
-- [ ] 18.1 RED — `src/app/(privado)/cuentas/FormularioCuenta.test.tsx`: "Si solo falla un campo posterior, el foco va a ese campo".
-- [ ] 18.2 GREEN — `src/components/formularios/useFocoPrimerError.ts`.
-- [ ] 18.3 REFACTOR
+- [x] 18.1 RED — `src/app/(privado)/cuentas/FormularioCuenta.test.tsx`: "Si solo falla un campo posterior, el foco va a ese campo".
+- [x] 18.2 GREEN — `src/components/formularios/useFocoPrimerError.ts`: sin cambios, el hook de 17.2 ya enfoca el primer inválido (RED forzado con una mutación temporal que enfocaba el primer input).
+- [x] 18.3 REFACTOR
 
 ## 19. Escenario: Un error general sin errores de campo no mueve el foco
 

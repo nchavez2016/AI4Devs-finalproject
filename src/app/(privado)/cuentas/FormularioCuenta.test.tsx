@@ -38,4 +38,16 @@ describe('FormularioCuenta', () => {
 
     expect(document.activeElement).toBe(screen.getByRole('textbox', { name: 'Nombre' }))
   })
+
+  it('Si solo falla un campo posterior, el foco va a ese campo', () => {
+    montar({
+      errores: {
+        saldoInicial: ['Escribe un saldo con hasta 2 decimales, por ejemplo 500.00'],
+      },
+    })
+
+    expect(document.activeElement).toBe(
+      screen.getByRole('textbox', { name: 'Saldo inicial (opcional)' })
+    )
+  })
 })
