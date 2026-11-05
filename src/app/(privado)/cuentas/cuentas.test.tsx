@@ -87,9 +87,14 @@ describe('cuentas', () => {
     const datos = await cargarCuentas()
     render(<ContenidoCuentas {...datos} />)
 
-    expect(screen.getByText('Aún no tienes cuentas')).toBeTruthy()
+    expect(
+      screen.getByText('Todavía no tienes cuentas. Crea una para empezar a registrar movimientos.')
+    ).toBeTruthy()
 
-    const boton = screen.getByRole('button', { name: 'Crear mi primera cuenta' })
+    const boton = screen
+      .getAllByRole('button', { name: 'Crear cuenta' })
+      .find((candidato) => !candidato.closest('form'))!
+    expect(boton).toBeTruthy()
     expect(boton.className).toContain('bg-secondary')
     expect(boton.className).not.toContain('bg-primary')
     boton.click()

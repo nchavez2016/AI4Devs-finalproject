@@ -41,9 +41,11 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
         <div className="grid grid-cols-(--columnas-lista-formulario) items-start gap-seccion">
           {cuentas.length === 0 ? (
             <div className="flex flex-col items-start gap-entre-campos">
-              <p className="text-cuerpo text-muted-foreground">Aún no tienes cuentas</p>
+              <p className="text-cuerpo text-muted-foreground">
+                Todavía no tienes cuentas. Crea una para empezar a registrar movimientos.
+              </p>
               <Button type="button" variante="secundario" onClick={enfocarNombre}>
-                Crear mi primera cuenta
+                Crear cuenta
               </Button>
             </div>
           ) : (
