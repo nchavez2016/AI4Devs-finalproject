@@ -81,7 +81,7 @@ describe('categorias', () => {
       fireEvent.submit(formulario)
     })
 
-    expect(screen.getByText('Categoría creada').closest('[aria-live]')).toBeTruthy()
+    expect(screen.getByText('Categoría Publicidad creada.').closest('[aria-live="polite"]')).toBeTruthy()
 
     const filaNueva = screen.getByText('Publicidad').closest('li')!
     expect(filaNueva.className).toContain('animate-resaltado')

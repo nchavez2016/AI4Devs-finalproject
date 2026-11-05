@@ -18,6 +18,8 @@ const etiquetasTipo = {
 export function ContenidoCuentas({ cuentas }: DatosCuentas) {
   const [estado, accion, pendiente] = useActionState(crearCuentaAccion, {})
   const formularioRef = useRef<HTMLFormElement>(null)
+  const nombreCreado = cuentas.find((cuenta) => cuenta.id === estado.idCreado)?.nombre
+  const mensajeExito = nombreCreado ? `Cuenta ${nombreCreado} creada.` : 'Cuenta creada.'
 
   function enfocarNombre() {
     const campo = formularioRef.current?.elements.namedItem('nombre')
@@ -35,7 +37,7 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
         />
 
         <div aria-live="polite" className="text-detalle text-muted-foreground">
-          {estado.exito && 'Cuenta creada'}
+          {estado.exito && mensajeExito}
         </div>
 
         <div className="grid grid-cols-(--columnas-lista-formulario) items-start gap-seccion">

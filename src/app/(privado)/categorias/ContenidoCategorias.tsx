@@ -10,6 +10,11 @@ import { FormularioCategoria } from './FormularioCategoria'
 export function ContenidoCategorias({ ingreso, gasto }: DatosCategorias) {
   const [estado, accion, pendiente] = useActionState(crearCategoriaAccion, {})
 
+  const nombreCreado = [...ingreso, ...gasto].find(
+    (categoria) => categoria.id === estado.idCreado
+  )?.nombre
+  const mensajeExito = nombreCreado ? `Categoría ${nombreCreado} creada.` : 'Categoría creada.'
+
   function claseFila(id: string): string {
     return [
       'px-fila-x py-fila-y border-b border-border text-cuerpo font-control text-foreground',
@@ -28,7 +33,7 @@ export function ContenidoCategorias({ ingreso, gasto }: DatosCategorias) {
         />
 
         <div aria-live="polite" className="text-detalle text-muted-foreground">
-          {estado.exito && 'Categoría creada'}
+          {estado.exito && mensajeExito}
         </div>
 
         <div className="grid grid-cols-(--columnas-lista-formulario) items-start gap-seccion">

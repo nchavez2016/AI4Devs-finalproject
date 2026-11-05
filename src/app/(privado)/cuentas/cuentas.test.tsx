@@ -123,7 +123,7 @@ describe('cuentas', () => {
       fireEvent.submit(formulario)
     })
 
-    expect(screen.getByText('Cuenta creada').closest('[aria-live]')).toBeTruthy()
+    expect(screen.getByText('Cuenta Caja chica creada.').closest('[aria-live="polite"]')).toBeTruthy()
 
     const filaNueva = screen.getByText('Caja chica').closest('li')!
     expect(filaNueva.className).toContain('animate-resaltado')
