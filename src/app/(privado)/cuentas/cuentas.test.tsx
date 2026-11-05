@@ -77,22 +77,6 @@ describe('cuentas', () => {
     ).toBe(explicacion)
   })
 
-  it('Pantalla de cuentas enlaza de vuelta al panel', async () => {
-    authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
-    listarCuentasSimulado.mockResolvedValue([])
-
-    const { cargarCuentas } = await import('@/server/cuentas/pantalla')
-    const { ContenidoCuentas } = await import('./ContenidoCuentas')
-
-    render(<ContenidoCuentas {...(await cargarCuentas())} />)
-
-    const enlace = screen.getByRole('link', { name: 'Volver al panel' })
-    expect(enlace.getAttribute('href')).toBe('/panel')
-
-    enlace.focus()
-    expect(document.activeElement).toBe(enlace)
-  })
-
   it('Pantalla de cuentas sin cuentas muestra el estado vacío', async () => {
     authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
     listarCuentasSimulado.mockResolvedValue([])

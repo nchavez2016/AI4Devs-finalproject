@@ -68,10 +68,10 @@
 
 ## 11. Escenario: Las pantallas privadas no enlazan de vuelta al panel (requiere 0.1)
 
-- [ ] 11.1 CARACTERIZACIÓN — Ejecutar `src/components/EncabezadoPagina.test.tsx`, `cuentas.test.tsx` y `categorias.test.tsx` en verde.
-- [ ] 11.2 RED — `src/app/(privado)/navegacion.test.tsx`: "Las pantallas privadas no enlazan de vuelta al panel".
-- [ ] 11.3 GREEN — Retirar `volverAlPanel` de `src/components/EncabezadoPagina.tsx`, `ContenidoCuentas.tsx` y `ContenidoCategorias.tsx`, y los tests confirmados en 0.1.
-- [ ] 11.4 REFACTOR
+- [x] 11.1 CARACTERIZACIÓN — Ejecutar `src/components/EncabezadoPagina.test.tsx`, `cuentas.test.tsx` y `categorias.test.tsx` en verde.
+- [x] 11.2 RED — `src/app/(privado)/navegacion.test.tsx`: "Las pantallas privadas no enlazan de vuelta al panel".
+- [x] 11.3 GREEN — Retirar `volverAlPanel` de `src/components/EncabezadoPagina.tsx`, `ContenidoCuentas.tsx` y `ContenidoCategorias.tsx`, y los tests confirmados en 0.1.
+- [x] 11.4 REFACTOR
 
 ## 12. Escenario: Las tarjetas de acceso del panel tienen un solo enlace (requiere 0.1)
 

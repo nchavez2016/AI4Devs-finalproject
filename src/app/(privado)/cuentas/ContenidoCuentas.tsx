@@ -31,7 +31,6 @@ export function ContenidoCuentas({ cuentas }: DatosCuentas) {
         <EncabezadoPagina
           titulo="Cuentas"
           proposito="Aquí registras dónde tienes tu dinero: bancos, efectivo y billeteras digitales."
-          volverAlPanel
         />
 
         <div aria-live="polite" className="text-detalle text-muted-foreground">

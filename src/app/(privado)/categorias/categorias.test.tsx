@@ -122,18 +122,6 @@ describe('categorias', () => {
     ).toBe('Aquí defines cómo clasificas tus ingresos y tus gastos.')
   })
 
-  it('Pantalla de categorías enlaza de vuelta al panel', async () => {
-    const { ContenidoCategorias } = await import('./ContenidoCategorias')
-
-    render(<ContenidoCategorias ingreso={[]} gasto={[]} />)
-
-    const enlace = screen.getByRole('link', { name: 'Volver al panel' })
-    expect(enlace.getAttribute('href')).toBe('/panel')
-
-    enlace.focus()
-    expect(document.activeElement).toBe(enlace)
-  })
-
   it('Formulario de categoría muestra el error junto al nombre', async () => {
     const { FormularioCategoria } = await import('./FormularioCategoria')
 

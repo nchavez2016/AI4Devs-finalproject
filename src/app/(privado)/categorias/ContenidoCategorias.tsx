@@ -24,7 +24,6 @@ export function ContenidoCategorias({ ingreso, gasto }: DatosCategorias) {
         <EncabezadoPagina
           titulo="Categorías"
           proposito="Aquí defines cómo clasificas tus ingresos y tus gastos."
-          volverAlPanel
         />
 
         <div aria-live="polite" className="text-detalle text-muted-foreground">
