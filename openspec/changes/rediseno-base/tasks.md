@@ -164,10 +164,10 @@
 
 ## 26. Escenario: El registro se muestra en una tarjeta con la marca
 
-- [ ] 26.1 CARACTERIZACIÓN — `src/app/registro/page.test.tsx`: "La página de registro muestra su título y su formulario" (comportamiento actual).
-- [ ] 26.2 RED — `src/app/registro/page.test.tsx`: "El registro se muestra en una tarjeta con la marca".
-- [ ] 26.3 GREEN — `src/app/registro/page.tsx`.
-- [ ] 26.4 REFACTOR
+- [x] 26.1 CARACTERIZACIÓN — `src/app/registro/page.test.tsx`: "La página de registro muestra su título y su formulario" (comportamiento actual).
+- [x] 26.2 RED — `src/app/registro/page.test.tsx`: "El registro se muestra en una tarjeta con la marca".
+- [x] 26.3 GREEN — `src/app/registro/page.tsx`.
+- [x] 26.4 REFACTOR
 
 ## 27. Skill y cierre
 
