@@ -58,15 +58,15 @@
 
 ## 6. Escenario: El entorno del proceso no se añade al registro
 
-- [ ] 6.1 RED — test llamado exactamente `El entorno del proceso no se añade al registro` que
+- [x] 6.1 RED — test llamado exactamente `El entorno del proceso no se añade al registro` que
   define una variable de entorno de prueba antes de llamar a `procesarEntrada` con un payload
   válido y luego verifica que ninguna clave ni valor de `process.env` aparece en la línea
   escrita; confirmar que falla solo si la implementación llegara a incluir el entorno (test de
   caracterización del comportamiento ya correcto, ya que `procesarEntrada` nunca lee
   `process.env`)
-- [ ] 6.2 GREEN — si el test de 6.1 ya pasa con la implementación de los escenarios 2-5, dejar
+- [x] 6.2 GREEN — si el test de 6.1 ya pasa con la implementación de los escenarios 2-5, dejar
   constancia explícita de que no hizo falta cambiar código de producción
-- [ ] 6.3 REFACTOR — revisar que `procesarEntrada` no importe ni referencie `process.env` en
+- [x] 6.3 REFACTOR — revisar que `procesarEntrada` no importe ni referencie `process.env` en
   ningún punto; dejar constancia en el commit aunque no haya cambios
 
 ## 7. CLI del hook y resolución de ruta

@@ -1,4 +1,4 @@
 # Progreso: registro-ia
-- Siguiente: 6.1 RED — test 'El entorno del proceso no se añade al registro' en scripts/ia/registrar-prompt.test.mjs.
+- Siguiente: 7.1 RED — test 'Resuelve la ruta del log relativa a la raíz del repo' en scripts/ia/registrar-prompt.test.mjs.
 - Decisiones: Ninguna
-- Discrepancias: RED 5.1 falló como se esperaba con SyntaxError (Unterminated string in JSON) al procesar JSON inválido.
+- Discrepancias: RED 6.1 forzado inyectando process.env en objeto; falló con AssertionError (expected not to contain). GREEN no requirió código de producción.

@@ -67,4 +67,24 @@ describe('registrar-prompt', () => {
       fs.rmSync(dirTemporal, { recursive: true, force: true });
     }
   });
+
+  it('El entorno del proceso no se añade al registro', () => {
+    const dirTemporal = fs.mkdtempSync(path.join(os.tmpdir(), 'registro-ia-'));
+    const rutaLogTemporal = path.join(dirTemporal, 'registro-prompts.jsonl');
+    const clavePrueba = 'CUADRE_TEST_ENV_VAR';
+    const valorPrueba = 'secreto_super_confidencial_123';
+    process.env[clavePrueba] = valorPrueba;
+    try {
+      procesarEntrada('{"prompt":"hola sin env"}', rutaLogTemporal);
+      const contenido = fs.readFileSync(rutaLogTemporal, 'utf-8');
+      expect(contenido).not.toContain(clavePrueba);
+      expect(contenido).not.toContain(valorPrueba);
+      const registro = JSON.parse(contenido.trim());
+      expect(registro).not.toHaveProperty('env');
+      expect(registro).not.toHaveProperty('process');
+    } finally {
+      delete process.env[clavePrueba];
+      fs.rmSync(dirTemporal, { recursive: true, force: true });
+    }
+  });
 });
