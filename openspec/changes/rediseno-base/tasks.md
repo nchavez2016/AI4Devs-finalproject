@@ -21,7 +21,7 @@
 ## 3. Dependencias y Sheet (requiere 0.2)
 
 - [x] 3.1 Instalar las dependencias aprobadas con versión exacta y justificarlas en este design.md. Se verifica con `npm run build` y `npm run typecheck`.
-- [ ] 3.2 Copiar Sheet a `src/components/ui/sheet.tsx` y crear `cn()` en `src/lib/cn.ts` (solo `clsx`), adaptados a los tokens. Se verifica con `node scripts/diseno/comprobar-clases.mjs src/components/ui/sheet.tsx` sin hallazgos.
+- [x] 3.2 Copiar Sheet a `src/components/ui/sheet.tsx` y crear `cn()` en `src/lib/cn.ts` (solo `clsx`), adaptados a los tokens. Se verifica con `node scripts/diseno/comprobar-clases.mjs src/components/ui/sheet.tsx` sin hallazgos.
 
 ## 4. Escenario: La cabecera muestra la marca y la navegación principal
 

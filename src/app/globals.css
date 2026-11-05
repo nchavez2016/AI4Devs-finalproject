@@ -138,6 +138,46 @@
   --animate-resaltado: resaltado var(--duracion-resaltado-salida) var(--ease-salida) var(--duracion-resaltado);
   --animate-esqueleto: esqueleto 0ms linear var(--duracion-espera-esqueleto) both;
   --animate-entrada: entrada var(--duracion-entrada) var(--ease-entrada) both;
+  --animate-panel-entrada: panel-entrada var(--duracion-panel) var(--ease-entrada) both;
+  --animate-panel-salida: panel-salida var(--duracion-panel) var(--ease-salida) both;
+  --animate-velo-entrada: velo-entrada var(--duracion-panel) var(--ease-entrada) both;
+  --animate-velo-salida: velo-salida var(--duracion-panel) var(--ease-salida) both;
+
+  @keyframes panel-entrada {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  @keyframes panel-salida {
+    from {
+      transform: none;
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes velo-entrada {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes velo-salida {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 
   @keyframes entrada {
     from {

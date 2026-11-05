@@ -198,6 +198,8 @@ Las sombras de tarjeta se tiñen con la tinta (`30 28 24`), nunca con un color d
 | `--animate-giro` | `@theme static` | fotograma `giro` (rotación 360°), `var(--duracion-giro)`, lineal, infinito | Indicador de carga en botones. |
 | `--animate-resaltado` | `@theme static` | fotograma `resaltado` (de `--color-resaltado` a transparente), `var(--duracion-resaltado-salida)`, `var(--ease-salida)`, retardo `var(--duracion-resaltado)` | Fila recién guardada. |
 | `--animate-esqueleto` | `@theme static` | fotograma `esqueleto` (opacidad de 0 a 1), duración 0ms, retardo `var(--duracion-espera-esqueleto)`, `both` | Aparición del esqueleto de carga tras la espera. Sin pulso ni brillo. |
+| `--animate-panel-entrada`, `--animate-panel-salida` | `@theme static` | fotogramas `panel-entrada` / `panel-salida` (desplazamiento horizontal completo), `var(--duracion-panel)`, `var(--ease-entrada)` / `var(--ease-salida)`, `both` | Panel lateral (Sheet). Con movimiento reducido la duración es 0ms. |
+| `--animate-velo-entrada`, `--animate-velo-salida` | `@theme static` | fotogramas `velo-entrada` / `velo-salida` (opacidad), `var(--duracion-panel)`, `both` | Velo detrás del Sheet y los diálogos. |
 | `--animate-entrada` | `@theme static` | fotograma `entrada` (opacidad de 0 a 1 y subida de `--desplazamiento-entrada`), `var(--duracion-entrada)`, `var(--ease-entrada)`, `both` | Entrada breve del contenedor de la página. Con movimiento reducido vale `none`. |
 
 Con `prefers-reduced-motion: reduce` solo cambian valores de estos tokens (movimiento.md, sección 6).
