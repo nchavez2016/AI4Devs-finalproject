@@ -119,9 +119,9 @@
 
 ## 19. Escenario: Un error general sin errores de campo no mueve el foco
 
-- [ ] 19.1 RED — `src/app/(privado)/cuentas/FormularioCuenta.test.tsx`: "Un error general sin errores de campo no mueve el foco".
-- [ ] 19.2 GREEN — `src/components/formularios/useFocoPrimerError.ts`.
-- [ ] 19.3 REFACTOR
+- [x] 19.1 RED — `src/app/(privado)/cuentas/FormularioCuenta.test.tsx`: "Un error general sin errores de campo no mueve el foco".
+- [x] 19.2 GREEN — `src/components/formularios/useFocoPrimerError.ts`: sin cambios, el hook solo enfoca un campo con `aria-invalid` (RED forzado con una mutación temporal que enfocaba el primer input como respaldo).
+- [x] 19.3 REFACTOR
 
 ## 20. Escenario: El formulario de categoría enfoca el nombre con error
 

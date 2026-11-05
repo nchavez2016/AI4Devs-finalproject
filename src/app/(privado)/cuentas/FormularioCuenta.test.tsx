@@ -50,4 +50,14 @@ describe('FormularioCuenta', () => {
       screen.getByRole('textbox', { name: 'Saldo inicial (opcional)' })
     )
   })
+
+  it('Un error general sin errores de campo no mueve el foco', () => {
+    const { container } = montar({ mensaje: 'No pudimos guardar la cuenta. Inténtalo de nuevo.' })
+
+    expect(screen.getByRole('alert').textContent).toBe(
+      'No pudimos guardar la cuenta. Inténtalo de nuevo.'
+    )
+    expect(container.contains(document.activeElement)).toBe(false)
+    expect(document.activeElement).toBe(document.body)
+  })
 })
