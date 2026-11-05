@@ -31,9 +31,9 @@
 
 ## 5. Escenario: La cabecera marca la sección activa
 
-- [ ] 5.1 RED — `src/components/navegacion/secciones.test.ts`: "La cabecera marca la sección activa".
-- [ ] 5.2 GREEN — `src/components/navegacion/secciones.ts` (`seccionActiva`) y `aria-current` en `NavegacionPrincipal.tsx`.
-- [ ] 5.3 REFACTOR
+- [x] 5.1 RED — `src/components/navegacion/secciones.test.ts`: "La cabecera marca la sección activa".
+- [x] 5.2 GREEN — `src/components/navegacion/secciones.ts` (`seccionActiva`) y `aria-current` en `NavegacionPrincipal.tsx`.
+- [x] 5.3 REFACTOR
 
 ## 6. Escenario: Una subruta mantiene activa su sección
 

@@ -1,23 +1,33 @@
-import Link from 'next/link'
+'use client'
 
-export const SECCIONES = [
-  { href: '/panel', etiqueta: 'Panel' },
-  { href: '/cuentas', etiqueta: 'Cuentas' },
-  { href: '/categorias', etiqueta: 'Categorías' },
-] as const
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/cn'
+import { SECCIONES, seccionActiva } from './secciones'
 
 export function NavegacionPrincipal() {
+  const activa = seccionActiva(usePathname())
+
   return (
     <nav aria-label="Principal" className="flex items-center gap-acciones">
-      {SECCIONES.map((seccion) => (
-        <Link
-          key={seccion.href}
-          href={seccion.href}
-          className="inline-flex h-alto-control items-center rounded-control px-control-x text-cuerpo font-control text-muted-foreground transition-colors hover:text-foreground"
-        >
-          {seccion.etiqueta}
-        </Link>
-      ))}
+      {SECCIONES.map((seccion) => {
+        const esActiva = seccion.href === activa
+        return (
+          <Link
+            key={seccion.href}
+            href={seccion.href}
+            aria-current={esActiva ? 'page' : undefined}
+            className={cn(
+              'inline-flex h-alto-control items-center border-b px-control-x text-cuerpo transition-colors',
+              esActiva
+                ? 'border-primary font-enfasis text-foreground'
+                : 'border-transparent font-control text-muted-foreground hover:text-foreground'
+            )}
+          >
+            {seccion.etiqueta}
+          </Link>
+        )
+      })}
     </nav>
   )
 }
