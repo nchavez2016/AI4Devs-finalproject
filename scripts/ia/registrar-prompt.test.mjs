@@ -45,4 +45,15 @@ describe('registrar-prompt', () => {
       fs.rmSync(dirTemporal, { recursive: true, force: true });
     }
   });
+
+  it('Con stdin vacío no falla ni escribe', () => {
+    const dirTemporal = fs.mkdtempSync(path.join(os.tmpdir(), 'registro-ia-'));
+    const rutaLogTemporal = path.join(dirTemporal, 'registro-prompts.jsonl');
+    try {
+      expect(() => procesarEntrada('', rutaLogTemporal)).not.toThrow();
+      expect(fs.existsSync(rutaLogTemporal)).toBe(false);
+    } finally {
+      fs.rmSync(dirTemporal, { recursive: true, force: true });
+    }
+  });
 });

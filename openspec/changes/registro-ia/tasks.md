@@ -34,14 +34,14 @@
 
 ## 4. Escenario: Con stdin vacío no falla ni escribe
 
-- [ ] 4.1 RED — test llamado exactamente `Con stdin vacío no falla ni escribe` que llama a
+- [x] 4.1 RED — test llamado exactamente `Con stdin vacío no falla ni escribe` que llama a
   `procesarEntrada('', rutaLogTemporal)` sobre un archivo inexistente y espera que no se cree el
   archivo y que la llamada no lance excepción; confirmar que falla porque `procesarEntrada`
   intenta parsear la cadena vacía como JSON
-- [ ] 4.2 GREEN — en `procesarEntrada`, si el texto recibido (tras `trim()`) está vacío, retornar
+- [x] 4.2 GREEN — en `procesarEntrada`, si el texto recibido (tras `trim()`) está vacío, retornar
   sin intentar `JSON.parse` ni escribir; verificar que el test de 4.1 pasa y que los tests de los
   escenarios 2 y 3 siguen en verde
-- [ ] 4.3 REFACTOR — revisar la claridad de la guarda de entrada vacía; dejar constancia en el
+- [x] 4.3 REFACTOR — revisar la claridad de la guarda de entrada vacía; dejar constancia en el
   commit aunque no haya cambios
 
 ## 5. Escenario: Con JSON inválido no falla

@@ -1,4 +1,4 @@
 # Progreso: registro-ia
-- Siguiente: 4.1 RED — test 'Con stdin vacío no falla ni escribe' en scripts/ia/registrar-prompt.test.mjs.
+- Siguiente: 5.1 RED — test 'Con JSON inválido no falla' en scripts/ia/registrar-prompt.test.mjs.
 - Decisiones: Ninguna
-- Discrepancias: RED 3.1 forzado con fs.writeFileSync; falló como se esperaba con AssertionError (expected length 2 but got 1).
+- Discrepancias: RED 4.1 falló como se esperaba con SyntaxError (Unexpected end of JSON input) al procesar string vacío.
