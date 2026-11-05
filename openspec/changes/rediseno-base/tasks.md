@@ -172,5 +172,5 @@
 ## 27. Skill y cierre
 
 - [x] 27.1 Actualizar `.agents/skills/ux-cuadre/SKILL.md` (cabecera, composición en dos columnas, elevación, iconos, animación de entrada y referencias a los .md) y avisar al humano para que la copie a `.claude/skills/`. Se verifica releyendo que ya no prohíbe lo relajado ni pide "← Volver".
-- [ ] 27.2 Revisar cuentas, categorías, panel, login y registro a 360 px y a 1280 px con checklist.md, y anotar los hallazgos en progress.md.
-- [ ] 27.3 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate rediseno-base --strict`, todo sin errores.
+- [x] 27.2 Revisar cuentas, categorías, panel, login y registro a 360 px y a 1280 px con checklist.md, y anotar los hallazgos en progress.md.
+- [x] 27.3 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y `openspec validate rediseno-base --strict`, todo sin errores.

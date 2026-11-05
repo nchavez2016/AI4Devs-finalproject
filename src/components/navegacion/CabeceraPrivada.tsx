@@ -7,8 +7,8 @@ import { NavegacionPrincipal } from './NavegacionPrincipal'
 
 export function CabeceraPrivada() {
   return (
-    <header className="border-b border-border bg-card">
-      <div className="mx-auto flex h-alto-cabecera w-full max-w-contenido items-center justify-between gap-seccion px-pagina">
+    <header className="border-b border-border bg-card px-pagina">
+      <div className="mx-auto flex h-alto-cabecera w-full max-w-contenido items-center justify-between gap-seccion">
         <Link href="/panel" className="rounded-control">
           <MarcaCuadre />
         </Link>
