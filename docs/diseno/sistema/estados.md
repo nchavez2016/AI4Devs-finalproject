@@ -9,8 +9,9 @@ implementarse.
 
 ### 9.1 Vacío
 
-- Estructura: una frase que dice qué falta, una que dice qué hacer y **un** botón que lo hace. Sin ilustraciones ni iconos en círculos. — Por qué: el vacío es un paso del flujo, no un hueco que decorar.
-- **Primer uso sin cuentas:** "Todavía no tienes cuentas. Crea una para empezar a registrar movimientos." → primario "Crear cuenta". — Por qué: no se puede registrar sin cuenta; se guía al paso previo.
+- Estructura: una frase que dice qué falta, una que dice qué hacer y **un** botón que lo hace. Sin ilustraciones; un icono pequeño en su contenedor (componentes.md, 7.3) es opcional. — Por qué: el vacío es un paso del flujo, no un hueco que decorar.
+- **El botón del vacío es primario solo si la vista no tiene otro primario.** Si la vista ya incluye un formulario con su botón primario (cuentas, categorías), el botón del vacío es secundario y lleva el foco al formulario. — Por qué: un solo botón primario por vista (brief.md, principios obligatorios).
+- **Primer uso sin cuentas:** "Todavía no tienes cuentas. Crea una para empezar a registrar movimientos." → "Crear cuenta", secundario en la pantalla de cuentas porque el primario es el del formulario. — Por qué: no se puede registrar sin cuenta; se guía al paso previo.
 - **Dashboard sin movimientos (HU-003):** los totales se muestran en `$0,00`, y debajo: "No hay movimientos en este período." → primario "Registrar movimiento". — Por qué: lo exige el criterio de aceptación, y el cero también es un dato.
 - **Vacío por filtro:** "No hay movimientos del 1 al 15 de septiembre." → terciario "Quitar filtros". — Por qué: no es lo mismo que no tener datos, y no debe empujar a crear nada.
 - Tono: frases directas y concretas. Prohibido el lenguaje de marketing ("¡Toma el control de tus finanzas!"). — Por qué: criterio anti-IA del brief; el usuario está trabajando, no comprando.

@@ -28,7 +28,9 @@ Sección 10 del sistema de diseño. Índice completo en [README.md](README.md).
 - [ ] Las tarjetas y filas clicables lo son en toda su superficie y no contienen otros interactivos.
 - [ ] Los botones mantienen su ancho en carga y no se pueden pulsar dos veces.
 - [ ] Toda eliminación pasa por un diálogo de confirmación que nombra el elemento.
-- [ ] No hay una rejilla de tarjetas idénticas, iconos en círculos de color ni `rounded-full`.
+- [ ] No hay una rejilla de tarjetas idénticas ni `rounded-full`; las tarjetas usan `shadow-tarjeta` y los iconos van en su contenedor con `aria-hidden` (componentes.md, 7.3 y 7.8).
+- [ ] La pantalla usa la cabecera compartida y no lleva su propio enlace "← Volver" (componentes.md, 7.7).
+- [ ] En escritorio, lista y formulario van en dos columnas (`grid-cols-(--columnas-lista-formulario)`), con el formulario en una tarjeta con título; en móvil, una columna.
 
 **Estados**
 - [ ] Están diseñados los estados vacío (y vacío por filtro si hay filtros), carga, error y éxito.
@@ -59,9 +61,9 @@ Sección 10 del sistema de diseño. Índice completo en [README.md](README.md).
 - [ ] No se pide dos veces un dato que el usuario ya introdujo en el mismo flujo (criterio 3.3.7).
 
 **Movimiento**
-- [ ] Nada se anima al cargar la pantalla.
+- [ ] Solo el contenedor de la página entra, una vez, con `animate-entrada`; ninguna tarjeta ni fila se anima por separado.
 - [ ] Toda duración y curva sale de los tokens de tokens.md, 3.3.8.
-- [ ] Con movimiento reducido activado, no hay desplazamientos ni giros continuos.
+- [ ] Con movimiento reducido activado, no hay desplazamientos, entrada de página ni giros continuos.
 
 **Formato regional**
 - [ ] Importes y fechas usan `es-EC` y la zona horaria `America/Guayaquil`.

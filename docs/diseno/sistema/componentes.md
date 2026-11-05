@@ -39,11 +39,11 @@ a su clase: `bg-primary`, `text-detalle`, `h-alto-control`, `rounded-control`.
 
 **Campo de monto**
 - `inputmode="decimal"`; acepta coma o punto decimal y al salir del campo se muestra en formato `es-EC` ("25,50"). — Por qué: en el móvil aparece el teclado numérico y en Ecuador se escriben ambos separadores.
-- Prefijo `$` fijo y no editable; cifra en `importe-campo`. — Por qué: la cantidad es el dato protagonista del registro.
+- Prefijo `$` fijo y no editable, **dentro del mismo contenedor con borde** que el texto escrito: el borde (`input`, o `destructive` con error) y el foco (`focus-within`) pertenecen al contenedor, y el `input` interior no lleva borde. El prefijo no forma parte del valor enviado ni del nombre accesible. Cifra en `importe-campo`. — Por qué: la cantidad es el dato protagonista del registro y el "$" y la cifra se leen como una sola cosa.
 - Sin signo: el tipo (Ingreso o Gasto) decide si suma o resta. — Por qué: coincide con la regla del dominio (monto siempre mayor que 0).
 
 **Selector de tipo (Ingreso / Gasto)**
-- Grupo de dos radios en forma de control segmentado, cada opción con icono y texto: "− Gasto", "+ Ingreso". "Gasto" va primero y es la opción por defecto. — Por qué: es el movimiento más frecuente, y el tipo se distingue sin color.
+- Grupo de dos radios en forma de control segmentado, cada opción con icono (`Minus` / `Plus` de la librería de iconos, 7.8) y texto: "− Gasto", "+ Ingreso". "Gasto" va primero y es la opción por defecto. — Por qué: es el movimiento más frecuente, y el tipo se distingue sin color.
 - Opción seleccionada: fondo `card` (Gasto) o `ingreso-fondo` (Ingreso), borde `input`, peso `enfasis`. Opción no seleccionada: sobre `muted`, peso `lectura`. Alto `alto-control`. — Por qué: la selección se ve por forma y peso, no solo por color.
 
 **Orden del registro en móvil:** Tipo → Monto (recibe el foco al abrir) → Categoría (filtrada por
@@ -52,11 +52,17 @@ Descripción (opcional). — Por qué: el caso habitual se completa con monto y 
 
 ### 7.3 Tarjeta
 
-- Fondo `card`, borde `border`, radio `superficie`, relleno `tarjeta`, sin sombra. — Por qué: separa sin la rejilla de tarjetas con sombra prohibida.
-- Se usa para **agrupar** contenido (por ejemplo, "Saldo por cuenta"), no para envolver cada dato. — Por qué: tarjetas dentro de tarjetas e importes sueltos en cajas es el patrón de plantilla que se quiere evitar.
+- Fondo `card`, borde `border`, radio `superficie`, relleno `tarjeta`, elevación `shadow-tarjeta`. Nunca `rounded-full` ni sombras de color. — Por qué: la elevación suave separa la tarjeta del papel sin recurrir a la rejilla de tarjetas redondeadas.
+- Se usa para **agrupar** contenido (por ejemplo, "Saldo por cuenta" o el formulario de una pantalla, con su título `h2`), no para envolver cada dato. — Por qué: tarjetas dentro de tarjetas e importes sueltos en cajas es el patrón de plantilla que se quiere evitar.
+- **Tarjeta de formulario:** título `h2` en `titulo-seccion` dentro de la tarjeta, formulario debajo y un único botón primario. — Por qué: el formulario queda como un objeto con nombre, y el título lo enlaza con la sección.
 - El balance del período no va en una tarjeta: es tipografía (`importe-principal`) directamente sobre el papel, encabezando el dashboard. — Por qué: da una jerarquía clara y rompe la rejilla de piezas iguales.
-- **Tarjeta clicable:** toda la tarjeta es un único enlace (el enlace del título se extiende a toda la superficie); en hover el borde pasa a `input` y el fondo a `muted`; con el foco de teclado el anillo rodea toda la tarjeta. — Por qué: Ley de Fitts, y hay un solo destino que anunciar.
+- **Tarjeta clicable:** toda la tarjeta es un único enlace (el enlace del título se extiende a toda la superficie); en hover el borde pasa a `input`, el fondo a `muted` y la sombra a `shadow-tarjeta-hover`; con el foco de teclado el anillo rodea toda la tarjeta. — Por qué: Ley de Fitts, y hay un solo destino que anunciar.
 - Una tarjeta clicable no contiene otros botones ni enlaces. — Por qué: los interactivos anidados generan clics ambiguos y rompen la navegación por teclado.
+
+**Contenedor de icono**
+- Cuadrado de lado `contenedor-icono`, fondo `icono-fondo`, radio `contenedor-icono` (nunca `rounded-full`), con el icono centrado en `icono` y tamaño `icono`. — Por qué: ancla visualmente cada acceso sin usar color de significado; el icono (7,34 sobre su fondo) siempre acompaña a un texto.
+- El icono es decorativo: `aria-hidden="true"`; el nombre accesible lo da el texto de la tarjeta. — Por qué: no se anuncia dos veces.
+- Se usa en las tarjetas de acceso del panel y, de forma opcional, en el estado vacío. No se pone un contenedor de icono en cada fila ni en cada dato. — Por qué: evita el patrón de iconos repetidos en cada elemento.
 
 ### 7.4 Lista y tabla de movimientos
 
@@ -73,6 +79,11 @@ Descripción (opcional). — Por qué: el caso habitual se completa con monto y 
 - Filas de `alto-fila-tabla`, renglón `border`, hover `muted`; orden por fecha descendente. — Por qué: lo más reciente es lo que se busca.
 - Fecha corta `es-EC` ("28 sept 2026"); la descripción se trunca y el texto completo está en la edición. — Por qué: las columnas no cambian de ancho entre filas.
 - Editar y eliminar se hacen desde la vista de edición del movimiento, no con iconos en cada fila. — Por qué: la fila queda limpia y la acción destructiva, lejos de un clic accidental.
+
+**Barra de filtros (encima de la tabla y de la lista)**
+- Una fila de controles sobre la tabla, separada `acciones`: selectores nativos (7.2) con su etiqueta visible, y "Quitar filtros" terciario a la derecha, visible solo si hay un filtro activo. En móvil los controles se apilan a todo el ancho. — Por qué: los filtros se ven de un vistazo y se pueden quitar de una vez.
+- Los filtros avanzados (rangos libres, múltiples categorías, búsqueda de texto) quedan fuera del MVP y se tratan después de la entrega. — Por qué: el MVP necesita período, cuenta y categoría.
+- La barra no es una tarjeta. — Por qué: evita tarjetas dentro de tarjetas.
 
 ### 7.5 Importe
 
@@ -94,3 +105,26 @@ Se formatea con `Intl.NumberFormat('es-EC', { style: 'currency', currency: 'USD'
 - Siempre dos decimales y separador de miles; nunca abreviaturas ("1,2 k"). — Por qué: quien cuadra caja necesita el céntimo exacto.
 - El valor llega del servidor como `Decimal` serializado en texto y se formatea sin pasar por aritmética con `number`. — Por qué: coherente con la regla de dinero del proyecto; el formateo no debe redondear.
 - Alineado a la derecha en listas y tablas, en uno de tres tamaños: `cuerpo` (fila), `importe-resumen` o `importe-principal`. — Por qué: tres tamaños bastan para la jerarquía del MVP.
+
+### 7.6 Diálogo
+
+- Capa `popover` con borde `border`, radio `superficie`, sombra `shadow-flotante`, ancho máximo `container-dialogo`, relleno `tarjeta`, sobre un `velo`. Entrada con opacidad en `duracion-panel`. — Por qué: se distingue de la página y no tapa el contexto de golpe.
+- Título (`h2`), una frase que nombra lo que se afecta y, abajo, los botones: el secundario "Cancelar" a la izquierda y la acción a la derecha. En una eliminación, el destructivo solo aparece aquí (7.1). — Por qué: la acción segura es la más fácil de elegir.
+- Atrapa el foco, se cierra con Escape y devuelve el foco a quien lo abrió. El foco inicial va a "Cancelar" en acciones destructivas y al primer campo en un formulario. — Por qué: es un criterio de accesibilidad y de seguridad.
+- El Sheet del menú móvil (7.7) comparte la misma base. Un diálogo de confirmación se construye cuando una pantalla lo necesita, siguiendo esta especificación. — Por qué: no se adelanta código sin uso.
+
+### 7.7 Cabecera de la app
+
+- Barra superior de alto `alto-cabecera`, fondo `card`, renglón inferior `border`, sin sombra, dentro de `contenido` y con margen `pagina`. Contiene, de izquierda a derecha: la marca, la navegación principal y "Cerrar sesión". — Por qué: las acciones globales están siempre en el mismo sitio.
+- **Marca:** el nombre "Cuadre" en `font-titulo` con un distintivo cuadrado en `degradado-marca` y `primary-foreground`; es un enlace a /panel. — Por qué: da identidad sin competir con el contenido.
+- **Navegación:** enlaces "Panel", "Cuentas" y "Categorías" (y "Transacciones" cuando exista). El enlace de la sección activa lleva `aria-current="page"`, peso `enfasis` y un subrayado de `primary`; los demás van en `muted-foreground` con hover `foreground`. — Por qué: la sección activa se ve por forma y no solo por color.
+- **Cerrar sesión:** botón terciario, nunca el primario de la vista. — Por qué: no compite con la acción principal de la pantalla.
+- **Móvil (por debajo de `escritorio`):** la navegación y "Cerrar sesión" se agrupan en un menú que se abre con el botón "Abrir menú" (icono `Menu`, `objetivo-tactil`, `aria-expanded`) y se muestra en un Sheet lateral que atrapa el foco, se cierra con Escape o al elegir un enlace y devuelve el foco al botón. — Por qué: en 360 px no caben tres enlaces y el botón.
+- El `h1` de cada pantalla pertenece a su `EncabezadoPagina`, dentro de `main`; la cabecera no lleva `h1`. — Por qué: un único `h1` por pantalla.
+- No hay enlace "← Volver al panel" en las pantallas: la cabecera lo sustituye. — Por qué: un solo mecanismo de navegación.
+
+### 7.8 Iconos
+
+- Librería: `lucide-react`, un import por icono. Tamaño `icono` (o `icono-detalle` junto a `detalle`), grosor de trazo por defecto, `aria-hidden="true"` cuando acompañan a un texto y `aria-label` cuando están solos (7.1). — Por qué: un trazo coherente y sin pesos distintos en cada pantalla.
+- El color de un icono hereda del texto (`currentColor`), salvo dentro de un contenedor de icono (`icono`). — Por qué: no se añaden colores nuevos.
+- No se usan iconos para sustituir al texto de una acción ni para decorar cada fila. — Por qué: el texto con verbo y objeto sigue siendo la etiqueta.

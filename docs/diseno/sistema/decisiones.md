@@ -90,7 +90,7 @@ Los ratios citados se calcularon con la fórmula de luminancia relativa de WCAG 
 > renglones finos y cifras alineadas en columna.
 > El color solo aparece cuando significa algo: entra dinero, hay un problema o se puede actuar.
 
-- Fondo papel cálido y superficies blancas, sin sombras. — Por qué: separa zonas sin la rejilla de tarjetas prohibida.
+- Fondo papel cálido y superficies blancas con borde fino y una elevación suave en las tarjetas. — Por qué: separa zonas sin la rejilla de tarjetas redondeadas que sigue prohibida.
 - Serif solo en los títulos y sans con cifras tabulares en todo lo demás. — Por qué: da identidad sin sacrificar la lectura de números.
 - **Los gastos van en tinta, no en rojo**; el rojo queda para los errores, lo destructivo y los saldos negativos. — Por qué: en un negocio la mayoría de filas son gastos; pintarlas de rojo genera fatiga de alarma y confunde un gasto normal con un error.
 - Por qué se recomienda: nace del nombre y del problema del producto (reemplazar el cuaderno o el Excel que "se descuadra") y responde a la prioridad de leer cifras con claridad.

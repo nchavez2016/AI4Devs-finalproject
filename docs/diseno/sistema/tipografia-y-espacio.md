@@ -35,13 +35,14 @@ Valores en tokens.md, 3.3.3 a 3.3.7.
 
 **Radios**
 - Dos radios: `--radius-control` (4 px) y `--radius-superficie` (6 px). — Por qué: firme en lo que se pulsa y un punto más suave en lo que contiene, sin llegar a "inflado".
-- Sin píldoras ni círculos de color: `rounded-full` no se usa en componentes, y los iconos van sueltos. — Por qué: son rasgos anti-IA listados.
+- Sin píldoras ni círculos: `rounded-full` no se usa en componentes. Los iconos pueden ir en un contenedor redondeado (`--radius-contenedor-icono`, componentes.md 7.3), nunca en un círculo. — Por qué: las píldoras siguen siendo un rasgo anti-IA; el contenedor cuadrado de esquinas suaves no.
 
 **Bordes y foco**
 - Un único ancho de borde (1 px). Se usa `--color-border` en renglones, separadores y tarjetas; `--color-input` en controles; y `--color-destructive` más icono y mensaje en campos con error. — Por qué: la jerarquía la da el color del borde, no su grosor; el error nunca se comunica solo con color.
 - El foco se define una sola vez en la hoja global para `:focus-visible`: contorno de `--default-outline-width` en `--color-ring`, separado `--foco-separacion`. Los componentes no lo redefinen. — Por qué: un foco idéntico y visible en toda la app (8,28:1).
 
 **Elevación**
-- Nivel 0 para todo lo que vive en la página: sin sombra. — Por qué: la jerarquía la dan la tipografía, el papel y el blanco, no la profundidad.
-- Nivel 1, `--shadow-flotante` más borde `--color-border`, solo para lo que flota: menús, selectores, diálogos y panel inferior. — Por qué: lo que tapa contenido debe notarse.
+- Nivel 0 para filas, cabeceras, campos y todo lo que vive en la página sin ser una tarjeta: sin sombra. — Por qué: la jerarquía la dan la tipografía, el papel y el blanco.
+- Nivel 1, `--shadow-tarjeta` (y `--shadow-tarjeta-hover` en una tarjeta clicable) más borde `--color-border`, para las tarjetas que agrupan contenido. — Por qué: una elevación suave separa la tarjeta del papel (decisión del 2026-11-05).
+- Nivel 2, `--shadow-flotante` más borde `--color-border`, solo para lo que flota: menús, selectores, diálogos y panel inferior. — Por qué: lo que tapa contenido debe notarse más que una tarjeta.
 - Detrás de diálogos y panel, `--color-velo` sin blur. — Por qué: aísla la capa; el blur está prohibido.
