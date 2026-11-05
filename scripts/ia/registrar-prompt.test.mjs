@@ -26,4 +26,23 @@ describe('registrar-prompt', () => {
       fs.rmSync(dirTemporal, { recursive: true, force: true });
     }
   });
+
+  it('Agrega sin sobrescribir', () => {
+    const dirTemporal = fs.mkdtempSync(path.join(os.tmpdir(), 'registro-ia-'));
+    const rutaLogTemporal = path.join(dirTemporal, 'registro-prompts.jsonl');
+    try {
+      const lineaPrevia = JSON.stringify({ prompt: 'primero', fechaRegistro: '2026-01-01T00:00:00.000Z' }) + '\n';
+      fs.writeFileSync(rutaLogTemporal, lineaPrevia);
+
+      procesarEntrada('{"prompt":"segundo"}', rutaLogTemporal);
+
+      const contenido = fs.readFileSync(rutaLogTemporal, 'utf-8');
+      const lineas = contenido.trim().split('\n');
+      expect(lineas).toHaveLength(2);
+      expect(JSON.parse(lineas[0]).prompt).toBe('primero');
+      expect(JSON.parse(lineas[1]).prompt).toBe('segundo');
+    } finally {
+      fs.rmSync(dirTemporal, { recursive: true, force: true });
+    }
+  });
 });

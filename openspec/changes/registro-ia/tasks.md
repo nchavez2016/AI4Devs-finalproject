@@ -22,14 +22,14 @@
 
 ## 3. Escenario: Agrega sin sobrescribir
 
-- [ ] 3.1 RED — test llamado exactamente `Agrega sin sobrescribir` que escribe una línea previa
+- [x] 3.1 RED — test llamado exactamente `Agrega sin sobrescribir` que escribe una línea previa
   en el archivo temporal, llama a `procesarEntrada` con un segundo payload válido y espera que el
   archivo final tenga ambas líneas en orden; confirmar que falla si la implementación actual
   sobrescribe o no soporta el caso (si ya pasa por el uso de `appendFileSync` del 2.2, forzar el
   RED comentando temporalmente el append para observar el fallo esperado)
-- [ ] 3.2 GREEN — confirmar/ajustar `procesarEntrada` para que el test de 3.1 pase sin modificar
+- [x] 3.2 GREEN — confirmar/ajustar `procesarEntrada` para que el test de 3.1 pase sin modificar
   el comportamiento del escenario 2
-- [ ] 3.3 REFACTOR — revisar que no haya duplicación entre este test y el de 2.1; dejar
+- [x] 3.3 REFACTOR — revisar que no haya duplicación entre este test y el de 2.1; dejar
   constancia en el commit aunque no haya cambios
 
 ## 4. Escenario: Con stdin vacío no falla ni escribe
