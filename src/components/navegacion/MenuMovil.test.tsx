@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { fireEvent, render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { MenuMovil } from './MenuMovil'
 
 vi.mock('next/navigation', () => ({
@@ -25,5 +25,19 @@ describe('MenuMovil', () => {
     const enlaces = within(dialogo).getAllByRole('link')
     expect(enlaces.map((enlace) => enlace.textContent)).toEqual(['Panel', 'Cuentas', 'Categorías'])
     expect(within(dialogo).getByRole('button', { name: 'Cerrar sesión' })).toBeTruthy()
+  })
+
+  it('Escape cierra el menú móvil y devuelve el foco', async () => {
+    render(<MenuMovil />)
+
+    const abrir = screen.getByRole('button', { name: 'Abrir menú' })
+    fireEvent.click(abrir)
+    await screen.findByRole('dialog')
+
+    fireEvent.keyDown(document, { key: 'Escape' })
+
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull())
+    await waitFor(() => expect(document.activeElement).toBe(abrir))
+    expect(abrir.getAttribute('aria-expanded')).toBe('false')
   })
 })

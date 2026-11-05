@@ -56,9 +56,9 @@
 
 ## 9. Escenario: Escape cierra el menú móvil y devuelve el foco
 
-- [ ] 9.1 RED — `src/components/navegacion/MenuMovil.test.tsx`: "Escape cierra el menú móvil y devuelve el foco".
-- [ ] 9.2 GREEN — `src/components/navegacion/MenuMovil.tsx`.
-- [ ] 9.3 REFACTOR
+- [x] 9.1 RED — `src/components/navegacion/MenuMovil.test.tsx`: "Escape cierra el menú móvil y devuelve el foco".
+- [x] 9.2 GREEN — `src/components/navegacion/MenuMovil.tsx`: sin cambios de código, el comportamiento lo da Radix Dialog (RED forzado con una mutación temporal que ignoraba Escape).
+- [x] 9.3 REFACTOR
 
 ## 10. Escenario: Elegir una sección cierra el menú móvil
 
