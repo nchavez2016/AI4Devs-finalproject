@@ -161,7 +161,8 @@ Ajuste humano: la guardia la revisa y la edita solo el autor.
 - **Datos no verificables** (cifras de productividad citadas en clase) no se
   usan en los entregables.
 - **Correcciones al output de la IA:** sin ajuste
-
+- **decisiones y criterio humano** El hook de protección bloqueó un comando del agente que apuntaba a .claude/ y encadenaba órdenes. 
+	El agente se detuvo y avisó, como exige AGENTS.md, y se reanudó con instrucciones más acotadas
 ---
 
 ## 7. Pendiente para la entrega final
