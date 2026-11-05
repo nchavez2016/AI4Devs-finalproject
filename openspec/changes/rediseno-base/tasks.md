@@ -157,10 +157,10 @@
 
 ## 25. Escenario: El inicio de sesión se muestra en una tarjeta con la marca
 
-- [ ] 25.1 CARACTERIZACIÓN — `src/app/login/page.test.tsx`: "La página de inicio de sesión muestra su título y su formulario" (comportamiento actual).
-- [ ] 25.2 RED — `src/app/login/page.test.tsx`: "El inicio de sesión se muestra en una tarjeta con la marca".
-- [ ] 25.3 GREEN — `src/components/MarcaCuadre.tsx` y `src/app/login/page.tsx`.
-- [ ] 25.4 REFACTOR
+- [x] 25.1 CARACTERIZACIÓN — `src/app/login/page.test.tsx`: "La página de inicio de sesión muestra su título y su formulario" (comportamiento actual).
+- [x] 25.2 RED — `src/app/login/page.test.tsx`: "El inicio de sesión se muestra en una tarjeta con la marca".
+- [x] 25.3 GREEN — `src/components/MarcaCuadre.tsx` y `src/app/login/page.tsx`.
+- [x] 25.4 REFACTOR
 
 ## 26. Escenario: El registro se muestra en una tarjeta con la marca
 
