@@ -25,9 +25,9 @@
 
 ## 4. Escenario: La cabecera muestra la marca y la navegación principal
 
-- [ ] 4.1 RED — `src/components/navegacion/CabeceraPrivada.test.tsx`: "La cabecera muestra la marca y la navegación principal".
-- [ ] 4.2 GREEN — `src/components/navegacion/CabeceraPrivada.tsx`, `NavegacionPrincipal.tsx` y `src/app/(privado)/layout.tsx`.
-- [ ] 4.3 REFACTOR
+- [x] 4.1 RED — `src/components/navegacion/CabeceraPrivada.test.tsx`: "La cabecera muestra la marca y la navegación principal".
+- [x] 4.2 GREEN — `src/components/navegacion/CabeceraPrivada.tsx`, `NavegacionPrincipal.tsx` y `src/app/(privado)/layout.tsx`.
+- [x] 4.3 REFACTOR
 
 ## 5. Escenario: La cabecera marca la sección activa
 
