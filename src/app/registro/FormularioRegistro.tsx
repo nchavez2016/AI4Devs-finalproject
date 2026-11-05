@@ -12,7 +12,7 @@ export function FormularioRegistro() {
   const [estado, accion, pendiente] = useActionState(registrar, ESTADO_INICIAL)
 
   return (
-    <form action={accion} className="flex flex-col gap-entre-campos">
+    <form action={accion} noValidate className="flex flex-col gap-entre-campos">
       <Campo
         etiqueta="Nombre"
         name="nombre"

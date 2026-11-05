@@ -12,7 +12,7 @@ export function FormularioCategoria({ estado, accion, pendiente }: FormularioCat
   const errorTipo = estado.errores?.tipo?.[0]
 
   return (
-    <form action={accion} className="flex flex-col gap-entre-campos">
+    <form action={accion} noValidate className="flex flex-col gap-entre-campos">
       {estado.mensaje && (
         <p
           role="alert"

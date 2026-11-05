@@ -19,7 +19,12 @@ export function FormularioCuenta({
   const errorTipo = estado.errores?.tipo?.[0]
 
   return (
-    <form ref={formularioRef} action={accion} className="flex flex-col gap-entre-campos">
+    <form
+      ref={formularioRef}
+      action={accion}
+      noValidate
+      className="flex flex-col gap-entre-campos"
+    >
       {estado.mensaje && (
         <p
           role="alert"

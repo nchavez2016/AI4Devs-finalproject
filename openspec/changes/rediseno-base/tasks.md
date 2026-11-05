@@ -94,10 +94,10 @@
 
 ## 15. Escenario: Los formularios desactivan la validación nativa del navegador
 
-- [ ] 15.1 CARACTERIZACIÓN — Ejecutar `FormularioLogin.test.tsx` y `FormularioRegistro.test.tsx` en verde.
-- [ ] 15.2 RED — `src/components/formularios/formularios.test.tsx`: "Los formularios desactivan la validación nativa del navegador".
-- [ ] 15.3 GREEN — `noValidate` en `FormularioCuenta.tsx`, `FormularioCategoria.tsx`, `FormularioRegistro.tsx` y `FormularioLogin.tsx`.
-- [ ] 15.4 REFACTOR
+- [x] 15.1 CARACTERIZACIÓN — Ejecutar `FormularioLogin.test.tsx` y `FormularioRegistro.test.tsx` en verde.
+- [x] 15.2 RED — `src/components/formularios/formularios.test.tsx`: "Los formularios desactivan la validación nativa del navegador".
+- [x] 15.3 GREEN — `noValidate` en `FormularioCuenta.tsx`, `FormularioCategoria.tsx`, `FormularioRegistro.tsx` y `FormularioLogin.tsx`.
+- [x] 15.4 REFACTOR
 
 ## 16. Escenario: Escribir en un formulario no muestra errores antes de enviarlo
 

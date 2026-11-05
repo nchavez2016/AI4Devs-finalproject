@@ -12,7 +12,7 @@ export function FormularioLogin() {
   const [estado, accion, pendiente] = useActionState(iniciarSesion, ESTADO_INICIAL)
 
   return (
-    <form action={accion} className="flex flex-col gap-entre-campos">
+    <form action={accion} noValidate className="flex flex-col gap-entre-campos">
       <Campo etiqueta="Email" name="email" type="email" autoComplete="email" />
       <Campo
         etiqueta="Contraseña"
