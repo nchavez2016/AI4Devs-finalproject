@@ -5,7 +5,12 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/cn'
 import { SECCIONES, seccionActiva } from './secciones'
 
-export function NavegacionPrincipal({ vertical = false }: { vertical?: boolean }) {
+interface NavegacionPrincipalProps {
+  vertical?: boolean
+  alSeleccionar?: () => void
+}
+
+export function NavegacionPrincipal({ vertical = false, alSeleccionar }: NavegacionPrincipalProps) {
   const activa = seccionActiva(usePathname())
 
   return (
@@ -20,6 +25,7 @@ export function NavegacionPrincipal({ vertical = false }: { vertical?: boolean }
             key={seccion.href}
             href={seccion.href}
             aria-current={esActiva ? 'page' : undefined}
+            onClick={alSeleccionar}
             className={cn(
               'inline-flex h-alto-control items-center border-b px-control-x text-cuerpo transition-colors',
               esActiva

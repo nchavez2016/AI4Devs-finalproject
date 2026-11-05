@@ -1,6 +1,7 @@
 'use client'
 
 import { Menu } from 'lucide-react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import {
   Sheet,
@@ -13,8 +14,10 @@ import { cerrarSesion } from '@/server/auth/acciones'
 import { NavegacionPrincipal } from './NavegacionPrincipal'
 
 export function MenuMovil() {
+  const [abierto, setAbierto] = useState(false)
+
   return (
-    <Sheet>
+    <Sheet open={abierto} onOpenChange={setAbierto}>
       <SheetTrigger asChild>
         <button
           type="button"
@@ -29,7 +32,7 @@ export function MenuMovil() {
         <SheetDescription className="sr-only">
           Secciones de Cuadre y cierre de sesión.
         </SheetDescription>
-        <NavegacionPrincipal vertical />
+        <NavegacionPrincipal vertical alSeleccionar={() => setAbierto(false)} />
         <form action={cerrarSesion}>
           <Button type="submit" variante="terciario">
             Cerrar sesión

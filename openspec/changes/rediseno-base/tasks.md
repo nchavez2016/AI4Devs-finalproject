@@ -62,9 +62,9 @@
 
 ## 10. Escenario: Elegir una sección cierra el menú móvil
 
-- [ ] 10.1 RED — `src/components/navegacion/MenuMovil.test.tsx`: "Elegir una sección cierra el menú móvil".
-- [ ] 10.2 GREEN — `src/components/navegacion/MenuMovil.tsx`.
-- [ ] 10.3 REFACTOR
+- [x] 10.1 RED — `src/components/navegacion/MenuMovil.test.tsx`: "Elegir una sección cierra el menú móvil".
+- [x] 10.2 GREEN — `src/components/navegacion/MenuMovil.tsx`.
+- [x] 10.3 REFACTOR
 
 ## 11. Escenario: Las pantallas privadas no enlazan de vuelta al panel (requiere 0.1)
 

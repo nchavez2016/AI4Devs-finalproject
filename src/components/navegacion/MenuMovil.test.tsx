@@ -40,4 +40,15 @@ describe('MenuMovil', () => {
     await waitFor(() => expect(document.activeElement).toBe(abrir))
     expect(abrir.getAttribute('aria-expanded')).toBe('false')
   })
+
+  it('Elegir una sección cierra el menú móvil', async () => {
+    render(<MenuMovil />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Abrir menú' }))
+    const dialogo = await screen.findByRole('dialog')
+
+    fireEvent.click(within(dialogo).getByRole('link', { name: 'Cuentas' }))
+
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull())
+  })
 })
