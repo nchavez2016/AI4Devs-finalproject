@@ -5,11 +5,14 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/cn'
 import { SECCIONES, seccionActiva } from './secciones'
 
-export function NavegacionPrincipal() {
+export function NavegacionPrincipal({ vertical = false }: { vertical?: boolean }) {
   const activa = seccionActiva(usePathname())
 
   return (
-    <nav aria-label="Principal" className="flex items-center gap-acciones">
+    <nav
+      aria-label="Principal"
+      className={vertical ? 'flex flex-col' : 'flex items-center gap-acciones'}
+    >
       {SECCIONES.map((seccion) => {
         const esActiva = seccion.href === activa
         return (

@@ -22,6 +22,7 @@ describe('CabeceraPrivada', () => {
       '/cuentas',
       '/categorias',
     ])
+    expect(within(banner).getByRole('button', { name: 'Abrir menú' })).toBeTruthy()
   })
 
   it('La cabecera ofrece cerrar sesión en cada pantalla privada', async () => {

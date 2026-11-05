@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { cerrarSesion } from '@/server/auth/acciones'
+import { MenuMovil } from './MenuMovil'
 import { NavegacionPrincipal } from './NavegacionPrincipal'
 
 export function CabeceraPrivada() {
@@ -19,7 +20,7 @@ export function CabeceraPrivada() {
           </span>
           Cuadre
         </Link>
-        <div className="flex items-center gap-seccion">
+        <div className="hidden items-center gap-seccion escritorio:flex">
           <NavegacionPrincipal />
           <form action={cerrarSesion}>
             <Button type="submit" variante="terciario">
@@ -27,6 +28,7 @@ export function CabeceraPrivada() {
             </Button>
           </form>
         </div>
+        <MenuMovil />
       </div>
     </header>
   )

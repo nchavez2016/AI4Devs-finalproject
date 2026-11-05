@@ -50,9 +50,9 @@
 
 ## 8. Escenario: El menú móvil muestra la navegación y el cierre de sesión
 
-- [ ] 8.1 RED — `src/components/navegacion/MenuMovil.test.tsx`: "El menú móvil muestra la navegación y el cierre de sesión".
-- [ ] 8.2 GREEN — `src/components/navegacion/MenuMovil.tsx` con Sheet, visible solo por debajo de `escritorio`.
-- [ ] 8.3 REFACTOR
+- [x] 8.1 RED — `src/components/navegacion/MenuMovil.test.tsx`: "El menú móvil muestra la navegación y el cierre de sesión".
+- [x] 8.2 GREEN — `src/components/navegacion/MenuMovil.tsx` con Sheet, visible solo por debajo de `escritorio`.
+- [x] 8.3 REFACTOR
 
 ## 9. Escenario: Escape cierra el menú móvil y devuelve el foco
 
