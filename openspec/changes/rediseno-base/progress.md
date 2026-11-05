@@ -1,4 +1,4 @@
 # Progreso: rediseno-base
-- Siguiente: 1.2 (tokens nuevos en tokens.md y globals.css, con ratios calculados por script en el scratchpad).
+- Siguiente: 1.3 (componentes.md, movimiento.md, estados.md y checklist.md).
 - Decisiones: 0.1 aprobado: retirar 4 tests de enlace al panel / "Por dónde empezar" y ampliar el del estado vacío de cuentas a botón secundario. 0.2 aprobado: lucide-react, @radix-ui/react-dialog y clsx con versión exacta; solo Sheet de shadcn/ui; Select nativo y tabla propia. Filtros avanzados después de la entrega.
 - Discrepancias: textos de las specs principales distintos del código, sin corregir aquí: "Todavía no tienes cuentas. Crea una para empezar a registrar movimientos." / botón "Crear cuenta" frente a "Aún no tienes cuentas" / "Crear mi primera cuenta"; "Cuenta Banco Pichincha creada." frente a "Cuenta creada"; "Categoría Publicidad creada." frente a "Categoría creada"; secciones "Ingresos"/"Gastos" frente a "Ingreso"/"Gasto". La tarea 6.2 de transacciones usa volverAlPanel, que este change retira.

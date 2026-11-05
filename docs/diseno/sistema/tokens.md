@@ -72,6 +72,8 @@ Los valores con "→" cambian en el punto de corte `escritorio` (y `amplio` si s
 | `--color-negativo-fondo` | `#F8E6E3` | Fondo del aviso de error de sección o formulario. |
 | `--color-resaltado` | `#FFF1BF` | Fila recién creada o editada: marcador fluorescente sobre el libro. |
 | `--color-velo` | `rgb(30 28 24 / 0.40)` | Capa detrás de diálogos y panel inferior. |
+| `--color-icono` | `#1F4D78` | Icono dentro de su contenedor (7.3 de componentes.md). |
+| `--color-icono-fondo` | `#E3ECF4` | Fondo del contenedor de icono: tono claro de la marca. |
 
 Ningún valor es un color de la paleta por defecto de Tailwind o de shadcn/ui. `--color-chart-2` a
 `--color-chart-5` y `--color-sidebar-*` no existen en el MVP.
@@ -135,6 +137,8 @@ Escala tipográfica. Cada `--text-*` define tamaño, `--text-*--line-height` y `
 | `--spacing-icono` | 1.25rem | Iconos en botones, campos y filas. |
 | `--spacing-icono-detalle` | 1rem | Iconos junto a `--text-detalle` (mensajes de error). |
 | `--spacing-reserva-barra-inferior` | 4.75rem | Espacio reservado bajo el contenido y `scroll-padding-bottom` cuando hay barra fija inferior (alto de control + 2 × margen de página). |
+| `--spacing-contenedor-icono` | 2.5rem | Lado del contenedor de icono. |
+| `--spacing-alto-cabecera` | 3.5rem → 4rem | Alto de la cabecera de la app. |
 | `--container-formulario` | 30rem | Ancho máximo de formulario. |
 | `--container-dialogo` | 30rem | Ancho máximo de diálogo. |
 | `--container-contenido` | 65rem | Ancho máximo del contenido de página. |
@@ -152,6 +156,7 @@ Escala tipográfica. Cada `--text-*` define tamaño, `--text-*--line-height` y `
 |---|---|---|---|
 | `--radius-control` | `@theme static` | 0.25rem | Botones, campos, controles segmentados. |
 | `--radius-superficie` | `@theme static` | 0.375rem | Tarjetas, diálogos, menús; esquinas superiores del panel inferior. |
+| `--radius-contenedor-icono` | `@theme static` | 0.5rem | Contenedor redondeado de un icono (nunca un círculo completo). |
 | `--default-border-width` | `@theme static` | 1px | Único ancho de borde del sistema (clase `border`). |
 | `--default-outline-width` | `@theme static` | 2px | Ancho del anillo de foco. |
 | `--foco-separacion` | `:root` | 2px | Separación entre el elemento y su anillo de foco. |
@@ -160,7 +165,18 @@ Escala tipográfica. Cada `--text-*` define tamaño, `--text-*--line-height` y `
 
 | Token | Valor | Uso |
 |---|---|---|
-| `--shadow-flotante` | `0 8px 24px rgb(30 28 24 / 0.16)` | Única sombra: menús, selectores, diálogos, panel inferior. |
+| `--shadow-flotante` | `0 8px 24px rgb(30 28 24 / 0.16)` | Capas flotantes: menús, selectores, diálogos, panel inferior. |
+| `--shadow-tarjeta` | `0 1px 2px rgb(30 28 24 / 0.06), 0 2px 8px rgb(30 28 24 / 0.06)` | Tarjeta en reposo: elevación suave, sin resplandor. |
+| `--shadow-tarjeta-hover` | `0 2px 4px rgb(30 28 24 / 0.08), 0 6px 16px rgb(30 28 24 / 0.10)` | Tarjeta clicable en hover o con el foco encima. |
+
+Las sombras de tarjeta se tiñen con la tinta (`30 28 24`), nunca con un color de marca. — Por qué: una sombra de color es un resplandor, que sigue prohibido.
+
+#### 3.3.7b Degradado de marca y composición (`:root`)
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--degradado-marca` | `linear-gradient(135deg, var(--color-primary), var(--color-primary-hover))` | Único degradado: de `primary` a `primary-hover`, monocromo. Se usa con `bg-(image:--degradado-marca)` en la marca de la cabecera y el distintivo de login y registro. |
+| `--columnas-lista-formulario` | `minmax(0, 1fr)` → `minmax(0, 1fr) minmax(0, var(--container-formulario))` | Columnas de las pantallas con lista y formulario; una en móvil y dos desde `escritorio`. Se usa con `grid-cols-(--columnas-lista-formulario)`. |
 
 #### 3.3.8 Movimiento
 
@@ -173,6 +189,8 @@ Escala tipográfica. Cada `--text-*` define tamaño, `--text-*--line-height` y `
 | `--duracion-resaltado-salida` | `:root` | 1000ms | Desvanecimiento del resaltado. |
 | `--duracion-giro` | `:root` | 800ms | Una vuelta del indicador de carga. |
 | `--duracion-espera-esqueleto` | `:root` | 400ms | Espera antes de mostrar el esqueleto de carga, para no parpadear en cargas rápidas (estados.md 9.2). |
+| `--duracion-entrada` | `:root` | 200ms | Entrada de la página (una vez, en el contenedor principal). |
+| `--desplazamiento-entrada` | `:root` | 0.25rem | Distancia que sube el contenido al entrar. |
 | `--ease-entrada` | `@theme static` | `cubic-bezier(0.2, 0, 0, 1)` | Lo que aparece: arranca rápido y frena al llegar. |
 | `--ease-salida` | `@theme static` | `cubic-bezier(0.4, 0, 1, 1)` | Lo que desaparece: se va sin frenar. |
 | `--default-transition-duration` | `@theme static` | `var(--duracion-rapida)` | Duración de cualquier `transition-*` sin duración explícita. |
@@ -180,6 +198,7 @@ Escala tipográfica. Cada `--text-*` define tamaño, `--text-*--line-height` y `
 | `--animate-giro` | `@theme static` | fotograma `giro` (rotación 360°), `var(--duracion-giro)`, lineal, infinito | Indicador de carga en botones. |
 | `--animate-resaltado` | `@theme static` | fotograma `resaltado` (de `--color-resaltado` a transparente), `var(--duracion-resaltado-salida)`, `var(--ease-salida)`, retardo `var(--duracion-resaltado)` | Fila recién guardada. |
 | `--animate-esqueleto` | `@theme static` | fotograma `esqueleto` (opacidad de 0 a 1), duración 0ms, retardo `var(--duracion-espera-esqueleto)`, `both` | Aparición del esqueleto de carga tras la espera. Sin pulso ni brillo. |
+| `--animate-entrada` | `@theme static` | fotograma `entrada` (opacidad de 0 a 1 y subida de `--desplazamiento-entrada`), `var(--duracion-entrada)`, `var(--ease-entrada)`, `both` | Entrada breve del contenedor de la página. Con movimiento reducido vale `none`. |
 
 Con `prefers-reduced-motion: reduce` solo cambian valores de estos tokens (movimiento.md, sección 6).
 
@@ -223,6 +242,10 @@ cada tema nuevo.
 | `destructive`, `negativo` | `resaltado` | 5,89 | 4,5 | Cumple |
 | `destructive-foreground` | `destructive` | 6,66 | 4,5 | Cumple |
 | `destructive-foreground` | `destructive-hover` | 8,84 | 4,5 | Cumple |
+| `icono` | `icono-fondo` | 7,34 | 4,5 | Cumple |
+| `foreground` | `icono-fondo` | 14,23 | 4,5 | Cumple |
+| `primary-foreground` | `primary` (inicio del degradado de marca) | 8,78 | 4,5 | Cumple |
+| `primary-foreground` | `primary-hover` (final del degradado de marca) | 11,56 | 4,5 | Cumple |
 
 **Componentes de interfaz y foco**
 
@@ -243,6 +266,10 @@ cada tema nuevo.
 | `border` / `card` | 1,36 | Igual que el anterior. |
 | `card` / `background` | 1,06 | La tarjeta lleva además un borde `--color-border`; su límite no transmite información. |
 | `muted` / `background` (hover de fila) | 1,10 | El hover es un refuerzo; el foco de teclado usa `--color-ring` (8,28). |
+| `icono-fondo` / `card` | 1,19 | El contenedor es decorativo: el icono que contiene (7,34 sobre `icono-fondo`) siempre acompaña a un texto y no transmite información por sí solo. |
+| `icono-fondo` / `background` | 1,12 | Igual que el anterior. |
+
+El degradado de marca es un fondo detrás de un texto o un icono blanco: se mide en sus dos extremos (arriba) y el punto medio queda entre ambos (10,14), porque la luminancia entre dos extremos es monótona.
 
 Colores de las propuestas medidos con el mismo método: blanco sobre esmeralda `#10B981` 2,53;
 blanco sobre cian `#06B6D4` 2,42; `#E2E8F0` sobre blanco 1,23; `#E7E5E4` sobre blanco 1,25.

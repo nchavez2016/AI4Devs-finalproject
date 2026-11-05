@@ -8,7 +8,7 @@
 ## 1. Sistema de diseño (documentación y tokens)
 
 - [x] 1.1 Actualizar `docs/diseno/brief.md` (criterios anti-IA: lo que se relaja y lo que se mantiene) y registrar en `docs/diseno/sistema/decisiones.md` la decisión del 5-nov-2026 con su porqué. Se verifica releyendo que ninguna prohibición relajada sigue en el brief.
-- [ ] 1.2 Añadir a `docs/diseno/sistema/tokens.md` (3.3) y a `src/app/globals.css` los tokens de design.md D3, incluida la variante con movimiento reducido. Calcular por script (en el scratchpad, no en el repo) el ratio de cada color o par nuevo y añadirlo a la tabla 3.4. Se verifica con `npm run build` y con cada par nuevo en 3.4 en "Cumple".
+- [x] 1.2 Añadir a `docs/diseno/sistema/tokens.md` (3.3) y a `src/app/globals.css` los tokens de design.md D3, incluida la variante con movimiento reducido. Calcular por script (en el scratchpad, no en el repo) el ratio de cada color o par nuevo y añadirlo a la tabla 3.4. Se verifica con `npm run build` y con cada par nuevo en 3.4 en "Cumple".
 - [ ] 1.3 Actualizar `componentes.md` (tarjeta con elevación, contenedor de icono, selector de tipo, tabla con barra de filtros, diálogo, cabecera; campo de monto con el "$" dentro del borde), `movimiento.md` (animación de entrada; sin `tw-animate-css`), `estados.md` (el botón del estado vacío pasa a secundario porque la vista ya tiene un primario) y `checklist.md` (retirar las prohibiciones relajadas). Se verifica con una búsqueda de "sombra de tarjeta", "círculos" y "animación de entrada" en checklist.md: no debe quedar ninguna prohibición relajada.
 
 ## 2. Comprobación de clases del tema por defecto (tokens.md 3.2)
