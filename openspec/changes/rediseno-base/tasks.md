@@ -101,9 +101,9 @@
 
 ## 16. Escenario: Escribir en un formulario no muestra errores antes de enviarlo
 
-- [ ] 16.1 RED — `src/app/(privado)/cuentas/FormularioCuenta.test.tsx`: "Escribir en un formulario no muestra errores antes de enviarlo". Si pasa sin cambios (RED no observable), se detiene y propone cómo forzarlo.
-- [ ] 16.2 GREEN — `src/app/(privado)/cuentas/FormularioCuenta.tsx`, si hace falta.
-- [ ] 16.3 REFACTOR
+- [x] 16.1 RED — `src/app/(privado)/cuentas/FormularioCuenta.test.tsx`: "Escribir en un formulario no muestra errores antes de enviarlo". Si pasa sin cambios (RED no observable), se detiene y propone cómo forzarlo.
+- [x] 16.2 GREEN — `src/app/(privado)/cuentas/FormularioCuenta.tsx`, si hace falta: sin cambios, el formulario ya no valida mientras se escribe (RED forzado con una mutación temporal que mostraba un error por defecto).
+- [x] 16.3 REFACTOR
 
 ## 17. Escenario: Un envío con errores lleva el foco al primer campo inválido
 
