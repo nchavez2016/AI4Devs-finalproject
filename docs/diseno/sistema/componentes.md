@@ -34,6 +34,9 @@ a su clase: `bg-primary`, `text-detalle`, `h-alto-control`, `rounded-control`.
 - La validación se muestra al enviar y, a partir de ahí, al salir de cada campo; nunca con cada tecla. — Por qué: no se marca como error algo que el usuario todavía está escribiendo.
 - Al enviar con errores, el foco va al primer campo inválido. — Por qué: con teclado y lector de pantalla es el camino más corto a la corrección.
 
+**Selector (lista desplegable)**
+- Elemento `select` nativo con las mismas medidas y tokens que el campo (fondo `card`, borde `input`, radio `control`, alto `alto-campo`, relleno `campo-x`, texto `cuerpo`), no el Select de shadcn/ui. — Por qué: el nativo abre el selector del sistema en el móvil, es accesible sin código extra y no añade dependencias.
+
 **Campo de monto**
 - `inputmode="decimal"`; acepta coma o punto decimal y al salir del campo se muestra en formato `es-EC` ("25,50"). — Por qué: en el móvil aparece el teclado numérico y en Ecuador se escriben ambos separadores.
 - Prefijo `$` fijo y no editable; cifra en `importe-campo`. — Por qué: la cantidad es el dato protagonista del registro.
@@ -64,6 +67,7 @@ Descripción (opcional). — Por qué: el caso habitual se completa con monto y 
 - Toda la fila es el área de clic y abre la edición. — Por qué: una única acción por fila, con el objetivo más grande posible.
 
 **Escritorio (desde `escritorio`): tabla**
+- Tabla propia (`table` semántica con tokens), no la Table de shadcn/ui. — Por qué: las reglas de esta sección ya definen toda la tabla, y el componente de shadcn/ui solo añadiría clases por defecto que habría que reescribir.
 - Columnas: Fecha · Descripción · Categoría · Cuenta · **Importe**. — Por qué: el importe al final, donde lo espera quien viene de Excel.
 - Cabeceras en `etiqueta` y `muted-foreground`; la de Importe, alineada a la derecha como su columna. — Por qué: cabecera y datos comparten borde de alineación.
 - Filas de `alto-fila-tabla`, renglón `border`, hover `muted`; orden por fecha descendente. — Por qué: lo más reciente es lo que se busca.
