@@ -1,24 +1,15 @@
 import Link from 'next/link'
-import { Button } from '@/components/ui/Button'
 import { EncabezadoPagina } from '@/components/EncabezadoPagina'
-import { cerrarSesion } from '@/server/auth/acciones'
 import type { DatosPanel } from '@/server/panel'
 
 export function ContenidoPanel({ nombreNegocio }: DatosPanel) {
   return (
     <main className="px-pagina py-seccion bg-background text-foreground min-h-full">
       <div className="w-full max-w-contenido mx-auto flex flex-col gap-seccion">
-        <div className="flex items-start justify-between gap-seccion">
-          <EncabezadoPagina
-            titulo={nombreNegocio}
-            proposito="Desde aquí llegas a tus cuentas y a tus categorías."
-          />
-          <form action={cerrarSesion}>
-            <Button type="submit" variante="secundario">
-              Cerrar sesión
-            </Button>
-          </form>
-        </div>
+        <EncabezadoPagina
+          titulo={nombreNegocio}
+          proposito="Desde aquí llegas a tus cuentas y a tus categorías."
+        />
         <nav aria-label="Secciones" className="flex gap-fila-x">
         <Link href="/cuentas" className="text-cuerpo font-control text-primary">
           Cuentas

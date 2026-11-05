@@ -1,6 +1,10 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { render, screen, within } from '@testing-library/react'
 import { CabeceraPrivada } from './CabeceraPrivada'
+
+vi.mock('@/server/auth/acciones', () => ({
+  cerrarSesion: vi.fn(),
+}))
 
 describe('CabeceraPrivada', () => {
   it('La cabecera muestra la marca y la navegación principal', () => {
@@ -18,5 +22,19 @@ describe('CabeceraPrivada', () => {
       '/cuentas',
       '/categorias',
     ])
+  })
+
+  it('La cabecera ofrece cerrar sesión en cada pantalla privada', async () => {
+    const { unmount } = render(<CabeceraPrivada />)
+
+    const banner = screen.getByRole('banner')
+    const boton = within(banner).getByRole('button', { name: 'Cerrar sesión' })
+    expect(boton.className).not.toContain('bg-primary')
+    unmount()
+
+    const { ContenidoPanel } = await import('@/app/(privado)/panel/ContenidoPanel')
+    render(<ContenidoPanel nombreNegocio="Tienda Ana" />)
+
+    expect(screen.queryByRole('button', { name: 'Cerrar sesión' })).toBeNull()
   })
 })

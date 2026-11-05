@@ -43,10 +43,10 @@
 
 ## 7. Escenario: La cabecera ofrece cerrar sesión en cada pantalla privada
 
-- [ ] 7.1 CARACTERIZACIÓN — Ejecutar `src/app/(privado)/panel/panel.test.tsx` y `src/server/auth/acciones.test.ts` ("Cierre de sesión termina la sesión y redirige al login") en verde antes de mover el botón.
-- [ ] 7.2 RED — `src/components/navegacion/CabeceraPrivada.test.tsx`: "La cabecera ofrece cerrar sesión en cada pantalla privada".
-- [ ] 7.3 GREEN — Formulario de `cerrarSesion` en `CabeceraPrivada.tsx`; quitar el botón y el `nav` provisional de `src/app/(privado)/panel/ContenidoPanel.tsx`.
-- [ ] 7.4 REFACTOR
+- [x] 7.1 CARACTERIZACIÓN — Ejecutar `src/app/(privado)/panel/panel.test.tsx` y `src/server/auth/acciones.test.ts` ("Cierre de sesión termina la sesión y redirige al login") en verde antes de mover el botón.
+- [x] 7.2 RED — `src/components/navegacion/CabeceraPrivada.test.tsx`: "La cabecera ofrece cerrar sesión en cada pantalla privada".
+- [x] 7.3 GREEN — Formulario de `cerrarSesion` en `CabeceraPrivada.tsx`; quitar el botón de `src/app/(privado)/panel/ContenidoPanel.tsx`. El `nav` provisional se retira en 12.2: "El panel enlaza a cuentas y categorías" depende de él hasta que lo sustituyan las tarjetas.
+- [x] 7.4 REFACTOR
 
 ## 8. Escenario: El menú móvil muestra la navegación y el cierre de sesión
 
@@ -76,7 +76,7 @@
 ## 12. Escenario: Las tarjetas de acceso del panel tienen un solo enlace (requiere 0.1)
 
 - [ ] 12.1 RED — `src/app/(privado)/panel/panel.test.tsx`: "Las tarjetas de acceso del panel tienen un solo enlace".
-- [ ] 12.2 GREEN — `src/components/ui/Tarjeta.tsx` (clicable, con elevación y contenedor de icono) y tarjetas en `ContenidoPanel.tsx`; retirar "Por dónde empezar" y su test según 0.1. "El panel enlaza a cuentas y categorías" sigue en verde.
+- [ ] 12.2 GREEN — `src/components/ui/Tarjeta.tsx` (clicable, con elevación y contenedor de icono) y tarjetas en `ContenidoPanel.tsx`; retirar el `nav` provisional y "Por dónde empezar" y su test según 0.1. "El panel enlaza a cuentas y categorías" sigue en verde.
 - [ ] 12.3 REFACTOR
 
 ## 13. Escenario: El campo de monto muestra el prefijo dentro del control
