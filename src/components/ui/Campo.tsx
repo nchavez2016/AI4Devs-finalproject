@@ -57,7 +57,7 @@ export function Campo({
       {monto ? (
         <div
           data-campo-monto=""
-          className="flex items-center gap-campo-x rounded-control border border-input bg-card px-campo-x"
+          className={`flex items-center gap-campo-x rounded-control border ${claseBorde} bg-card px-campo-x`}
         >
           <span
             className="text-importe-campo font-control text-muted-foreground select-none"

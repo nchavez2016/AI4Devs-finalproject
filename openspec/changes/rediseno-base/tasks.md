@@ -88,9 +88,9 @@
 
 ## 14. Escenario: El campo de monto con error marca el control completo
 
-- [ ] 14.1 RED — `src/components/ui/Campo.test.tsx`: "El campo de monto con error marca el control completo".
-- [ ] 14.2 GREEN — `src/components/ui/Campo.tsx`.
-- [ ] 14.3 REFACTOR
+- [x] 14.1 RED — `src/components/ui/Campo.test.tsx`: "El campo de monto con error marca el control completo".
+- [x] 14.2 GREEN — `src/components/ui/Campo.tsx`.
+- [x] 14.3 REFACTOR
 
 ## 15. Escenario: Los formularios desactivan la validación nativa del navegador
 

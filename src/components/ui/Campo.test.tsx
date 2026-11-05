@@ -73,4 +73,20 @@ describe('Campo', () => {
     fireEvent.change(input, { target: { value: '500.00' } })
     expect(input.value).toBe('500.00')
   })
+
+  it('El campo de monto con error marca el control completo', () => {
+    const { rerender } = render(
+      <Campo etiqueta="Saldo inicial" monto error="Escribe un saldo con hasta 2 decimales" />
+    )
+
+    const input = screen.getByLabelText('Saldo inicial')
+    const contenedor = input.parentElement!
+    expect(input.getAttribute('aria-invalid')).toBe('true')
+    expect(contenedor.className).toContain('border-destructive')
+    expect(contenedor.className).not.toContain('border-input')
+
+    rerender(<Campo etiqueta="Saldo inicial" monto />)
+    expect(contenedor.className).toContain('border-input')
+    expect(contenedor.className).not.toContain('border-destructive')
+  })
 })
