@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import { procesarEntrada } from './registrar-prompt.mjs';
+import { procesarEntrada, rutaLogPorDefecto } from './registrar-prompt.mjs';
 
 describe('registrar-prompt', () => {
   it('humo: exporta procesarEntrada', () => {
@@ -86,5 +86,11 @@ describe('registrar-prompt', () => {
       delete process.env[clavePrueba];
       fs.rmSync(dirTemporal, { recursive: true, force: true });
     }
+  });
+
+  it('Resuelve la ruta del log relativa a la raíz del repo', () => {
+    const ruta = rutaLogPorDefecto();
+    expect(typeof ruta).toBe('string');
+    expect(ruta.replace(/\\/g, '/')).toMatch(/docs\/ia\/registro-prompts\.jsonl$/);
   });
 });

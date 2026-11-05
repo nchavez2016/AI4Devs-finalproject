@@ -1,4 +1,4 @@
 # Progreso: registro-ia
-- Siguiente: 7.1 RED — test 'Resuelve la ruta del log relativa a la raíz del repo' en scripts/ia/registrar-prompt.test.mjs.
+- Siguiente: 8.1 Añadir `/docs/ia/registro-prompts.jsonl` a `.gitignore`.
 - Decisiones: Ninguna
-- Discrepancias: RED 6.1 forzado inyectando process.env en objeto; falló con AssertionError (expected not to contain). GREEN no requirió código de producción.
+- Discrepancias: RED 7.1 falló como se esperaba con TypeError (rutaLogPorDefecto is not a function).

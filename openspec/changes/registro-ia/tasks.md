@@ -71,19 +71,19 @@
 
 ## 7. CLI del hook y resolución de ruta
 
-- [ ] 7.1 RED — test llamado exactamente `Resuelve la ruta del log relativa a la raíz del repo`
+- [x] 7.1 RED — test llamado exactamente `Resuelve la ruta del log relativa a la raíz del repo`
   que importa una función auxiliar exportada (por ejemplo `rutaLogPorDefecto()`) y espera que
   termine en `docs/ia/registro-prompts.jsonl` bajo la raíz del proyecto, calculada desde la
   ubicación del script y no desde `process.cwd()`; confirmar que falla porque la función no
   existe todavía
-- [ ] 7.2 GREEN — implementar `rutaLogPorDefecto()` con `import.meta.url` subiendo dos niveles
+- [x] 7.2 GREEN — implementar `rutaLogPorDefecto()` con `import.meta.url` subiendo dos niveles
   desde `scripts/ia/` hasta la raíz del repo, y añadir el bloque de entrada del script, que solo
   se ejecuta cuando el archivo se invoca directamente como proceso: un `try/catch/finally` donde
   el `try` lee stdin de forma síncrona y llama a `procesarEntrada(texto, rutaLogPorDefecto())`, el
   `catch` absorbe cualquier error (incluido un fallo al leer stdin) sin relanzarlo, y el `finally`
   ejecuta `process.exit(0)`; verificar que el test de 7.1 pasa y que la suite completa de
   `registrar-prompt.test.mjs` sigue en verde
-- [ ] 7.3 REFACTOR — revisar que el bloque de entrada no interfiera con la importación del módulo
+- [x] 7.3 REFACTOR — revisar que el bloque de entrada no interfiera con la importación del módulo
   desde los tests; dejar constancia en el commit aunque no haya cambios
 
 ## 8. .gitignore
