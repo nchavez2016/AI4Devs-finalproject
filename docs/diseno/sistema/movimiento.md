@@ -19,8 +19,8 @@ acción. Nada se anima al cargar una pantalla, salvo la entrada breve del conten
 | Tarjeta clicable | Transición de sombra (`--shadow-tarjeta` → `--shadow-tarjeta-hover`) con la duración por defecto | Confirma que toda la tarjeta responde. |
 
 **No se anima:** la entrada de cada tarjeta o fila por separado (solo el contenedor de la página
-entra, una vez); las cifras (sin contadores); los gráficos al aparecer; los esqueletos (sin shimmer ni
-pulso).
+entra, una vez); las cifras (sin contadores); los esqueletos (sin shimmer ni pulso). Los gráficos
+pueden tener una entrada breve con `--duracion-entrada` (visualizacion.md, 8.5).
 
 - Las salidas usan `--ease-salida`, que se percibe más corta con la misma duración. — Por qué: lo que se va ya no aporta información y no debe hacer esperar.
 - Nada supera `--duracion-panel` (220 ms) salvo el resaltado de fila, que es un cambio de color y no un desplazamiento. — Por qué: son pantallas que se abren a diario.

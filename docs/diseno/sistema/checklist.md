@@ -41,7 +41,7 @@ Sección 10 del sistema de diseño. Índice completo en [README.md](README.md).
 - [ ] No es un gráfico circular o de anillo (visualizacion.md, 8.3).
 - [ ] Usa `--color-chart-*` existentes o, si necesita uno nuevo, se dio de alta en tokens.md, 3.3.1, con su ratio calculado en la tabla 3.4 de tokens.md; con dos series, se distinguen también por posición, patrón o etiqueta, no solo por color (visualizacion.md, 8.4).
 - [ ] Las etiquetas de valor usan el mismo formato que el componente Importe (componentes.md, 7.5) y el eje de valores arranca en cero sin truncarlo (visualizacion.md, 8.5).
-- [ ] Sin 3D, degradados, sombras ni animación de entrada; `isAnimationActive={false}` en cada serie de Recharts (visualizacion.md, 8.5 y 8.9).
+- [ ] Sin 3D ni ejes truncados; degradado solo monocromo de la marca; entrada breve con la duración del token y `isAnimationActive={false}` con movimiento reducido (visualizacion.md, 8.5 y 8.9).
 - [ ] Tiene sus propios estados vacío, carga y error, sin bloquear el resto de la pantalla si falla (visualizacion.md, 8.6).
 - [ ] Lleva `role="img"` con `aria-label`, una tabla accesible con los mismos datos y, si aplica, un detalle que también responda a clic o foco, no solo a hover (visualizacion.md, 8.7).
 - [ ] Se ha revisado en 360 px de ancho sin necesitar una versión distinta del gráfico (visualizacion.md, 8.8).
