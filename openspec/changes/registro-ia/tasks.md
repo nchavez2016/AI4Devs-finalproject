@@ -88,7 +88,7 @@
 
 ## 8. .gitignore
 
-- [ ] 8.1 Añadir `/docs/ia/registro-prompts.jsonl` a `.gitignore` y verificar con
+- [x] 8.1 Añadir `/docs/ia/registro-prompts.jsonl` a `.gitignore` y verificar con
   `git status` que el archivo generado en pruebas manuales no aparece como no rastreado
 
 ## 9. Cierre

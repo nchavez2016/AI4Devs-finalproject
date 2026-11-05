@@ -1,4 +1,4 @@
 # Progreso: registro-ia
-- Siguiente: 8.1 Añadir `/docs/ia/registro-prompts.jsonl` a `.gitignore`.
+- Siguiente: 9.1 Cierre — ejecutar linters, typecheck, tests y validación estricta de OpenSpec.
 - Decisiones: Ninguna
-- Discrepancias: RED 7.1 falló como se esperaba con TypeError (rutaLogPorDefecto is not a function).
+- Discrepancias: Ninguna

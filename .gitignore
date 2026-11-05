@@ -46,3 +46,6 @@ next-env.d.ts
 
 # documento personal
 hoja-de-ruta-cuadre.md
+
+# registro de ia (local, no versionado)
+/docs/ia/registro-prompts.jsonl
