@@ -150,10 +150,10 @@
 
 ## 24. Escenario: Pantalla de categorías muestra las listas y el formulario en dos columnas
 
-- [ ] 24.1 CARACTERIZACIÓN — Ejecutar `categorias.test.tsx` y `estados.test.tsx` de categorías en verde.
-- [ ] 24.2 RED — `src/app/(privado)/categorias/categorias.test.tsx`: "Pantalla de categorías muestra las listas y el formulario en dos columnas".
-- [ ] 24.3 GREEN — `ContenidoCategorias.tsx`, con la tarjeta "Nueva categoría".
-- [ ] 24.4 REFACTOR
+- [x] 24.1 CARACTERIZACIÓN — Ejecutar `categorias.test.tsx` y `estados.test.tsx` de categorías en verde.
+- [x] 24.2 RED — `src/app/(privado)/categorias/categorias.test.tsx`: "Pantalla de categorías muestra las listas y el formulario en dos columnas".
+- [x] 24.3 GREEN — `ContenidoCategorias.tsx`, con la tarjeta "Nueva categoría".
+- [x] 24.4 REFACTOR
 
 ## 25. Escenario: El inicio de sesión se muestra en una tarjeta con la marca
 

@@ -140,6 +140,45 @@ describe('categorias', () => {
     expect(nombre.getAttribute('aria-describedby')).toContain(idError!)
   })
 
+  it('Pantalla de categorías muestra las listas y el formulario en dos columnas', async () => {
+    const { ContenidoCategorias } = await import('./ContenidoCategorias')
+
+    const { container } = render(
+      <ContenidoCategorias
+        ingreso={[
+          { id: 'k1', nombre: 'Ventas', tipo: 'INGRESO', categoriaPadreId: null, creadoEn: new Date() },
+        ]}
+        gasto={[
+          { id: 'k2', nombre: 'Arriendo', tipo: 'GASTO', categoriaPadreId: null, creadoEn: new Date() },
+        ]}
+      />
+    )
+
+    const rejilla = container.querySelector('[class*="columnas-lista-formulario"]')!
+    expect(rejilla).toBeTruthy()
+
+    const listaIngreso = screen.getByRole('list', { name: 'Categorías de ingreso' })
+    const listaGasto = screen.getByRole('list', { name: 'Categorías de gasto' })
+    const titulo = screen.getByRole('heading', { level: 2, name: 'Nueva categoría' })
+    const tarjeta = titulo.closest('[class*="shadow-tarjeta"]')!
+    expect(tarjeta).toBeTruthy()
+    for (const lista of [listaIngreso, listaGasto]) {
+      expect(rejilla.contains(lista)).toBe(true)
+      expect(lista.compareDocumentPosition(tarjeta) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    }
+    expect(rejilla.contains(tarjeta)).toBe(true)
+
+    const formulario = screen.getByRole('button', { name: 'Crear categoría' }).closest('form')
+    expect(tarjeta.contains(formulario)).toBe(true)
+
+    const primarios = screen
+      .getAllByRole('button')
+      .filter((boton) => boton.className.includes('bg-primary'))
+    expect(primarios.map((boton) => boton.textContent)).toEqual(['Crear categoría'])
+
+    expect(container.querySelector('.animate-entrada')).toBeTruthy()
+  })
+
   it('Pantalla de categorías limita el ancho del contenido y del formulario', async () => {
     const { ContenidoCategorias } = await import('./ContenidoCategorias')
 
