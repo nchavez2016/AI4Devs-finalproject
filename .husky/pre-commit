@@ -18,6 +18,9 @@ for TASKS in $(echo "$STAGED" | grep -E '^openspec/changes/[^/]+/tasks\.md$'); d
   fi
 done
 
+# Clases del tema por defecto de Tailwind (tokens.md, 3.2): no generan CSS y no fallan el build.
+node scripts/diseno/comprobar-clases.mjs || exit 1
+
 npm run lint || exit 1
 npm run typecheck || exit 1
 npm run test:run || exit 1
