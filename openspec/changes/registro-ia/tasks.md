@@ -46,14 +46,14 @@
 
 ## 5. Escenario: Con JSON inválido no falla
 
-- [ ] 5.1 RED — test llamado exactamente `Con JSON inválido no falla` que llama a
+- [x] 5.1 RED — test llamado exactamente `Con JSON inválido no falla` que llama a
   `procesarEntrada('"{rota', rutaLogTemporal)` sobre un archivo inexistente y espera que no se
   cree el archivo y que la llamada no lance excepción; confirmar que falla porque el error de
   `JSON.parse` no está capturado
-- [ ] 5.2 GREEN — envolver el parseo y la escritura de `procesarEntrada` en un único
+- [x] 5.2 GREEN — envolver el parseo y la escritura de `procesarEntrada` en un único
   `try/catch` que, ante cualquier error, no escribe nada y retorna sin relanzar; verificar que el
   test de 5.1 pasa y que los escenarios 2, 3 y 4 siguen en verde
-- [ ] 5.3 REFACTOR — revisar que el `try/catch` cubra exactamente lo descrito en design.md (todo
+- [x] 5.3 REFACTOR — revisar que el `try/catch` cubra exactamente lo descrito en design.md (todo
   el procesamiento en un solo bloque); dejar constancia en el commit aunque no haya cambios
 
 ## 6. Escenario: El entorno del proceso no se añade al registro

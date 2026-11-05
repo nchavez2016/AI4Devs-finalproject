@@ -56,4 +56,15 @@ describe('registrar-prompt', () => {
       fs.rmSync(dirTemporal, { recursive: true, force: true });
     }
   });
+
+  it('Con JSON inválido no falla', () => {
+    const dirTemporal = fs.mkdtempSync(path.join(os.tmpdir(), 'registro-ia-'));
+    const rutaLogTemporal = path.join(dirTemporal, 'registro-prompts.jsonl');
+    try {
+      expect(() => procesarEntrada('"{rota', rutaLogTemporal)).not.toThrow();
+      expect(fs.existsSync(rutaLogTemporal)).toBe(false);
+    } finally {
+      fs.rmSync(dirTemporal, { recursive: true, force: true });
+    }
+  });
 });

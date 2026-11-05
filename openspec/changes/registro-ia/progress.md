@@ -1,4 +1,4 @@
 # Progreso: registro-ia
-- Siguiente: 5.1 RED — test 'Con JSON inválido no falla' en scripts/ia/registrar-prompt.test.mjs.
+- Siguiente: 6.1 RED — test 'El entorno del proceso no se añade al registro' en scripts/ia/registrar-prompt.test.mjs.
 - Decisiones: Ninguna
-- Discrepancias: RED 4.1 falló como se esperaba con SyntaxError (Unexpected end of JSON input) al procesar string vacío.
+- Discrepancias: RED 5.1 falló como se esperaba con SyntaxError (Unterminated string in JSON) al procesar JSON inválido.
