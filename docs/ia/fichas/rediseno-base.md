@@ -1,0 +1,15 @@
+# Ficha IA — rediseno-base — 2026-11-05
+- Ticket / HU: Entrega final AI4Devs (rediseño base: cabecera compartida, composición, tokens, formularios)
+- Fase: spec + implementación + tests
+- Herramienta y modelo: Claude Code; Opus 5.5 en la propuesta y Sonnet 5.5 desde /opsx:apply (cambio con /model a mitad del change)
+- Skills, comandos o subagentes usados: /opsx:propose, /opsx:apply, /opsx:verify, /opsx:archive, ux-cuadre; navegador integrado para la revisión a 1280 y 360 px
+- Prompt clave (literal, resumido): /opsx:propose rediseno-base. Objetivo: que Cuadre se vea profesional y coherente en todas sus pantallas. Se relajan iconos, sombras de tarjeta, degradado monocromo de la marca y entrada breve; se mantienen paleta propia, WCAG 2.2 AA, un primario por vista y los estados vacío/carga/error/éxito. Alcance: tokens y docs de diseño, cabecera compartida, composición en dos columnas, formularios, skill y shadcn/ui solo donde ahorre trabajo.
+  - session_id: f2c5955c-c9fe-4b4f-9f45-ea36257a3954
+  - prompt_id: 41a0596b-63f2-414f-b278-d7ad2c23ca81
+- Resultado (1-2 líneas): 91 tareas en TDD (cabecera con menú móvil en Sheet, tarjetas, campo de monto con "$" dentro, foco en el primer campo inválido, login y registro en tarjeta) más el script de pre-commit que rechaza clases del tema por defecto. Specs principales sincronizadas con 2 capacidades nuevas (navegacion, formularios) y 3 modificadas.
+- Ajuste humano: BORRADOR (humano valida)
+  - Aprobó 0.1 y 0.2 con límites: solo Sheet de shadcn/ui, Select nativo y tabla propia, sin tailwind-merge ni tw-animate-css; relajó además los gráficos (degradado, sombra, entrada breve).
+  - Corrigió el flujo: un comando por vez, sin ';' ni '&&' y sin tocar .claude tras el bloqueo del hook; pidió detenerse en los grupos 10, 15, 26 y 27 y un commit por grupo.
+  - Tras /opsx:verify pidió corregir las tres divergencias de texto entre specs y código ("Ingresos"/"Gastos", estado vacío y mensajes de éxito) antes de archivar.
+- Tests: iteraciones hasta pasar: 1 por tarea en general; 4 RED forzados con mutación (grupos 9, 16, 18 y 19) porque ya pasaban; 1 commit rechazado por el hook (min-w-0 no genera CSS) y 1 por timeouts de carga, ambos resueltos al reintentar.
+- Salió bien a la primera: no (el hook de clases corrigió min-w-0, dos fallos visuales aparecieron en la revisión manual y /opsx:verify halló 3 divergencias de texto con las specs).

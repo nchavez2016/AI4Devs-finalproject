@@ -100,8 +100,10 @@ sesión, ninguna operación sobre categorías se SHALL ejecutar.
 
 ### Requirement: Pantalla de categorías
 La pantalla de categorías SHALL mostrar por separado las categorías de ingreso y las de gasto
-del usuario, e incluir el formulario para crear una categoría con nombre y tipo. SHALL mostrar
-un estado de carga, uno de error y uno de éxito.
+del usuario, e incluir el formulario para crear una categoría con nombre y tipo dentro de una
+tarjeta con título. En escritorio, las listas y la tarjeta del formulario SHALL ir en dos
+columnas; en móvil, en una sola columna con las listas primero. SHALL mostrar un estado de
+carga, uno de error y uno de éxito, con un único botón primario en la vista.
 
 #### Scenario: Pantalla de categorías muestra las de ingreso y las de gasto por separado
 - **GIVEN** el usuario tiene sus 7 categorías por defecto
@@ -135,3 +137,10 @@ un estado de carga, uno de error y uno de éxito.
 - **WHEN** se muestra la pantalla
 - **THEN** ve "No pudimos cargar tus categorías." y un botón secundario "Reintentar"
 - **AND** al pulsarlo se vuelve a intentar la carga
+
+#### Scenario: Pantalla de categorías muestra las listas y el formulario en dos columnas
+- **GIVEN** el usuario tiene sus 7 categorías por defecto
+- **WHEN** abre la pantalla de categorías
+- **THEN** las secciones de ingreso y gasto y una tarjeta con el título de nivel 2 "Nueva categoría" están en una rejilla de una columna que pasa a dos desde el punto de corte de escritorio
+- **AND** las secciones van antes que la tarjeta y la tarjeta contiene el formulario
+- **AND** la vista tiene un solo botón primario, "Crear categoría"
