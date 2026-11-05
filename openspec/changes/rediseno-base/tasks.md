@@ -125,9 +125,9 @@
 
 ## 20. Escenario: El formulario de categoría enfoca el nombre con error
 
-- [ ] 20.1 RED — `src/app/(privado)/categorias/FormularioCategoria.test.tsx`: "El formulario de categoría enfoca el nombre con error".
-- [ ] 20.2 GREEN — `useFocoPrimerError` en `FormularioCategoria.tsx`.
-- [ ] 20.3 REFACTOR
+- [x] 20.1 RED — `src/app/(privado)/categorias/FormularioCategoria.test.tsx`: "El formulario de categoría enfoca el nombre con error".
+- [x] 20.2 GREEN — `useFocoPrimerError` en `FormularioCategoria.tsx`.
+- [x] 20.3 REFACTOR
 
 ## 21. Escenario: El formulario de registro enfoca el primer campo con error
 

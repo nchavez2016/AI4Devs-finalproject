@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+import { useFocoPrimerError } from '@/components/formularios/useFocoPrimerError'
 import { Button } from '@/components/ui/Button'
 import { Campo } from '@/components/ui/Campo'
 import type { EstadoFormularioCategoria } from '@/server/categorias/acciones'
@@ -10,9 +12,16 @@ export interface FormularioCategoriaProps {
 
 export function FormularioCategoria({ estado, accion, pendiente }: FormularioCategoriaProps) {
   const errorTipo = estado.errores?.tipo?.[0]
+  const formularioRef = useRef<HTMLFormElement>(null)
+  useFocoPrimerError(formularioRef, estado)
 
   return (
-    <form action={accion} noValidate className="flex flex-col gap-entre-campos">
+    <form
+      ref={formularioRef}
+      action={accion}
+      noValidate
+      className="flex flex-col gap-entre-campos"
+    >
       {estado.mensaje && (
         <p
           role="alert"
