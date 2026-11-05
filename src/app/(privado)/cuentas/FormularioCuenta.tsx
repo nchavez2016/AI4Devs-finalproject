@@ -1,5 +1,6 @@
 import type { RefObject } from 'react'
 import { Button } from '@/components/ui/Button'
+import { useFocoPrimerError } from '@/components/formularios/useFocoPrimerError'
 import { Campo } from '@/components/ui/Campo'
 import type { EstadoFormularioCuenta } from '@/server/cuentas/acciones'
 
@@ -17,6 +18,7 @@ export function FormularioCuenta({
   pendiente,
 }: FormularioCuentaProps) {
   const errorTipo = estado.errores?.tipo?.[0]
+  useFocoPrimerError(formularioRef, estado)
 
   return (
     <form

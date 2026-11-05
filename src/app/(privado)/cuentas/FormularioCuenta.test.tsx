@@ -27,4 +27,15 @@ describe('FormularioCuenta', () => {
     expect(screen.queryByRole('alert')).toBeNull()
     expect(container.querySelectorAll('[aria-invalid="true"]')).toHaveLength(0)
   })
+
+  it('Un envío con errores lleva el foco al primer campo inválido', () => {
+    montar({
+      errores: {
+        nombre: ['El nombre es obligatorio'],
+        saldoInicial: ['Escribe un saldo con hasta 2 decimales, por ejemplo 500.00'],
+      },
+    })
+
+    expect(document.activeElement).toBe(screen.getByRole('textbox', { name: 'Nombre' }))
+  })
 })

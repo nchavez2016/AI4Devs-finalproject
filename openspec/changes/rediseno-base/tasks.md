@@ -107,9 +107,9 @@
 
 ## 17. Escenario: Un envío con errores lleva el foco al primer campo inválido
 
-- [ ] 17.1 RED — `src/app/(privado)/cuentas/FormularioCuenta.test.tsx`: "Un envío con errores lleva el foco al primer campo inválido".
-- [ ] 17.2 GREEN — `src/components/formularios/useFocoPrimerError.ts` y su uso en `FormularioCuenta.tsx`.
-- [ ] 17.3 REFACTOR
+- [x] 17.1 RED — `src/app/(privado)/cuentas/FormularioCuenta.test.tsx`: "Un envío con errores lleva el foco al primer campo inválido".
+- [x] 17.2 GREEN — `src/components/formularios/useFocoPrimerError.ts` y su uso en `FormularioCuenta.tsx`.
+- [x] 17.3 REFACTOR
 
 ## 18. Escenario: Si solo falla un campo posterior, el foco va a ese campo
 
