@@ -9,15 +9,15 @@
 
 ## 2. Escenario: Guarda una línea con payload válido
 
-- [ ] 2.1 RED — en `scripts/ia/registrar-prompt.test.mjs`, test llamado exactamente
+- [x] 2.1 RED — en `scripts/ia/registrar-prompt.test.mjs`, test llamado exactamente
   `Guarda una línea con payload válido` que llama a `procesarEntrada('{"prompt":"hola"}',
   rutaLogTemporal)` sobre un archivo temporal inexistente y espera que el archivo resultante
   contenga una línea JSON con `prompt: "hola"` y un campo `fechaRegistro` ISO 8601; confirmar que
   falla porque `procesarEntrada` no hace nada todavía
-- [ ] 2.2 GREEN — en `scripts/ia/registrar-prompt.mjs`, implementar `procesarEntrada` para que
+- [x] 2.2 GREEN — en `scripts/ia/registrar-prompt.mjs`, implementar `procesarEntrada` para que
   parsee el JSON, agregue `fechaRegistro` con `new Date().toISOString()` y escriba la línea con
   `fs.appendFileSync(rutaLog, JSON.stringify(objeto) + '\n')`; verificar que el test del 2.1 pasa
-- [ ] 2.3 REFACTOR — revisar nombres y claridad de `procesarEntrada`; dejar constancia en el
+- [x] 2.3 REFACTOR — revisar nombres y claridad de `procesarEntrada`; dejar constancia en el
   commit aunque no haya cambios
 
 ## 3. Escenario: Agrega sin sobrescribir
