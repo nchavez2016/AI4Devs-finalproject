@@ -54,6 +54,9 @@ describe('categorias', () => {
     const gasto = within(screen.getByRole('list', { name: 'Categorías de gasto' }))
     expect(gasto.getByText('Arriendo')).toBeTruthy()
     expect(gasto.queryByText('Ventas')).toBeNull()
+
+    expect(screen.getByRole('heading', { level: 2, name: 'Ingresos' })).toBeTruthy()
+    expect(screen.getByRole('heading', { level: 2, name: 'Gastos' })).toBeTruthy()
   })
 
   it('Categoría creada se anuncia y se resalta en la lista', async () => {

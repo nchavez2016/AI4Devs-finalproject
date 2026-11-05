@@ -34,7 +34,7 @@ export function ContenidoCategorias({ ingreso, gasto }: DatosCategorias) {
         <div className="grid grid-cols-(--columnas-lista-formulario) items-start gap-seccion">
           <div className="flex flex-col gap-seccion">
             <section className="flex flex-col gap-entre-campos">
-              <h2 className="font-titulo text-titulo-seccion text-foreground">Ingreso</h2>
+              <h2 className="font-titulo text-titulo-seccion text-foreground">Ingresos</h2>
               <ul aria-label="Categorías de ingreso" className="flex flex-col">
                 {ingreso.map((categoria) => (
                   <li key={categoria.id} className={claseFila(categoria.id)}>
@@ -45,7 +45,7 @@ export function ContenidoCategorias({ ingreso, gasto }: DatosCategorias) {
             </section>
 
             <section className="flex flex-col gap-entre-campos">
-              <h2 className="font-titulo text-titulo-seccion text-foreground">Gasto</h2>
+              <h2 className="font-titulo text-titulo-seccion text-foreground">Gastos</h2>
               <ul aria-label="Categorías de gasto" className="flex flex-col">
                 {gasto.map((categoria) => (
                   <li key={categoria.id} className={claseFila(categoria.id)}>
