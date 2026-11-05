@@ -36,7 +36,7 @@ rules:
 operations:
   apply:
     guidance:
-      - Antes de empezar, confirma que la rama actual es feature/entrega-N-NCH. Si es main, detente y avisa.
+      - Antes de empezar, confirma que la rama actual es final-project-NCH. Si es main, detente y avisa.
       - Implementa una sola subtarea a la vez, en orden RED, GREEN, REFACTOR. Nunca escribas código de producción sin haber visto fallar su test.
       - Si el RED no puede observarse de forma natural (por ejemplo, porque el entorno ya cumple la condición), detente y propón cómo forzarlo antes de continuar.
       - Si un GREEN introduce varias piezas independientes y el RED solo demostró la necesidad de una, verifica cada pieza por mutación (retírala temporalmente, confirma que un test falla y restáurala), sin commit.

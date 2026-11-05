@@ -73,7 +73,7 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
 - NO ejecutar `npm audit fix --force`: bajaría Prisma a la versión 6.
 
 ## Commits y ramas
-- Se trabaja en la rama de la entrega actual (`feature/entrega-N-NCH`). Nunca en `main`
+- Se trabaja en la rama de la entrega actual (`final-project-NCH`). Nunca en `main`
   (lo bloquea el hook de pre-commit).
 - Durante la aplicación de un change: un commit por subtarea RED/GREEN, con el test y el código juntos y la suite en verde, formato Conventional Commits.
   Fuera de eso: solo con orden explícita.
@@ -98,3 +98,7 @@ Ahorros, presupuestos, préstamos/deudas, tarjetas de crédito, suscripciones, a
 - Si un hook o una protección devuelve un error, detente y avisa al usuario. No continúes.
 - No borrar, mover ni reescribir archivos que no estén en un commit (compruébalo con `git status`) sin confirmación del usuario.
 - Las migraciones nuevas las crea y revisa el humano (el hook bloquea escribir en prisma/migrations/).
+
+## Registro de IA
+- Al archivar un change, crea `docs/ia/fichas/<change>.md` con la plantilla `docs/ia/plantilla-ficha.md`.
+- Completa fase, herramienta, prompt clave y resultado. Deja "Modelo" y "Ajuste humano" con el texto `COMPLETAR (humano)`.
