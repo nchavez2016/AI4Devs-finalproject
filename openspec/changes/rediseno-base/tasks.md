@@ -13,9 +13,9 @@
 
 ## 2. Comprobación de clases del tema por defecto (tokens.md 3.2)
 
-- [ ] 2.1 RED — `scripts/diseno/comprobar-clases.test.mjs`: "detecta clases del tema por defecto en cadenas sueltas", "admite la sintaxis de variable de tema" y "detecta clases por defecto en @apply". Fallan porque el script no existe.
-- [ ] 2.2 GREEN — `scripts/diseno/comprobar-clases.mjs` (design.md D2), con salida de archivo, línea y clase. Tests en verde.
-- [ ] 2.3 REFACTOR — Pasar el script sobre `src/` completo: sin falsos positivos ni clases por defecto en el código actual.
+- [x] 2.1 RED — `scripts/diseno/comprobar-clases.test.mjs`: "detecta clases del tema por defecto en cadenas sueltas", "admite la sintaxis de variable de tema" y "detecta clases por defecto en @apply". Fallan porque el script no existe.
+- [x] 2.2 GREEN — `scripts/diseno/comprobar-clases.mjs` (design.md D2), con salida de archivo, línea y clase. Tests en verde.
+- [x] 2.3 REFACTOR — Pasar el script sobre `src/` completo: sin falsos positivos ni clases por defecto en el código actual.
 - [ ] 2.4 Añadir el script a `.husky/pre-commit` antes de lint. Si el hook de protección bloquea la edición, se detiene y la tarea se marca [HUMANO]. Se verifica con un commit de prueba que contenga `p-4`, que debe bloquearse, y deshaciéndolo después.
 
 ## 3. Dependencias y Sheet (requiere 0.2)
