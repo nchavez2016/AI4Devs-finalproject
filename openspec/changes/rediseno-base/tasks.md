@@ -75,9 +75,9 @@
 
 ## 12. Escenario: Las tarjetas de acceso del panel tienen un solo enlace (requiere 0.1)
 
-- [ ] 12.1 RED — `src/app/(privado)/panel/panel.test.tsx`: "Las tarjetas de acceso del panel tienen un solo enlace".
-- [ ] 12.2 GREEN — `src/components/ui/Tarjeta.tsx` (clicable, con elevación y contenedor de icono) y tarjetas en `ContenidoPanel.tsx`; retirar el `nav` provisional y "Por dónde empezar" y su test según 0.1. "El panel enlaza a cuentas y categorías" sigue en verde.
-- [ ] 12.3 REFACTOR
+- [x] 12.1 RED — `src/app/(privado)/panel/panel.test.tsx`: "Las tarjetas de acceso del panel tienen un solo enlace".
+- [x] 12.2 GREEN — `src/components/ui/Tarjeta.tsx` (clicable, con elevación y contenedor de icono) y tarjetas en `ContenidoPanel.tsx`; retirar el `nav` provisional y "Por dónde empezar" y su test según 0.1. "El panel enlaza a cuentas y categorías" sigue en verde.
+- [x] 12.3 REFACTOR
 
 ## 13. Escenario: El campo de monto muestra el prefijo dentro del control
 

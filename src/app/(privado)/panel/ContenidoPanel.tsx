@@ -1,5 +1,6 @@
-import Link from 'next/link'
+import { Tags, Wallet } from 'lucide-react'
 import { EncabezadoPagina } from '@/components/EncabezadoPagina'
+import { TarjetaAcceso } from '@/components/ui/Tarjeta'
 import type { DatosPanel } from '@/server/panel'
 
 export function ContenidoPanel({ nombreNegocio }: DatosPanel) {
@@ -10,31 +11,20 @@ export function ContenidoPanel({ nombreNegocio }: DatosPanel) {
           titulo={nombreNegocio}
           proposito="Desde aquí llegas a tus cuentas y a tus categorías."
         />
-        <nav aria-label="Secciones" className="flex gap-fila-x">
-        <Link href="/cuentas" className="text-cuerpo font-control text-primary">
-          Cuentas
-        </Link>
-        <Link href="/categorias" className="text-cuerpo font-control text-primary">
-          Categorías
-        </Link>
-      </nav>
-      <section className="flex flex-col gap-entre-campos">
-        <h2 id="por-donde-empezar" className="font-titulo text-titulo-seccion text-foreground">
-          Por dónde empezar
-        </h2>
-        <ol aria-labelledby="por-donde-empezar" className="flex flex-col gap-entre-campos">
-          <li>
-            <Link href="/cuentas" className="text-cuerpo font-control text-primary">
-              Crea tu primera cuenta
-            </Link>
-          </li>
-          <li>
-            <Link href="/categorias" className="text-cuerpo font-control text-primary">
-              Revisa tus categorías
-            </Link>
-          </li>
-        </ol>
-      </section>
+        <ul aria-label="Accesos" className="grid gap-entre-campos escritorio:grid-cols-2">
+          <TarjetaAcceso
+            href="/cuentas"
+            titulo="Cuentas"
+            descripcion="Dónde tienes tu dinero: bancos, efectivo y billeteras digitales."
+            icono={Wallet}
+          />
+          <TarjetaAcceso
+            href="/categorias"
+            titulo="Categorías"
+            descripcion="Cómo clasificas tus ingresos y tus gastos."
+            icono={Tags}
+          />
+        </ul>
       </div>
     </main>
   )

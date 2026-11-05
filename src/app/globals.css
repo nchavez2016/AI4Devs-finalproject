@@ -267,6 +267,16 @@
     outline: var(--default-outline-width) solid var(--color-ring);
     outline-offset: var(--foco-separacion);
   }
+
+  /* El anillo de foco rodea toda la tarjeta clicable (componentes.md, 7.3). */
+  [data-tarjeta-enlace]:has(:focus-visible) {
+    outline: var(--default-outline-width) solid var(--color-ring);
+    outline-offset: var(--foco-separacion);
+  }
+
+  [data-tarjeta-enlace] :focus-visible {
+    outline: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

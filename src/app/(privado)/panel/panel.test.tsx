@@ -43,24 +43,25 @@ describe('panel', () => {
     )
   })
 
-  it('El panel muestra por dónde empezar', async () => {
+  it('Las tarjetas de acceso del panel tienen un solo enlace', async () => {
     const { ContenidoPanel } = await import('./ContenidoPanel')
 
     render(<ContenidoPanel nombreNegocio="Tienda Ana" />)
 
-    const lista = screen.getByRole('list', { name: 'Por dónde empezar' })
-    const elementos = within(lista).getAllByRole('listitem')
-    expect(elementos).toHaveLength(2)
+    const lista = screen.getByRole('list', { name: 'Accesos' })
+    const tarjetas = within(lista).getAllByRole('listitem')
+    expect(tarjetas).toHaveLength(2)
 
-    const enlaceCuentas = within(elementos[0]).getByRole('link', {
-      name: 'Crea tu primera cuenta',
+    const titulos = ['Cuentas', 'Categorías']
+    tarjetas.forEach((tarjeta, indice) => {
+      const enlaces = within(tarjeta).getAllByRole('link')
+      expect(enlaces).toHaveLength(1)
+      expect(enlaces[0].textContent).toBe(titulos[indice])
+      expect(within(tarjeta).queryAllByRole('button')).toHaveLength(0)
+      expect((tarjeta.textContent ?? '').length).toBeGreaterThan(titulos[indice].length)
+      expect(tarjeta.className).toContain('shadow-tarjeta')
+      expect(tarjeta.querySelector('[aria-hidden="true"]')).toBeTruthy()
     })
-    expect(enlaceCuentas.getAttribute('href')).toBe('/cuentas')
-
-    const enlaceCategorias = within(elementos[1]).getByRole('link', {
-      name: 'Revisa tus categorías',
-    })
-    expect(enlaceCategorias.getAttribute('href')).toBe('/categorias')
   })
 
   it('El panel usa el encabezado de página', async () => {
