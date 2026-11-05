@@ -137,10 +137,10 @@
 
 ## 22. Escenario: Pantalla de cuentas muestra la lista y el formulario en dos columnas
 
-- [ ] 22.1 CARACTERIZACIÓN — Ejecutar `cuentas.test.tsx` y `estados.test.tsx` de cuentas en verde.
-- [ ] 22.2 RED — `src/app/(privado)/cuentas/cuentas.test.tsx`: "Pantalla de cuentas muestra la lista y el formulario en dos columnas".
-- [ ] 22.3 GREEN — Rejilla con `--columnas-lista-formulario` y tarjeta "Nueva cuenta" en `ContenidoCuentas.tsx`, con `max-w-formulario` conservado. Animación de entrada en el contenedor de la página.
-- [ ] 22.4 REFACTOR
+- [x] 22.1 CARACTERIZACIÓN — Ejecutar `cuentas.test.tsx` y `estados.test.tsx` de cuentas en verde.
+- [x] 22.2 RED — `src/app/(privado)/cuentas/cuentas.test.tsx`: "Pantalla de cuentas muestra la lista y el formulario en dos columnas".
+- [x] 22.3 GREEN — Rejilla con `--columnas-lista-formulario` y tarjeta "Nueva cuenta" en `ContenidoCuentas.tsx`, con `max-w-formulario` conservado. Animación de entrada en el contenedor de la página.
+- [x] 22.4 REFACTOR
 
 ## 23. Escenario: Pantalla de cuentas sin cuentas muestra el estado vacío (requiere 0.1)
 

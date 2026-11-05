@@ -191,6 +191,39 @@ describe('cuentas', () => {
     ).toBeTruthy()
   })
 
+  it('Pantalla de cuentas muestra la lista y el formulario en dos columnas', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
+    listarCuentasSimulado.mockResolvedValue([
+      { id: 'c1', nombre: 'Banco Pichincha', tipo: 'BANCO', saldo: '500.00', creadoEn: new Date() },
+    ])
+
+    const { cargarCuentas } = await import('@/server/cuentas/pantalla')
+    const { ContenidoCuentas } = await import('./ContenidoCuentas')
+
+    const { container } = render(<ContenidoCuentas {...(await cargarCuentas())} />)
+
+    const rejilla = container.querySelector('[class*="columnas-lista-formulario"]')!
+    expect(rejilla).toBeTruthy()
+
+    const lista = screen.getByRole('list', { name: 'Cuentas' })
+    const titulo = screen.getByRole('heading', { level: 2, name: 'Nueva cuenta' })
+    const tarjeta = titulo.closest('[class*="shadow-tarjeta"]')!
+    expect(tarjeta).toBeTruthy()
+    expect(rejilla.contains(lista)).toBe(true)
+    expect(rejilla.contains(tarjeta)).toBe(true)
+    expect(lista.compareDocumentPosition(tarjeta) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+
+    const formulario = screen.getByRole('button', { name: 'Crear cuenta' }).closest('form')
+    expect(tarjeta.contains(formulario)).toBe(true)
+
+    const primarios = screen
+      .getAllByRole('button')
+      .filter((boton) => boton.className.includes('bg-primary'))
+    expect(primarios.map((boton) => boton.textContent)).toEqual(['Crear cuenta'])
+
+    expect(container.querySelector('.animate-entrada')).toBeTruthy()
+  })
+
   it('Pantalla de cuentas limita el ancho del contenido y del formulario', async () => {
     authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
     listarCuentasSimulado.mockResolvedValue([])
