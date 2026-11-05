@@ -37,9 +37,9 @@
 
 ## 6. Escenario: Una subruta mantiene activa su sección
 
-- [ ] 6.1 RED — `src/components/navegacion/secciones.test.ts`: "Una subruta mantiene activa su sección".
-- [ ] 6.2 GREEN — `src/components/navegacion/secciones.ts`.
-- [ ] 6.3 REFACTOR
+- [x] 6.1 RED — `src/components/navegacion/secciones.test.ts`: "Una subruta mantiene activa su sección".
+- [x] 6.2 GREEN — `src/components/navegacion/secciones.ts`.
+- [x] 6.3 REFACTOR
 
 ## 7. Escenario: La cabecera ofrece cerrar sesión en cada pantalla privada
 
