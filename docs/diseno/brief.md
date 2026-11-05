@@ -29,12 +29,23 @@ decisiones tomadas.
 - Todo usable con teclado y con foco visible.
 - Respeta prefers-reduced-motion.
 
-## Criterios anti-IA (prohibidos)
+## Criterios anti-IA
+
+Decisión del responsable del producto (2026-11-05): se relajan algunas prohibiciones originales
+para que la interfaz se vea profesional y coherente (decisiones.md, decisiones de partida).
+
+**Permitido desde 2026-11-05** (siempre con tokens, nunca con valores literales):
+- Iconos, incluidos los iconos dentro de contenedores redondeados.
+- Sombras de tarjeta suaves (tokens de elevación).
+- Degradados sutiles y monocromos de la marca.
+- Una animación de entrada breve, aplicada una vez al contenedor de la página.
+
+**Siguen prohibidos:**
 - Paleta por defecto de Tailwind o shadcn/ui sin personalizar (slate, zinc, emerald, indigo tal cual).
-- Gradientes índigo, violeta o cian; glassmorphism; brillos y resplandores.
-- Rejilla de tarjetas idénticas con sombra suave y esquinas muy redondeadas.
-- Animación de entrada en todos los elementos.
-- Iconos genéricos dentro de círculos de color.
+- Degradados índigo, violeta o cian; glassmorphism; brillos y resplandores.
+- Rejilla de tarjetas idénticas con esquinas muy redondeadas (`rounded-full` en tarjetas).
+- Animación de entrada en cada fila o en cada tarjeta; cualquier movimiento sin versión para `prefers-reduced-motion`.
+- Gráficos en 3D o con ejes de valores truncados.
 - Textos genéricos de marketing ("Toma el control de tus finanzas").
 - Una sola tipografía genérica sin decisión tipográfica.
 
@@ -44,8 +55,8 @@ decisiones tomadas.
   ingresos y gastos se distinguen también sin color (signo o icono).
 - Números: cifras tabulares, alineadas a la derecha en tablas, decimales siempre visibles,
   negativos con signo.
-- Movimiento solo funcional (confirmar acciones, transiciones de estado), breve y nunca
-  decorativo en pantallas que se abren a diario.
+- Movimiento breve y sin bloquear la lectura: confirmar acciones, transiciones de estado y una
+  única entrada de página; nunca en cada elemento ni en bucle.
 - Un solo botón primario por vista; la tarjeta clicable entera es el área de clic; los botones
   mantienen su ancho al cargar; confirmación en acciones destructivas.
 - Cada pantalla contempla estados vacío, carga, error y éxito.

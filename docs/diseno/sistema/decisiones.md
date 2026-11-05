@@ -11,6 +11,12 @@ Tailwind CSS 4 y shadcn/ui, más las reglas de este documento.
 - Todo valor de diseño es un token semántico, y un tema oscuro o una variante de marca futuros cambian solo valores de tokens, nunca componentes (tokens.md, sección 3). — Por qué: requisito del producto; el sistema tiene que poder crecer sin reescribir pantallas.
 - Contexto de uso del brief validado: registro breve desde el móvil justo después del gasto; consulta en móvil y escritorio. Usuario: quien lleva el dinero de un negocio pequeño o actividad.
 
+**Decisión del 2026-11-05 (responsable del producto): se relajan las prohibiciones visuales.**
+- Se permiten iconos, iconos en contenedores redondeados, sombras de tarjeta suaves, degradados sutiles monocromos de la marca (nada índigo, violeta ni cian) y una animación de entrada breve. — Por qué: sin ellos las pantallas se veían planas y poco profesionales, y un producto de dinero necesita transmitir solidez.
+- Se mantienen la paleta propia, la ausencia de glassmorphism y resplandores, los gráficos sin 3D ni ejes truncados, los textos sin marketing, WCAG 2.2 AA, `prefers-reduced-motion`, un solo botón primario por vista y los estados vacío, carga, error y éxito. — Por qué: protegen la identidad "Libro de caja", la legibilidad de las cifras y la accesibilidad.
+- Cada elemento permitido se materializa como un token con nombre de función (tokens.md, 3.3), con el ratio de contraste de todo color o par nuevo en tokens.md, 3.4. — Por qué: el sistema debe seguir pudiendo cambiar de tema sin tocar componentes.
+- Donde el análisis de la sección 1 cita una de estas prohibiciones como motivo de descarte (sombras difusas, entrada escalonada), el descarte de ese concepto se mantiene, pero ya no por esa prohibición: sigue siendo decorativo para el producto. Esa tabla es histórica y no se reescribe. — Por qué: conservar el razonamiento original sin contradecir la regla vigente.
+
 ---
 
 ## 1. Análisis de los tres conceptos
