@@ -93,5 +93,5 @@
 
 ## 9. Cierre
 
-- [ ] 9.1 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y
+- [x] 9.1 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run` y
   `openspec validate registro-ia --strict`, y confirmar que los cuatro terminan sin errores

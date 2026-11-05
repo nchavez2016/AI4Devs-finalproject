@@ -1,4 +1,4 @@
 # Progreso: registro-ia
-- Siguiente: 9.1 Cierre — ejecutar linters, typecheck, tests y validación estricta de OpenSpec.
+- Siguiente: /opsx-verify y luego /opsx-archive (21/21 tareas hechas).
 - Decisiones: Ninguna
 - Discrepancias: Ninguna
