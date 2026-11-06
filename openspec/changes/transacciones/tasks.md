@@ -48,9 +48,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 2.28 RED — mismo archivo, test "Filtrar transacciones por rango de fechas". Debe fallar porque `listarTransacciones` no recibe filtros.
 - [x] 2.29 GREEN — `listarTransacciones(usuarioId, filtros)` y `where.fecha` `gte`/`lte` en el repositorio (design f). Test en verde.
 - [x] 2.30 REFACTOR — test en verde.
-- [ ] 2.31 RED — mismo archivo, test "Filtrar transacciones por tipo y cuenta".
-- [ ] 2.32 GREEN — `where.tipo` y `where.cuentaId`, siempre junto a `usuarioId`. Test en verde.
-- [ ] 2.33 REFACTOR — test en verde.
+- [x] 2.31 RED — mismo archivo, test "Filtrar transacciones por tipo y cuenta".
+- [x] 2.32 GREEN — `where.tipo` y `where.cuentaId`, siempre junto a `usuarioId`. Test en verde.
+- [x] 2.33 REFACTOR — test en verde.
 - [ ] 2.34 RED — mismo archivo, test "Un filtro con valor inválido se ignora".
 - [ ] 2.35 GREEN — `esquemas.ts`: `esquemaFiltros` con `.catch(undefined)` por campo. Test en verde.
 - [ ] 2.36 REFACTOR — test en verde.

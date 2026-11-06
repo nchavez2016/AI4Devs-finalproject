@@ -77,6 +77,8 @@ export interface FiltrosTransacciones {
   desde?: string
   /** Fecha final AAAA-MM-DD, incluida. */
   hasta?: string
+  tipo?: TipoMovimiento
+  cuentaId?: string
 }
 
 export async function listarTransacciones(
@@ -86,6 +88,8 @@ export async function listarTransacciones(
   const transacciones = await transaccionRepository.listar(usuarioId, {
     desde: filtros.desde ? new Date(`${filtros.desde}T00:00:00Z`) : undefined,
     hasta: filtros.hasta ? new Date(`${filtros.hasta}T00:00:00Z`) : undefined,
+    tipo: filtros.tipo,
+    cuentaId: filtros.cuentaId,
   })
   return transacciones.map(mapearTransaccion)
 }

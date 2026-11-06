@@ -14,6 +14,8 @@ export interface DatosCrearTransaccionRepo {
 export interface FiltrosListarRepo {
   desde?: Date
   hasta?: Date
+  tipo?: TipoMovimiento
+  cuentaId?: string
 }
 
 const incluirNombres = {
@@ -41,6 +43,8 @@ export const transaccionRepository = {
     return prisma.transaccion.findMany({
       where: {
         usuarioId,
+        tipo: filtros.tipo,
+        cuentaId: filtros.cuentaId,
         ...((filtros.desde || filtros.hasta) && {
           fecha: { gte: filtros.desde, lte: filtros.hasta },
         }),

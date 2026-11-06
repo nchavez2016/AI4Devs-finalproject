@@ -280,4 +280,41 @@ describe('transacciones', () => {
     const desdeElDos = await listarTransacciones(usuarioId, { desde: '2026-09-02' })
     expect(desdeElDos.map((t) => t.monto)).toEqual(['30.00', '20.00'])
   })
+
+  it('Filtrar transacciones por tipo y cuenta', async () => {
+    const { usuarioId, cuentaId, categoriaId, categoriaIngresoId } = await usuarioConCajaEInsumos()
+    const banco = await crearCuenta(usuarioId, {
+      nombre: 'Banco',
+      tipo: 'BANCO',
+      saldoInicial: '0.00',
+    })
+    if (!banco.ok) throw new Error('Falló la creación de la cuenta')
+
+    const base = { fecha: '2026-09-28' }
+    await registrarTransaccion(usuarioId, {
+      ...base,
+      tipo: 'GASTO',
+      monto: '25.50',
+      cuentaId,
+      categoriaId,
+    })
+    await registrarTransaccion(usuarioId, {
+      ...base,
+      tipo: 'INGRESO',
+      monto: '100.00',
+      cuentaId,
+      categoriaId: categoriaIngresoId,
+    })
+    await registrarTransaccion(usuarioId, {
+      ...base,
+      tipo: 'GASTO',
+      monto: '40.00',
+      cuentaId: banco.cuenta.id,
+      categoriaId,
+    })
+
+    const transacciones = await listarTransacciones(usuarioId, { tipo: 'GASTO', cuentaId })
+
+    expect(transacciones.map((t) => t.monto)).toEqual(['25.50'])
+  })
 })
