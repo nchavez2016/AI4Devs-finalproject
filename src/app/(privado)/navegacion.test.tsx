@@ -9,6 +9,10 @@ vi.mock('@/server/categorias/acciones', () => ({
   crearCategoriaAccion: vi.fn(),
 }))
 
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({ replace: vi.fn(), push: vi.fn() }),
+}))
+
 vi.mock('@/server/transacciones/acciones', () => ({
   registrarTransaccionAccion: vi.fn(),
 }))

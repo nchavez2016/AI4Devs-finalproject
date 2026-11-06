@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useActionState, useRef } from 'react'
 import { EncabezadoPagina } from '@/components/EncabezadoPagina'
 import { ListaMovimientos } from '@/components/ListaMovimientos'
@@ -9,15 +10,22 @@ import { Tarjeta } from '@/components/ui/Tarjeta'
 import { registrarTransaccionAccion } from '@/server/transacciones/acciones'
 import type { DatosTransacciones } from '@/server/transacciones/pantalla'
 import { FormularioTransaccion } from './FormularioTransaccion'
+import { hayFiltrosActivos, mensajeSinResultados } from './filtros'
 
 export function ContenidoTransacciones({
   transacciones,
   cuentas,
   categorias,
+  filtros,
   hoy,
 }: DatosTransacciones) {
   const [estado, accion, pendiente] = useActionState(registrarTransaccionAccion, {})
   const formularioRef = useRef<HTMLFormElement>(null)
+  const router = useRouter()
+
+  function quitarFiltros() {
+    router.replace('/transacciones')
+  }
 
   function enfocarMonto() {
     const campo = formularioRef.current?.elements.namedItem('monto')
@@ -48,6 +56,15 @@ export function ContenidoTransacciones({
             <section aria-label="Movimientos" className="flex flex-col gap-entre-campos">
               {transacciones.length > 0 ? (
                 <ListaMovimientos transacciones={transacciones} idResaltado={estado.idCreado} />
+              ) : hayFiltrosActivos(filtros) ? (
+                <div className="flex flex-col items-start gap-entre-campos">
+                  <p className="text-cuerpo text-muted-foreground">
+                    {mensajeSinResultados(filtros)}
+                  </p>
+                  <Button type="button" variante="terciario" onClick={quitarFiltros}>
+                    Quitar filtros
+                  </Button>
+                </div>
               ) : (
                 <div className="flex flex-col items-start gap-entre-campos">
                   <p className="text-cuerpo text-muted-foreground">

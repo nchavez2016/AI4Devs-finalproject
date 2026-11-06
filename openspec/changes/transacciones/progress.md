@@ -1,4 +1,4 @@
 # Progreso: transacciones
-- Siguiente: 10.4 RED "Filtros sin resultados muestran el vacío por filtro"
+- Siguiente: 10.7 RED "Cambiar un filtro actualiza la URL y conserva los datos mientras carga"
 - Decisiones: 0.1 = opción A, el tipo debe coincidir con el de la categoría (design d); 0.2 = autorizada la modificación de los 5 tests de tasks 0.2; el esquema de 2.2 es mínimo (sin validaciones): cada una llega con su RED
-- Discrepancias: 2.12 sin extracción a validacion.ts; 3.10 fuerza su RED con un test del repositorio; 6.7 añade 3 tests de las ramas de la acción; 7.x en dos commits; 8.2 añade `clasesBoton` a Button.tsx; 8.11 trunca la descripción con `max-w-formulario`; los radios se llaman "Gasto"/"Ingreso" y no llevan aria-invalid; 9.7 añade un test de pantalla para el campo fecha; 9.10 prueba errores en los 6 campos
+- Discrepancias: 2.12 sin extracción a validacion.ts; 3.10 fuerza su RED con un test del repositorio; 6.7 añade 3 tests de las ramas de la acción; 7.x en dos commits; 8.2 añade `clasesBoton` a Button.tsx; 8.11 trunca la descripción con `max-w-formulario`; 9.10 prueba errores en los 6 campos; 10.5 crea `filtros.ts` (frase del vacío) y deja `FiltrosMovimientos.tsx` para 10.8, que es donde su RED lo exige; el vacío por filtro lleva su propio "Quitar filtros" y la barra no lo duplica

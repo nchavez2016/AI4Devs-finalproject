@@ -10,6 +10,7 @@ const listarTransaccionesSimulado = vi.fn()
 const listarCuentasSimulado = vi.fn()
 const listarCategoriasSimulado = vi.fn()
 const registrarTransaccionAccionSimulada = vi.fn()
+const replaceSimulado = vi.fn()
 
 vi.mock('@/auth', () => ({
   auth: () => authSimulado(),
@@ -18,7 +19,7 @@ vi.mock('@/auth', () => ({
 vi.mock('next/navigation', () => ({
   redirect: vi.fn(),
   usePathname: () => '/transacciones',
-  useRouter: () => ({ replace: vi.fn(), push: vi.fn() }),
+  useRouter: () => ({ replace: (...args: unknown[]) => replaceSimulado(...args), push: vi.fn() }),
   useSearchParams: () => new URLSearchParams(),
 }))
 
@@ -355,6 +356,42 @@ describe('transacciones', () => {
 
     expect(document.activeElement).toBe(screen.getByRole('textbox', { name: 'Monto' }))
     expect(screen.queryByRole('table')).toBeNull()
+  })
+
+  it('Filtros sin resultados muestran el vacío por filtro', async () => {
+    await mostrarPantalla({
+      transacciones: [],
+      filtros: { desde: '2026-09-01', hasta: '2026-09-15' },
+    })
+
+    expect(screen.getByText('No hay movimientos del 1 al 15 de septiembre.')).toBeTruthy()
+    expect(screen.queryByText(/Todavía no tienes movimientos/)).toBeNull()
+
+    const quitar = screen.getByRole('button', { name: 'Quitar filtros' })
+    expect(quitar.className).toContain('text-primary')
+    expect(quitar.className).not.toContain('bg-primary')
+    expect(quitar.className).not.toContain('bg-secondary')
+
+    fireEvent.click(quitar)
+
+    expect(replaceSimulado).toHaveBeenCalledWith('/transacciones')
+  })
+
+  it('Filtros sin resultados que no son un rango de un mes dan un mensaje general', async () => {
+    const casos: Record<string, string>[] = [
+      { tipo: 'INGRESO' },
+      { desde: '2026-09-20', hasta: '2026-10-05' },
+      { desde: '2025-09-01', hasta: '2026-09-15' },
+      { desde: '2026-09-01' },
+    ]
+
+    for (const filtros of casos) {
+      const { unmount } = await mostrarPantalla({ transacciones: [], filtros })
+
+      expect(screen.getByText('No hay movimientos con estos filtros.')).toBeTruthy()
+      expect(screen.getAllByRole('button', { name: 'Quitar filtros' })).toHaveLength(1)
+      unmount()
+    }
   })
 
   it('La entrada de página se anima solo en el contenedor', async () => {
