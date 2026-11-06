@@ -12,6 +12,11 @@ const clasesVariante: Record<VarianteBoton, string> = {
 const clasesBase =
   'relative inline-flex items-center justify-center h-alto-control px-control-x text-cuerpo font-control rounded-control transition-colors'
 
+// Para un enlace que debe verse como botón (por ejemplo, "Crear cuenta" que lleva a otra pantalla).
+export function clasesBoton(variante: VarianteBoton = 'primario'): string {
+  return [clasesBase, clasesVariante[variante]].join(' ')
+}
+
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variante?: VarianteBoton
   cargando?: boolean
