@@ -59,6 +59,17 @@ const categoriasPorDefecto = {
   })),
 }
 
+const gastoHarina = {
+  id: 't1',
+  tipo: 'GASTO',
+  monto: '25.50',
+  fecha: '2026-09-28',
+  descripcion: 'Harina',
+  cuenta: { id: 'c1', nombre: 'Caja' },
+  categoria: { id: 'g1', nombre: 'Insumos' },
+  creadoEn: new Date(),
+}
+
 interface Escenario {
   cuentas?: unknown[]
   categorias?: unknown
@@ -104,5 +115,33 @@ describe('transacciones', () => {
 
     expect(screen.queryByRole('button', { name: 'Guardar transacción' })).toBeNull()
     expect(screen.queryByRole('heading', { name: 'Nueva transacción' })).toBeNull()
+  })
+
+  it('Pantalla de transacciones muestra los movimientos y el formulario en dos columnas', async () => {
+    const { container } = await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Transacciones' })).toBeTruthy()
+    expect(screen.queryByRole('link', { name: 'Volver al panel' })).toBeNull()
+
+    const rejilla = container.querySelector('[class*="columnas-lista-formulario"]')!
+    expect(rejilla).toBeTruthy()
+
+    const movimientos = screen.getByRole('region', { name: 'Movimientos' })
+    const titulo = screen.getByRole('heading', { level: 2, name: 'Nueva transacción' })
+    const tarjeta = titulo.closest('[class*="shadow-tarjeta"]')!
+    expect(tarjeta).toBeTruthy()
+    expect(rejilla.contains(movimientos)).toBe(true)
+    expect(rejilla.contains(tarjeta)).toBe(true)
+    expect(
+      movimientos.compareDocumentPosition(tarjeta) & Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy()
+
+    const formulario = screen.getByRole('button', { name: 'Guardar transacción' }).closest('form')
+    expect(tarjeta.contains(formulario)).toBe(true)
+
+    const primarios = screen
+      .getAllByRole('button')
+      .filter((boton) => boton.className.includes('bg-primary'))
+    expect(primarios.map((boton) => boton.textContent)).toEqual(['Guardar transacción'])
   })
 })

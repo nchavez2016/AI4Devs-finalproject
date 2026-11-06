@@ -125,9 +125,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 8.1 RED — test "Pantalla de transacciones sin cuentas pide crear una cuenta primero". Debe fallar porque `ContenidoTransacciones` no existe.
 - [x] 8.2 GREEN — `src/server/transacciones/pantalla.ts` (`cargarTransacciones(filtros)` → `{ transacciones, cuentas, categorias, filtros, hoy }`), `page.tsx` (await de `searchParams`) y `ContenidoTransacciones.tsx` con `EncabezadoPagina` ("Transacciones" + propósito, **sin** `volverAlPanel`) y el estado sin cuentas (enlace primario a /cuentas). Test en verde.
 - [x] 8.3 REFACTOR — test en verde.
-- [ ] 8.4 RED — test "Pantalla de transacciones muestra los movimientos y el formulario en dos columnas".
-- [ ] 8.5 GREEN — rejilla `grid-cols-(--columnas-lista-formulario)`, `Tarjeta` con `h2` "Nueva transacción" en `max-w-formulario`, `FormularioTransaccion.tsx` mínimo con el botón primario "Guardar transacción" (design g). Test en verde.
-- [ ] 8.6 REFACTOR — test en verde.
+- [x] 8.4 RED — test "Pantalla de transacciones muestra los movimientos y el formulario en dos columnas".
+- [x] 8.5 GREEN — rejilla `grid-cols-(--columnas-lista-formulario)`, `Tarjeta` con `h2` "Nueva transacción" en `max-w-formulario`, `FormularioTransaccion.tsx` mínimo con el botón primario "Guardar transacción" (design g). Test en verde.
+- [x] 8.6 REFACTOR — test en verde.
 - [ ] 8.7 RED — test "La entrada de página se anima solo en el contenedor".
 - [ ] 8.8 GREEN — `animate-entrada` solo en el contenedor `max-w-contenido`. Test en verde.
 - [ ] 8.9 REFACTOR — test en verde.
