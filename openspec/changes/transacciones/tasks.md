@@ -87,9 +87,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 6. Aislamiento entre usuarios
 
-- [ ] 6.1 RED — `transacciones.int.test.ts`, test "Un usuario no ve las transacciones de otro". Si pasa sin cambios, forzar el RED quitando `usuarioId` del `where` de `listar`, y restaurar.
-- [ ] 6.2 GREEN — corregir el filtro si hace falta. Test en verde.
-- [ ] 6.3 REFACTOR — test en verde.
+- [x] 6.1 RED — `transacciones.int.test.ts`, test "Un usuario no ve las transacciones de otro". Si pasa sin cambios, forzar el RED quitando `usuarioId` del `where` de `listar`, y restaurar.
+- [x] 6.2 GREEN — corregir el filtro si hace falta. Test en verde.
+- [x] 6.3 REFACTOR — test en verde.
 - [ ] 6.4 RED — mismo archivo, test "Filtrar por una cuenta de otro usuario no muestra sus movimientos". Si pasa sin cambios, forzar el RED como en 6.1.
 - [ ] 6.5 GREEN — corregir el `where` si hace falta. Test en verde.
 - [ ] 6.6 REFACTOR — test en verde.

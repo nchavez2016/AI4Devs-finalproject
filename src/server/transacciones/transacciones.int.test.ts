@@ -68,6 +68,7 @@ async function dosUsuarios() {
     usuarioB,
     categoriaGastoA: buscar(categoriasA.gasto, 'Insumos'),
     categoriaGastoB: buscar(categoriasB.gasto, 'Insumos'),
+    categoriaIngresoB: buscar(categoriasB.ingreso, 'Ventas'),
   }
 }
 
@@ -444,5 +445,31 @@ describe('transacciones', () => {
       errores: { categoriaId: ['Elige una categoría de ingreso'] },
     })
     expect(await listarTransacciones(usuarioId)).toEqual([])
+  })
+
+  it('Un usuario no ve las transacciones de otro', async () => {
+    const { usuarioA, usuarioB, categoriaGastoA, categoriaIngresoB } = await dosUsuarios()
+    const cajaA = await crearCuenta(usuarioA, { nombre: 'Caja', tipo: 'EFECTIVO', saldoInicial: '0.00' })
+    const cajaB = await crearCuenta(usuarioB, { nombre: 'Caja', tipo: 'EFECTIVO', saldoInicial: '0.00' })
+    if (!cajaA.ok || !cajaB.ok) throw new Error('Falló la creación de cuentas')
+
+    await registrarTransaccion(usuarioA, {
+      tipo: 'GASTO',
+      monto: '25.50',
+      fecha: '2026-09-28',
+      cuentaId: cajaA.cuenta.id,
+      categoriaId: categoriaGastoA,
+    })
+    await registrarTransaccion(usuarioB, {
+      tipo: 'INGRESO',
+      monto: '100.00',
+      fecha: '2026-09-28',
+      cuentaId: cajaB.cuenta.id,
+      categoriaId: categoriaIngresoB,
+    })
+
+    const transacciones = await listarTransacciones(usuarioA)
+
+    expect(transacciones.map((t) => [t.tipo, t.monto])).toEqual([['GASTO', '25.50']])
   })
 })
