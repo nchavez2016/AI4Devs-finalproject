@@ -66,9 +66,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 3.7 RED — mismo archivo, test "El saldo de una cuenta solo cuenta sus transacciones". Si pasa sin cambios, forzar el RED quitando el agrupado por `cuentaId`.
 - [x] 3.8 GREEN — corregir el agrupado si hace falta. Test en verde.
 - [x] 3.9 REFACTOR — test en verde.
-- [ ] 3.10 RED — mismo archivo, test "El saldo de una cuenta no cuenta transacciones de otro usuario". Si pasa sin cambios, forzar el RED quitando `usuarioId` de `sumasPorCuenta`.
-- [ ] 3.11 GREEN — corregir el filtro si hace falta. Test en verde.
-- [ ] 3.12 REFACTOR — `cuentas.int.test.ts` completo en verde.
+- [x] 3.10 RED — mismo archivo, test "El saldo de una cuenta no cuenta transacciones de otro usuario". Pasa sin cambios y la mutación no lo rompe (las sumas se agrupan por `cuentaId`, único entre usuarios): el RED se fuerza con un test aparte "Las sumas por cuenta del repositorio no incluyen filas de otro usuario" que llama a `cuentaRepository.sumasPorCuenta(usuarioA)` (aprobado por el humano).
+- [x] 3.11 GREEN — corregir el filtro si hace falta. Test en verde.
+- [x] 3.12 REFACTOR — `cuentas.int.test.ts` completo en verde.
 
 ## 4. Pertenencia de cuenta y categoría
 

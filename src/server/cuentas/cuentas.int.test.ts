@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { limpiarBD } from '@/test/bd/limpiar'
 import { registrarUsuario } from '@/server/auth/registro'
 import { listarCategorias } from '@/server/categorias/categorias'
+import { cuentaRepository } from '@/server/repositories/cuentaRepository'
 import { registrarTransaccion } from '@/server/transacciones/transacciones'
 import { crearCuenta, listarCuentas, obtenerCuenta } from './cuentas'
 
@@ -549,5 +550,47 @@ describe('cuentas', () => {
       ['Caja', '10.00'],
       ['Banco', '-3.75'],
     ])
+  })
+
+  it('El saldo de una cuenta no cuenta transacciones de otro usuario', async () => {
+    const usuarioA = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const usuarioB = await registrarUsuarioDePrueba('Beto', 'beto@bazar.ec')
+    const { ingresoId } = await categoriasDeEjemplo(usuarioB)
+    const cajaA = await crearCuenta(usuarioA, {
+      nombre: 'Caja',
+      tipo: 'EFECTIVO',
+      saldoInicial: '10.00',
+    })
+    const cajaB = await crearCuenta(usuarioB, {
+      nombre: 'Caja',
+      tipo: 'EFECTIVO',
+      saldoInicial: '0.00',
+    })
+    if (!cajaA.ok || !cajaB.ok) throw new Error('Falló la creación de cuentas')
+
+    await registrarMovimiento(usuarioB, cajaB.cuenta.id, ingresoId, 'INGRESO', '5.25')
+
+    const cuentasA = await listarCuentas(usuarioA)
+    const cuentasB = await listarCuentas(usuarioB)
+    expect(cuentasA.map((c) => [c.nombre, c.saldo])).toEqual([['Caja', '10.00']])
+    expect(cuentasB.map((c) => [c.nombre, c.saldo])).toEqual([['Caja', '5.25']])
+    expect((await obtenerCuenta(usuarioA, cajaA.cuenta.id))?.saldo).toBe('10.00')
+  })
+
+  it('Las sumas por cuenta del repositorio no incluyen filas de otro usuario', async () => {
+    const usuarioA = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const usuarioB = await registrarUsuarioDePrueba('Beto', 'beto@bazar.ec')
+    const { ingresoId } = await categoriasDeEjemplo(usuarioB)
+    const cajaB = await crearCuenta(usuarioB, {
+      nombre: 'Caja',
+      tipo: 'EFECTIVO',
+      saldoInicial: '0.00',
+    })
+    if (!cajaB.ok) throw new Error('Falló la creación de la cuenta')
+
+    await registrarMovimiento(usuarioB, cajaB.cuenta.id, ingresoId, 'INGRESO', '5.25')
+
+    expect(await cuentaRepository.sumasPorCuenta(usuarioA)).toEqual([])
+    expect(await cuentaRepository.sumasPorCuenta(usuarioB)).toHaveLength(1)
   })
 })
