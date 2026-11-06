@@ -118,4 +118,27 @@ describe('transacciones', () => {
 
     expect(await listarTransacciones(usuarioId)).toEqual([])
   })
+
+  it('Rechazar una transacción con monto de formato inválido', async () => {
+    const { usuarioId, cuentaId, categoriaId } = await usuarioConCajaEInsumos()
+
+    for (const monto of ['', 'abc', '10.555', '1.000,00', '1000000000000.00']) {
+      const resultado = await registrarTransaccion(usuarioId, {
+        tipo: 'GASTO',
+        monto,
+        fecha: '2026-09-28',
+        cuentaId,
+        categoriaId,
+      })
+
+      expect(resultado.ok).toBe(false)
+      if (!resultado.ok) {
+        expect(resultado.errores.monto).toEqual([
+          'Escribe un monto con hasta 2 decimales, por ejemplo 25.50',
+        ])
+      }
+    }
+
+    expect(await listarTransacciones(usuarioId)).toEqual([])
+  })
 })
