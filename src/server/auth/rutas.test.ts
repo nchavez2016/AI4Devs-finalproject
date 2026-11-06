@@ -8,6 +8,11 @@ describe('resolverRedireccion', () => {
     expect(redireccion).toBe('/login')
   })
 
+  it('Ruta de transacciones sin sesión redirige al login', () => {
+    expect(resolverRedireccion('/transacciones', false)).toBe('/login')
+    expect(resolverRedireccion('/transacciones', true)).toBeNull()
+  })
+
   it('Rutas públicas accesibles sin sesión', () => {
     expect(resolverRedireccion('/login', false)).toBeNull()
     expect(resolverRedireccion('/registro', false)).toBeNull()

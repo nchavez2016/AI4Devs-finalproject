@@ -99,9 +99,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 6.10 RED — mismo archivo, test "Registrar una transacción sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
 - [x] 6.11 GREEN — sin cambios si `exigirUsuarioId` ya lo cumple. Test en verde.
 - [x] 6.12 REFACTOR — test en verde.
-- [ ] 6.13 RED — `src/server/auth/rutas.test.ts`, test "Ruta de transacciones sin sesión redirige al login". Pasará sin cambios (design h): forzar el RED añadiendo temporalmente `/transacciones` a `RUTAS_PUBLICAS`, y restaurar.
-- [ ] 6.14 GREEN — sin cambios en `rutas.ts` ni `proxy.ts`. Test en verde.
-- [ ] 6.15 REFACTOR — test en verde.
+- [x] 6.13 RED — `src/server/auth/rutas.test.ts`, test "Ruta de transacciones sin sesión redirige al login". Pasará sin cambios (design h): forzar el RED añadiendo temporalmente `/transacciones` a `RUTAS_PUBLICAS`, y restaurar.
+- [x] 6.14 GREEN — sin cambios en `rutas.ts` ni `proxy.ts`. Test en verde.
+- [x] 6.15 REFACTOR — test en verde.
 
 ## 7. Navegación
 
