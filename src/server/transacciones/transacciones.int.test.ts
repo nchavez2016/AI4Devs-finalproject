@@ -97,4 +97,25 @@ describe('transacciones', () => {
       }),
     ])
   })
+
+  it('Rechazar una transacción con monto inválido', async () => {
+    const { usuarioId, cuentaId, categoriaId } = await usuarioConCajaEInsumos()
+
+    for (const monto of ['0', '0.00', '-25.50']) {
+      const resultado = await registrarTransaccion(usuarioId, {
+        tipo: 'GASTO',
+        monto,
+        fecha: '2026-09-28',
+        cuentaId,
+        categoriaId,
+      })
+
+      expect(resultado).toEqual({
+        ok: false,
+        errores: { monto: ['El monto debe ser mayor que 0'] },
+      })
+    }
+
+    expect(await listarTransacciones(usuarioId)).toEqual([])
+  })
 })

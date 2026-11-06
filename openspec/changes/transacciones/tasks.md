@@ -24,9 +24,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 2.4 RED — mismo archivo, test "Registrar un ingreso válido con descripción". Si pasa sin cambios, forzar el RED.
 - [x] 2.5 GREEN — `esquemas.ts`: coma decimal y descripción recortada (vacía → `null`); `calcularSaldo` suma ingresos si aún no lo hacía. Test en verde.
 - [x] 2.6 REFACTOR — test en verde.
-- [ ] 2.7 RED — mismo archivo, test "Rechazar una transacción con monto inválido".
-- [ ] 2.8 GREEN — `esquemas.ts`: `refine` > 0 con "El monto debe ser mayor que 0"; `transacciones.ts` devuelve `{ ok: false, errores }` con `agruparErroresPorCampo`. Test en verde.
-- [ ] 2.9 REFACTOR — test en verde.
+- [x] 2.7 RED — mismo archivo, test "Rechazar una transacción con monto inválido".
+- [x] 2.8 GREEN — `esquemas.ts`: `refine` > 0 con "El monto debe ser mayor que 0"; `transacciones.ts` devuelve `{ ok: false, errores }` con `agruparErroresPorCampo`. Test en verde.
+- [x] 2.9 REFACTOR — test en verde.
 - [ ] 2.10 RED — mismo archivo, test "Rechazar una transacción con monto de formato inválido".
 - [ ] 2.11 GREEN — `esquemas.ts`: regex de design b, mensaje "Escribe un monto con hasta 2 decimales, por ejemplo 25.50". Test en verde. Verificar por mutación cada parte de la regex que el test no haya exigido.
 - [ ] 2.12 REFACTOR — si se repite, extraer la normalización de importes compartida con `src/server/cuentas/esquemas.ts` a `src/server/validacion.ts`, con los tests de cuentas en verde.
