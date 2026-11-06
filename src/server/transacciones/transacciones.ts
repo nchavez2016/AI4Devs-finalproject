@@ -1,4 +1,5 @@
 import { Prisma, TipoMovimiento } from '@/generated/prisma/client'
+import { categoriaRepository } from '@/server/repositories/categoriaRepository'
 import { cuentaRepository } from '@/server/repositories/cuentaRepository'
 import { transaccionRepository } from '@/server/repositories/transaccionRepository'
 import { agruparErroresPorCampo } from '@/server/validacion'
@@ -65,6 +66,11 @@ export async function registrarTransaccion(
   const cuenta = await cuentaRepository.buscarPorId(usuarioId, datos.cuentaId)
   if (!cuenta) {
     return { ok: false, errores: { cuentaId: ['Elige una de tus cuentas'] } }
+  }
+
+  const categoria = await categoriaRepository.buscarPorId(usuarioId, datos.categoriaId)
+  if (!categoria) {
+    return { ok: false, errores: { categoriaId: ['Elige una de tus categorías'] } }
   }
 
   const transaccion = await transaccionRepository.crear({

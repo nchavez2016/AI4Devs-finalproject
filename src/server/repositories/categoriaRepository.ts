@@ -33,6 +33,12 @@ export const categoriaRepository = {
     }
   },
 
+  async buscarPorId(usuarioId: string, id: string) {
+    return prisma.categoria.findFirst({
+      where: { id, usuarioId },
+    })
+  },
+
   async listar(usuarioId: string) {
     return prisma.categoria.findMany({
       where: {

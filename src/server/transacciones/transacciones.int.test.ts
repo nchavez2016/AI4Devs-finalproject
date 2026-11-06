@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { limpiarBD } from '@/test/bd/limpiar'
 import { registrarUsuario } from '@/server/auth/registro'
-import { listarCategorias } from '@/server/categorias/categorias'
+import { crearCategoria, listarCategorias } from '@/server/categorias/categorias'
 import { crearCuenta, listarCuentas } from '@/server/cuentas/cuentas'
 import { listarTransacciones, registrarTransaccion } from './transacciones'
 
@@ -395,5 +395,28 @@ describe('transacciones', () => {
     expect(await listarTransacciones(usuarioA)).toEqual([])
     expect(await listarTransacciones(usuarioB)).toEqual([])
     expect((await listarCuentas(usuarioB))[0].saldo).toBe('50.00')
+  })
+
+  it('Rechazar una transacción con una categoría de otro usuario', async () => {
+    const { usuarioA, usuarioB } = await dosUsuarios()
+    const cajaA = await crearCuenta(usuarioA, {
+      nombre: 'Caja',
+      tipo: 'EFECTIVO',
+      saldoInicial: '0.00',
+    })
+    const publicidadB = await crearCategoria(usuarioB, { nombre: 'Publicidad', tipo: 'GASTO' })
+    if (!cajaA.ok || !publicidadB.ok) throw new Error('Falló la preparación')
+
+    const base = { tipo: 'GASTO', monto: '25.50', fecha: '2026-09-28', cuentaId: cajaA.cuenta.id }
+    const ajena = await registrarTransaccion(usuarioA, {
+      ...base,
+      categoriaId: publicidadB.categoria.id,
+    })
+    const inexistente = await registrarTransaccion(usuarioA, { ...base, categoriaId: 'no-existe' })
+
+    const esperado = { ok: false, errores: { categoriaId: ['Elige una de tus categorías'] } }
+    expect(ajena).toEqual(esperado)
+    expect(inexistente).toEqual(esperado)
+    expect(await listarTransacciones(usuarioA)).toEqual([])
   })
 })
