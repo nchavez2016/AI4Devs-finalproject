@@ -22,9 +22,9 @@ export const esquemaRegistrarTransaccion = z.object({
         ctx.addIssue({ code: 'custom', message: 'El monto debe ser mayor que 0' })
       }
     }),
-  fecha: z.string(),
-  cuentaId: z.string(),
-  categoriaId: z.string(),
+  fecha: z.string({ error: 'Indica la fecha' }).min(1, 'Indica la fecha'),
+  cuentaId: z.string({ error: 'Elige una cuenta' }).min(1, 'Elige una cuenta'),
+  categoriaId: z.string({ error: 'Elige una categoría' }).min(1, 'Elige una categoría'),
   descripcion: z
     .string()
     .optional()

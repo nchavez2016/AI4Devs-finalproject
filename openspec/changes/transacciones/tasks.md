@@ -30,9 +30,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 2.10 RED — mismo archivo, test "Rechazar una transacción con monto de formato inválido".
 - [x] 2.11 GREEN — `esquemas.ts`: regex de design b, mensaje "Escribe un monto con hasta 2 decimales, por ejemplo 25.50". Test en verde. Verificar por mutación cada parte de la regex que el test no haya exigido.
 - [x] 2.12 REFACTOR — si se repite, extraer la normalización de importes compartida con `src/server/cuentas/esquemas.ts` a `src/server/validacion.ts`, con los tests de cuentas en verde.
-- [ ] 2.13 RED — mismo archivo, test "Rechazar una transacción sin campos obligatorios".
-- [ ] 2.14 GREEN — `esquemas.ts`: "Elige una cuenta", "Elige una categoría", "Indica la fecha". Test en verde.
-- [ ] 2.15 REFACTOR — test en verde.
+- [x] 2.13 RED — mismo archivo, test "Rechazar una transacción sin campos obligatorios".
+- [x] 2.14 GREEN — `esquemas.ts`: "Elige una cuenta", "Elige una categoría", "Indica la fecha". Test en verde.
+- [x] 2.15 REFACTOR — test en verde.
 - [ ] 2.16 RED — mismo archivo, test "Rechazar una transacción con fecha inexistente".
 - [ ] 2.17 GREEN — `esquemas.ts`: formato AAAA-MM-DD y día real. Test en verde.
 - [ ] 2.18 REFACTOR — test en verde.

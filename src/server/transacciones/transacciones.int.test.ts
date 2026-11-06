@@ -141,4 +141,30 @@ describe('transacciones', () => {
 
     expect(await listarTransacciones(usuarioId)).toEqual([])
   })
+
+  it('Rechazar una transacción sin campos obligatorios', async () => {
+    const { usuarioId } = await usuarioConCajaEInsumos()
+
+    const esperado = {
+      ok: false,
+      errores: {
+        cuentaId: ['Elige una cuenta'],
+        categoriaId: ['Elige una categoría'],
+        fecha: ['Indica la fecha'],
+      },
+    }
+
+    const ausentes = await registrarTransaccion(usuarioId, { tipo: 'GASTO', monto: '25.50' })
+    const vacios = await registrarTransaccion(usuarioId, {
+      tipo: 'GASTO',
+      monto: '25.50',
+      cuentaId: '',
+      categoriaId: '',
+      fecha: '',
+    })
+
+    expect(ausentes).toEqual(esperado)
+    expect(vacios).toEqual(esperado)
+    expect(await listarTransacciones(usuarioId)).toEqual([])
+  })
 })
