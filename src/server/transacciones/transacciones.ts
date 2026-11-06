@@ -1,4 +1,5 @@
 import { Prisma, TipoMovimiento } from '@/generated/prisma/client'
+import { cuentaRepository } from '@/server/repositories/cuentaRepository'
 import { transaccionRepository } from '@/server/repositories/transaccionRepository'
 import { agruparErroresPorCampo } from '@/server/validacion'
 import { esquemaFiltros, esquemaRegistrarTransaccion } from './esquemas'
@@ -59,6 +60,13 @@ export async function registrarTransaccion(
   }
 
   const datos = validacion.data
+
+  // Una cuenta de otro usuario se trata igual que una inexistente (design c).
+  const cuenta = await cuentaRepository.buscarPorId(usuarioId, datos.cuentaId)
+  if (!cuenta) {
+    return { ok: false, errores: { cuentaId: ['Elige una de tus cuentas'] } }
+  }
+
   const transaccion = await transaccionRepository.crear({
     usuarioId,
     cuentaId: datos.cuentaId,

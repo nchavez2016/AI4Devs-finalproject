@@ -41,6 +41,36 @@ async function usuarioConCajaEInsumos() {
   }
 }
 
+async function registrarUsuarioDePrueba(nombre: string, email: string) {
+  const registro = await registrarUsuario({
+    nombre,
+    nombreNegocio: `Negocio de ${nombre}`,
+    email,
+    password: 'clave-segura-1',
+  })
+  if (!registro.ok) throw new Error('Falló el registro')
+  return registro.usuario.id
+}
+
+async function dosUsuarios() {
+  const usuarioA = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+  const usuarioB = await registrarUsuarioDePrueba('Beto', 'beto@bazar.ec')
+  const categoriasA = await listarCategorias(usuarioA)
+  const categoriasB = await listarCategorias(usuarioB)
+  const buscar = (lista: { id: string; nombre: string }[], nombre: string) => {
+    const categoria = lista.find((c) => c.nombre === nombre)
+    if (!categoria) throw new Error(`Falta la categoría ${nombre}`)
+    return categoria.id
+  }
+
+  return {
+    usuarioA,
+    usuarioB,
+    categoriaGastoA: buscar(categoriasA.gasto, 'Insumos'),
+    categoriaGastoB: buscar(categoriasB.gasto, 'Insumos'),
+  }
+}
+
 describe('transacciones', () => {
   it('Registrar un gasto válido', async () => {
     const { usuarioId, cuentaId, categoriaId } = await usuarioConCajaEInsumos()
@@ -344,5 +374,26 @@ describe('transacciones', () => {
     })
 
     expect(transacciones.map((t) => t.monto)).toEqual(['100.00', '25.50'])
+  })
+
+  it('Rechazar una transacción en una cuenta de otro usuario', async () => {
+    const { usuarioA, usuarioB, categoriaGastoA } = await dosUsuarios()
+    const cajaBeto = await crearCuenta(usuarioB, {
+      nombre: 'Caja Beto',
+      tipo: 'EFECTIVO',
+      saldoInicial: '50.00',
+    })
+    if (!cajaBeto.ok) throw new Error('Falló la creación de la cuenta')
+
+    const base = { tipo: 'GASTO', monto: '25.50', fecha: '2026-09-28', categoriaId: categoriaGastoA }
+    const ajena = await registrarTransaccion(usuarioA, { ...base, cuentaId: cajaBeto.cuenta.id })
+    const inexistente = await registrarTransaccion(usuarioA, { ...base, cuentaId: 'no-existe' })
+
+    const esperado = { ok: false, errores: { cuentaId: ['Elige una de tus cuentas'] } }
+    expect(ajena).toEqual(esperado)
+    expect(inexistente).toEqual(esperado)
+    expect(await listarTransacciones(usuarioA)).toEqual([])
+    expect(await listarTransacciones(usuarioB)).toEqual([])
+    expect((await listarCuentas(usuarioB))[0].saldo).toBe('50.00')
   })
 })

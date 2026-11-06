@@ -72,9 +72,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 4. Pertenencia de cuenta y categoría
 
-- [ ] 4.1 RED — `src/server/transacciones/transacciones.int.test.ts`, test "Rechazar una transacción en una cuenta de otro usuario".
-- [ ] 4.2 GREEN — `transacciones.ts`: `cuentaRepository.buscarPorId(usuarioId, cuentaId)`; si es `null`, "Elige una de tus cuentas" en `cuentaId` (design c). Test en verde.
-- [ ] 4.3 REFACTOR — test en verde.
+- [x] 4.1 RED — `src/server/transacciones/transacciones.int.test.ts`, test "Rechazar una transacción en una cuenta de otro usuario".
+- [x] 4.2 GREEN — `transacciones.ts`: `cuentaRepository.buscarPorId(usuarioId, cuentaId)`; si es `null`, "Elige una de tus cuentas" en `cuentaId` (design c). Test en verde.
+- [x] 4.3 REFACTOR — test en verde.
 - [ ] 4.4 RED — mismo archivo, test "Rechazar una transacción con una categoría de otro usuario".
 - [ ] 4.5 GREEN — `src/server/repositories/categoriaRepository.ts`: `buscarPorId(usuarioId, id)` con `findFirst({ where: { id, usuarioId } })`; `transacciones.ts`: si es `null`, "Elige una de tus categorías" en `categoriaId`. Test en verde, y `src/server/categorias/categorias.int.test.ts` también.
 - [ ] 4.6 REFACTOR — tests de los grupos 2 y 4 en verde.
