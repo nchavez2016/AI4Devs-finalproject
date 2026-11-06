@@ -419,4 +419,30 @@ describe('transacciones', () => {
     expect(inexistente).toEqual(esperado)
     expect(await listarTransacciones(usuarioA)).toEqual([])
   })
+
+  it('Rechazar una transacción cuyo tipo no coincide con su categoría', async () => {
+    const { usuarioId, cuentaId, categoriaId, categoriaIngresoId } = await usuarioConCajaEInsumos()
+    const base = { monto: '25.50', fecha: '2026-09-28', cuentaId }
+
+    const gastoConIngreso = await registrarTransaccion(usuarioId, {
+      ...base,
+      tipo: 'GASTO',
+      categoriaId: categoriaIngresoId,
+    })
+    const ingresoConGasto = await registrarTransaccion(usuarioId, {
+      ...base,
+      tipo: 'INGRESO',
+      categoriaId,
+    })
+
+    expect(gastoConIngreso).toEqual({
+      ok: false,
+      errores: { categoriaId: ['Elige una categoría de gasto'] },
+    })
+    expect(ingresoConGasto).toEqual({
+      ok: false,
+      errores: { categoriaId: ['Elige una categoría de ingreso'] },
+    })
+    expect(await listarTransacciones(usuarioId)).toEqual([])
+  })
 })

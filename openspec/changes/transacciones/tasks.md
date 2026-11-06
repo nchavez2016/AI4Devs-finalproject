@@ -81,9 +81,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 5. Tipo de transacción coincide con la categoría (opción A, design d)
 
-- [ ] 5.1 RED — `transacciones.int.test.ts`, test "Rechazar una transacción cuyo tipo no coincide con su categoría".
-- [ ] 5.2 GREEN — `transacciones.ts`: comparar el `tipo` de la categoría que devuelve `categoriaRepository.buscarPorId` (grupo 4) con `datos.tipo`; "Elige una categoría de gasto" / "Elige una categoría de ingreso" en `categoriaId`. Test en verde.
-- [ ] 5.3 REFACTOR — tests de los grupos 2, 4 y 5 en verde.
+- [x] 5.1 RED — `transacciones.int.test.ts`, test "Rechazar una transacción cuyo tipo no coincide con su categoría".
+- [x] 5.2 GREEN — `transacciones.ts`: comparar el `tipo` de la categoría que devuelve `categoriaRepository.buscarPorId` (grupo 4) con `datos.tipo`; "Elige una categoría de gasto" / "Elige una categoría de ingreso" en `categoriaId`. Test en verde.
+- [x] 5.3 REFACTOR — tests de los grupos 2, 4 y 5 en verde.
 
 ## 6. Aislamiento entre usuarios
 

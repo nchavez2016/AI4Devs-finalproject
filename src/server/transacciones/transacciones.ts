@@ -73,6 +73,12 @@ export async function registrarTransaccion(
     return { ok: false, errores: { categoriaId: ['Elige una de tus categorías'] } }
   }
 
+  // El tipo de la transacción debe coincidir con el de su categoría (design d, opción A).
+  if (categoria.tipo !== datos.tipo) {
+    const etiqueta = datos.tipo === 'INGRESO' ? 'ingreso' : 'gasto'
+    return { ok: false, errores: { categoriaId: [`Elige una categoría de ${etiqueta}`] } }
+  }
+
   const transaccion = await transaccionRepository.crear({
     usuarioId,
     cuentaId: datos.cuentaId,
