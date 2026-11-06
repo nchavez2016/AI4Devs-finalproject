@@ -185,4 +185,4 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 
 - [x] 11.1 `readme.md`: §4 sustituye `/api/transacciones` por las Server Actions de registrar y listar (entrada, filtros, errores por campo, sesión); HU-001 implementado; HU-004 con la asignación cubierta; HU-002 con saldo calculado. Verificación: `grep -n "api/transacciones" readme.md` sin resultados como endpoint vigente.
 - [x] 11.2 `docs/pendientes.md`: quitar "selector de tipo" y "lista y tabla de movimientos" de los componentes que faltan. Verificación: lectura del archivo.
-- [ ] 11.3 Cierre — `npm run lint`, `npx tsc --noEmit`, `npx vitest run --reporter=dot` y `openspec validate transacciones --strict`, todo sin errores.
+- [x] 11.3 Cierre — `npm run lint`, `npx tsc --noEmit`, `npx vitest run --reporter=dot` y `openspec validate transacciones --strict`, todo sin errores.
