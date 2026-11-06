@@ -96,9 +96,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 6.7 RED — `src/server/transacciones/acciones.test.ts`, test "La transacción se crea siempre para el usuario de la sesión". Debe fallar porque `registrarTransaccionAccion` no existe.
 - [x] 6.8 GREEN — `acciones.ts` (`'use server'`): `exigirUsuarioId()` fuera del `try`, solo las claves esperadas del `FormData`; éxito → `revalidatePath('/transacciones')` y `{ exito, idCreado, creado: { tipo, monto, cuentaNombre } }`; error inesperado → `{ mensaje, valores }` (design g). Test en verde.
 - [x] 6.9 REFACTOR — test en verde.
-- [ ] 6.10 RED — mismo archivo, test "Registrar una transacción sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
-- [ ] 6.11 GREEN — sin cambios si `exigirUsuarioId` ya lo cumple. Test en verde.
-- [ ] 6.12 REFACTOR — test en verde.
+- [x] 6.10 RED — mismo archivo, test "Registrar una transacción sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
+- [x] 6.11 GREEN — sin cambios si `exigirUsuarioId` ya lo cumple. Test en verde.
+- [x] 6.12 REFACTOR — test en verde.
 - [ ] 6.13 RED — `src/server/auth/rutas.test.ts`, test "Ruta de transacciones sin sesión redirige al login". Pasará sin cambios (design h): forzar el RED añadiendo temporalmente `/transacciones` a `RUTAS_PUBLICAS`, y restaurar.
 - [ ] 6.14 GREEN — sin cambios en `rutas.ts` ni `proxy.ts`. Test en verde.
 - [ ] 6.15 REFACTOR — test en verde.

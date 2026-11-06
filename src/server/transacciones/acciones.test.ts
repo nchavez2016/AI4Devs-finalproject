@@ -120,4 +120,20 @@ describe('registrarTransaccionAccion', () => {
       },
     })
   })
+
+  it('Registrar una transacción sin sesión redirige al login', async () => {
+    authSimulado.mockResolvedValue(null)
+    redirectSimulado.mockImplementation(() => {
+      throw new Error('NEXT_REDIRECT')
+    })
+
+    const { registrarTransaccionAccion } = await import('./acciones')
+
+    await expect(registrarTransaccionAccion(undefined, formularioDeGasto())).rejects.toThrow(
+      'NEXT_REDIRECT'
+    )
+
+    expect(redirectSimulado).toHaveBeenCalledWith('/login')
+    expect(registrarTransaccionSimulado).not.toHaveBeenCalled()
+  })
 })
