@@ -43,6 +43,16 @@ describe('panel', () => {
     )
   })
 
+  it('El panel enlaza a transacciones', async () => {
+    const { ContenidoPanel } = await import('./ContenidoPanel')
+
+    render(<ContenidoPanel nombreNegocio="Tienda Ana" />)
+
+    expect(screen.getByRole('link', { name: 'Transacciones' }).getAttribute('href')).toBe(
+      '/transacciones'
+    )
+  })
+
   it('Las tarjetas de acceso del panel tienen un solo enlace', async () => {
     const { ContenidoPanel } = await import('./ContenidoPanel')
 
@@ -50,9 +60,9 @@ describe('panel', () => {
 
     const lista = screen.getByRole('list', { name: 'Accesos' })
     const tarjetas = within(lista).getAllByRole('listitem')
-    expect(tarjetas).toHaveLength(2)
+    expect(tarjetas).toHaveLength(3)
 
-    const titulos = ['Cuentas', 'Categorías']
+    const titulos = ['Transacciones', 'Cuentas', 'Categorías']
     tarjetas.forEach((tarjeta, indice) => {
       const enlaces = within(tarjeta).getAllByRole('link')
       expect(enlaces).toHaveLength(1)
@@ -72,7 +82,7 @@ describe('panel', () => {
     const h1 = screen.getByRole('heading', { level: 1, name: 'Tienda Ana' })
     expect(h1).toBeTruthy()
     expect(h1.nextElementSibling?.textContent).toBe(
-      'Desde aquí llegas a tus cuentas y a tus categorías.'
+      'Desde aquí llegas a tus transacciones, cuentas y categorías.'
     )
     expect(screen.queryByRole('link', { name: 'Volver al panel' })).toBeNull()
   })

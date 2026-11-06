@@ -114,9 +114,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 7.7 RED — `secciones.test.ts`, test "La cabecera marca Transacciones como activa con filtros en la URL" (`seccionActiva('/transacciones')`; `usePathname` no incluye la query). Si pasa sin cambios, forzar el RED quitando temporalmente la sección.
 - [x] 7.8 GREEN — sin cambios si ya lo cumple. Test en verde.
 - [x] 7.9 REFACTOR — test en verde.
-- [ ] 7.10 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel enlaza a transacciones".
-- [ ] 7.11 GREEN — `ContenidoPanel.tsx`: `TarjetaAcceso` "Transacciones" primera, icono `ArrowLeftRight`, descripción "Lo que entra y sale de tu negocio: ingresos y gastos."; propósito "Desde aquí llegas a tus transacciones, cuentas y categorías." Test en verde.
-- [ ] 7.12 REFACTOR — actualizar (autorizado en 0.2) "Las tarjetas de acceso del panel tienen un solo enlace" (tres tarjetas) y "El panel usa el encabezado de página" (nueva frase); `panel.test.tsx` y "El panel enlaza a cuentas y categorías" en verde.
+- [x] 7.10 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel enlaza a transacciones".
+- [x] 7.11 GREEN — `ContenidoPanel.tsx`: `TarjetaAcceso` "Transacciones" primera, icono `ArrowLeftRight`, descripción "Lo que entra y sale de tu negocio: ingresos y gastos."; propósito "Desde aquí llegas a tus transacciones, cuentas y categorías." Test en verde.
+- [x] 7.12 REFACTOR — actualizar (autorizado en 0.2) "Las tarjetas de acceso del panel tienen un solo enlace" (tres tarjetas) y "El panel usa el encabezado de página" (nueva frase); `panel.test.tsx` y "El panel enlaza a cuentas y categorías" en verde.
 
 ## 8. Pantalla de transacciones: composición y listado
 
