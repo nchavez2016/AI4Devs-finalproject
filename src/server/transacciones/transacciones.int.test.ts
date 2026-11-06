@@ -206,4 +206,22 @@ describe('transacciones', () => {
     })
     expect(await listarTransacciones(usuarioId)).toEqual([])
   })
+
+  it('Longitud máxima de la descripción es 255 caracteres', async () => {
+    const { usuarioId, cuentaId, categoriaId } = await usuarioConCajaEInsumos()
+    const base = { tipo: 'GASTO', monto: '1.00', fecha: '2026-09-28', cuentaId, categoriaId }
+
+    const primera = await registrarTransaccion(usuarioId, { ...base, descripcion: 'a'.repeat(255) })
+    const segunda = await registrarTransaccion(usuarioId, { ...base, descripcion: 'b'.repeat(256) })
+
+    expect(primera.ok).toBe(true)
+    expect(segunda).toEqual({
+      ok: false,
+      errores: { descripcion: ['La descripción puede tener como máximo 255 caracteres'] },
+    })
+
+    const transacciones = await listarTransacciones(usuarioId)
+    expect(transacciones).toHaveLength(1)
+    expect(transacciones[0].descripcion).toBe('a'.repeat(255))
+  })
 })

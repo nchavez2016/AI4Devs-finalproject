@@ -39,9 +39,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 2.19 RED — mismo archivo, test "Rechazar una transacción con tipo inválido". Si pasa sin cambios, forzar el RED.
 - [x] 2.20 GREEN — `esquemas.ts`: `z.enum(['INGRESO','GASTO'], 'Elige si es un gasto o un ingreso')`. Test en verde.
 - [x] 2.21 REFACTOR — test en verde.
-- [ ] 2.22 RED — mismo archivo, test "Longitud máxima de la descripción es 255 caracteres".
-- [ ] 2.23 GREEN — `esquemas.ts`: máximo 255 tras recortar, "La descripción puede tener como máximo 255 caracteres". Test en verde.
-- [ ] 2.24 REFACTOR — test en verde.
+- [x] 2.22 RED — mismo archivo, test "Longitud máxima de la descripción es 255 caracteres".
+- [x] 2.23 GREEN — `esquemas.ts`: máximo 255 tras recortar, "La descripción puede tener como máximo 255 caracteres". Test en verde.
+- [x] 2.24 REFACTOR — test en verde.
 - [ ] 2.25 RED — mismo archivo, test "Listado de transacciones de la más reciente a la más antigua".
 - [ ] 2.26 GREEN — `transaccionRepository.listar`: `orderBy` fecha y `creadoEn` descendentes. Test en verde.
 - [ ] 2.27 REFACTOR — test en verde.

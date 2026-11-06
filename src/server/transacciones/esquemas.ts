@@ -47,7 +47,11 @@ export const esquemaRegistrarTransaccion = z.object({
     .transform((valor) => {
       const recortada = valor?.trim()
       return recortada ? recortada : null
-    }),
+    })
+    .refine(
+      (valor) => valor === null || valor.length <= 255,
+      'La descripción puede tener como máximo 255 caracteres'
+    ),
 })
 
 export type DatosRegistrarTransaccion = z.infer<typeof esquemaRegistrarTransaccion>
