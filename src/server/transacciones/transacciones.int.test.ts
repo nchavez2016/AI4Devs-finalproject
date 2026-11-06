@@ -30,7 +30,15 @@ async function usuarioConCajaEInsumos() {
   const insumos = categorias.gasto.find((c) => c.nombre === 'Insumos')
   if (!insumos) throw new Error('Falta la categoría Insumos')
 
-  return { usuarioId, cuentaId: cuenta.cuenta.id, categoriaId: insumos.id }
+  const ventas = categorias.ingreso.find((c) => c.nombre === 'Ventas')
+  if (!ventas) throw new Error('Falta la categoría Ventas')
+
+  return {
+    usuarioId,
+    cuentaId: cuenta.cuenta.id,
+    categoriaId: insumos.id,
+    categoriaIngresoId: ventas.id,
+  }
 }
 
 describe('transacciones', () => {
@@ -61,5 +69,32 @@ describe('transacciones', () => {
 
     const cuentas = await listarCuentas(usuarioId)
     expect(cuentas).toEqual([expect.objectContaining({ nombre: 'Caja', saldo: '474.50' })])
+  })
+
+  it('Registrar un ingreso válido con descripción', async () => {
+    const { usuarioId, cuentaId, categoriaIngresoId } = await usuarioConCajaEInsumos()
+
+    const resultado = await registrarTransaccion(usuarioId, {
+      tipo: 'INGRESO',
+      monto: '150,00',
+      fecha: '2026-09-17',
+      cuentaId,
+      categoriaId: categoriaIngresoId,
+      descripcion: '  Venta de producto  ',
+    })
+
+    expect(resultado.ok).toBe(true)
+
+    const transacciones = await listarTransacciones(usuarioId)
+    expect(transacciones).toEqual([
+      expect.objectContaining({
+        tipo: 'INGRESO',
+        monto: '150.00',
+        fecha: '2026-09-17',
+        descripcion: 'Venta de producto',
+        cuenta: { id: cuentaId, nombre: 'Caja' },
+        categoria: { id: categoriaIngresoId, nombre: 'Ventas' },
+      }),
+    ])
   })
 })

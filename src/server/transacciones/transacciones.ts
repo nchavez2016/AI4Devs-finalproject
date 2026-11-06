@@ -66,7 +66,7 @@ export async function registrarTransaccion(
     tipo: datos.tipo,
     monto: new Prisma.Decimal(datos.monto),
     fecha: new Date(`${datos.fecha}T00:00:00Z`),
-    descripcion: datos.descripcion ?? null,
+    descripcion: datos.descripcion,
   })
 
   return { ok: true, transaccion: mapearTransaccion(transaccion) }
