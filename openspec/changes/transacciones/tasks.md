@@ -128,9 +128,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 8.4 RED — test "Pantalla de transacciones muestra los movimientos y el formulario en dos columnas".
 - [x] 8.5 GREEN — rejilla `grid-cols-(--columnas-lista-formulario)`, `Tarjeta` con `h2` "Nueva transacción" en `max-w-formulario`, `FormularioTransaccion.tsx` mínimo con el botón primario "Guardar transacción" (design g). Test en verde.
 - [x] 8.6 REFACTOR — test en verde.
-- [ ] 8.7 RED — test "La entrada de página se anima solo en el contenedor".
-- [ ] 8.8 GREEN — `animate-entrada` solo en el contenedor `max-w-contenido`. Test en verde.
-- [ ] 8.9 REFACTOR — test en verde.
+- [x] 8.7 RED — test "La entrada de página se anima solo en el contenedor".
+- [x] 8.8 GREEN — `animate-entrada` solo en el contenedor `max-w-contenido`. Test en verde.
+- [x] 8.9 REFACTOR — test en verde.
 - [ ] 8.10 RED — test "Listado muestra cada movimiento con su categoría, cuenta e importe con signo".
 - [ ] 8.11 GREEN — `src/components/ListaMovimientos.tsx`: lista por día y `table` propia con tokens (componentes.md 7.4), `Importe` de tipo `ingreso`/`gasto` (7.5). Test en verde.
 - [ ] 8.12 REFACTOR — test en verde.

@@ -144,4 +144,12 @@ describe('transacciones', () => {
       .filter((boton) => boton.className.includes('bg-primary'))
     expect(primarios.map((boton) => boton.textContent)).toEqual(['Guardar transacción'])
   })
+
+  it('La entrada de página se anima solo en el contenedor', async () => {
+    const { container } = await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    const animados = container.querySelectorAll('.animate-entrada')
+    expect(animados).toHaveLength(1)
+    expect(animados[0].classList.contains('max-w-contenido')).toBe(true)
+  })
 })

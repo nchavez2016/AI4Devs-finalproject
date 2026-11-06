@@ -15,7 +15,7 @@ export function ContenidoTransacciones({ cuentas }: DatosTransacciones) {
 
   return (
     <main className="px-pagina py-seccion bg-background text-foreground min-h-full">
-      <div className="w-full max-w-contenido mx-auto flex flex-col gap-seccion">
+      <div className="w-full max-w-contenido mx-auto flex flex-col gap-seccion animate-entrada">
         <EncabezadoPagina
           titulo="Transacciones"
           proposito="Registra lo que entra y sale de tu negocio y revisa tus movimientos."
