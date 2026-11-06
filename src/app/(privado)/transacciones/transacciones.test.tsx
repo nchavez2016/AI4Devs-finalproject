@@ -340,6 +340,23 @@ describe('transacciones', () => {
     )
   })
 
+  it('Pantalla de transacciones sin movimientos muestra el estado vacío', async () => {
+    await mostrarPantalla({ transacciones: [] })
+
+    expect(
+      screen.getByText('Todavía no tienes movimientos. Registra el primero con el formulario.')
+    ).toBeTruthy()
+
+    const boton = screen.getByRole('button', { name: 'Registrar movimiento' })
+    expect(boton.className).toContain('bg-secondary')
+    expect(boton.className).not.toContain('bg-primary')
+
+    fireEvent.click(boton)
+
+    expect(document.activeElement).toBe(screen.getByRole('textbox', { name: 'Monto' }))
+    expect(screen.queryByRole('table')).toBeNull()
+  })
+
   it('La entrada de página se anima solo en el contenedor', async () => {
     const { container } = await mostrarPantalla({ transacciones: [gastoHarina] })
 

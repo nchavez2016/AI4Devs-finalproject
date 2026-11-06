@@ -158,9 +158,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 
 ## 10. Estados y filtros de la pantalla
 
-- [ ] 10.1 RED — `transacciones.test.tsx`, test "Pantalla de transacciones sin movimientos muestra el estado vacío".
-- [ ] 10.2 GREEN — vacío sin filtros con botón secundario que enfoca el monto (estados.md 9.1). Test en verde.
-- [ ] 10.3 REFACTOR — test en verde.
+- [x] 10.1 RED — `transacciones.test.tsx`, test "Pantalla de transacciones sin movimientos muestra el estado vacío".
+- [x] 10.2 GREEN — vacío sin filtros con botón secundario que enfoca el monto (estados.md 9.1). Test en verde.
+- [x] 10.3 REFACTOR — test en verde.
 - [ ] 10.4 RED — mismo archivo, test "Filtros sin resultados muestran el vacío por filtro".
 - [ ] 10.5 GREEN — `src/components/FiltrosMovimientos.tsx` (design f) y el vacío por filtro con la frase del rango en `es-EC` y "Quitar filtros" terciario. Test en verde.
 - [ ] 10.6 REFACTOR — test en verde.
