@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
+import { Button } from '@/components/ui/Button'
 import { Campo } from '@/components/ui/Campo'
 import { Selector } from '@/components/ui/Selector'
 import type { FiltrosTransacciones } from '@/server/transacciones/transacciones'
@@ -11,13 +12,26 @@ type ClaveFiltro = keyof FiltrosTransacciones
 interface FiltrosMovimientosProps {
   filtros: FiltrosTransacciones
   cuentas: { id: string; nombre: string }[]
+  /** El botón "Quitar filtros" solo se ofrece con un filtro activo y resultados en pantalla. */
+  mostrarQuitar: boolean
 }
 
 // Filtros básicos del listado: viven en la URL (desde, hasta, tipo, cuentaId). Los avanzados
 // quedan fuera del MVP (componentes.md, 7.4).
-export function FiltrosMovimientos({ filtros, cuentas }: FiltrosMovimientosProps) {
+export function FiltrosMovimientos({
+  filtros,
+  cuentas,
+  mostrarQuitar,
+}: FiltrosMovimientosProps) {
   const router = useRouter()
   const [pendiente, iniciarTransicion] = useTransition()
+
+  // La transición mantiene los movimientos anteriores en pantalla mientras llegan los nuevos.
+  function navegar(url: string) {
+    iniciarTransicion(async () => {
+      await router.replace(url)
+    })
+  }
 
   function cambiar(clave: ClaveFiltro, valor: string) {
     const parametros = new URLSearchParams()
@@ -27,12 +41,7 @@ export function FiltrosMovimientos({ filtros, cuentas }: FiltrosMovimientosProps
     if (valor) parametros.set(clave, valor)
 
     const consulta = parametros.toString()
-    const url = consulta ? `/transacciones?${consulta}` : '/transacciones'
-
-    // La transición mantiene los movimientos anteriores en pantalla mientras llegan los nuevos.
-    iniciarTransicion(async () => {
-      await router.replace(url)
-    })
+    navegar(consulta ? `/transacciones?${consulta}` : '/transacciones')
   }
 
   return (
@@ -73,9 +82,16 @@ export function FiltrosMovimientos({ filtros, cuentas }: FiltrosMovimientosProps
         </Selector>
       </div>
 
-      <p aria-live="polite" className="min-h-alto-fila text-detalle text-muted-foreground">
-        {pendiente && 'Actualizando…'}
-      </p>
+      <div className="flex items-center justify-between gap-entre-campos">
+        <p aria-live="polite" className="text-detalle text-muted-foreground">
+          {pendiente && 'Actualizando…'}
+        </p>
+        {mostrarQuitar && (
+          <Button type="button" variante="terciario" onClick={() => navegar('/transacciones')}>
+            Quitar filtros
+          </Button>
+        )}
+      </div>
     </div>
   )
 }

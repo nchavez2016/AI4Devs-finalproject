@@ -167,9 +167,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 10.7 RED — mismo archivo, test "Cambiar un filtro actualiza la URL y conserva los datos mientras carga".
 - [x] 10.8 GREEN — `router.replace` dentro de `useTransition` y "Actualizando…" mientras `isPending`. Test en verde.
 - [x] 10.9 REFACTOR — test en verde.
-- [ ] 10.10 RED — mismo archivo, test "Quitar filtros solo aparece con un filtro activo". Si pasa sin cambios, forzar el RED.
-- [ ] 10.11 GREEN — condición de filtro activo. Test en verde.
-- [ ] 10.12 REFACTOR — test en verde.
+- [x] 10.10 RED — mismo archivo, test "Quitar filtros solo aparece con un filtro activo". Si pasa sin cambios, forzar el RED.
+- [x] 10.11 GREEN — condición de filtro activo. Test en verde.
+- [x] 10.12 REFACTOR — test en verde.
 - [ ] 10.13 RED — mismo archivo, test "Transacción registrada se anuncia y se resalta en el listado".
 - [ ] 10.14 GREEN — región `aria-live` con `formatearImporte` y `creado.cuentaNombre`; `idResaltado` → `animate-resaltado` en la fila. Test en verde.
 - [ ] 10.15 REFACTOR — test en verde.

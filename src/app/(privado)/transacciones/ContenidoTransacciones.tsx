@@ -55,7 +55,11 @@ export function ContenidoTransacciones({
         ) : (
           <div className="grid grid-cols-(--columnas-lista-formulario) items-start gap-seccion">
             <section aria-label="Movimientos" className="flex flex-col gap-entre-campos">
-              <FiltrosMovimientos filtros={filtros} cuentas={cuentas} />
+              <FiltrosMovimientos
+                filtros={filtros}
+                cuentas={cuentas}
+                mostrarQuitar={hayFiltrosActivos(filtros) && transacciones.length > 0}
+              />
               {transacciones.length > 0 ? (
                 <ListaMovimientos transacciones={transacciones} idResaltado={estado.idCreado} />
               ) : hayFiltrosActivos(filtros) ? (

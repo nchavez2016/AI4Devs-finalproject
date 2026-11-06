@@ -420,6 +420,20 @@ describe('transacciones', () => {
     expect(replaceSimulado).toHaveBeenLastCalledWith('/transacciones')
   })
 
+  it('Quitar filtros solo aparece con un filtro activo', async () => {
+    const sinFiltros = await mostrarPantalla({ transacciones: [gastoHarina] })
+    expect(screen.queryByRole('button', { name: 'Quitar filtros' })).toBeNull()
+    sinFiltros.unmount()
+
+    await mostrarPantalla({ transacciones: [gastoHarina], filtros: { cuentaId: 'c1' } })
+    const quitar = screen.getByRole('button', { name: 'Quitar filtros' })
+    expect(quitar.className).toContain('text-primary')
+    expect(screen.getAllByRole('button', { name: 'Quitar filtros' })).toHaveLength(1)
+
+    fireEvent.click(quitar)
+    expect(replaceSimulado).toHaveBeenCalledWith('/transacciones')
+  })
+
   it('Filtros sin resultados que no son un rango de un mes dan un mensaje general', async () => {
     const casos: Record<string, string>[] = [
       { tipo: 'INGRESO' },
