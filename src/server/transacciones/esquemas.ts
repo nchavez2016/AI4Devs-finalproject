@@ -18,7 +18,7 @@ function esFechaReal(valor: string): boolean {
 }
 
 export const esquemaRegistrarTransaccion = z.object({
-  tipo: z.enum(['INGRESO', 'GASTO']),
+  tipo: z.enum(['INGRESO', 'GASTO'], 'Elige si es un gasto o un ingreso'),
   monto: z
     .string()
     .transform((valor) => valor.trim().replace(',', '.'))

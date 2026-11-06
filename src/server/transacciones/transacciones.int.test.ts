@@ -188,4 +188,22 @@ describe('transacciones', () => {
 
     expect(await listarTransacciones(usuarioId)).toEqual([])
   })
+
+  it('Rechazar una transacción con tipo inválido', async () => {
+    const { usuarioId, cuentaId, categoriaId } = await usuarioConCajaEInsumos()
+
+    const resultado = await registrarTransaccion(usuarioId, {
+      tipo: 'AHORRO',
+      monto: '25.50',
+      fecha: '2026-09-28',
+      cuentaId,
+      categoriaId,
+    })
+
+    expect(resultado).toEqual({
+      ok: false,
+      errores: { tipo: ['Elige si es un gasto o un ingreso'] },
+    })
+    expect(await listarTransacciones(usuarioId)).toEqual([])
+  })
 })
