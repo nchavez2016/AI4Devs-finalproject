@@ -377,6 +377,49 @@ describe('transacciones', () => {
     expect(replaceSimulado).toHaveBeenCalledWith('/transacciones')
   })
 
+  it('Cambiar un filtro actualiza la URL y conserva los datos mientras carga', async () => {
+    // La navegación tarda: la transición sigue pendiente mientras llegan los datos nuevos.
+    replaceSimulado.mockImplementation(() => new Promise(() => {}))
+    await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    expect(screen.queryByText('Actualizando…')).toBeNull()
+
+    fireEvent.change(screen.getByRole('combobox', { name: 'Filtrar por tipo' }), {
+      target: { value: 'GASTO' },
+    })
+
+    expect(replaceSimulado).toHaveBeenCalledWith('/transacciones?tipo=GASTO')
+    expect(await screen.findByText('Actualizando…')).toBeTruthy()
+    // Los movimientos anteriores siguen en pantalla.
+    expect(within(screen.getByRole('table')).getByText('Harina')).toBeTruthy()
+  })
+
+  it('Los filtros de fechas y cuenta se combinan en la URL', async () => {
+    replaceSimulado.mockImplementation(() => new Promise(() => {}))
+    await mostrarPantalla({
+      transacciones: [gastoHarina],
+      filtros: { tipo: 'GASTO' },
+    })
+
+    fireEvent.change(screen.getByLabelText('Desde'), { target: { value: '2026-09-01' } })
+    expect(replaceSimulado).toHaveBeenLastCalledWith('/transacciones?tipo=GASTO&desde=2026-09-01')
+
+    fireEvent.change(screen.getByLabelText('Hasta'), { target: { value: '2026-09-15' } })
+    expect(replaceSimulado).toHaveBeenLastCalledWith(
+      '/transacciones?tipo=GASTO&hasta=2026-09-15'
+    )
+
+    fireEvent.change(screen.getByRole('combobox', { name: 'Filtrar por cuenta' }), {
+      target: { value: 'c1' },
+    })
+    expect(replaceSimulado).toHaveBeenLastCalledWith('/transacciones?tipo=GASTO&cuentaId=c1')
+
+    fireEvent.change(screen.getByRole('combobox', { name: 'Filtrar por tipo' }), {
+      target: { value: '' },
+    })
+    expect(replaceSimulado).toHaveBeenLastCalledWith('/transacciones')
+  })
+
   it('Filtros sin resultados que no son un rango de un mes dan un mensaje general', async () => {
     const casos: Record<string, string>[] = [
       { tipo: 'INGRESO' },

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useActionState, useRef } from 'react'
 import { EncabezadoPagina } from '@/components/EncabezadoPagina'
+import { FiltrosMovimientos } from '@/components/FiltrosMovimientos'
 import { ListaMovimientos } from '@/components/ListaMovimientos'
 import { Button, clasesBoton } from '@/components/ui/Button'
 import { Tarjeta } from '@/components/ui/Tarjeta'
@@ -54,6 +55,7 @@ export function ContenidoTransacciones({
         ) : (
           <div className="grid grid-cols-(--columnas-lista-formulario) items-start gap-seccion">
             <section aria-label="Movimientos" className="flex flex-col gap-entre-campos">
+              <FiltrosMovimientos filtros={filtros} cuentas={cuentas} />
               {transacciones.length > 0 ? (
                 <ListaMovimientos transacciones={transacciones} idResaltado={estado.idCreado} />
               ) : hayFiltrosActivos(filtros) ? (

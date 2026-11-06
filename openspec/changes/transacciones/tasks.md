@@ -164,9 +164,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 10.4 RED — mismo archivo, test "Filtros sin resultados muestran el vacío por filtro".
 - [x] 10.5 GREEN — `src/components/FiltrosMovimientos.tsx` (design f) y el vacío por filtro con la frase del rango en `es-EC` y "Quitar filtros" terciario. Test en verde.
 - [x] 10.6 REFACTOR — test en verde.
-- [ ] 10.7 RED — mismo archivo, test "Cambiar un filtro actualiza la URL y conserva los datos mientras carga".
-- [ ] 10.8 GREEN — `router.replace` dentro de `useTransition` y "Actualizando…" mientras `isPending`. Test en verde.
-- [ ] 10.9 REFACTOR — test en verde.
+- [x] 10.7 RED — mismo archivo, test "Cambiar un filtro actualiza la URL y conserva los datos mientras carga".
+- [x] 10.8 GREEN — `router.replace` dentro de `useTransition` y "Actualizando…" mientras `isPending`. Test en verde.
+- [x] 10.9 REFACTOR — test en verde.
 - [ ] 10.10 RED — mismo archivo, test "Quitar filtros solo aparece con un filtro activo". Si pasa sin cambios, forzar el RED.
 - [ ] 10.11 GREEN — condición de filtro activo. Test en verde.
 - [ ] 10.12 REFACTOR — test en verde.
