@@ -14,6 +14,7 @@ export function ContenidoTransacciones({
   transacciones,
   cuentas,
   categorias,
+  hoy,
 }: DatosTransacciones) {
   const [estado, accion, pendiente] = useActionState(registrarTransaccionAccion, {})
   const formularioRef = useRef<HTMLFormElement>(null)
@@ -56,6 +57,7 @@ export function ContenidoTransacciones({
                   pendiente={pendiente}
                   categorias={categorias}
                   cuentas={cuentas}
+                  hoy={hoy}
                 />
               </Tarjeta>
             </div>

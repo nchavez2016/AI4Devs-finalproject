@@ -146,9 +146,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 9.4 RED — mismo archivo, test "Formulario de transacción usa controles nativos y el monto con prefijo".
 - [x] 9.5 GREEN — `src/components/ui/Selector.tsx` (`select` nativo con tokens de campo, etiqueta y error) para categoría y cuenta, `Campo monto` con etiqueta "Monto", `noValidate`, primera cuenta por defecto. Test en verde.
 - [x] 9.6 REFACTOR — test en verde.
-- [ ] 9.7 RED — `src/server/transacciones/pantalla.test.ts`, test "Fecha del formulario empieza en el día de hoy" (`vi.setSystemTime('2026-09-29T04:30:00Z')`).
-- [ ] 9.8 GREEN — `pantalla.ts`: `hoy` con zona `America/Guayaquil`; el formulario lo usa como `defaultValue`. Test en verde.
-- [ ] 9.9 REFACTOR — test en verde.
+- [x] 9.7 RED — `src/server/transacciones/pantalla.test.ts`, test "Fecha del formulario empieza en el día de hoy" (`vi.setSystemTime('2026-09-29T04:30:00Z')`).
+- [x] 9.8 GREEN — `pantalla.ts`: `hoy` con zona `America/Guayaquil`; el formulario lo usa como `defaultValue`. Test en verde.
+- [x] 9.9 REFACTOR — test en verde.
 - [ ] 9.10 RED — `transacciones.test.tsx`, test "Formulario de transacción muestra el error junto a cada campo".
 - [ ] 9.11 GREEN — errores y `aria-invalid` en cada campo, `useFocoPrimerError`. Test en verde.
 - [ ] 9.12 REFACTOR — test en verde.

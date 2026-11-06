@@ -33,6 +33,7 @@ describe('navegación de las pantallas privadas', () => {
         cuentas={[]}
         categorias={{ ingreso: [], gasto: [] }}
         filtros={{}}
+        hoy="2026-09-28"
       />
     )
     expect(screen.queryByRole('link', { name: 'Volver al panel' })).toBeNull()

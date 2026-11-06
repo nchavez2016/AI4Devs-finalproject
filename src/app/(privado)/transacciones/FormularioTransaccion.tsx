@@ -14,6 +14,7 @@ export interface FormularioTransaccionProps {
   pendiente: boolean
   categorias: ListadoCategorias
   cuentas: CuentaItem[]
+  hoy: string
 }
 
 export function FormularioTransaccion({
@@ -22,6 +23,7 @@ export function FormularioTransaccion({
   pendiente,
   categorias,
   cuentas,
+  hoy,
 }: FormularioTransaccionProps) {
   const [tipo, setTipo] = useState<TipoMovimientoSeleccionado>('GASTO')
   const categoriasDelTipo = tipo === 'GASTO' ? categorias.gasto : categorias.ingreso
@@ -52,6 +54,8 @@ export function FormularioTransaccion({
           </option>
         ))}
       </Selector>
+
+      <Campo etiqueta="Fecha" name="fecha" type="date" defaultValue={hoy} />
 
       <Button type="submit" cargando={pendiente} textoCarga="Guardando…">
         Guardar transacción

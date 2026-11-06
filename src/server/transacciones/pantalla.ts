@@ -13,7 +13,16 @@ export interface DatosTransacciones {
   cuentas: CuentaItem[]
   categorias: ListadoCategorias
   filtros: FiltrosTransacciones
+  /** Día de hoy en Ecuador (AAAA-MM-DD): fecha inicial del formulario. */
+  hoy: string
 }
+
+const formatoHoy = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'America/Guayaquil',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+})
 
 export async function cargarTransacciones(parametrosDeUrl: unknown): Promise<DatosTransacciones> {
   const usuarioId = await exigirUsuarioId()
@@ -26,5 +35,5 @@ export async function cargarTransacciones(parametrosDeUrl: unknown): Promise<Dat
     listarCategorias(usuarioId),
   ])
 
-  return { transacciones, cuentas, categorias, filtros }
+  return { transacciones, cuentas, categorias, filtros, hoy: formatoHoy.format(new Date()) }
 }

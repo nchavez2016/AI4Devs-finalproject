@@ -229,6 +229,19 @@ describe('transacciones', () => {
     expect(monto.name).toBe('monto')
   })
 
+  it('El campo fecha del formulario muestra el día de hoy', async () => {
+    authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
+    listarCuentasSimulado.mockResolvedValue([cuentaCaja])
+    listarCategoriasSimulado.mockResolvedValue(categoriasPorDefecto)
+    listarTransaccionesSimulado.mockResolvedValue([])
+
+    const datos = { ...(await cargarTransacciones({})), hoy: '2026-09-28' }
+    render(<ContenidoTransacciones {...datos} />)
+
+    expect((screen.getByLabelText('Fecha') as HTMLInputElement).value).toBe('2026-09-28')
+    expect((screen.getByLabelText('Fecha') as HTMLInputElement).type).toBe('date')
+  })
+
   it('La entrada de página se anima solo en el contenedor', async () => {
     const { container } = await mostrarPantalla({ transacciones: [gastoHarina] })
 
