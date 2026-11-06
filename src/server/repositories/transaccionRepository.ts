@@ -36,6 +36,7 @@ export const transaccionRepository = {
     return prisma.transaccion.findMany({
       where: { usuarioId },
       include: incluirNombres,
+      orderBy: [{ fecha: 'desc' }, { creadoEn: 'desc' }],
     })
   },
 }

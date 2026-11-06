@@ -224,4 +224,38 @@ describe('transacciones', () => {
     expect(transacciones).toHaveLength(1)
     expect(transacciones[0].descripcion).toBe('a'.repeat(255))
   })
+
+  it('Listado de transacciones de la más reciente a la más antigua', async () => {
+    const { usuarioId, cuentaId, categoriaId, categoriaIngresoId } = await usuarioConCajaEInsumos()
+
+    await registrarTransaccion(usuarioId, {
+      tipo: 'GASTO',
+      monto: '10.00',
+      fecha: '2026-09-27',
+      cuentaId,
+      categoriaId,
+    })
+    await registrarTransaccion(usuarioId, {
+      tipo: 'GASTO',
+      monto: '20.00',
+      fecha: '2026-09-28',
+      cuentaId,
+      categoriaId,
+    })
+    await registrarTransaccion(usuarioId, {
+      tipo: 'INGRESO',
+      monto: '30.00',
+      fecha: '2026-09-27',
+      cuentaId,
+      categoriaId: categoriaIngresoId,
+    })
+
+    const transacciones = await listarTransacciones(usuarioId)
+
+    expect(transacciones.map((t) => [t.tipo, t.monto, t.fecha])).toEqual([
+      ['GASTO', '20.00', '2026-09-28'],
+      ['INGRESO', '30.00', '2026-09-27'],
+      ['GASTO', '10.00', '2026-09-27'],
+    ])
+  })
 })

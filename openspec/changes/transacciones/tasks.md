@@ -42,9 +42,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 2.22 RED — mismo archivo, test "Longitud máxima de la descripción es 255 caracteres".
 - [x] 2.23 GREEN — `esquemas.ts`: máximo 255 tras recortar, "La descripción puede tener como máximo 255 caracteres". Test en verde.
 - [x] 2.24 REFACTOR — test en verde.
-- [ ] 2.25 RED — mismo archivo, test "Listado de transacciones de la más reciente a la más antigua".
-- [ ] 2.26 GREEN — `transaccionRepository.listar`: `orderBy` fecha y `creadoEn` descendentes. Test en verde.
-- [ ] 2.27 REFACTOR — test en verde.
+- [x] 2.25 RED — mismo archivo, test "Listado de transacciones de la más reciente a la más antigua".
+- [x] 2.26 GREEN — `transaccionRepository.listar`: `orderBy` fecha y `creadoEn` descendentes. Test en verde.
+- [x] 2.27 REFACTOR — test en verde.
 - [ ] 2.28 RED — mismo archivo, test "Filtrar transacciones por rango de fechas". Debe fallar porque `listarTransacciones` no recibe filtros.
 - [ ] 2.29 GREEN — `listarTransacciones(usuarioId, filtros)` y `where.fecha` `gte`/`lte` en el repositorio (design f). Test en verde.
 - [ ] 2.30 REFACTOR — test en verde.
