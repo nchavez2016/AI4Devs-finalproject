@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, within } from '@testing-library/react'
+import { cargarTransacciones } from '@/server/transacciones/pantalla'
+import { ContenidoTransacciones } from './ContenidoTransacciones'
 
 const authSimulado = vi.fn()
 const listarTransaccionesSimulado = vi.fn()
@@ -88,9 +90,6 @@ async function mostrarPantalla({
   listarCuentasSimulado.mockResolvedValue(cuentas)
   listarCategoriasSimulado.mockResolvedValue(categorias)
   listarTransaccionesSimulado.mockResolvedValue(transacciones)
-
-  const { cargarTransacciones } = await import('@/server/transacciones/pantalla')
-  const { ContenidoTransacciones } = await import('./ContenidoTransacciones')
 
   const datos = await cargarTransacciones(filtros)
   return render(<ContenidoTransacciones {...datos} />)
