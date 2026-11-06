@@ -167,4 +167,25 @@ describe('transacciones', () => {
     expect(vacios).toEqual(esperado)
     expect(await listarTransacciones(usuarioId)).toEqual([])
   })
+
+  it('Rechazar una transacción con fecha inexistente', async () => {
+    const { usuarioId, cuentaId, categoriaId } = await usuarioConCajaEInsumos()
+
+    for (const fecha of ['2026-02-30', '28/09/2026']) {
+      const resultado = await registrarTransaccion(usuarioId, {
+        tipo: 'GASTO',
+        monto: '25.50',
+        fecha,
+        cuentaId,
+        categoriaId,
+      })
+
+      expect(resultado.ok).toBe(false)
+      if (!resultado.ok) {
+        expect(resultado.errores.fecha).toEqual(['Escribe una fecha válida'])
+      }
+    }
+
+    expect(await listarTransacciones(usuarioId)).toEqual([])
+  })
 })

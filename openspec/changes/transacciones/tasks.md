@@ -33,9 +33,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 2.13 RED — mismo archivo, test "Rechazar una transacción sin campos obligatorios".
 - [x] 2.14 GREEN — `esquemas.ts`: "Elige una cuenta", "Elige una categoría", "Indica la fecha". Test en verde.
 - [x] 2.15 REFACTOR — test en verde.
-- [ ] 2.16 RED — mismo archivo, test "Rechazar una transacción con fecha inexistente".
-- [ ] 2.17 GREEN — `esquemas.ts`: formato AAAA-MM-DD y día real. Test en verde.
-- [ ] 2.18 REFACTOR — test en verde.
+- [x] 2.16 RED — mismo archivo, test "Rechazar una transacción con fecha inexistente".
+- [x] 2.17 GREEN — `esquemas.ts`: formato AAAA-MM-DD y día real. Test en verde.
+- [x] 2.18 REFACTOR — test en verde.
 - [ ] 2.19 RED — mismo archivo, test "Rechazar una transacción con tipo inválido". Si pasa sin cambios, forzar el RED.
 - [ ] 2.20 GREEN — `esquemas.ts`: `z.enum(['INGRESO','GASTO'], 'Elige si es un gasto o un ingreso')`. Test en verde.
 - [ ] 2.21 REFACTOR — test en verde.
