@@ -173,12 +173,12 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 10.13 RED — mismo archivo, test "Transacción registrada se anuncia y se resalta en el listado".
 - [x] 10.14 GREEN — región `aria-live` con `formatearImporte` y `creado.cuentaNombre`; `idResaltado` → `animate-resaltado` en la fila. Test en verde.
 - [x] 10.15 REFACTOR — test en verde.
-- [ ] 10.16 RED — `src/app/(privado)/transacciones/estados.test.tsx`, test "Pantalla de transacciones en carga muestra un esqueleto ocupado".
-- [ ] 10.17 GREEN — `loading.tsx` con `animate-esqueleto`. Test en verde.
-- [ ] 10.18 REFACTOR — test en verde.
-- [ ] 10.19 RED — mismo archivo, test "Error al cargar las transacciones ofrece reintentar".
-- [ ] 10.20 GREEN — `error.tsx` con `retry()`. Test en verde.
-- [ ] 10.21 REFACTOR — test en verde.
+- [x] 10.16 RED — `src/app/(privado)/transacciones/estados.test.tsx`, test "Pantalla de transacciones en carga muestra un esqueleto ocupado".
+- [x] 10.17 GREEN — `loading.tsx` con `animate-esqueleto`. Test en verde.
+- [x] 10.18 REFACTOR — test en verde.
+- [x] 10.19 RED — mismo archivo, test "Error al cargar las transacciones ofrece reintentar".
+- [x] 10.20 GREEN — `error.tsx` con `retry()`. Test en verde.
+- [x] 10.21 REFACTOR — test en verde.
 - [ ] 10.22 [HUMANO] Revisión manual con `npm run dev`: `docs/diseno/sistema/checklist.md` a 360 px y 1280 px, esqueleto con retardo, "Actualizando…" conservando la lista, y un gasto que cambia el saldo en `/cuentas`.
 
 ## 11. Documentación y cierre
