@@ -179,7 +179,7 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 10.19 RED — mismo archivo, test "Error al cargar las transacciones ofrece reintentar".
 - [x] 10.20 GREEN — `error.tsx` con `retry()`. Test en verde.
 - [x] 10.21 REFACTOR — test en verde.
-- [ ] 10.22 [HUMANO] Revisión manual con `npm run dev`: `docs/diseno/sistema/checklist.md` a 360 px y 1280 px, esqueleto con retardo, "Actualizando…" conservando la lista, y un gasto que cambia el saldo en `/cuentas`.
+- [x] 10.22 [HUMANO] Revisión manual con `npm run dev`: `docs/diseno/sistema/checklist.md` a 360 px y 1280 px, esqueleto con retardo, "Actualizando…" conservando la lista, y un gasto que cambia el saldo en `/cuentas`.
 
 ## 11. Documentación y cierre
 

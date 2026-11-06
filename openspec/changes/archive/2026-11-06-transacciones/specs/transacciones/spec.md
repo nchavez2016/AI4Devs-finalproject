@@ -168,8 +168,8 @@ La vista SHALL tener un único botón primario, el de guardar del formulario.
 - **AND** la lista móvil agrupa el gasto bajo la cabecera del 28 sept y el ingreso bajo la del 27 sept, con los mismos importes
 
 ### Requirement: Formulario de nueva transacción
-El formulario SHALL tener, en este orden: un selector de tipo de dos opciones, "− Gasto" y
-"+ Ingreso", con Gasto marcado por defecto; el monto, con el prefijo "$" dentro del control;
+El formulario SHALL tener, en este orden: un selector de tipo de dos opciones, "Gasto" (con el
+icono −) e "Ingreso" (con el icono +), con Gasto marcado por defecto; el monto, con el prefijo "$" dentro del control;
 la categoría, como lista desplegable nativa que ofrece solo las categorías del tipo marcado;
 la cuenta, como lista desplegable nativa con la primera cuenta elegida; la fecha, que empieza
 en el día de hoy en Ecuador; y la descripción opcional. SHALL desactivar la validación nativa
@@ -178,9 +178,9 @@ campo inválido.
 
 #### Scenario: Selector de tipo empieza en Gasto y filtra las categorías
 - **GIVEN** el usuario tiene sus 7 categorías por defecto
-- **WHEN** abre el formulario y después elige "+ Ingreso"
-- **THEN** al abrir está marcada la opción "− Gasto" y la lista de categorías ofrece solo "Arriendo", "Insumos", "Otros", "Servicios básicos" y "Transporte"
-- **AND** tras elegir "+ Ingreso" ofrece solo "Otros ingresos" y "Ventas"
+- **WHEN** abre el formulario y después elige "Ingreso"
+- **THEN** al abrir está marcada la opción "Gasto" y la lista de categorías ofrece solo "Arriendo", "Insumos", "Otros", "Servicios básicos" y "Transporte"
+- **AND** tras elegir "Ingreso" ofrece solo "Otros ingresos" y "Ventas"
 
 #### Scenario: Formulario de transacción usa controles nativos y el monto con prefijo
 - **GIVEN** el usuario tiene las cuentas "Caja" y "Banco"

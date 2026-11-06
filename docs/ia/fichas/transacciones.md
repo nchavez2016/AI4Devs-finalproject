@@ -1,0 +1,15 @@
+# Ficha IA — transacciones — 2026-11-06
+- Ticket / HU: HU-001 (registrar una transacción), TK-002; cubre además el saldo calculado de HU-002 y la asignación de categoría de HU-004
+- Fase: spec + implementación + tests
+- Herramienta y modelo: Claude Code; Opus 5.5 en la propuesta y la actualización del change, Sonnet 5.5 desde /opsx:apply (cambio con /model a mitad del change)
+- Skills, comandos o subagentes usados: /opsx:propose, /opsx:update, /opsx:apply, /opsx:verify, /opsx:archive, ux-cuadre
+- Prompt clave (literal, resumido): /opsx:propose transacciones. Implementa HU-001 con sus 3 escenarios Gherkin como nombre exacto de test. Server Actions con el patrón de capas de cuentas (sin /api/transacciones; el readme §4 se corrige al final); sin migración nueva; saldo = saldo inicial + ingresos − gastos con caracterización previa (0.00 + 100.00 − 25.50 = 74.50); cuenta y categoría del usuario de la sesión; plantear en design.md si el tipo de la transacción debe coincidir con el de la categoría; pantalla /transacciones con selector de tipo y lista/tabla de movimientos. Fuera de alcance: editar/eliminar (HU-005), subcategorías y dashboard.
+  - session_id: 9feb4320-9c87-4b70-94dc-a185bc61fb11
+  - prompt_id: ff17a050-bb41-403a-8021-7ce10b307fe0
+- Resultado (1-2 líneas): 142 tareas en TDD: registro y listado con filtros por URL (desde, hasta, tipo, cuenta), saldo calculado, pertenencia de cuenta y categoría, pantalla en dos columnas con lista por día y tabla propia, y estados vacío, carga, error y éxito. Specs principales sincronizadas: transacciones nueva, cuentas y navegacion modificadas. 51 escenarios, cada uno con su test.
+- Ajuste humano: BORRADOR (humano valida)
+  - Reorientó el change tras archivar rediseno-base (cabecera compartida, tarjeta, selects nativos, filtros por URL) y reordenó los grupos (pertenencia antes del tipo); aprobó la opción A (tipo = tipo de la categoría) y la modificación de 5 tests existentes.
+  - Pidió parar ante timeouts del pre-commit (subió el timeout él mismo en vitest.config.mts) y aprobó las desviaciones de 2.2, 2.12 y el test de repositorio de 3.10.
+  - Su revisión manual halló la tabla desbordada, la fecha en tres líneas y faltaba un título "Movimientos"; anotó además fechas mm/dd/yyyy, descripción truncada y PR de TK-002 en pendientes.
+- Tests: iteraciones hasta pasar: 1 por tarea en general; 10 RED forzados con mutación porque ya pasaban (3.4, 3.7, 3.10, 6.1, 6.4, 6.10, 6.13, 7.x, 8.13); 4 commits rechazados por el hook (timeouts de carga, tipos en vitest.config.mts y en un test) resueltos tras corregir; la 10.22 manual se repitió tras los ajustes.
+- Salió bien a la primera: no (un test dejaba una transición asíncrona pendiente que bloqueaba las acciones de los siguientes, el hook rechazó varios commits y la revisión manual halló 3 fallos de maquetación).
