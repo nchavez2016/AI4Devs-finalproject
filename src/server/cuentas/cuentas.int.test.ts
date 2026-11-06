@@ -1,11 +1,49 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { limpiarBD } from '@/test/bd/limpiar'
 import { registrarUsuario } from '@/server/auth/registro'
+import { listarCategorias } from '@/server/categorias/categorias'
+import { registrarTransaccion } from '@/server/transacciones/transacciones'
 import { crearCuenta, listarCuentas, obtenerCuenta } from './cuentas'
 
 beforeEach(async () => {
   await limpiarBD(process.env.DATABASE_URL!)
 })
+
+async function registrarUsuarioDePrueba(nombre: string, email: string) {
+  const registro = await registrarUsuario({
+    nombre,
+    nombreNegocio: `Negocio de ${nombre}`,
+    email,
+    password: 'clave-segura-1',
+  })
+  if (!registro.ok) throw new Error('Falló el registro')
+  return registro.usuario.id
+}
+
+async function categoriasDeEjemplo(usuarioId: string) {
+  const categorias = await listarCategorias(usuarioId)
+  const gasto = categorias.gasto.find((c) => c.nombre === 'Insumos')
+  const ingreso = categorias.ingreso.find((c) => c.nombre === 'Ventas')
+  if (!gasto || !ingreso) throw new Error('Faltan las categorías por defecto')
+  return { gastoId: gasto.id, ingresoId: ingreso.id }
+}
+
+async function registrarMovimiento(
+  usuarioId: string,
+  cuentaId: string,
+  categoriaId: string,
+  tipo: 'INGRESO' | 'GASTO',
+  monto: string
+) {
+  const resultado = await registrarTransaccion(usuarioId, {
+    tipo,
+    monto,
+    fecha: '2026-09-28',
+    cuentaId,
+    categoriaId,
+  })
+  if (!resultado.ok) throw new Error('Falló el registro de la transacción')
+}
 
 describe('cuentas', () => {
   it('Crear una cuenta con saldo inicial 500.00', async () => {
@@ -450,5 +488,25 @@ describe('cuentas', () => {
     const consultadaNegativa = await obtenerCuenta(usuarioId, negativa.cuenta.id)
     expect(consultadaCero?.saldo).toBe('0.00')
     expect(consultadaNegativa?.saldo).toBe('-120.00')
+  })
+
+  it('Saldo de cuenta suma ingresos y resta gastos', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const { gastoId, ingresoId } = await categoriasDeEjemplo(usuarioId)
+    const cuenta = await crearCuenta(usuarioId, {
+      nombre: 'Caja',
+      tipo: 'EFECTIVO',
+      saldoInicial: '0.00',
+    })
+    if (!cuenta.ok) throw new Error('Falló la creación de la cuenta')
+
+    await registrarMovimiento(usuarioId, cuenta.cuenta.id, ingresoId, 'INGRESO', '100.00')
+    await registrarMovimiento(usuarioId, cuenta.cuenta.id, gastoId, 'GASTO', '25.50')
+
+    const lista = await listarCuentas(usuarioId)
+    expect(lista).toEqual([expect.objectContaining({ nombre: 'Caja', saldo: '74.50' })])
+
+    const consultada = await obtenerCuenta(usuarioId, cuenta.cuenta.id)
+    expect(consultada?.saldo).toBe('74.50')
   })
 })

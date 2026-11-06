@@ -57,9 +57,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 3. Saldo calculado de cuentas
 
-- [ ] 3.1 RED — `src/server/cuentas/cuentas.int.test.ts`, test "Saldo de cuenta suma ingresos y resta gastos" (0.00 + 100.00 − 25.50 = 74.50, por lista y por identificador). Si pasa sin cambios, forzar el RED quitando temporalmente la suma de ingresos de `calcularSaldo`.
-- [ ] 3.2 GREEN — `obtenerCuenta` usa también el saldo calculado; si `_sum` devuelve `number`, detenerse y consultar. Test en verde.
-- [ ] 3.3 REFACTOR — test en verde.
+- [x] 3.1 RED — `src/server/cuentas/cuentas.int.test.ts`, test "Saldo de cuenta suma ingresos y resta gastos" (0.00 + 100.00 − 25.50 = 74.50, por lista y por identificador). Si pasa sin cambios, forzar el RED quitando temporalmente la suma de ingresos de `calcularSaldo`.
+- [x] 3.2 GREEN — `obtenerCuenta` usa también el saldo calculado; si `_sum` devuelve `number`, detenerse y consultar. Test en verde.
+- [x] 3.3 REFACTOR — test en verde.
 - [ ] 3.4 RED — mismo archivo, test "Ver el saldo actualizado de una cuenta". Si pasa sin cambios, forzar el RED.
 - [ ] 3.5 GREEN — sin cambios si ya lo cumple. Test en verde.
 - [ ] 3.6 REFACTOR — test en verde.

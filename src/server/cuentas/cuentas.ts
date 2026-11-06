@@ -138,5 +138,6 @@ export async function obtenerCuenta(
     return null
   }
 
-  return mapearCuenta(cuenta, SIN_MOVIMIENTOS)
+  const movimientos = await movimientosPorCuenta(usuarioId)
+  return mapearCuenta(cuenta, movimientos.get(cuenta.id) ?? SIN_MOVIMIENTOS)
 }
