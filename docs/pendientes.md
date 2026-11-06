@@ -24,6 +24,8 @@
 - Editar y eliminar movimientos (HU-005).
 - Interfaz de subcategorías, si no cabe en el plazo.
 - Filtro de movimientos con `desde` posterior a `hasta`: hoy devuelve una lista vacía sin aviso.
+- Descripción truncada en la tabla de movimientos (transacciones): el texto completo no se puede leer en ningún sitio hasta que exista la vista de edición (HU-005). Valorar mostrar hasta 2 líneas o una vista de detalle.
+- Sección 7 del readme y casilla del PR de TK-002: esta entrega no abre Pull Request (se entrega la rama y el formulario de Typeform). Corregirlo en la fase de documentación final.
 - Posible migración de Auth.js a Better Auth (Auth.js está en modo de mantenimiento).
 
 ## Entrega final
