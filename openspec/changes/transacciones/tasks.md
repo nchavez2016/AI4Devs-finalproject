@@ -131,9 +131,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 8.7 RED — test "La entrada de página se anima solo en el contenedor".
 - [x] 8.8 GREEN — `animate-entrada` solo en el contenedor `max-w-contenido`. Test en verde.
 - [x] 8.9 REFACTOR — test en verde.
-- [ ] 8.10 RED — test "Listado muestra cada movimiento con su categoría, cuenta e importe con signo".
-- [ ] 8.11 GREEN — `src/components/ListaMovimientos.tsx`: lista por día y `table` propia con tokens (componentes.md 7.4), `Importe` de tipo `ingreso`/`gasto` (7.5). Test en verde.
-- [ ] 8.12 REFACTOR — test en verde.
+- [x] 8.10 RED — test "Listado muestra cada movimiento con su categoría, cuenta e importe con signo".
+- [x] 8.11 GREEN — `src/components/ListaMovimientos.tsx`: lista por día y `table` propia con tokens (componentes.md 7.4), `Importe` de tipo `ingreso`/`gasto` (7.5). Test en verde.
+- [x] 8.12 REFACTOR — test en verde.
 - [ ] 8.13 RED — `src/app/(privado)/navegacion.test.tsx`, test "Las pantallas privadas no enlazan de vuelta al panel" ampliado a `ContenidoTransacciones` (autorizado en 0.2). Si pasa sin cambios, forzar el RED pasando temporalmente `volverAlPanel`.
 - [ ] 8.14 GREEN — sin cambios si ya lo cumple. Test en verde.
 - [ ] 8.15 REFACTOR — test en verde.

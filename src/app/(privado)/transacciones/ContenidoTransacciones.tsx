@@ -3,13 +3,14 @@
 import Link from 'next/link'
 import { useActionState, useRef } from 'react'
 import { EncabezadoPagina } from '@/components/EncabezadoPagina'
+import { ListaMovimientos } from '@/components/ListaMovimientos'
 import { clasesBoton } from '@/components/ui/Button'
 import { Tarjeta } from '@/components/ui/Tarjeta'
 import { registrarTransaccionAccion } from '@/server/transacciones/acciones'
 import type { DatosTransacciones } from '@/server/transacciones/pantalla'
 import { FormularioTransaccion } from './FormularioTransaccion'
 
-export function ContenidoTransacciones({ cuentas }: DatosTransacciones) {
+export function ContenidoTransacciones({ transacciones, cuentas }: DatosTransacciones) {
   const [estado, accion, pendiente] = useActionState(registrarTransaccionAccion, {})
   const formularioRef = useRef<HTMLFormElement>(null)
 
@@ -32,7 +33,11 @@ export function ContenidoTransacciones({ cuentas }: DatosTransacciones) {
           </div>
         ) : (
           <div className="grid grid-cols-(--columnas-lista-formulario) items-start gap-seccion">
-            <section aria-label="Movimientos" className="flex flex-col gap-entre-campos" />
+            <section aria-label="Movimientos" className="flex flex-col gap-entre-campos">
+              {transacciones.length > 0 && (
+                <ListaMovimientos transacciones={transacciones} idResaltado={estado.idCreado} />
+              )}
+            </section>
 
             <div className="w-full max-w-formulario">
               <Tarjeta className="flex flex-col gap-entre-campos">

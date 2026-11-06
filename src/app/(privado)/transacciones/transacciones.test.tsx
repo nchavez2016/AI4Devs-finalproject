@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 
 const authSimulado = vi.fn()
 const listarTransaccionesSimulado = vi.fn()
@@ -143,6 +143,50 @@ describe('transacciones', () => {
       .getAllByRole('button')
       .filter((boton) => boton.className.includes('bg-primary'))
     expect(primarios.map((boton) => boton.textContent)).toEqual(['Guardar transacción'])
+  })
+
+  it('Listado muestra cada movimiento con su categoría, cuenta e importe con signo', async () => {
+    const ingresoVentas = {
+      id: 't2',
+      tipo: 'INGRESO',
+      monto: '100.00',
+      fecha: '2026-09-27',
+      descripcion: null,
+      cuenta: { id: 'c1', nombre: 'Caja' },
+      categoria: { id: 'i1', nombre: 'Ventas' },
+      creadoEn: new Date(),
+    }
+    await mostrarPantalla({ transacciones: [gastoHarina, ingresoVentas] })
+
+    const tabla = screen.getByRole('table')
+    const cabeceras = within(tabla).getAllByRole('columnheader')
+    expect(cabeceras.map((c) => c.textContent)).toEqual([
+      'Fecha',
+      'Descripción',
+      'Categoría',
+      'Cuenta',
+      'Importe',
+    ])
+
+    const filas = within(tabla).getAllByRole('row').slice(1)
+    const textos = filas.map((fila) =>
+      within(fila)
+        .getAllByRole('cell')
+        .map((celda) => celda.textContent)
+    )
+    expect(textos).toEqual([
+      ['28 sept 2026', 'Harina', 'Insumos', 'Caja', 'Gasto−$25,50'],
+      ['27 sept 2026', '', 'Ventas', 'Caja', 'Ingreso+$100,00'],
+    ])
+
+    // Lista móvil: un grupo por día, con sus filas.
+    const grupoDel28 = screen.getByRole('heading', { level: 3, name: 'lun, 28 sept' })
+    const grupoDel27 = screen.getByRole('heading', { level: 3, name: 'dom, 27 sept' })
+    expect(within(grupoDel28.parentElement!).getByText('Insumos')).toBeTruthy()
+    expect(within(grupoDel28.parentElement!).getByText('Caja · Harina')).toBeTruthy()
+    expect(within(grupoDel28.parentElement!).getByText('−$25,50')).toBeTruthy()
+    expect(within(grupoDel27.parentElement!).getByText('Ventas')).toBeTruthy()
+    expect(within(grupoDel27.parentElement!).getByText('+$100,00')).toBeTruthy()
   })
 
   it('La entrada de página se anima solo en el contenedor', async () => {
