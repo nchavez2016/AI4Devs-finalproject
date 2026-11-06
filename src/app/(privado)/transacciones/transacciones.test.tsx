@@ -494,6 +494,37 @@ describe('transacciones', () => {
     expect(screen.getByText('Ingreso de $1.250,00 registrado en Banco.')).toBeTruthy()
   })
 
+  it('La región de movimientos tiene un título de nivel 2 que la nombra', async () => {
+    await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    const titulo = screen.getByRole('heading', { level: 2, name: 'Movimientos' })
+    expect(titulo.className).toContain('font-titulo')
+    expect(titulo.className).toContain('text-titulo-seccion')
+
+    const region = screen.getByRole('region', { name: 'Movimientos' })
+    expect(region.getAttribute('aria-labelledby')).toBe(titulo.id)
+    expect(titulo.id).toBeTruthy()
+
+    // El título va encima de los filtros y de la lista.
+    expect(region.contains(titulo)).toBe(true)
+    const filtros = within(region).getByRole('group', { name: 'Filtros' })
+    expect(titulo.compareDocumentPosition(filtros) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+
+  it('La tabla de movimientos cabe en su columna y la descripción absorbe el ancho sobrante', async () => {
+    await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    // Un hijo de la rejilla necesita min-w-ninguno para poder encogerse.
+    expect(screen.getByRole('region', { name: 'Movimientos' }).className).toContain('min-w-ninguno')
+
+    const fila = within(screen.getByRole('table')).getAllByRole('row')[1]
+    const [fecha, descripcion] = within(fila).getAllByRole('cell')
+    expect(fecha.className).toContain('whitespace-nowrap')
+    expect(descripcion.className).toContain('w-full')
+    expect(descripcion.className).toContain('max-w-ninguno')
+    expect(descripcion.className).toContain('truncate')
+  })
+
   it('Quitar filtros solo aparece con un filtro activo', async () => {
     const sinFiltros = await mostrarPantalla({ transacciones: [gastoHarina] })
     expect(screen.queryByRole('button', { name: 'Quitar filtros' })).toBeNull()

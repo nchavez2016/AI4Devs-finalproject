@@ -65,7 +65,16 @@ export function ContenidoTransacciones({
           </div>
         ) : (
           <div className="grid grid-cols-(--columnas-lista-formulario) items-start gap-seccion">
-            <section aria-label="Movimientos" className="flex flex-col gap-entre-campos">
+            <section
+              aria-labelledby="titulo-movimientos"
+              className="flex min-w-ninguno flex-col gap-entre-campos"
+            >
+              <h2
+                id="titulo-movimientos"
+                className="font-titulo text-titulo-seccion text-foreground"
+              >
+                Movimientos
+              </h2>
               <FiltrosMovimientos
                 filtros={filtros}
                 cuentas={cuentas}

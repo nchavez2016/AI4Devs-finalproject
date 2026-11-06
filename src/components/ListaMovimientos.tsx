@@ -113,8 +113,10 @@ export function ListaMovimientos({ transacciones, idResaltado }: ListaMovimiento
                 .filter(Boolean)
                 .join(' ')}
             >
-              <td className="px-fila-x text-foreground">{formatoFechaCorta.format(aFecha(t.fecha))}</td>
-              <td className="max-w-formulario truncate px-fila-x text-foreground">
+              <td className="whitespace-nowrap px-fila-x text-foreground">
+                {formatoFechaCorta.format(aFecha(t.fecha))}
+              </td>
+              <td className="w-full max-w-ninguno truncate px-fila-x text-foreground">
                 {t.descripcion}
               </td>
               <td className="px-fila-x text-foreground">{t.categoria.nombre}</td>
