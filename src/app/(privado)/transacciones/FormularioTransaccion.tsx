@@ -1,7 +1,10 @@
 import { useState, type RefObject } from 'react'
 import { Button } from '@/components/ui/Button'
+import { Campo } from '@/components/ui/Campo'
+import { Selector } from '@/components/ui/Selector'
 import { SelectorTipo, type TipoMovimientoSeleccionado } from '@/components/ui/SelectorTipo'
 import type { ListadoCategorias } from '@/server/categorias/categorias'
+import type { CuentaItem } from '@/server/cuentas/cuentas'
 import type { EstadoFormularioTransaccion } from '@/server/transacciones/acciones'
 
 export interface FormularioTransaccionProps {
@@ -10,6 +13,7 @@ export interface FormularioTransaccionProps {
   accion: (payload: FormData) => void
   pendiente: boolean
   categorias: ListadoCategorias
+  cuentas: CuentaItem[]
 }
 
 export function FormularioTransaccion({
@@ -17,31 +21,37 @@ export function FormularioTransaccion({
   accion,
   pendiente,
   categorias,
+  cuentas,
 }: FormularioTransaccionProps) {
   const [tipo, setTipo] = useState<TipoMovimientoSeleccionado>('GASTO')
   const categoriasDelTipo = tipo === 'GASTO' ? categorias.gasto : categorias.ingreso
 
   return (
-    <form ref={formularioRef} action={accion} className="flex flex-col gap-entre-campos">
+    <form
+      ref={formularioRef}
+      action={accion}
+      noValidate
+      className="flex flex-col gap-entre-campos"
+    >
       <SelectorTipo valor={tipo} onCambio={setTipo} />
 
-      <div className="flex flex-col gap-etiqueta">
-        <label htmlFor="categoriaId" className="text-etiqueta font-control text-foreground">
-          Categoría
-        </label>
-        <select
-          id="categoriaId"
-          name="categoriaId"
-          key={tipo}
-          className="bg-card border border-input rounded-control h-alto-campo px-campo-x text-cuerpo text-foreground"
-        >
-          {categoriasDelTipo.map((categoria) => (
-            <option key={categoria.id} value={categoria.id}>
-              {categoria.nombre}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Campo etiqueta="Monto" name="monto" monto />
+
+      <Selector etiqueta="Categoría" name="categoriaId" key={tipo}>
+        {categoriasDelTipo.map((categoria) => (
+          <option key={categoria.id} value={categoria.id}>
+            {categoria.nombre}
+          </option>
+        ))}
+      </Selector>
+
+      <Selector etiqueta="Cuenta" name="cuentaId">
+        {cuentas.map((cuenta) => (
+          <option key={cuenta.id} value={cuenta.id}>
+            {cuenta.nombre}
+          </option>
+        ))}
+      </Selector>
 
       <Button type="submit" cargando={pendiente} textoCarga="Guardando…">
         Guardar transacción

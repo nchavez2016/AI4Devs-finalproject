@@ -209,6 +209,26 @@ describe('transacciones', () => {
     expect(opciones()).toEqual(['Otros ingresos', 'Ventas'])
   })
 
+  it('Formulario de transacción usa controles nativos y el monto con prefijo', async () => {
+    const banco = { ...cuentaCaja, id: 'c2', nombre: 'Banco' }
+    const { container } = await mostrarPantalla({ cuentas: [cuentaCaja, banco] })
+
+    expect(container.querySelector('form')!.hasAttribute('novalidate')).toBe(true)
+
+    const categoria = screen.getByRole('combobox', { name: 'Categoría' })
+    const cuenta = screen.getByRole('combobox', { name: 'Cuenta' }) as HTMLSelectElement
+    expect(categoria.tagName).toBe('SELECT')
+    expect(cuenta.tagName).toBe('SELECT')
+    expect(cuenta.selectedOptions[0].textContent).toBe('Caja')
+
+    const monto = screen.getByRole('textbox', { name: 'Monto' }) as HTMLInputElement
+    const contenedor = monto.closest('[data-campo-monto]')!
+    expect(contenedor).toBeTruthy()
+    expect(contenedor.textContent).toContain('$')
+    expect(monto.getAttribute('inputmode')).toBe('decimal')
+    expect(monto.name).toBe('monto')
+  })
+
   it('La entrada de página se anima solo en el contenedor', async () => {
     const { container } = await mostrarPantalla({ transacciones: [gastoHarina] })
 

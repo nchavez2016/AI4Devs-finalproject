@@ -33,7 +33,6 @@ export function SelectorTipo({ valor, onCambio, error }: SelectorTipoProps) {
               value={valorOpcion}
               checked={valor === valorOpcion}
               onChange={() => onCambio(valorOpcion)}
-              aria-invalid={error ? 'true' : undefined}
               className="peer sr-only"
             />
             <span

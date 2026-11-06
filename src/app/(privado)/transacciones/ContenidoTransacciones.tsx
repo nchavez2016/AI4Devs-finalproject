@@ -55,6 +55,7 @@ export function ContenidoTransacciones({
                   accion={accion}
                   pendiente={pendiente}
                   categorias={categorias}
+                  cuentas={cuentas}
                 />
               </Tarjeta>
             </div>
