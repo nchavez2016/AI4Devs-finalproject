@@ -509,4 +509,21 @@ describe('cuentas', () => {
     const consultada = await obtenerCuenta(usuarioId, cuenta.cuenta.id)
     expect(consultada?.saldo).toBe('74.50')
   })
+
+  it('Ver el saldo actualizado de una cuenta', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const { gastoId, ingresoId } = await categoriasDeEjemplo(usuarioId)
+    const cuenta = await crearCuenta(usuarioId, {
+      nombre: 'Banco Pichincha',
+      tipo: 'BANCO',
+      saldoInicial: '500.00',
+    })
+    if (!cuenta.ok) throw new Error('Falló la creación de la cuenta')
+
+    await registrarMovimiento(usuarioId, cuenta.cuenta.id, ingresoId, 'INGRESO', '200.00')
+    await registrarMovimiento(usuarioId, cuenta.cuenta.id, gastoId, 'GASTO', '50.00')
+
+    const consultada = await obtenerCuenta(usuarioId, cuenta.cuenta.id)
+    expect(consultada?.saldo).toBe('650.00')
+  })
 })
