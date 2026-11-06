@@ -16,9 +16,15 @@ describe('CabeceraPrivada', () => {
 
     const navegacion = within(banner).getByRole('navigation', { name: 'Principal' })
     const enlaces = within(navegacion).getAllByRole('link')
-    expect(enlaces.map((enlace) => enlace.textContent)).toEqual(['Panel', 'Cuentas', 'Categorías'])
+    expect(enlaces.map((enlace) => enlace.textContent)).toEqual([
+      'Panel',
+      'Transacciones',
+      'Cuentas',
+      'Categorías',
+    ])
     expect(enlaces.map((enlace) => enlace.getAttribute('href'))).toEqual([
       '/panel',
+      '/transacciones',
       '/cuentas',
       '/categorias',
     ])

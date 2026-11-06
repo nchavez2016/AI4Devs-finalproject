@@ -23,7 +23,12 @@ describe('MenuMovil', () => {
     expect(abrir.getAttribute('aria-expanded')).toBe('true')
     const dialogo = await screen.findByRole('dialog')
     const enlaces = within(dialogo).getAllByRole('link')
-    expect(enlaces.map((enlace) => enlace.textContent)).toEqual(['Panel', 'Cuentas', 'Categorías'])
+    expect(enlaces.map((enlace) => enlace.textContent)).toEqual([
+      'Panel',
+      'Transacciones',
+      'Cuentas',
+      'Categorías',
+    ])
     expect(within(dialogo).getByRole('button', { name: 'Cerrar sesión' })).toBeTruthy()
   })
 

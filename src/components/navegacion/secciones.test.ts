@@ -10,6 +10,12 @@ describe('seccionActiva', () => {
     expect(seccionActiva(null)).toBeNull()
   })
 
+  it('La cabecera marca Transacciones como activa con filtros en la URL', () => {
+    // usePathname no incluye la query: /transacciones?tipo=GASTO llega como /transacciones.
+    expect(seccionActiva('/transacciones')).toBe('/transacciones')
+    expect(seccionActiva('/transacciones/nueva')).toBe('/transacciones')
+  })
+
   it('Una subruta mantiene activa su sección', () => {
     expect(seccionActiva('/categorias/nueva')).toBe('/categorias')
     expect(seccionActiva('/cuentas/c1/editar')).toBe('/cuentas')

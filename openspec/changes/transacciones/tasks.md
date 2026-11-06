@@ -105,15 +105,15 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 7. Navegación
 
-- [ ] 7.1 RED — `src/components/navegacion/CabeceraPrivada.test.tsx`, test "La cabecera muestra la marca y la navegación principal" actualizado al orden Panel, Transacciones, Cuentas, Categorías (autorizado en 0.2). Falla porque falta la sección.
-- [ ] 7.2 GREEN — `secciones.ts`: `{ href: '/transacciones', etiqueta: 'Transacciones' }` tras "Panel" (design h). Test en verde.
-- [ ] 7.3 REFACTOR — tests de `src/components/navegacion/` en verde.
-- [ ] 7.4 RED — `MenuMovil.test.tsx`, test "El menú móvil muestra la navegación y el cierre de sesión" con "Transacciones" (autorizado en 0.2). Si pasa sin cambios por 7.2, forzar el RED quitando temporalmente la sección.
-- [ ] 7.5 GREEN — sin cambios en `MenuMovil.tsx` (usa `NavegacionPrincipal`). Test en verde.
-- [ ] 7.6 REFACTOR — test en verde.
-- [ ] 7.7 RED — `secciones.test.ts`, test "La cabecera marca Transacciones como activa con filtros en la URL" (`seccionActiva('/transacciones')`; `usePathname` no incluye la query). Si pasa sin cambios, forzar el RED quitando temporalmente la sección.
-- [ ] 7.8 GREEN — sin cambios si ya lo cumple. Test en verde.
-- [ ] 7.9 REFACTOR — test en verde.
+- [x] 7.1 RED — `src/components/navegacion/CabeceraPrivada.test.tsx`, test "La cabecera muestra la marca y la navegación principal" actualizado al orden Panel, Transacciones, Cuentas, Categorías (autorizado en 0.2). Falla porque falta la sección.
+- [x] 7.2 GREEN — `secciones.ts`: `{ href: '/transacciones', etiqueta: 'Transacciones' }` tras "Panel" (design h). Test en verde.
+- [x] 7.3 REFACTOR — tests de `src/components/navegacion/` en verde.
+- [x] 7.4 RED — `MenuMovil.test.tsx`, test "El menú móvil muestra la navegación y el cierre de sesión" con "Transacciones" (autorizado en 0.2). Si pasa sin cambios por 7.2, forzar el RED quitando temporalmente la sección.
+- [x] 7.5 GREEN — sin cambios en `MenuMovil.tsx` (usa `NavegacionPrincipal`). Test en verde.
+- [x] 7.6 REFACTOR — test en verde.
+- [x] 7.7 RED — `secciones.test.ts`, test "La cabecera marca Transacciones como activa con filtros en la URL" (`seccionActiva('/transacciones')`; `usePathname` no incluye la query). Si pasa sin cambios, forzar el RED quitando temporalmente la sección.
+- [x] 7.8 GREEN — sin cambios si ya lo cumple. Test en verde.
+- [x] 7.9 REFACTOR — test en verde.
 - [ ] 7.10 RED — `src/app/(privado)/panel/panel.test.tsx`, test "El panel enlaza a transacciones".
 - [ ] 7.11 GREEN — `ContenidoPanel.tsx`: `TarjetaAcceso` "Transacciones" primera, icono `ArrowLeftRight`, descripción "Lo que entra y sale de tu negocio: ingresos y gastos."; propósito "Desde aquí llegas a tus transacciones, cuentas y categorías." Test en verde.
 - [ ] 7.12 REFACTOR — actualizar (autorizado en 0.2) "Las tarjetas de acceso del panel tienen un solo enlace" (tres tarjetas) y "El panel usa el encabezado de página" (nueva frase); `panel.test.tsx` y "El panel enlaza a cuentas y categorías" en verde.

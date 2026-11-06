@@ -1,5 +1,6 @@
 export const SECCIONES = [
   { href: '/panel', etiqueta: 'Panel' },
+  { href: '/transacciones', etiqueta: 'Transacciones' },
   { href: '/cuentas', etiqueta: 'Cuentas' },
   { href: '/categorias', etiqueta: 'Categorías' },
 ] as const
