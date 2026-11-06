@@ -93,9 +93,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 6.4 RED — mismo archivo, test "Filtrar por una cuenta de otro usuario no muestra sus movimientos". Si pasa sin cambios, forzar el RED como en 6.1.
 - [x] 6.5 GREEN — corregir el `where` si hace falta. Test en verde.
 - [x] 6.6 REFACTOR — test en verde.
-- [ ] 6.7 RED — `src/server/transacciones/acciones.test.ts`, test "La transacción se crea siempre para el usuario de la sesión". Debe fallar porque `registrarTransaccionAccion` no existe.
-- [ ] 6.8 GREEN — `acciones.ts` (`'use server'`): `exigirUsuarioId()` fuera del `try`, solo las claves esperadas del `FormData`; éxito → `revalidatePath('/transacciones')` y `{ exito, idCreado, creado: { tipo, monto, cuentaNombre } }`; error inesperado → `{ mensaje, valores }` (design g). Test en verde.
-- [ ] 6.9 REFACTOR — test en verde.
+- [x] 6.7 RED — `src/server/transacciones/acciones.test.ts`, test "La transacción se crea siempre para el usuario de la sesión". Debe fallar porque `registrarTransaccionAccion` no existe.
+- [x] 6.8 GREEN — `acciones.ts` (`'use server'`): `exigirUsuarioId()` fuera del `try`, solo las claves esperadas del `FormData`; éxito → `revalidatePath('/transacciones')` y `{ exito, idCreado, creado: { tipo, monto, cuentaNombre } }`; error inesperado → `{ mensaje, valores }` (design g). Test en verde.
+- [x] 6.9 REFACTOR — test en verde.
 - [ ] 6.10 RED — mismo archivo, test "Registrar una transacción sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
 - [ ] 6.11 GREEN — sin cambios si `exigirUsuarioId` ya lo cumple. Test en verde.
 - [ ] 6.12 REFACTOR — test en verde.
