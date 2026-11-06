@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { cargarTransacciones } from '@/server/transacciones/pantalla'
 import { ContenidoTransacciones } from './ContenidoTransacciones'
 
@@ -186,6 +186,27 @@ describe('transacciones', () => {
     expect(within(grupoDel28.parentElement!).getByText('−$25,50')).toBeTruthy()
     expect(within(grupoDel27.parentElement!).getByText('Ventas')).toBeTruthy()
     expect(within(grupoDel27.parentElement!).getByText('+$100,00')).toBeTruthy()
+  })
+
+  it('Selector de tipo empieza en Gasto y filtra las categorías', async () => {
+    await mostrarPantalla()
+
+    const gasto = screen.getByRole('radio', { name: 'Gasto' }) as HTMLInputElement
+    const ingreso = screen.getByRole('radio', { name: 'Ingreso' }) as HTMLInputElement
+    expect(gasto.checked).toBe(true)
+    expect(ingreso.checked).toBe(false)
+
+    const opciones = () =>
+      within(screen.getByRole('combobox', { name: 'Categoría' }))
+        .getAllByRole('option')
+        .map((opcion) => opcion.textContent)
+
+    expect(opciones()).toEqual(['Arriendo', 'Insumos', 'Otros', 'Servicios básicos', 'Transporte'])
+
+    fireEvent.click(ingreso)
+
+    expect(ingreso.checked).toBe(true)
+    expect(opciones()).toEqual(['Otros ingresos', 'Ventas'])
   })
 
   it('La entrada de página se anima solo en el contenedor', async () => {

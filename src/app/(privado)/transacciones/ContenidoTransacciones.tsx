@@ -10,7 +10,11 @@ import { registrarTransaccionAccion } from '@/server/transacciones/acciones'
 import type { DatosTransacciones } from '@/server/transacciones/pantalla'
 import { FormularioTransaccion } from './FormularioTransaccion'
 
-export function ContenidoTransacciones({ transacciones, cuentas }: DatosTransacciones) {
+export function ContenidoTransacciones({
+  transacciones,
+  cuentas,
+  categorias,
+}: DatosTransacciones) {
   const [estado, accion, pendiente] = useActionState(registrarTransaccionAccion, {})
   const formularioRef = useRef<HTMLFormElement>(null)
 
@@ -50,6 +54,7 @@ export function ContenidoTransacciones({ transacciones, cuentas }: DatosTransacc
                   estado={estado}
                   accion={accion}
                   pendiente={pendiente}
+                  categorias={categorias}
                 />
               </Tarjeta>
             </div>

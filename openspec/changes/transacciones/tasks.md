@@ -140,9 +140,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 
 ## 9. Formulario de nueva transacción
 
-- [ ] 9.1 RED — `transacciones.test.tsx`, test "Selector de tipo empieza en Gasto y filtra las categorías".
-- [ ] 9.2 GREEN — `src/components/ui/SelectorTipo.tsx` (design g; iconos `Minus`/`Plus` de `lucide-react`) y filtro de categorías por el tipo elegido en `FormularioTransaccion`. Test en verde.
-- [ ] 9.3 REFACTOR — test en verde.
+- [x] 9.1 RED — `transacciones.test.tsx`, test "Selector de tipo empieza en Gasto y filtra las categorías".
+- [x] 9.2 GREEN — `src/components/ui/SelectorTipo.tsx` (design g; iconos `Minus`/`Plus` de `lucide-react`) y filtro de categorías por el tipo elegido en `FormularioTransaccion`. Test en verde.
+- [x] 9.3 REFACTOR — test en verde.
 - [ ] 9.4 RED — mismo archivo, test "Formulario de transacción usa controles nativos y el monto con prefijo".
 - [ ] 9.5 GREEN — `src/components/ui/Selector.tsx` (`select` nativo con tokens de campo, etiqueta y error) para categoría y cuenta, `Campo monto` con etiqueta "Monto", `noValidate`, primera cuenta por defecto. Test en verde.
 - [ ] 9.6 REFACTOR — test en verde.

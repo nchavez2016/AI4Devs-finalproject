@@ -1,4 +1,4 @@
 # Progreso: transacciones
-- Siguiente: 9.1 RED "Selector de tipo empieza en Gasto y filtra las categorías"
+- Siguiente: 9.4 RED "Formulario de transacción usa controles nativos y el monto con prefijo"
 - Decisiones: 0.1 = opción A, el tipo debe coincidir con el de la categoría (design d); 0.2 = autorizada la modificación de los 5 tests de tasks 0.2; el esquema de 2.2 es mínimo (sin validaciones): cada una llega con su RED; 8.2 deja `hoy` fuera de `DatosTransacciones` hasta 9.8 (su RED)
-- Discrepancias: 2.12 sin extracción a validacion.ts; 3.10 fuerza su RED con un test del repositorio; 6.7 añade 3 tests de las ramas de la acción; 7.x en dos commits (el GREEN rompe los tests autorizados); 8.2 añade `clasesBoton` a Button.tsx para el enlace "Crear cuenta"; 8.11 trunca la descripción con `max-w-formulario` (no hay token propio de ancho de descripción)
+- Discrepancias: 2.12 sin extracción a validacion.ts; 3.10 fuerza su RED con un test del repositorio; 6.7 añade 3 tests de las ramas de la acción; 7.x en dos commits; 8.2 añade `clasesBoton` a Button.tsx; 8.11 trunca la descripción con `max-w-formulario`; 9.2 usa un select nativo suelto para categoría (9.5 lo extrae a Selector); el nombre accesible de los radios es "Gasto"/"Ingreso" (el icono Minus/Plus es aria-hidden)
