@@ -1,7 +1,7 @@
 import { Prisma, TipoMovimiento } from '@/generated/prisma/client'
 import { transaccionRepository } from '@/server/repositories/transaccionRepository'
 import { agruparErroresPorCampo } from '@/server/validacion'
-import { esquemaRegistrarTransaccion } from './esquemas'
+import { esquemaFiltros, esquemaRegistrarTransaccion } from './esquemas'
 
 export interface TransaccionItem {
   id: string
@@ -83,8 +83,9 @@ export interface FiltrosTransacciones {
 
 export async function listarTransacciones(
   usuarioId: string,
-  filtros: FiltrosTransacciones = {}
+  filtrosSinValidar: unknown = {}
 ): Promise<TransaccionItem[]> {
+  const filtros: FiltrosTransacciones = esquemaFiltros.parse(filtrosSinValidar ?? {})
   const transacciones = await transaccionRepository.listar(usuarioId, {
     desde: filtros.desde ? new Date(`${filtros.desde}T00:00:00Z`) : undefined,
     hasta: filtros.hasta ? new Date(`${filtros.hasta}T00:00:00Z`) : undefined,

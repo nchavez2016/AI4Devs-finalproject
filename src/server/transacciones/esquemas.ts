@@ -55,3 +55,11 @@ export const esquemaRegistrarTransaccion = z.object({
 })
 
 export type DatosRegistrarTransaccion = z.infer<typeof esquemaRegistrarTransaccion>
+
+// Filtros de la URL: un valor inválido se ignora en lugar de rechazar la consulta.
+export const esquemaFiltros = z.object({
+  desde: z.string().refine(esFechaReal).optional().catch(undefined),
+  hasta: z.string().refine(esFechaReal).optional().catch(undefined),
+  tipo: z.enum(['INGRESO', 'GASTO']).optional().catch(undefined),
+  cuentaId: z.string().min(1).optional().catch(undefined),
+})

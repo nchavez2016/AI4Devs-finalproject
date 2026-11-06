@@ -317,4 +317,32 @@ describe('transacciones', () => {
 
     expect(transacciones.map((t) => t.monto)).toEqual(['25.50'])
   })
+
+  it('Un filtro con valor inválido se ignora', async () => {
+    const { usuarioId, cuentaId, categoriaId, categoriaIngresoId } = await usuarioConCajaEInsumos()
+
+    await registrarTransaccion(usuarioId, {
+      tipo: 'GASTO',
+      monto: '25.50',
+      fecha: '2026-09-28',
+      cuentaId,
+      categoriaId,
+    })
+    await registrarTransaccion(usuarioId, {
+      tipo: 'INGRESO',
+      monto: '100.00',
+      fecha: '2026-09-28',
+      cuentaId,
+      categoriaId: categoriaIngresoId,
+    })
+
+    const transacciones = await listarTransacciones(usuarioId, {
+      tipo: 'AHORRO',
+      desde: '2026-02-30',
+      hasta: '28/09/2026',
+      cuentaId: '',
+    })
+
+    expect(transacciones.map((t) => t.monto)).toEqual(['100.00', '25.50'])
+  })
 })

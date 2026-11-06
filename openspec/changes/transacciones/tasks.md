@@ -51,9 +51,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 2.31 RED — mismo archivo, test "Filtrar transacciones por tipo y cuenta".
 - [x] 2.32 GREEN — `where.tipo` y `where.cuentaId`, siempre junto a `usuarioId`. Test en verde.
 - [x] 2.33 REFACTOR — test en verde.
-- [ ] 2.34 RED — mismo archivo, test "Un filtro con valor inválido se ignora".
-- [ ] 2.35 GREEN — `esquemas.ts`: `esquemaFiltros` con `.catch(undefined)` por campo. Test en verde.
-- [ ] 2.36 REFACTOR — test en verde.
+- [x] 2.34 RED — mismo archivo, test "Un filtro con valor inválido se ignora".
+- [x] 2.35 GREEN — `esquemas.ts`: `esquemaFiltros` con `.catch(undefined)` por campo. Test en verde.
+- [x] 2.36 REFACTOR — test en verde.
 
 ## 3. Saldo calculado de cuentas
 
