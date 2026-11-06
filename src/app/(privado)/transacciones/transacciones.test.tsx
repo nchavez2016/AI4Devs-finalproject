@@ -1,7 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import { cargarTransacciones } from '@/server/transacciones/pantalla'
+import { createRef } from 'react'
 import { ContenidoTransacciones } from './ContenidoTransacciones'
+import { FormularioTransaccion } from './FormularioTransaccion'
 
 const authSimulado = vi.fn()
 const listarTransaccionesSimulado = vi.fn()
@@ -240,6 +242,50 @@ describe('transacciones', () => {
 
     expect((screen.getByLabelText('Fecha') as HTMLInputElement).value).toBe('2026-09-28')
     expect((screen.getByLabelText('Fecha') as HTMLInputElement).type).toBe('date')
+  })
+
+  it('Formulario de transacción muestra el error junto a cada campo', () => {
+    render(
+      <FormularioTransaccion
+        formularioRef={createRef<HTMLFormElement>()}
+        accion={() => {}}
+        pendiente={false}
+        categorias={categoriasPorDefecto as never}
+        cuentas={[cuentaCaja] as never}
+        hoy="2026-09-28"
+        estado={{
+          errores: {
+            monto: ['El monto debe ser mayor que 0'],
+            categoriaId: ['Elige una categoría'],
+            cuentaId: ['Elige una de tus cuentas'],
+            fecha: ['Indica la fecha'],
+            tipo: ['Elige si es un gasto o un ingreso'],
+          },
+        }}
+      />
+    )
+
+    const monto = screen.getByRole('textbox', { name: 'Monto' })
+    expect(monto.getAttribute('aria-invalid')).toBe('true')
+    const idErrorMonto = screen.getByText('El monto debe ser mayor que 0').closest('[id]')?.id
+    expect(idErrorMonto).toBeTruthy()
+    expect(monto.getAttribute('aria-describedby')).toContain(idErrorMonto!)
+
+    const categoria = screen.getByRole('combobox', { name: 'Categoría' })
+    expect(categoria.getAttribute('aria-invalid')).toBe('true')
+    expect(screen.getByText('Elige una categoría')).toBeTruthy()
+
+    const cuenta = screen.getByRole('combobox', { name: 'Cuenta' })
+    expect(cuenta.getAttribute('aria-invalid')).toBe('true')
+    expect(screen.getByText('Elige una de tus cuentas')).toBeTruthy()
+
+    expect(screen.getByLabelText('Fecha').getAttribute('aria-invalid')).toBe('true')
+    expect(screen.getByText('Indica la fecha')).toBeTruthy()
+
+    expect(screen.getByText('Elige si es un gasto o un ingreso')).toBeTruthy()
+
+    // El foco va al primer campo inválido según el orden del formulario.
+    expect(document.activeElement).toBe(monto)
   })
 
   it('La entrada de página se anima solo en el contenedor', async () => {

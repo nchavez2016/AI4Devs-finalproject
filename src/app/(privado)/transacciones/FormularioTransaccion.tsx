@@ -1,4 +1,5 @@
 import { useState, type RefObject } from 'react'
+import { useFocoPrimerError } from '@/components/formularios/useFocoPrimerError'
 import { Button } from '@/components/ui/Button'
 import { Campo } from '@/components/ui/Campo'
 import { Selector } from '@/components/ui/Selector'
@@ -19,6 +20,7 @@ export interface FormularioTransaccionProps {
 
 export function FormularioTransaccion({
   formularioRef,
+  estado,
   accion,
   pendiente,
   categorias,
@@ -27,6 +29,7 @@ export function FormularioTransaccion({
 }: FormularioTransaccionProps) {
   const [tipo, setTipo] = useState<TipoMovimientoSeleccionado>('GASTO')
   const categoriasDelTipo = tipo === 'GASTO' ? categorias.gasto : categorias.ingreso
+  useFocoPrimerError(formularioRef, estado)
 
   return (
     <form
@@ -35,11 +38,16 @@ export function FormularioTransaccion({
       noValidate
       className="flex flex-col gap-entre-campos"
     >
-      <SelectorTipo valor={tipo} onCambio={setTipo} />
+      <SelectorTipo valor={tipo} onCambio={setTipo} error={estado.errores?.tipo?.[0]} />
 
-      <Campo etiqueta="Monto" name="monto" monto />
+      <Campo etiqueta="Monto" name="monto" monto error={estado.errores?.monto?.[0]} />
 
-      <Selector etiqueta="Categoría" name="categoriaId" key={tipo}>
+      <Selector
+        etiqueta="Categoría"
+        name="categoriaId"
+        key={tipo}
+        error={estado.errores?.categoriaId?.[0]}
+      >
         {categoriasDelTipo.map((categoria) => (
           <option key={categoria.id} value={categoria.id}>
             {categoria.nombre}
@@ -47,7 +55,7 @@ export function FormularioTransaccion({
         ))}
       </Selector>
 
-      <Selector etiqueta="Cuenta" name="cuentaId">
+      <Selector etiqueta="Cuenta" name="cuentaId" error={estado.errores?.cuentaId?.[0]}>
         {cuentas.map((cuenta) => (
           <option key={cuenta.id} value={cuenta.id}>
             {cuenta.nombre}
@@ -55,7 +63,13 @@ export function FormularioTransaccion({
         ))}
       </Selector>
 
-      <Campo etiqueta="Fecha" name="fecha" type="date" defaultValue={hoy} />
+      <Campo
+        etiqueta="Fecha"
+        name="fecha"
+        type="date"
+        defaultValue={hoy}
+        error={estado.errores?.fecha?.[0]}
+      />
 
       <Button type="submit" cargando={pendiente} textoCarga="Guardando…">
         Guardar transacción

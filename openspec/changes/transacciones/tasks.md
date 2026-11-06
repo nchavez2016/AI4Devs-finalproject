@@ -149,9 +149,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 9.7 RED — `src/server/transacciones/pantalla.test.ts`, test "Fecha del formulario empieza en el día de hoy" (`vi.setSystemTime('2026-09-29T04:30:00Z')`).
 - [x] 9.8 GREEN — `pantalla.ts`: `hoy` con zona `America/Guayaquil`; el formulario lo usa como `defaultValue`. Test en verde.
 - [x] 9.9 REFACTOR — test en verde.
-- [ ] 9.10 RED — `transacciones.test.tsx`, test "Formulario de transacción muestra el error junto a cada campo".
-- [ ] 9.11 GREEN — errores y `aria-invalid` en cada campo, `useFocoPrimerError`. Test en verde.
-- [ ] 9.12 REFACTOR — test en verde.
+- [x] 9.10 RED — `transacciones.test.tsx`, test "Formulario de transacción muestra el error junto a cada campo".
+- [x] 9.11 GREEN — errores y `aria-invalid` en cada campo, `useFocoPrimerError`. Test en verde.
+- [x] 9.12 REFACTOR — test en verde.
 - [ ] 9.13 RED — mismo archivo, test "Error al guardar la transacción conserva los datos escritos".
 - [ ] 9.14 GREEN — aviso `role="alert"` encima del botón, `defaultValue` desde `estado.valores` (también el tipo) y `key` por respuesta. Test en verde.
 - [ ] 9.15 REFACTOR — test en verde.
