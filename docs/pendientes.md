@@ -14,7 +14,7 @@
 - Guardián automático de clases del tema por defecto en el pre-commit.
 - Test automático de contraste de los tokens.
 - Skill `ux-cuadre` y subagente revisor de UX (y comprobación de sincronía si se duplican skills propias).
-- Componentes que faltan: selector de tipo, tarjeta, lista y tabla de movimientos, "Totales con etiqueta" de Importe.
+- Componentes que faltan: tarjeta, "Totales con etiqueta" de Importe.
 - Formulario: reformateo del monto al salir, validación al enviar y foco al primer campo inválido.
 - Los `input type="date"` (formulario de transacciones y filtros) muestran mm/dd/yyyy según el idioma del navegador, y el checklist pide fechas en formato `es-EC` (checklist.md, línea 69). Valorar un campo de fecha propio o fijar el idioma del control.
 - Antigravity en Windows pide permiso para comandos con argumentos aunque su prefijo esté en la lista y en el hook (git log, git diff, npx vitest run...). Usar Claude Code para ciclos largos de apply. Revisar si una versión futura respeta el allow del hook.

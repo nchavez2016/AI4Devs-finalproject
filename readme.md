@@ -7,12 +7,12 @@
 | Registro e inicio de sesión | ✅ Implementado |
 | Gestión de cuentas | ✅ Implementado |
 | Gestión de categorías | ✅ Implementado |
-| Registro de transacciones | ⏳ Pendiente |
+| Registro de transacciones | ✅ Implementado (alta, listado y filtros; sin editar ni eliminar) |
 | Dashboard | ⏳ Pendiente |
 | Despliegue (Vercel + Neon) | ⏳ Pendiente |
 
-**Pendiente tras la Entrega 2:** transacciones, dashboard, despliegue en Vercel + Neon, E2E y
-GitHub Actions.
+**Pendiente tras la Entrega 2:** dashboard, editar y eliminar transacciones, despliegue en
+Vercel + Neon, E2E y GitHub Actions.
 
 ## Índice
 
@@ -86,16 +86,16 @@ estado real a fecha de la Entrega 2 se marca con ✅ (implementado) o ⏳
   trabajo.
 - **[MVP] ✅ Gestión de cuentas.** El usuario crea y administra sus cuentas de
   dinero (por ejemplo banco, efectivo, billetera digital), para saber cuánto
-  tiene disponible en cada una. El saldo mostrado hoy es el saldo inicial; se
-  calculará con las transacciones cuando esa funcionalidad exista.
-- **[MVP] ⏳ Registro de transacciones.** El usuario registra un ingreso o un
-  gasto, asociándolo a una cuenta, una categoría, un monto y una fecha; puede
-  además listar, editar y eliminar sus movimientos. Pendiente para la entrega
-  final.
+  tiene disponible en cada una. El saldo se calcula: saldo inicial más ingresos
+  menos gastos de esa cuenta.
+- **[MVP] ✅ Registro de transacciones.** El usuario registra un ingreso o un
+  gasto, asociándolo a una cuenta, una categoría, un monto y una fecha, y lista
+  sus movimientos con filtros básicos (fechas, tipo y cuenta). Editar y eliminar
+  movimientos (HU-005) queda pendiente.
 - **[MVP] ✅ (parcial) Categorización.** El usuario ya puede crear y consultar
   sus categorías de ingreso y de gasto (de primer nivel; las subcategorías
-  quedan fuera de esta entrega). Clasificar una transacción concreta depende de
-  que exista el registro de transacciones, todavía pendiente.
+  quedan fuera de esta entrega) y asignar una a cada transacción, que debe ser
+  del mismo tipo que la transacción.
 - **[MVP] ⏳ Dashboard.** Una pantalla de resumen muestra el saldo actual, el
   total de ingresos y gastos del período y las principales categorías de gasto,
   todo calculado automáticamente a partir de las transacciones. Pendiente para
@@ -229,8 +229,9 @@ Recorrido sugerido, con la app corriendo (`npm run dev`) y la base levantada:
    que con las cuentas.
 7. Cierra sesión desde el botón correspondiente y confirma que vuelves al login.
 
-*(Registrar transacciones y ver el dashboard quedan pendientes; no forman parte
-de este recorrido todavía.)*
+*(Registrar transacciones tiene su propio recorrido en **Transacciones**: elige tipo,
+monto, categoría, cuenta y fecha, y el saldo de la cuenta cambia en **Cuentas**. El
+dashboard queda pendiente.)*
 
 ---
 
@@ -368,8 +369,7 @@ cuadre/
 └── readme.md
 ```
 
-Pendiente: `src/app/(privado)/transacciones/` (registro de transacciones) y un
-`dashboard/` con cálculos reales; hoy existe `panel/` como pantalla de
+Pendiente: un `dashboard/` con cálculos reales; hoy existe `panel/` como pantalla de
 bienvenida provisional. La separación clave es: `app/` contiene las pantallas y
 los endpoints; `server/` contiene la lógica de negocio y, dentro de
 `server/repositories/`, la capa de acceso a datos que encapsula Prisma (patrón
@@ -578,97 +578,71 @@ más adelante valores como TRANSFERENCIA sin romper lo existente.
 
 ## 4. Especificación de la API
 
-La aplicación expone sus operaciones a través de endpoints internos consumidos
-por el propio frontend. Todos requieren que el usuario esté autenticado, y todas
-las operaciones se restringen automáticamente a los datos del usuario de la
-sesión. A continuación se describen los tres endpoints principales del MVP en
-formato OpenAPI (resumido).
+Las operaciones de transacciones no se exponen como endpoints REST: el frontend las
+invoca como **Server Actions** de Next.js y la pantalla carga sus datos en el servidor,
+con la misma separación en capas que cuentas y categorías (repositorio, esquemas Zod,
+caso de uso, acción y pantalla). Todas exigen que el usuario esté autenticado y se
+restringen a los datos del usuario de la sesión: el dueño nunca se toma de los datos
+enviados. Sin sesión, la acción redirige a `/login`. El dashboard (pendiente) seguirá
+la misma vía; el endpoint de abajo describe su contrato previsto.
 
-### Endpoint 1 — Crear transacción
+### Acción 1 — Registrar transacción
 
-```yaml
-POST /api/transacciones
-summary: Registra un nuevo ingreso o gasto del usuario autenticado.
-security:
-  - sessionAuth: []
-requestBody:
-  required: true
-  content:
-    application/json:
-      schema:
-        type: object
-        required: [cuentaId, categoriaId, tipo, monto, fecha]
-        properties:
-          cuentaId:    { type: string, description: "Cuenta afectada" }
-          categoriaId: { type: string, description: "Categoría del movimiento" }
-          tipo:        { type: string, enum: [INGRESO, GASTO] }
-          monto:       { type: number, minimum: 0.01 }
-          fecha:       { type: string, format: date }
-          descripcion: { type: string, nullable: true }
-responses:
-  "201": { description: "Transacción creada" }
-  "400": { description: "Datos inválidos" }
-  "401": { description: "No autenticado" }
-```
+`registrarTransaccionAccion(estadoPrevio, formData)` en
+`src/server/transacciones/acciones.ts`. Registra un nuevo ingreso o gasto del usuario
+autenticado.
 
-Ejemplo de petición:
+| Campo del formulario | Regla (validada con Zod en el servidor) |
+|---|---|
+| `tipo` | `INGRESO` o `GASTO`. Debe coincidir con el tipo de la categoría. |
+| `monto` | Texto con punto o coma decimal y hasta 2 decimales; mayor que 0 y como máximo 999999999999.99. Se guarda como `Decimal`. |
+| `fecha` | `AAAA-MM-DD`, un día que exista en el calendario. |
+| `cuentaId` | Cuenta del usuario de la sesión. |
+| `categoriaId` | Categoría del usuario de la sesión, del mismo tipo que la transacción. |
+| `descripcion` | Opcional, máximo 255 caracteres; se guarda sin los espacios del inicio y del final. |
+
+Una cuenta o una categoría de otro usuario se trata igual que una inexistente
+("Elige una de tus cuentas" / "Elige una de tus categorías").
+
+Resultado (estado del formulario):
 
 ```json
-{
-  "cuentaId": "cta_001",
-  "categoriaId": "cat_ventas",
-  "tipo": "INGRESO",
-  "monto": 150.00,
-  "fecha": "2026-09-17",
-  "descripcion": "Venta de producto"
-}
+{ "exito": true, "idCreado": "trx_012",
+  "creado": { "tipo": "GASTO", "monto": "25.50", "cuentaNombre": "Efectivo" } }
 ```
 
-Ejemplo de respuesta (201):
+Con datos inválidos devuelve un error por campo y no crea nada:
 
 ```json
-{
-  "id": "trx_012",
-  "cuentaId": "cta_001",
-  "categoriaId": "cat_ventas",
-  "tipo": "INGRESO",
-  "monto": 150.00,
-  "fecha": "2026-09-17",
-  "descripcion": "Venta de producto",
-  "creadoEn": "2026-09-17T14:05:00Z"
-}
+{ "errores": { "monto": ["El monto debe ser mayor que 0"] } }
 ```
 
-### Endpoint 2 — Listar transacciones
+Si el guardado falla por un error inesperado devuelve
+`{ "mensaje": "No pudimos guardar la transacción. Inténtalo de nuevo.", "valores": { … } }`
+para conservar lo escrito. Al registrar, el saldo de la cuenta cambia: saldo inicial
+más ingresos menos gastos.
 
-```yaml
-GET /api/transacciones
-summary: Devuelve las transacciones del usuario, con filtros opcionales.
-security:
-  - sessionAuth: []
-parameters:
-  - name: desde
-    in: query
-    schema: { type: string, format: date }
-    description: "Fecha inicial del rango (opcional)"
-  - name: hasta
-    in: query
-    schema: { type: string, format: date }
-    description: "Fecha final del rango (opcional)"
-  - name: tipo
-    in: query
-    schema: { type: string, enum: [INGRESO, GASTO] }
-    description: "Filtrar por tipo (opcional)"
-  - name: cuentaId
-    in: query
-    schema: { type: string }
-    description: "Filtrar por cuenta (opcional)"
-responses:
-  "200": { description: "Lista de transacciones" }
-  "401": { description: "No autenticado" }
-```
+### Consulta 2 — Listar transacciones
 
-### Endpoint 3 — Resumen del dashboard
+`cargarTransacciones(parametrosDeUrl)` en `src/server/transacciones/pantalla.ts`, que usa
+la página `/transacciones`. Devuelve las transacciones del usuario de la más reciente a
+la más antigua (y, en el mismo día, de la última registrada a la primera), junto con sus
+cuentas y categorías para el formulario. Los filtros viajan en la URL y son opcionales y
+combinables; un valor inválido se ignora.
+
+| Parámetro de la URL | Valor |
+|---|---|
+| `desde` | `AAAA-MM-DD`, incluida |
+| `hasta` | `AAAA-MM-DD`, incluida |
+| `tipo` | `INGRESO` o `GASTO` |
+| `cuentaId` | Identificador de una cuenta del usuario; la de otro usuario no devuelve nada |
+
+Ejemplo: `/transacciones?tipo=GASTO&desde=2026-09-01&hasta=2026-09-15`.
+
+Cada transacción incluye `tipo`, `monto` (texto con 2 decimales), `fecha`, `descripcion` y el
+nombre y el identificador de su cuenta y de su categoría.
+
+### Endpoint 3 — Resumen del dashboard (pendiente)
 
 ```yaml
 GET /api/dashboard
@@ -775,7 +749,7 @@ se detallan las tres principales, como pide la plantilla.
 > el usuario indica el **nombre de su negocio o actividad**, que identifica su
 > espacio de trabajo y se muestra en el dashboard.
 
-### HU-001 — Registrar una transacción ⏳ Pendiente
+### HU-001 — Registrar una transacción ✅ Implementado
 
 **Como** persona que gestiona las finanzas de mi negocio
 **quiero** registrar un ingreso o un gasto con su monto, fecha, cuenta y categoría
@@ -816,10 +790,10 @@ digital)
 **para** saber cuánto tengo disponible en cada una y a dónde asignar cada
 movimiento.
 
-> Implementado hasta la Entrega 2: crear y listar cuentas, con nombre único por
-> usuario y aislamiento entre usuarios. El saldo mostrado es el saldo inicial;
-> el escenario "Ver el saldo actualizado de una cuenta" de abajo depende de las
-> transacciones, todavía pendientes.
+> Implementado: crear y listar cuentas, con nombre único por usuario y
+> aislamiento entre usuarios. El saldo actual se calcula (saldo inicial más
+> ingresos menos gastos), así que el escenario "Ver el saldo actualizado de una
+> cuenta" de abajo también está cubierto.
 
 **Prioridad:** Must-have
 **Criterios de aceptación:**
@@ -887,9 +861,10 @@ Scenario: Dashboard sin datos
 - **HU-004 (Must-have) — Categorizar transacciones. ✅ Implementado (parcial)**
   Como usuario quiero crear categorías y subcategorías y asignarlas a mis
   transacciones, para analizar en qué gano y en qué gasto. (Habilita el
-  desglose por categoría del dashboard.) Implementado hasta la Entrega 2: crear
-  y listar categorías de primer nivel, únicas por usuario y tipo. Las
-  subcategorías y la asignación a una transacción real quedan pendientes.
+  desglose por categoría del dashboard.) Implementado: crear y listar
+  categorías de primer nivel, únicas por usuario y tipo, y asignarlas a una
+  transacción (la categoría debe ser del mismo tipo que la transacción). Las
+  subcategorías quedan pendientes.
 - **HU-005 (Should-have) — Editar y eliminar transacciones. ⏳ Pendiente** Como
   usuario quiero corregir o borrar un movimiento mal registrado, para mantener
   mis datos fiables. Se implementa solo si el núcleo del MVP está estable.
@@ -938,35 +913,35 @@ de usuarios con Auth.js (next-auth v5 beta).
 
 ---
 
-### TK-002 — API de transacciones (crear y listar) ⏳ Pendiente
+### TK-002 — Transacciones: registrar y listar ✅ Implementado (pendiente de PR)
 
-**Tipo:** Backend
+**Tipo:** Backend y pantalla
 **Prioridad:** Alta
 **Historia relacionada:** HU-001
 
 **Descripción:**
-Implementar los endpoints de creación y listado de transacciones descritos en la
-sección 4, con validación de datos en el servidor y aislamiento por usuario.
+Implementar el registro y el listado de transacciones descritos en la sección 4, con
+validación de datos en el servidor y aislamiento por usuario. Se hace con Server
+Actions y una pantalla `/transacciones`, no con endpoints REST.
 
 **Tareas técnicas:**
-- Endpoint `POST /api/transacciones` que valide los datos de entrada con Zod
+- Acción `registrarTransaccionAccion` que valide los datos de entrada con Zod
   (monto > 0, tipo INGRESO/GASTO, cuenta y categoría existentes y pertenecientes
-  al usuario, fecha válida).
-- Endpoint `GET /api/transacciones` con filtros opcionales por rango de fechas,
-  tipo y cuenta.
-- Capa de servicio que asocie toda operación al usuario autenticado.
-- Acceso a datos a través de un repositorio (`TransaccionRepository`) que
-  encapsula Prisma, en lugar de llamar a Prisma directamente desde el endpoint
-  (patrón Repository).
-- Manejo de errores con códigos HTTP correctos (201, 400, 401).
+  al usuario, categoría del mismo tipo, fecha válida).
+- Listado con filtros opcionales por rango de fechas, tipo y cuenta, tomados de la URL.
+- Caso de uso que asocie toda operación al usuario autenticado.
+- Acceso a datos a través de un repositorio (`transaccionRepository`) que
+  encapsula Prisma (patrón Repository).
+- Saldo de cada cuenta calculado: saldo inicial más ingresos menos gastos.
+- Errores por campo en el formulario; sin sesión se redirige a `/login`.
 
 **Definition of Done:**
-- [ ] Se puede crear una transacción válida y recuperarla en el listado.
-- [ ] Una transacción con monto ≤ 0 o con campos faltantes devuelve 400 con
-      mensaje claro.
-- [ ] Una petición sin sesión devuelve 401.
-- [ ] Un usuario nunca recibe transacciones de otro usuario.
-- [ ] Pruebas de integración que cubran los escenarios de HU-001 (caso válido,
+- [x] Se puede crear una transacción válida y recuperarla en el listado.
+- [x] Una transacción con monto ≤ 0 o con campos faltantes se rechaza con un
+      mensaje claro junto al campo.
+- [x] Sin sesión se redirige a `/login`.
+- [x] Un usuario nunca recibe transacciones de otro usuario.
+- [x] Pruebas de integración que cubran los escenarios de HU-001 (caso válido,
       monto inválido, campos faltantes).
 - [ ] PR enlazado a la historia HU-001, revisado por una persona.
 
