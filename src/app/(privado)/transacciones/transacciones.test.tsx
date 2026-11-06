@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { fireEvent, render, screen, within } from '@testing-library/react'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { act, fireEvent, render, screen, within } from '@testing-library/react'
 import { cargarTransacciones } from '@/server/transacciones/pantalla'
 import { createRef } from 'react'
 import { ContenidoTransacciones } from './ContenidoTransacciones'
@@ -98,9 +98,27 @@ async function mostrarPantalla({
   return render(<ContenidoTransacciones {...datos} />)
 }
 
+// La navegación de los filtros tarda hasta que el test la termina. Si la promesa no se
+// resolviera, su transición asíncrona seguiría pendiente y React la entrelazaría con las
+// acciones de los tests siguientes, que nunca llegarían a confirmarse.
+const navegacionesPendientes: (() => void)[] = []
+
+function navegacionLenta() {
+  replaceSimulado.mockImplementation(
+    () => new Promise<void>((resolver) => navegacionesPendientes.push(resolver))
+  )
+}
+
 describe('transacciones', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    replaceSimulado.mockReset()
+  })
+
+  afterEach(async () => {
+    await act(async () => {
+      navegacionesPendientes.splice(0).forEach((resolver) => resolver())
+    })
   })
 
   it('Pantalla de transacciones sin cuentas pide crear una cuenta primero', async () => {
@@ -379,7 +397,7 @@ describe('transacciones', () => {
 
   it('Cambiar un filtro actualiza la URL y conserva los datos mientras carga', async () => {
     // La navegación tarda: la transición sigue pendiente mientras llegan los datos nuevos.
-    replaceSimulado.mockImplementation(() => new Promise(() => {}))
+    navegacionLenta()
     await mostrarPantalla({ transacciones: [gastoHarina] })
 
     expect(screen.queryByText('Actualizando…')).toBeNull()
@@ -395,7 +413,7 @@ describe('transacciones', () => {
   })
 
   it('Los filtros de fechas y cuenta se combinan en la URL', async () => {
-    replaceSimulado.mockImplementation(() => new Promise(() => {}))
+    navegacionLenta()
     await mostrarPantalla({
       transacciones: [gastoHarina],
       filtros: { tipo: 'GASTO' },
@@ -418,6 +436,62 @@ describe('transacciones', () => {
       target: { value: '' },
     })
     expect(replaceSimulado).toHaveBeenLastCalledWith('/transacciones')
+  })
+
+  it('Transacción registrada se anuncia y se resalta en el listado', async () => {
+    const efectivo = { ...cuentaCaja, nombre: 'Efectivo' }
+    const gastoNuevo = { ...gastoHarina, cuenta: { id: 'c1', nombre: 'Efectivo' } }
+    const ingresoAnterior = {
+      ...gastoHarina,
+      id: 't0',
+      tipo: 'INGRESO',
+      monto: '100.00',
+      fecha: '2026-09-27',
+      descripcion: 'Venta previa',
+      categoria: { id: 'i1', nombre: 'Ventas' },
+      cuenta: { id: 'c1', nombre: 'Efectivo' },
+    }
+    registrarTransaccionAccionSimulada.mockResolvedValue({
+      exito: true,
+      idCreado: 't1',
+      creado: { tipo: 'GASTO', monto: '25.50', cuentaNombre: 'Efectivo' },
+    })
+    await mostrarPantalla({ cuentas: [efectivo], transacciones: [gastoNuevo, ingresoAnterior] })
+
+    const formulario = screen.getByRole('button', { name: 'Guardar transacción' }).closest('form')!
+    await act(async () => {
+      fireEvent.submit(formulario)
+    })
+
+    const aviso = screen.getByText('Gasto de $25,50 registrado en Efectivo.')
+    expect(aviso.closest('[aria-live="polite"]')).toBeTruthy()
+
+    const filaTabla = screen.getByText('Harina').closest('tr')!
+    const filaLista = screen.getByText('Efectivo · Harina').closest('li')!
+    expect(filaTabla.className).toContain('animate-resaltado')
+    expect(filaLista.className).toContain('animate-resaltado')
+
+    expect(screen.getByText('Venta previa').closest('tr')!.className).not.toContain(
+      'animate-resaltado'
+    )
+    expect(screen.getByText('Efectivo · Venta previa').closest('li')!.className).not.toContain(
+      'animate-resaltado'
+    )
+  })
+
+  it('Un ingreso registrado se anuncia como ingreso', async () => {
+    registrarTransaccionAccionSimulada.mockResolvedValue({
+      exito: true,
+      idCreado: 't1',
+      creado: { tipo: 'INGRESO', monto: '1250.00', cuentaNombre: 'Banco' },
+    })
+    await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    await act(async () => {
+      fireEvent.submit(screen.getByRole('button', { name: 'Guardar transacción' }).closest('form')!)
+    })
+
+    expect(screen.getByText('Ingreso de $1.250,00 registrado en Banco.')).toBeTruthy()
   })
 
   it('Quitar filtros solo aparece con un filtro activo', async () => {

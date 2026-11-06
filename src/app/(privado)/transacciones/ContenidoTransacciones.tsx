@@ -7,6 +7,7 @@ import { EncabezadoPagina } from '@/components/EncabezadoPagina'
 import { FiltrosMovimientos } from '@/components/FiltrosMovimientos'
 import { ListaMovimientos } from '@/components/ListaMovimientos'
 import { Button, clasesBoton } from '@/components/ui/Button'
+import { formatearImporte } from '@/components/ui/Importe'
 import { Tarjeta } from '@/components/ui/Tarjeta'
 import { registrarTransaccionAccion } from '@/server/transacciones/acciones'
 import type { DatosTransacciones } from '@/server/transacciones/pantalla'
@@ -23,6 +24,12 @@ export function ContenidoTransacciones({
   const [estado, accion, pendiente] = useActionState(registrarTransaccionAccion, {})
   const formularioRef = useRef<HTMLFormElement>(null)
   const router = useRouter()
+
+  // "Gasto de $25,50 registrado en Efectivo." (estados.md, 9.4)
+  const mensajeExito =
+    estado.exito && estado.creado
+      ? `${estado.creado.tipo === 'INGRESO' ? 'Ingreso' : 'Gasto'} de ${formatearImporte(estado.creado.monto, 'saldo')} registrado en ${estado.creado.cuentaNombre}.`
+      : ''
 
   function quitarFiltros() {
     router.replace('/transacciones')
@@ -42,6 +49,10 @@ export function ContenidoTransacciones({
           titulo="Transacciones"
           proposito="Registra lo que entra y sale de tu negocio y revisa tus movimientos."
         />
+
+        <div aria-live="polite" className="text-detalle text-muted-foreground">
+          {mensajeExito}
+        </div>
 
         {cuentas.length === 0 ? (
           <div className="flex flex-col items-start gap-entre-campos">

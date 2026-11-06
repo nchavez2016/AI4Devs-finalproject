@@ -170,9 +170,9 @@ Tests en `src/app/(privado)/transacciones/transacciones.test.tsx` salvo que se i
 - [x] 10.10 RED — mismo archivo, test "Quitar filtros solo aparece con un filtro activo". Si pasa sin cambios, forzar el RED.
 - [x] 10.11 GREEN — condición de filtro activo. Test en verde.
 - [x] 10.12 REFACTOR — test en verde.
-- [ ] 10.13 RED — mismo archivo, test "Transacción registrada se anuncia y se resalta en el listado".
-- [ ] 10.14 GREEN — región `aria-live` con `formatearImporte` y `creado.cuentaNombre`; `idResaltado` → `animate-resaltado` en la fila. Test en verde.
-- [ ] 10.15 REFACTOR — test en verde.
+- [x] 10.13 RED — mismo archivo, test "Transacción registrada se anuncia y se resalta en el listado".
+- [x] 10.14 GREEN — región `aria-live` con `formatearImporte` y `creado.cuentaNombre`; `idResaltado` → `animate-resaltado` en la fila. Test en verde.
+- [x] 10.15 REFACTOR — test en verde.
 - [ ] 10.16 RED — `src/app/(privado)/transacciones/estados.test.tsx`, test "Pantalla de transacciones en carga muestra un esqueleto ocupado".
 - [ ] 10.17 GREEN — `loading.tsx` con `animate-esqueleto`. Test en verde.
 - [ ] 10.18 REFACTOR — test en verde.
