@@ -63,9 +63,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 3.4 RED — mismo archivo, test "Ver el saldo actualizado de una cuenta". Si pasa sin cambios, forzar el RED.
 - [x] 3.5 GREEN — sin cambios si ya lo cumple. Test en verde.
 - [x] 3.6 REFACTOR — test en verde.
-- [ ] 3.7 RED — mismo archivo, test "El saldo de una cuenta solo cuenta sus transacciones". Si pasa sin cambios, forzar el RED quitando el agrupado por `cuentaId`.
-- [ ] 3.8 GREEN — corregir el agrupado si hace falta. Test en verde.
-- [ ] 3.9 REFACTOR — test en verde.
+- [x] 3.7 RED — mismo archivo, test "El saldo de una cuenta solo cuenta sus transacciones". Si pasa sin cambios, forzar el RED quitando el agrupado por `cuentaId`.
+- [x] 3.8 GREEN — corregir el agrupado si hace falta. Test en verde.
+- [x] 3.9 REFACTOR — test en verde.
 - [ ] 3.10 RED — mismo archivo, test "El saldo de una cuenta no cuenta transacciones de otro usuario". Si pasa sin cambios, forzar el RED quitando `usuarioId` de `sumasPorCuenta`.
 - [ ] 3.11 GREEN — corregir el filtro si hace falta. Test en verde.
 - [ ] 3.12 REFACTOR — `cuentas.int.test.ts` completo en verde.

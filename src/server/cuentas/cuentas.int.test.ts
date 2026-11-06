@@ -526,4 +526,28 @@ describe('cuentas', () => {
     const consultada = await obtenerCuenta(usuarioId, cuenta.cuenta.id)
     expect(consultada?.saldo).toBe('650.00')
   })
+
+  it('El saldo de una cuenta solo cuenta sus transacciones', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const { gastoId } = await categoriasDeEjemplo(usuarioId)
+    const caja = await crearCuenta(usuarioId, {
+      nombre: 'Caja',
+      tipo: 'EFECTIVO',
+      saldoInicial: '10.00',
+    })
+    const banco = await crearCuenta(usuarioId, {
+      nombre: 'Banco',
+      tipo: 'BANCO',
+      saldoInicial: '0.00',
+    })
+    if (!caja.ok || !banco.ok) throw new Error('Falló la creación de cuentas')
+
+    await registrarMovimiento(usuarioId, banco.cuenta.id, gastoId, 'GASTO', '3.75')
+
+    const lista = await listarCuentas(usuarioId)
+    expect(lista.map((c) => [c.nombre, c.saldo])).toEqual([
+      ['Caja', '10.00'],
+      ['Banco', '-3.75'],
+    ])
+  })
 })
