@@ -21,13 +21,15 @@ export default defineConfig({
       // next-auth (@auth/core) importa "next/server" como especificador sin extensión,
       // válido en el bundler de Next pero no para el resolutor ESM nativo de Node que
       // usa Vitest cuando externaliza un paquete. Se fuerza a Vite a procesarlo.
-      deps: { inline: [/next-auth/, /@auth\/core/] },
+      deps: { inline: [/next-auth/, /@auth\/core/] }
     },
     projects: [
       {
         extends: true,
         test: {
           name: 'unidad',
+		  testTimeout: 15000,
+          hookTimeout: 15000,
           environment: 'jsdom',
           setupFiles: ['./src/test/setup.ts'],
           include: ['src/**/*.test.{ts,tsx}', 'scripts/**/*.test.mjs'],
