@@ -22,6 +22,7 @@
 ## Producto
 - Editar y eliminar movimientos (HU-005).
 - Interfaz de subcategorías, si no cabe en el plazo.
+- Filtro de movimientos con `desde` posterior a `hasta`: hoy devuelve una lista vacía sin aviso.
 - Posible migración de Auth.js a Better Auth (Auth.js está en modo de mantenimiento).
 
 ## Entrega final
