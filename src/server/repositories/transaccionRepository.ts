@@ -11,6 +11,11 @@ export interface DatosCrearTransaccionRepo {
   descripcion: string | null
 }
 
+export interface FiltrosListarRepo {
+  desde?: Date
+  hasta?: Date
+}
+
 const incluirNombres = {
   cuenta: { select: { id: true, nombre: true } },
   categoria: { select: { id: true, nombre: true } },
@@ -32,9 +37,14 @@ export const transaccionRepository = {
     })
   },
 
-  async listar(usuarioId: string) {
+  async listar(usuarioId: string, filtros: FiltrosListarRepo = {}) {
     return prisma.transaccion.findMany({
-      where: { usuarioId },
+      where: {
+        usuarioId,
+        ...((filtros.desde || filtros.hasta) && {
+          fecha: { gte: filtros.desde, lte: filtros.hasta },
+        }),
+      },
       include: incluirNombres,
       orderBy: [{ fecha: 'desc' }, { creadoEn: 'desc' }],
     })

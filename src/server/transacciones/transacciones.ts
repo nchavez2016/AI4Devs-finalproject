@@ -72,7 +72,20 @@ export async function registrarTransaccion(
   return { ok: true, transaccion: mapearTransaccion(transaccion) }
 }
 
-export async function listarTransacciones(usuarioId: string): Promise<TransaccionItem[]> {
-  const transacciones = await transaccionRepository.listar(usuarioId)
+export interface FiltrosTransacciones {
+  /** Fecha inicial AAAA-MM-DD, incluida. */
+  desde?: string
+  /** Fecha final AAAA-MM-DD, incluida. */
+  hasta?: string
+}
+
+export async function listarTransacciones(
+  usuarioId: string,
+  filtros: FiltrosTransacciones = {}
+): Promise<TransaccionItem[]> {
+  const transacciones = await transaccionRepository.listar(usuarioId, {
+    desde: filtros.desde ? new Date(`${filtros.desde}T00:00:00Z`) : undefined,
+    hasta: filtros.hasta ? new Date(`${filtros.hasta}T00:00:00Z`) : undefined,
+  })
   return transacciones.map(mapearTransaccion)
 }

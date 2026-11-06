@@ -258,4 +258,26 @@ describe('transacciones', () => {
       ['GASTO', '10.00', '2026-09-27'],
     ])
   })
+
+  it('Filtrar transacciones por rango de fechas', async () => {
+    const { usuarioId, cuentaId, categoriaId } = await usuarioConCajaEInsumos()
+
+    for (const [monto, fecha] of [
+      ['10.00', '2026-09-01'],
+      ['20.00', '2026-09-15'],
+      ['30.00', '2026-09-16'],
+    ]) {
+      await registrarTransaccion(usuarioId, { tipo: 'GASTO', monto, fecha, cuentaId, categoriaId })
+    }
+
+    const transacciones = await listarTransacciones(usuarioId, {
+      desde: '2026-09-01',
+      hasta: '2026-09-15',
+    })
+
+    expect(transacciones.map((t) => t.monto)).toEqual(['20.00', '10.00'])
+
+    const desdeElDos = await listarTransacciones(usuarioId, { desde: '2026-09-02' })
+    expect(desdeElDos.map((t) => t.monto)).toEqual(['30.00', '20.00'])
+  })
 })
