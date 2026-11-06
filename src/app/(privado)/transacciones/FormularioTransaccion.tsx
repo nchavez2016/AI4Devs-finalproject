@@ -27,7 +27,10 @@ export function FormularioTransaccion({
   cuentas,
   hoy,
 }: FormularioTransaccionProps) {
-  const [tipo, setTipo] = useState<TipoMovimientoSeleccionado>('GASTO')
+  // Tras un error del servidor se conserva lo escrito, incluido el tipo (design e).
+  const [tipo, setTipo] = useState<TipoMovimientoSeleccionado>(
+    estado.valores?.tipo === 'INGRESO' ? 'INGRESO' : 'GASTO'
+  )
   const categoriasDelTipo = tipo === 'GASTO' ? categorias.gasto : categorias.ingreso
   useFocoPrimerError(formularioRef, estado)
 
@@ -40,12 +43,19 @@ export function FormularioTransaccion({
     >
       <SelectorTipo valor={tipo} onCambio={setTipo} error={estado.errores?.tipo?.[0]} />
 
-      <Campo etiqueta="Monto" name="monto" monto error={estado.errores?.monto?.[0]} />
+      <Campo
+        etiqueta="Monto"
+        name="monto"
+        monto
+        defaultValue={estado.valores?.monto}
+        error={estado.errores?.monto?.[0]}
+      />
 
       <Selector
         etiqueta="Categoría"
         name="categoriaId"
         key={tipo}
+        defaultValue={estado.valores?.categoriaId}
         error={estado.errores?.categoriaId?.[0]}
       >
         {categoriasDelTipo.map((categoria) => (
@@ -55,7 +65,12 @@ export function FormularioTransaccion({
         ))}
       </Selector>
 
-      <Selector etiqueta="Cuenta" name="cuentaId" error={estado.errores?.cuentaId?.[0]}>
+      <Selector
+        etiqueta="Cuenta"
+        name="cuentaId"
+        defaultValue={estado.valores?.cuentaId}
+        error={estado.errores?.cuentaId?.[0]}
+      >
         {cuentas.map((cuenta) => (
           <option key={cuenta.id} value={cuenta.id}>
             {cuenta.nombre}
@@ -67,9 +82,26 @@ export function FormularioTransaccion({
         etiqueta="Fecha"
         name="fecha"
         type="date"
-        defaultValue={hoy}
+        defaultValue={estado.valores?.fecha || hoy}
         error={estado.errores?.fecha?.[0]}
       />
+
+      <Campo
+        etiqueta="Descripción"
+        name="descripcion"
+        opcional
+        defaultValue={estado.valores?.descripcion}
+        error={estado.errores?.descripcion?.[0]}
+      />
+
+      {estado.mensaje && (
+        <p
+          role="alert"
+          className="bg-negativo-fondo text-destructive rounded-control px-campo-x py-mensaje text-detalle"
+        >
+          {estado.mensaje}
+        </p>
+      )}
 
       <Button type="submit" cargando={pendiente} textoCarga="Guardando…">
         Guardar transacción

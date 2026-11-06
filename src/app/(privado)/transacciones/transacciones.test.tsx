@@ -260,6 +260,7 @@ describe('transacciones', () => {
             cuentaId: ['Elige una de tus cuentas'],
             fecha: ['Indica la fecha'],
             tipo: ['Elige si es un gasto o un ingreso'],
+            descripcion: ['La descripción puede tener como máximo 255 caracteres'],
           },
         }}
       />
@@ -284,8 +285,59 @@ describe('transacciones', () => {
 
     expect(screen.getByText('Elige si es un gasto o un ingreso')).toBeTruthy()
 
+    expect(screen.getByRole('textbox', { name: /Descripción/ }).getAttribute('aria-invalid')).toBe(
+      'true'
+    )
+    expect(screen.getByText('La descripción puede tener como máximo 255 caracteres')).toBeTruthy()
+
     // El foco va al primer campo inválido según el orden del formulario.
     expect(document.activeElement).toBe(monto)
+  })
+
+  it('Error al guardar la transacción conserva los datos escritos', () => {
+    const banco = { ...cuentaCaja, id: 'c2', nombre: 'Banco' }
+    render(
+      <FormularioTransaccion
+        formularioRef={createRef<HTMLFormElement>()}
+        accion={() => {}}
+        pendiente={false}
+        categorias={categoriasPorDefecto as never}
+        cuentas={[cuentaCaja, banco] as never}
+        hoy="2026-09-28"
+        estado={{
+          mensaje: 'No pudimos guardar la transacción. Inténtalo de nuevo.',
+          valores: {
+            tipo: 'INGRESO',
+            monto: '150.00',
+            fecha: '2026-09-17',
+            cuentaId: 'c2',
+            categoriaId: 'i1',
+            descripcion: 'Venta de producto',
+          },
+        }}
+      />
+    )
+
+    const aviso = screen.getByRole('alert')
+    expect(aviso.textContent).toContain('No pudimos guardar la transacción. Inténtalo de nuevo.')
+    const boton = screen.getByRole('button', { name: 'Guardar transacción' })
+    expect(aviso.compareDocumentPosition(boton) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+
+    expect((screen.getByRole('radio', { name: 'Ingreso' }) as HTMLInputElement).checked).toBe(true)
+    expect((screen.getByRole('textbox', { name: 'Monto' }) as HTMLInputElement).value).toBe('150.00')
+    expect((screen.getByLabelText('Fecha') as HTMLInputElement).value).toBe('2026-09-17')
+    expect((screen.getByRole('combobox', { name: 'Cuenta' }) as HTMLSelectElement).value).toBe('c2')
+    expect((screen.getByRole('combobox', { name: 'Categoría' }) as HTMLSelectElement).value).toBe(
+      'i1'
+    )
+    expect(
+      (screen.getByRole('textbox', { name: /Descripción/ }) as HTMLInputElement).value
+    ).toBe('Venta de producto')
+
+    // Un error general no lleva el foco a ningún campo.
+    expect(document.body.contains(document.activeElement) && document.activeElement?.tagName).toBe(
+      'BODY'
+    )
   })
 
   it('La entrada de página se anima solo en el contenedor', async () => {
