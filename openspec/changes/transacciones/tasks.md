@@ -90,9 +90,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 - [x] 6.1 RED — `transacciones.int.test.ts`, test "Un usuario no ve las transacciones de otro". Si pasa sin cambios, forzar el RED quitando `usuarioId` del `where` de `listar`, y restaurar.
 - [x] 6.2 GREEN — corregir el filtro si hace falta. Test en verde.
 - [x] 6.3 REFACTOR — test en verde.
-- [ ] 6.4 RED — mismo archivo, test "Filtrar por una cuenta de otro usuario no muestra sus movimientos". Si pasa sin cambios, forzar el RED como en 6.1.
-- [ ] 6.5 GREEN — corregir el `where` si hace falta. Test en verde.
-- [ ] 6.6 REFACTOR — test en verde.
+- [x] 6.4 RED — mismo archivo, test "Filtrar por una cuenta de otro usuario no muestra sus movimientos". Si pasa sin cambios, forzar el RED como en 6.1.
+- [x] 6.5 GREEN — corregir el `where` si hace falta. Test en verde.
+- [x] 6.6 REFACTOR — test en verde.
 - [ ] 6.7 RED — `src/server/transacciones/acciones.test.ts`, test "La transacción se crea siempre para el usuario de la sesión". Debe fallar porque `registrarTransaccionAccion` no existe.
 - [ ] 6.8 GREEN — `acciones.ts` (`'use server'`): `exigirUsuarioId()` fuera del `try`, solo las claves esperadas del `FormData`; éxito → `revalidatePath('/transacciones')` y `{ exito, idCreado, creado: { tipo, monto, cuentaNombre } }`; error inesperado → `{ mensaje, valores }` (design g). Test en verde.
 - [ ] 6.9 REFACTOR — test en verde.

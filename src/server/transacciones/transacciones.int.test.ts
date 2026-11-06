@@ -472,4 +472,26 @@ describe('transacciones', () => {
 
     expect(transacciones.map((t) => [t.tipo, t.monto])).toEqual([['GASTO', '25.50']])
   })
+
+  it('Filtrar por una cuenta de otro usuario no muestra sus movimientos', async () => {
+    const { usuarioA, usuarioB, categoriaIngresoB } = await dosUsuarios()
+    const cajaBeto = await crearCuenta(usuarioB, {
+      nombre: 'Caja Beto',
+      tipo: 'EFECTIVO',
+      saldoInicial: '0.00',
+    })
+    if (!cajaBeto.ok) throw new Error('Falló la creación de la cuenta')
+
+    await registrarTransaccion(usuarioB, {
+      tipo: 'INGRESO',
+      monto: '100.00',
+      fecha: '2026-09-28',
+      cuentaId: cajaBeto.cuenta.id,
+      categoriaId: categoriaIngresoB,
+    })
+
+    const transacciones = await listarTransacciones(usuarioA, { cuentaId: cajaBeto.cuenta.id })
+
+    expect(transacciones).toEqual([])
+  })
 })
