@@ -421,4 +421,34 @@ describe('cuentas', () => {
     expect(cuentasA).toHaveLength(1)
     expect(cuentasB).toHaveLength(1)
   })
+
+  it('Caracterización: el saldo de una cuenta sin transacciones es su saldo inicial', async () => {
+    const registro = await registrarUsuario({
+      nombre: 'Ana',
+      nombreNegocio: 'Tienda Ana',
+      email: 'ana@tienda.ec',
+      password: 'clave-segura-1',
+    })
+    if (!registro.ok) throw new Error('Falló el registro')
+    const usuarioId = registro.usuario.id
+
+    const cero = await crearCuenta(usuarioId, { nombre: 'Caja', tipo: 'EFECTIVO', saldoInicial: '0.00' })
+    const negativa = await crearCuenta(usuarioId, {
+      nombre: 'Banco',
+      tipo: 'BANCO',
+      saldoInicial: '-120.00',
+    })
+    if (!cero.ok || !negativa.ok) throw new Error('Falló la creación de cuentas')
+
+    const lista = await listarCuentas(usuarioId)
+    expect(lista.map((c) => [c.nombre, c.saldo])).toEqual([
+      ['Caja', '0.00'],
+      ['Banco', '-120.00'],
+    ])
+
+    const consultadaCero = await obtenerCuenta(usuarioId, cero.cuenta.id)
+    const consultadaNegativa = await obtenerCuenta(usuarioId, negativa.cuenta.id)
+    expect(consultadaCero?.saldo).toBe('0.00')
+    expect(consultadaNegativa?.saldo).toBe('-120.00')
+  })
 })

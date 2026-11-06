@@ -14,7 +14,7 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 1. Caracterización del saldo actual de cuentas
 
-- [ ] 1.1 CARACTERIZACIÓN — `src/server/cuentas/cuentas.int.test.ts`, test "Caracterización: el saldo de una cuenta sin transacciones es su saldo inicial" (saldos iniciales 0.00 y -120.00, por `listarCuentas` y por `obtenerCuenta`). Pasa con el código actual; `cuentas.int.test.ts` completo en verde.
+- [x] 1.1 CARACTERIZACIÓN — `src/server/cuentas/cuentas.int.test.ts`, test "Caracterización: el saldo de una cuenta sin transacciones es su saldo inicial" (saldos iniciales 0.00 y -120.00, por `listarCuentas` y por `obtenerCuenta`). Pasa con el código actual; `cuentas.int.test.ts` completo en verde.
 
 ## 2. Registro y listado (caso de uso y repositorio)
 
