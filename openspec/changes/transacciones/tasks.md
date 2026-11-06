@@ -18,9 +18,9 @@ Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 2. Registro y listado (caso de uso y repositorio)
 
-- [ ] 2.1 RED — `src/server/transacciones/transacciones.int.test.ts`, test "Registrar un gasto válido". Debe fallar porque `registrarTransaccion` no existe.
-- [ ] 2.2 GREEN — `src/server/transacciones/esquemas.ts` (design b), `src/server/repositories/transaccionRepository.ts` (`crear`, `listar(usuarioId)` con nombres de cuenta y categoría), `src/server/transacciones/transacciones.ts` (`registrarTransaccion`, `listarTransacciones` → `TransaccionItem`) y el saldo de design e (`cuentaRepository.sumasPorCuenta` + `calcularSaldo` en `cuentas.ts`). Test en verde, y 1.1 también.
-- [ ] 2.3 REFACTOR — tests de los grupos 1 y 2 en verde.
+- [x] 2.1 RED — `src/server/transacciones/transacciones.int.test.ts`, test "Registrar un gasto válido". Debe fallar porque `registrarTransaccion` no existe.
+- [x] 2.2 GREEN — `src/server/transacciones/esquemas.ts` (design b), `src/server/repositories/transaccionRepository.ts` (`crear`, `listar(usuarioId)` con nombres de cuenta y categoría), `src/server/transacciones/transacciones.ts` (`registrarTransaccion`, `listarTransacciones` → `TransaccionItem`) y el saldo de design e (`cuentaRepository.sumasPorCuenta` + `calcularSaldo` en `cuentas.ts`). Test en verde, y 1.1 también.
+- [x] 2.3 REFACTOR — tests de los grupos 1 y 2 en verde.
 - [ ] 2.4 RED — mismo archivo, test "Registrar un ingreso válido con descripción". Si pasa sin cambios, forzar el RED.
 - [ ] 2.5 GREEN — `esquemas.ts`: coma decimal y descripción recortada (vacía → `null`); `calcularSaldo` suma ingresos si aún no lo hacía. Test en verde.
 - [ ] 2.6 REFACTOR — test en verde.

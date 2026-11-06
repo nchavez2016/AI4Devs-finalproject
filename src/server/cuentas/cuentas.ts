@@ -24,20 +24,63 @@ export type ResultadoCrearCuenta =
       errores: Record<string, string[]>
     }
 
-function mapearCuenta(c: {
-  id: string
-  nombre: string
-  tipo: TipoCuenta
-  saldoInicial: Prisma.Decimal
-  creadoEn: Date
-}): CuentaItem {
+interface Movimientos {
+  ingresos: Prisma.Decimal
+  gastos: Prisma.Decimal
+}
+
+/** Saldo actual = saldo inicial + ingresos − gastos (design e). */
+export function calcularSaldo(
+  saldoInicial: Prisma.Decimal,
+  ingresos: Prisma.Decimal,
+  gastos: Prisma.Decimal
+): Prisma.Decimal {
+  return saldoInicial.plus(ingresos).minus(gastos)
+}
+
+function mapearCuenta(
+  c: {
+    id: string
+    nombre: string
+    tipo: TipoCuenta
+    saldoInicial: Prisma.Decimal
+    creadoEn: Date
+  },
+  movimientos: Movimientos
+): CuentaItem {
   return {
     id: c.id,
     nombre: c.nombre,
     tipo: c.tipo,
-    saldo: c.saldoInicial.toFixed(2),
+    saldo: calcularSaldo(c.saldoInicial, movimientos.ingresos, movimientos.gastos).toFixed(2),
     creadoEn: c.creadoEn,
   }
+}
+
+async function movimientosPorCuenta(usuarioId: string): Promise<Map<string, Movimientos>> {
+  const sumas = await cuentaRepository.sumasPorCuenta(usuarioId)
+  const porCuenta = new Map<string, Movimientos>()
+
+  for (const suma of sumas) {
+    const actual = porCuenta.get(suma.cuentaId) ?? {
+      ingresos: new Prisma.Decimal(0),
+      gastos: new Prisma.Decimal(0),
+    }
+    const total = suma._sum.monto ?? new Prisma.Decimal(0)
+    if (suma.tipo === 'INGRESO') {
+      actual.ingresos = actual.ingresos.plus(total)
+    } else {
+      actual.gastos = actual.gastos.plus(total)
+    }
+    porCuenta.set(suma.cuentaId, actual)
+  }
+
+  return porCuenta
+}
+
+const SIN_MOVIMIENTOS: Movimientos = {
+  ingresos: new Prisma.Decimal(0),
+  gastos: new Prisma.Decimal(0),
 }
 
 export async function crearCuenta(
@@ -76,13 +119,14 @@ export async function crearCuenta(
 
   return {
     ok: true,
-    cuenta: mapearCuenta(cuenta),
+    cuenta: mapearCuenta(cuenta, SIN_MOVIMIENTOS),
   }
 }
 
 export async function listarCuentas(usuarioId: string): Promise<CuentaItem[]> {
   const cuentas = await cuentaRepository.listar(usuarioId)
-  return cuentas.map(mapearCuenta)
+  const movimientos = await movimientosPorCuenta(usuarioId)
+  return cuentas.map((c) => mapearCuenta(c, movimientos.get(c.id) ?? SIN_MOVIMIENTOS))
 }
 
 export async function obtenerCuenta(
@@ -94,5 +138,5 @@ export async function obtenerCuenta(
     return null
   }
 
-  return mapearCuenta(cuenta)
+  return mapearCuenta(cuenta, SIN_MOVIMIENTOS)
 }

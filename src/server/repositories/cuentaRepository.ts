@@ -42,6 +42,15 @@ export const cuentaRepository = {
     })
   },
 
+  /** Suma de montos por cuenta y tipo de las transacciones del usuario. */
+  async sumasPorCuenta(usuarioId: string) {
+    return prisma.transaccion.groupBy({
+      by: ['cuentaId', 'tipo'],
+      where: { usuarioId },
+      _sum: { monto: true },
+    })
+  },
+
   async buscarPorId(usuarioId: string, id: string) {
     return prisma.cuenta.findFirst({
       where: { id, usuarioId },
