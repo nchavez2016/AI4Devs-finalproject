@@ -26,6 +26,12 @@ describe('despliegue', () => {
     expect(readFileSync('prisma.config.ts', 'utf8')).not.toMatch(/seed/i)
   })
 
+  it('El typecheck genera los tipos de rutas antes de tsc', () => {
+    const { scripts } = leerPackageJson()
+
+    expect(scripts.typecheck).toBe('next typegen && tsc --noEmit')
+  })
+
   it('El proyecto declara Node 24', () => {
     const { engines } = leerPackageJson()
 

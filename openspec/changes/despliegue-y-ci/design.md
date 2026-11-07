@@ -63,5 +63,13 @@ usa `@prisma/adapter-pg` con `env.DATABASE_URL`. Playwright ya arranca la app co
 - La contraseña del revisor es pública: cualquiera puede entrar como revisor y el siguiente seed
   borra lo que haya hecho. Aceptado para una demo.
 - Postgres de CI necesita la extensión `citext`; la imagen oficial la trae.
+- **Hallazgo del primer CI**: `tsc` fallaba en un clon limpio porque `LayoutProps` (en
+  `src/app/layout.tsx`) es un tipo global que Next genera en `.next/types`. Solución:
+  `typecheck` pasa a `next typegen && tsc --noEmit`. Dependen de `npm run typecheck` y quedan
+  cubiertos `ci.yml`, `.husky/pre-commit` y `.husky/pre-merge-commit`. **No** quedan cubiertas las
+  menciones a `npx tsc --noEmit` suelto en `AGENTS.md` (definición de terminado),
+  `openspec/config.yaml` (guía de archivar) y `scripts/agents/antigravity-adapter.mjs` (lista de
+  comandos permitidos): en un clon limpio fallarían igual; conviene cambiarlas a
+  `npm run typecheck` en otro change (no se tocan aquí).
 - E2E en CI tarda (build + 2 proyectos); los reintentos pueden ocultar inestabilidad: el informe
   marca los tests *flaky*.

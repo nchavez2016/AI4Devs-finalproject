@@ -1,4 +1,4 @@
 # Progreso: despliegue-y-ci
-- Siguiente: grupo 16 [HUMANO] (Neon, Vercel, migrar, sembrar, subir la rama, comprobar CI y URL); después /opsx:verify y archivar
+- Siguiente: grupo 16 [HUMANO] y 18.4 (Neon, Vercel, migrar, sembrar, subir la rama, comprobar CI y URL); después /opsx:verify y archivar
 - Decisiones: 0.1 migraciones a mano con URL directa; 0.2 seed mínimo; 0.3 build dentro del webServer; 0.4 SEED_CONFIRMAR_BASE; 0.5 tsx exacto aprobado (4.23.15, en AGENTS.md)
-- Discrepancias: readme 1.5 cambió el ejemplo de cuenta a "Cooperativa Andina" porque el seed ya crea "Banco Pichincha"; CI no ejecutado aún en GitHub (16.5, humano)
+- Discrepancias: el primer CI falló en typecheck (LayoutProps sin .next/types); resuelto en grupo 18 con next typegen; quedan menciones a tsc suelto en AGENTS.md, openspec/config.yaml y antigravity-adapter.mjs (ver design.md, Riesgos); readme 1.5 usa "Cooperativa Andina" porque el seed ya crea "Banco Pichincha"

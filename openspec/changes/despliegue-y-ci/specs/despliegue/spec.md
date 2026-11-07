@@ -17,6 +17,11 @@ requerido.
 - **WHEN** se lee el script "build"
 - **THEN** ejecuta "prisma generate" y después "next build"
 
+#### Scenario: El typecheck genera los tipos de rutas antes de tsc
+- **GIVEN** el `package.json` del proyecto y un clon sin la carpeta `.next/`
+- **WHEN** se lee el script "typecheck"
+- **THEN** ejecuta "next typegen" y después "tsc --noEmit"
+
 #### Scenario: El proyecto declara Node 24
 - **GIVEN** el `package.json` del proyecto
 - **WHEN** se lee el campo "engines"
