@@ -37,7 +37,18 @@ aserciones web-first (`toHaveURL`, `toBeVisible`, `toHaveText`).
 
 **D4. Datos únicos.** Correo `e2e-<marca de tiempo>-<aleatorio>@e2e.cuadre.test` generado por
 test; la base no se vacía entre ejecuciones. `trace: 'on-first-retry'`; `retries` 0 en local
-para que la flakiness no quede oculta.
+para que la flakiness no quede oculta. `screenshot: 'only-on-failure'` deja una captura en
+`test-results/` (ignorada por git) solo cuando un test falla.
+
+**D5. Evidencias de pantalla opcionales.** Con `E2E_EVIDENCIA=1`, el flujo principal guarda al
+final capturas de `/panel` a 360 px y 1280 px en `docs/evidencias/e2e/` (`panel-360.png`,
+`panel-1280.png`); sin la variable no escribe nada. Las capturas **se commitean a mano**, cuando
+la persona decide documentar un hito, y **no en cada ejecución**: ni `test:e2e` ni el hook de
+pre-commit las generan o añaden, para no ensuciar el historial con binarios que cambian a cada
+corrida. El fallo de una captura se avisa pero no cambia el resultado del test. No son pruebas
+visuales (no hay comparación con una imagen de referencia), por lo que no contradicen el fuera
+de alcance del change. Alternativa descartada: guardarlas siempre en `test-results/`, que no
+sirve como evidencia versionada.
 
 ### Decisiones tomadas por la persona (tareas 0.1 a 0.4)
 

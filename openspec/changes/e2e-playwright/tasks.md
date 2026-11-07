@@ -27,13 +27,13 @@
 
 ## 4. Escenario: Cada ejecución E2E usa un correo distinto
 
-- [ ] 4.1 RED: test "Cada ejecución E2E usa un correo distinto" en `src/test/e2e/correo-unico.test.ts`; falla porque `correo-unico.ts` no existe. Verificación: `npx vitest run src/test/e2e/correo-unico.test.ts --reporter=dot` falla por esa razón.
-- [ ] 4.2 GREEN: `src/test/e2e/correo-unico.ts` con marca de tiempo y parte aleatoria, dominio `@e2e.cuadre.test`. Verificación: el test de 4.1 pasa.
-- [ ] 4.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 4.1 RED: test "Cada ejecución E2E usa un correo distinto" en `src/test/e2e/correo-unico.test.ts`; falla porque `correo-unico.ts` no existe. Verificación: `npx vitest run src/test/e2e/correo-unico.test.ts --reporter=dot` falla por esa razón.
+- [x] 4.2 GREEN: `src/test/e2e/correo-unico.ts` con marca de tiempo y parte aleatoria, dominio `@e2e.cuadre.test`. Verificación: el test de 4.1 pasa.
+- [x] 4.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 5. Configuración de la suite
 
-- [ ] 5.1 Crear `playwright.config.ts` según 0.1 y 0.2: `testDir: 'e2e'`, `globalSetup` que llama a `preparar-base-e2e`, `webServer` en el puerto acordado con `reuseExistingServer: false` y `env` con `DATABASE_URL` de la base E2E y un `AUTH_SECRET` ficticio (sin leer `.env`), `trace: 'on-first-retry'`, `retries: 0`. Verificación: `npx playwright test --list` arranca sin errores.
+- [ ] 5.1 Crear `playwright.config.ts` según 0.1 y 0.2: `testDir: 'e2e'`, `globalSetup` que llama a `preparar-base-e2e`, `webServer` en el puerto acordado con `reuseExistingServer: false` y `env` con `DATABASE_URL` de la base E2E y un `AUTH_SECRET` ficticio (sin leer `.env`), `trace: 'on-first-retry'`, `screenshot: 'only-on-failure'`, `retries: 0`. Verificación: `npx playwright test --list` arranca sin errores y la configuración contiene ambos valores.
 - [ ] 5.2 Añadir el script `test:e2e` (`playwright test`) a `package.json`, sin tocar `test:run` ni el hook de pre-commit; añadir `playwright-report/` y `test-results/` a `.gitignore`; documentar en `.env.example` cualquier variable nueva que exija la app en E2E. Verificación: `npm run test:e2e -- --list` funciona y `npm run test:run` no recoge archivos de `e2e/`.
 
 ## 6. Escenario: Flujo principal de registro, cuenta, gasto y panel
@@ -41,6 +41,7 @@
 - [ ] 6.1 RED: test "Flujo principal de registro, cuenta, gasto y panel" en `e2e/flujo-principal.spec.ts`, con selectores por rol, etiqueta o `data-testid` y sin `waitForTimeout`. Fallo esperado: algún elemento sin nombre accesible único (p. ej. el saldo de una cuenta en el panel). Si pasa a la primera, detenerse y verificar por mutación de un importe esperado. Verificación: `npm run test:e2e -- e2e/flujo-principal.spec.ts` falla por la razón anotada.
 - [ ] 6.2 GREEN: añadir solo los `data-testid` imprescindibles en los componentes que el RED señale, sin cambiar comportamiento. Verificación: el test pasa y `npm run test:run` sigue en verde.
 - [ ] 6.3 REFACTOR: extraer pasos repetidos (registrarse, crear cuenta, registrar gasto) a `e2e/soporte/pasos.ts`. Verificación: el test sigue pasando.
+- [ ] 6.4 Evidencias opcionales: añadir `e2e/soporte/evidencias.ts` y llamarlo al final del flujo principal, tras todas sus aserciones; solo si `E2E_EVIDENCIA=1`, guarda en `docs/evidencias/e2e/` las capturas de `/panel` a 360 px y a 1280 px de ancho (`panel-360.png` y `panel-1280.png`), una sola vez por ejecución (en el proyecto de escritorio). Un fallo al capturar se registra como aviso y no cambia el resultado del test. Sin la variable no se crea ningún archivo. Documentar el uso (`E2E_EVIDENCIA=1 npm run test:e2e`) en `.env.example` como comentario, sin valor por defecto. Verificación: sin la variable, `npm run test:e2e -- e2e/flujo-principal.spec.ts` pasa y `git status` no muestra archivos nuevos; con ella, existen ambas capturas en `docs/evidencias/e2e/` y el test pasa.
 
 ## 7. Escenario: Abrir el panel sin sesión en el navegador lleva al login (si 0.3 lo incluye)
 
