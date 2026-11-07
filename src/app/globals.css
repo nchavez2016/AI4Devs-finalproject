@@ -107,6 +107,9 @@
   --spacing-icono: 1.25rem;
   --spacing-icono-detalle: 1rem;
   --spacing-reserva-barra-inferior: 4.75rem;
+  --spacing-margen-seguro-inferior: env(safe-area-inset-bottom, 0px);
+  --spacing-relleno-barra-inferior: calc(var(--spacing-pagina) + var(--spacing-margen-seguro-inferior));
+  --spacing-reserva-barra-segura: calc(var(--spacing-reserva-barra-inferior) + var(--spacing-margen-seguro-inferior));
   --spacing-contenedor-icono: 2.5rem;
   --spacing-alto-cabecera: 3.5rem;
   --container-formulario: 30rem;
@@ -137,7 +140,7 @@
   --animate-giro: giro var(--duracion-giro) linear infinite;
   --animate-resaltado: resaltado var(--duracion-resaltado-salida) var(--ease-salida) var(--duracion-resaltado);
   --animate-esqueleto: esqueleto 0ms linear var(--duracion-espera-esqueleto) both;
-  --animate-entrada: entrada var(--duracion-entrada) var(--ease-entrada) both;
+  --animate-entrada: entrada var(--duracion-entrada) var(--ease-entrada) backwards;
   --animate-panel-entrada: panel-entrada var(--duracion-panel) var(--ease-entrada) both;
   --animate-panel-salida: panel-salida var(--duracion-panel) var(--ease-salida) both;
   --animate-velo-entrada: velo-entrada var(--duracion-panel) var(--ease-entrada) both;
@@ -252,6 +255,16 @@
 }
 
 @layer base {
+  html {
+    scroll-padding-bottom: var(--spacing-reserva-barra-inferior);
+  }
+
+  @variant escritorio {
+    html {
+      scroll-padding-bottom: 0;
+    }
+  }
+
   :root {
     color-scheme: light;
   }

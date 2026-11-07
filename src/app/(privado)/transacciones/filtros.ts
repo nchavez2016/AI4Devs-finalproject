@@ -1,7 +1,11 @@
 import type { FiltrosTransacciones } from '@/server/transacciones/transacciones'
 
+export function contarFiltrosActivos(filtros: FiltrosTransacciones): number {
+  return [filtros.desde, filtros.hasta, filtros.tipo, filtros.cuentaId].filter(Boolean).length
+}
+
 export function hayFiltrosActivos(filtros: FiltrosTransacciones): boolean {
-  return Boolean(filtros.desde || filtros.hasta || filtros.tipo || filtros.cuentaId)
+  return contarFiltrosActivos(filtros) > 0
 }
 
 const formatoMes = new Intl.DateTimeFormat('es-EC', { timeZone: 'UTC', month: 'long' })

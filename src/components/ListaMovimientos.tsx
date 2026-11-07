@@ -41,11 +41,17 @@ interface ListaMovimientosProps {
   transacciones: TransaccionItem[]
   /** Id de la transacción recién registrada, que se resalta. */
   idResaltado?: string
+  /** Día de hoy en Ecuador (AAAA-MM-DD): para prefijar "Hoy · " en la cabecera móvil. */
+  hoy?: string
 }
 
 // Móvil: lista agrupada por día. Escritorio: tabla (componentes.md, 7.4).
-export function ListaMovimientos({ transacciones, idResaltado }: ListaMovimientosProps) {
+export function ListaMovimientos({ transacciones, idResaltado, hoy }: ListaMovimientosProps) {
   const claseResaltado = (id: string) => (id === idResaltado ? 'animate-resaltado' : '')
+  const etiquetaDia = (fecha: string) => {
+    const texto = formatoDia.format(aFecha(fecha))
+    return hoy && fecha === hoy ? `Hoy · ${texto}` : texto
+  }
 
   return (
     <>
@@ -53,7 +59,7 @@ export function ListaMovimientos({ transacciones, idResaltado }: ListaMovimiento
         {agruparPorDia(transacciones).map((grupo) => (
           <div key={grupo.fecha}>
             <h3 className="sticky top-ninguno bg-background py-fila-y text-grupo text-muted-foreground">
-              {formatoDia.format(aFecha(grupo.fecha))}
+              {etiquetaDia(grupo.fecha)}
             </h3>
             <ul className="flex flex-col">
               {grupo.transacciones.map((t) => (

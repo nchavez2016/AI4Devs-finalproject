@@ -103,9 +103,11 @@ export function FormularioTransaccion({
         </p>
       )}
 
-      <Button type="submit" cargando={pendiente} textoCarga="Guardando…">
-        Guardar transacción
-      </Button>
+      <div className="fixed inset-x-ninguno bottom-ninguno z-10 flex flex-col bg-card border-t border-border p-pagina pb-relleno-barra-inferior escritorio:static escritorio:z-auto escritorio:bg-transparent escritorio:border-t-transparent escritorio:p-ninguno">
+        <Button type="submit" cargando={pendiente} textoCarga="Guardando…">
+          Guardar transacción
+        </Button>
+      </div>
     </form>
   )
 }

@@ -1,7 +1,8 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useTransition } from 'react'
+import { useState, useTransition } from 'react'
+import { contarFiltrosActivos } from '@/app/(privado)/transacciones/filtros'
 import { Button } from '@/components/ui/Button'
 import { Campo } from '@/components/ui/Campo'
 import { Selector } from '@/components/ui/Selector'
@@ -25,6 +26,7 @@ export function FiltrosMovimientos({
 }: FiltrosMovimientosProps) {
   const router = useRouter()
   const [pendiente, iniciarTransicion] = useTransition()
+  const [abierto, setAbierto] = useState(false)
 
   // La transición mantiene los movimientos anteriores en pantalla mientras llegan los nuevos.
   function navegar(url: string) {
@@ -44,9 +46,31 @@ export function FiltrosMovimientos({
     navegar(consulta ? `/transacciones?${consulta}` : '/transacciones')
   }
 
+  const totalActivos = contarFiltrosActivos(filtros)
+  const textoBoton = totalActivos > 0 ? `Filtros (${totalActivos})` : 'Filtros'
+
   return (
-    <div role="group" aria-label="Filtros" className="flex flex-col gap-entre-campos">
-      <div className="grid gap-entre-campos escritorio:grid-cols-2">
+    <div className="flex flex-col gap-entre-campos">
+      <Button
+        type="button"
+        variante="secundario"
+        className="escritorio:hidden self-start"
+        aria-expanded={abierto}
+        aria-controls="grupo-filtros"
+        onClick={() => setAbierto((actual) => !actual)}
+      >
+        {textoBoton}
+      </Button>
+
+      <div
+        id="grupo-filtros"
+        role="group"
+        aria-label="Filtros"
+        className={[
+          abierto ? 'grid' : 'hidden escritorio:grid',
+          'gap-entre-campos escritorio:grid-cols-2',
+        ].join(' ')}
+      >
         <Campo
           etiqueta="Desde"
           type="date"

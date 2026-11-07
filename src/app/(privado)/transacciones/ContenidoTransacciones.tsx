@@ -43,15 +43,17 @@ export function ContenidoTransacciones({
   }
 
   return (
-    <main className="px-pagina py-seccion bg-background text-foreground min-h-full">
+    <main className="px-pagina pt-seccion pb-reserva-barra-segura escritorio:pb-seccion bg-background text-foreground min-h-full">
       <div className="w-full max-w-contenido mx-auto flex flex-col gap-seccion animate-entrada">
-        <EncabezadoPagina
-          titulo="Transacciones"
-          proposito="Registra lo que entra y sale de tu negocio y revisa tus movimientos."
-        />
+        <div className="flex flex-col gap-entre-campos">
+          <EncabezadoPagina
+            titulo="Transacciones"
+            proposito="Registra lo que entra y sale de tu negocio y revisa tus movimientos."
+          />
 
-        <div aria-live="polite" className="text-detalle text-muted-foreground">
-          {mensajeExito}
+          <div aria-live="polite" className="text-detalle text-muted-foreground">
+            {mensajeExito}
+          </div>
         </div>
 
         {cuentas.length === 0 ? (
@@ -65,9 +67,27 @@ export function ContenidoTransacciones({
           </div>
         ) : (
           <div className="grid grid-cols-(--columnas-lista-formulario) items-start gap-seccion">
+            <div className="w-full max-w-formulario escritorio:col-start-2 escritorio:row-start-1">
+              <Tarjeta className="flex flex-col gap-entre-campos">
+                <h2 className="font-titulo text-titulo-seccion text-foreground">
+                  Nueva transacción
+                </h2>
+                <FormularioTransaccion
+                  key={JSON.stringify(estado)}
+                  formularioRef={formularioRef}
+                  estado={estado}
+                  accion={accion}
+                  pendiente={pendiente}
+                  categorias={categorias}
+                  cuentas={cuentas}
+                  hoy={hoy}
+                />
+              </Tarjeta>
+            </div>
+
             <section
               aria-labelledby="titulo-movimientos"
-              className="flex min-w-ninguno flex-col gap-entre-campos"
+              className="flex min-w-ninguno flex-col gap-entre-campos escritorio:col-start-1 escritorio:row-start-1"
             >
               <h2
                 id="titulo-movimientos"
@@ -81,7 +101,7 @@ export function ContenidoTransacciones({
                 mostrarQuitar={hayFiltrosActivos(filtros) && transacciones.length > 0}
               />
               {transacciones.length > 0 ? (
-                <ListaMovimientos transacciones={transacciones} idResaltado={estado.idCreado} />
+                <ListaMovimientos transacciones={transacciones} idResaltado={estado.idCreado} hoy={hoy} />
               ) : hayFiltrosActivos(filtros) ? (
                 <div className="flex flex-col items-start gap-entre-campos">
                   <p className="text-cuerpo text-muted-foreground">
@@ -102,24 +122,6 @@ export function ContenidoTransacciones({
                 </div>
               )}
             </section>
-
-            <div className="w-full max-w-formulario">
-              <Tarjeta className="flex flex-col gap-entre-campos">
-                <h2 className="font-titulo text-titulo-seccion text-foreground">
-                  Nueva transacción
-                </h2>
-                <FormularioTransaccion
-                  key={JSON.stringify(estado)}
-                  formularioRef={formularioRef}
-                  estado={estado}
-                  accion={accion}
-                  pendiente={pendiente}
-                  categorias={categorias}
-                  cuentas={cuentas}
-                  hoy={hoy}
-                />
-              </Tarjeta>
-            </div>
           </div>
         )}
       </div>

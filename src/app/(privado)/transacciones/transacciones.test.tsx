@@ -80,6 +80,7 @@ interface Escenario {
   categorias?: unknown
   transacciones?: unknown[]
   filtros?: Record<string, string>
+  hoy?: string
 }
 
 // Carga los datos como lo hace la página y pinta la pantalla.
@@ -88,6 +89,7 @@ async function mostrarPantalla({
   categorias = categoriasPorDefecto,
   transacciones = [],
   filtros = {},
+  hoy,
 }: Escenario = {}) {
   authSimulado.mockResolvedValue({ user: { id: 'usr_a' } })
   listarCuentasSimulado.mockResolvedValue(cuentas)
@@ -95,7 +97,7 @@ async function mostrarPantalla({
   listarTransaccionesSimulado.mockResolvedValue(transacciones)
 
   const datos = await cargarTransacciones(filtros)
-  return render(<ContenidoTransacciones {...datos} />)
+  return render(<ContenidoTransacciones {...datos} hoy={hoy ?? datos.hoy} />)
 }
 
 // La navegación de los filtros tarda hasta que el test la termina. Si la promesa no se
@@ -153,8 +155,14 @@ describe('transacciones', () => {
     expect(rejilla.contains(movimientos)).toBe(true)
     expect(rejilla.contains(tarjeta)).toBe(true)
     expect(
-      movimientos.compareDocumentPosition(tarjeta) & Node.DOCUMENT_POSITION_FOLLOWING
+      tarjeta.compareDocumentPosition(movimientos) & Node.DOCUMENT_POSITION_FOLLOWING
     ).toBeTruthy()
+
+    const contenedorTarjeta = tarjeta.parentElement!
+    expect(contenedorTarjeta.classList.contains('escritorio:col-start-2')).toBe(true)
+    expect(contenedorTarjeta.classList.contains('escritorio:row-start-1')).toBe(true)
+    expect(movimientos.classList.contains('escritorio:col-start-1')).toBe(true)
+    expect(movimientos.classList.contains('escritorio:row-start-1')).toBe(true)
 
     const formulario = screen.getByRole('button', { name: 'Guardar transacción' }).closest('form')
     expect(tarjeta.contains(formulario)).toBe(true)
@@ -562,5 +570,139 @@ describe('transacciones', () => {
     const animados = container.querySelectorAll('.animate-entrada')
     expect(animados).toHaveLength(1)
     expect(animados[0].classList.contains('max-w-contenido')).toBe(true)
+  })
+
+  it('La región de avisos vacía no añade espacio bajo el encabezado', async () => {
+    const { container } = await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    const contenedorAnimado = container.querySelector('.animate-entrada')!
+    expect(contenedorAnimado.children).toHaveLength(2)
+
+    const primerHijo = contenedorAnimado.children[0]
+    const encabezado = within(primerHijo as HTMLElement).getByRole('heading', { level: 1, name: 'Transacciones' })
+    const aviso = primerHijo.querySelector('[aria-live="polite"]')!
+    expect(aviso).toBeTruthy()
+    expect(encabezado.compareDocumentPosition(aviso) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+
+  it('Los iconos del selector de tipo son decorativos', async () => {
+    await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    const radioGasto = screen.getByRole('radio', { name: 'Gasto' })
+    const radioIngreso = screen.getByRole('radio', { name: 'Ingreso' })
+    expect(radioGasto).toBeTruthy()
+    expect(radioIngreso).toBeTruthy()
+
+    const labelGasto = radioGasto.closest('label')!
+    const svgGasto = labelGasto.querySelector('svg')!
+    expect(svgGasto).toBeTruthy()
+    expect(svgGasto.getAttribute('aria-hidden')).toBe('true')
+    expect(svgGasto.classList.contains('lucide-minus')).toBe(true)
+
+    const labelIngreso = radioIngreso.closest('label')!
+    const svgIngreso = labelIngreso.querySelector('svg')!
+    expect(svgIngreso).toBeTruthy()
+    expect(svgIngreso.getAttribute('aria-hidden')).toBe('true')
+    expect(svgIngreso.classList.contains('lucide-plus')).toBe(true)
+  })
+
+  it('Abrir la pantalla de transacciones no mueve el foco', async () => {
+    const { container } = await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    expect(document.activeElement).toBe(document.body)
+    expect(container.querySelector('[autofocus]')).toBeNull()
+  })
+
+  it('El botón Guardar transacción queda fijo abajo en móvil', async () => {
+    const { container } = await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    const boton = screen.getByRole('button', { name: 'Guardar transacción' })
+    const form = boton.closest('form')!
+    expect(form).toBeTruthy()
+
+    const envoltorio = boton.parentElement!
+    expect(envoltorio.classList.contains('fixed')).toBe(true)
+    expect(envoltorio.classList.contains('inset-x-ninguno')).toBe(true)
+    expect(envoltorio.classList.contains('bottom-ninguno')).toBe(true)
+    expect(envoltorio.classList.contains('z-10')).toBe(true)
+    expect(envoltorio.classList.contains('pb-relleno-barra-inferior')).toBe(true)
+    expect(envoltorio.classList.contains('escritorio:static')).toBe(true)
+
+    const main = container.querySelector('main')!
+    expect(main.classList.contains('pb-reserva-barra-segura')).toBe(true)
+    expect(main.classList.contains('escritorio:pb-seccion')).toBe(true)
+  })
+
+  it('La cabecera del día de hoy en la lista móvil empieza por Hoy', async () => {
+    const gastoHoy = { ...gastoHarina, id: 't-hoy', fecha: '2026-11-06' }
+    const gastoAyer = { ...gastoHarina, id: 't-ayer', fecha: '2026-11-05' }
+
+    await mostrarPantalla({
+      hoy: '2026-11-06',
+      transacciones: [gastoHoy, gastoAyer],
+    })
+
+    const regionMovimientos = screen.getByRole('region', { name: 'Movimientos' })
+    const cabeceras = within(regionMovimientos).getAllByRole('heading', { level: 3 })
+    expect(cabeceras.map((c) => c.textContent)).toEqual(['Hoy · vie, 6 nov', 'jue, 5 nov'])
+  })
+
+  it('Los filtros empiezan plegados en móvil y se despliegan con el botón Filtros', async () => {
+    await mostrarPantalla({ transacciones: [gastoHarina] })
+
+    const botonFiltros = screen.getByRole('button', { name: /^Filtros/ })
+    expect(botonFiltros.getAttribute('aria-expanded')).toBe('false')
+    expect(botonFiltros.classList.contains('escritorio:hidden')).toBe(true)
+
+    const idGrupo = botonFiltros.getAttribute('aria-controls')
+    expect(idGrupo).toBeTruthy()
+
+    const grupoFiltros = document.getElementById(idGrupo!)!
+    expect(grupoFiltros).toBeTruthy()
+    expect(grupoFiltros.classList.contains('hidden')).toBe(true)
+    expect(grupoFiltros.classList.contains('escritorio:grid')).toBe(true)
+
+    fireEvent.click(botonFiltros)
+    expect(botonFiltros.getAttribute('aria-expanded')).toBe('true')
+    expect(grupoFiltros.classList.contains('hidden')).toBe(false)
+
+    fireEvent.click(botonFiltros)
+    expect(botonFiltros.getAttribute('aria-expanded')).toBe('false')
+    expect(grupoFiltros.classList.contains('hidden')).toBe(true)
+  })
+
+  it('El botón Filtros indica cuántos filtros hay activos', async () => {
+    const { unmount: u1 } = await mostrarPantalla({ transacciones: [gastoHarina], filtros: {} })
+    expect(screen.getByRole('button', { name: 'Filtros' })).toBeTruthy()
+    u1()
+
+    const { unmount: u2 } = await mostrarPantalla({
+      transacciones: [gastoHarina],
+      filtros: { tipo: 'GASTO', cuentaId: 'c1' },
+    })
+    expect(screen.getByRole('button', { name: 'Filtros (2)' })).toBeTruthy()
+    u2()
+
+    const { unmount: u3 } = await mostrarPantalla({
+      transacciones: [gastoHarina],
+      filtros: { desde: '2026-09-01', hasta: '2026-09-30', tipo: 'GASTO', cuentaId: 'c1' },
+    })
+    expect(screen.getByRole('button', { name: 'Filtros (4)' })).toBeTruthy()
+    u3()
+  })
+
+  it('Quitar filtros y Actualizando siguen visibles con los filtros plegados', async () => {
+    const { container } = await mostrarPantalla({
+      transacciones: [gastoHarina],
+      filtros: { tipo: 'GASTO' },
+    })
+
+    const grupoFiltros = screen.getByRole('group', { name: 'Filtros' })
+    const botonQuitar = screen.getByRole('button', { name: 'Quitar filtros' })
+    const regionActualizando = container.querySelector('p[aria-live="polite"]')!
+    expect(regionActualizando).toBeTruthy()
+
+    expect(grupoFiltros.contains(botonQuitar)).toBe(false)
+    expect(grupoFiltros.contains(regionActualizando)).toBe(false)
   })
 })
