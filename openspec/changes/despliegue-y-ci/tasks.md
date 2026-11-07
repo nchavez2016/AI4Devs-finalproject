@@ -82,9 +82,9 @@
 
 ## 13. Escenario: Ningún script automático invoca el seed
 
-- [ ] 13.1 RED: test "Ningún script automático invoca el seed" en `src/config/despliegue.test.ts` (lee `package.json` y `prisma.config.ts`); falla porque no existe el script `db:seed`. Verificación: el archivo de test falla por esa razón.
-- [ ] 13.2 GREEN: `scripts/db-seed.ts` (lee `DATABASE_URL` y `SEED_CONFIRMAR_BASE`, llama a `comprobarDestinoSemilla` y a `sembrar(new Date())`) y el script `"db:seed"` en `package.json` según la decisión 0.5. Verificación: el test pasa y `npm run db:seed` sin confirmación falla nombrando la base local.
-- [ ] 13.3 REFACTOR: documentar `SEED_CONFIRMAR_BASE` en `.env.example`. Verificación: `npm run db:seed` con `SEED_CONFIRMAR_BASE=cuadre` contra la base local de Docker termina y el revisor entra en `/panel` con datos.
+- [x] 13.1 RED: test "Ningún script automático invoca el seed" en `src/config/despliegue.test.ts` (lee `package.json` y `prisma.config.ts`); falla porque no existe el script `db:seed`. Verificación: el archivo de test falla por esa razón.
+- [x] 13.2 GREEN: `scripts/db-seed.ts` (lee `DATABASE_URL` y `SEED_CONFIRMAR_BASE`, llama a `comprobarDestinoSemilla` y a `sembrar(new Date())`) y el script `"db:seed"` en `package.json` según la decisión 0.5. Verificación: el test pasa y `npm run db:seed` sin confirmación falla nombrando la base local.
+- [x] 13.3 REFACTOR: documentar `SEED_CONFIRMAR_BASE` en `.env.example`. Verificación: `npm run db:seed` con `SEED_CONFIRMAR_BASE=cuadre` contra la base local de Docker termina y el revisor entra en `/panel` con datos.
 
 ## 14. Escenarios: workflow de CI
 
