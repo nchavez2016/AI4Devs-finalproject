@@ -72,6 +72,8 @@ de gastos ya está arriba); sin "saldo total" (la API del readme no lo incluye).
 escrita para ella), versión exacta fijada al instalar. B) SVG propio con `<rect>` (sin dependencia,
 pero reimplementa ejes, escalas y redimensión). C) Solo lista con importes (incumple
 visualizacion.md 8.1). **Recomendado: A**, cargada en un componente cliente `GraficoCategorias`.
+Instalada: `recharts@3.10.1` (versión exacta; peers `react`, `react-dom` y `react-is` compatibles con
+React 19, `react-is` lo resuelve npm). `npm run build` y `npm run typecheck` sin errores.
 
 ## Decisiones técnicas
 

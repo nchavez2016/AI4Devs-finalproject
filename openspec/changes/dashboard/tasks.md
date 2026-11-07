@@ -88,7 +88,7 @@ Sin migraciones. Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 6. Dependencia del gráfico
 
-- [ ] 6.1 Instalar Recharts con versión exacta (`npm install recharts@<versión> --save-exact`, design 0.6) y anotar la versión en design.md. Verificación: `npm run build` y `npm run typecheck` sin errores. Si pide una dependencia par no aprobada, detenerse y consultar.
+- [x] 6.1 Instalar Recharts con versión exacta (`npm install recharts@<versión> --save-exact`, design 0.6) y anotar la versión en design.md. Verificación: `npm run build` y `npm run typecheck` sin errores. Si pide una dependencia par no aprobada, detenerse y consultar.
 
 ## 7. Pantalla del dashboard
 
