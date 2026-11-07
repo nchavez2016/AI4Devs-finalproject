@@ -22,15 +22,15 @@
 
 ## 3. Escenario: La suite E2E reintenta 2 veces en CI
 
-- [ ] 3.1 RED: test "La suite E2E reintenta 2 veces en CI" en `src/test/e2e/reintentos.test.ts`; falla porque `reintentos.ts` no existe. Verificación: `npx vitest run src/test/e2e/reintentos.test.ts --reporter=dot` falla por esa razón.
-- [ ] 3.2 GREEN: `src/test/e2e/reintentos.ts` con `reintentosE2E(env)` y `retries: reintentosE2E(process.env)` en `playwright.config.ts`. Verificación: el test pasa y `npx playwright test --list` arranca.
-- [ ] 3.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 3.1 RED: test "La suite E2E reintenta 2 veces en CI" en `src/test/e2e/reintentos.test.ts`; falla porque `reintentos.ts` no existe. Verificación: `npx vitest run src/test/e2e/reintentos.test.ts --reporter=dot` falla por esa razón.
+- [x] 3.2 GREEN: `src/test/e2e/reintentos.ts` con `reintentosE2E(env)` y `retries: reintentosE2E(process.env)` en `playwright.config.ts`. Verificación: el test pasa y `npx playwright test --list` arranca.
+- [x] 3.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 4. Escenario: La suite E2E no reintenta fuera de CI
 
-- [ ] 4.1 RED: test "La suite E2E no reintenta fuera de CI" en `src/test/e2e/reintentos.test.ts`; si pasa sin cambios, verificar por mutación (devolver 2 siempre) y anotarlo en progress.md. Verificación: fallo observado o mutación documentada.
-- [ ] 4.2 GREEN: ajustar `reintentos.ts` si hace falta. Verificación: el archivo de test en verde.
-- [ ] 4.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 4.1 RED: test "La suite E2E no reintenta fuera de CI" en `src/test/e2e/reintentos.test.ts`; si pasa sin cambios, verificar por mutación (devolver 2 siempre) y anotarlo en progress.md. Verificación: fallo observado o mutación documentada.
+- [x] 4.2 GREEN: ajustar `reintentos.ts` si hace falta. Verificación: el archivo de test en verde.
+- [x] 4.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 5. Escenario: El seed se niega a correr sin confirmar la base
 

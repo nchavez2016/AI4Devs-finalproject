@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 import { urlBaseDePrueba } from './src/test/bd/url'
 import { comprobarBaseE2E } from './src/test/e2e/preparar-base-e2e'
+import { reintentosE2E } from './src/test/e2e/reintentos'
 
 // Igual que vitest.config.mts y prisma.config.ts: Node carga .env al ejecutar; sin .env
 // (CI) se usan las variables del entorno o los valores por defecto locales.
@@ -27,7 +28,7 @@ export default defineConfig({
   testDir: 'e2e',
   globalSetup: './e2e/global-setup.ts',
   workers: 1,
-  retries: 0,
+  retries: reintentosE2E(process.env),
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: `http://localhost:${PUERTO}`,
