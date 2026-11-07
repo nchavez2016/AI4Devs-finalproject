@@ -52,33 +52,33 @@
 
 ## 8. Escenario: El seed crea al revisor con cuentas y movimientos del mes
 
-- [ ] 8.1 RED: test de integración "El seed crea al revisor con cuentas y movimientos del mes" en `src/server/semilla/sembrar.int.test.ts` (base `cuadre_test`, fecha de referencia 2026-11-07); falla porque `sembrar.ts` no existe. Verificación: `npx vitest run src/server/semilla/sembrar.int.test.ts --reporter=dot` falla por esa razón.
-- [ ] 8.2 GREEN: datos fijos en `src/server/semilla/datos.ts`, `src/server/repositories/semillaRepository.ts` (escrituras con Prisma en una transacción, todo filtrado por `usuarioId` del revisor) y `src/server/semilla/sembrar.ts(fechaReferencia)` que usa `hashear()`. Verificación: el test pasa.
-- [ ] 8.3 REFACTOR: montos como `Decimal` y nombres en español. Verificación: mismo comando en verde.
+- [x] 8.1 RED: test de integración "El seed crea al revisor con cuentas y movimientos del mes" en `src/server/semilla/sembrar.int.test.ts` (base `cuadre_test`, fecha de referencia 2026-11-07); falla porque `sembrar.ts` no existe. Verificación: `npx vitest run src/server/semilla/sembrar.int.test.ts --reporter=dot` falla por esa razón.
+- [x] 8.2 GREEN: datos fijos en `src/server/semilla/datos.ts`, `src/server/repositories/semillaRepository.ts` (escrituras con Prisma en una transacción, todo filtrado por `usuarioId` del revisor) y `src/server/semilla/sembrar.ts(fechaReferencia)` que usa `hashear()`. Verificación: el test pasa.
+- [x] 8.3 REFACTOR: montos como `Decimal` y nombres en español. Verificación: mismo comando en verde.
 
 ## 9. Escenario: El revisor sembrado inicia sesión con la contraseña documentada
 
-- [ ] 9.1 RED: test de integración "El revisor sembrado inicia sesión con la contraseña documentada" en `sembrar.int.test.ts`. Verificación: falla por la razón esperada o mutación documentada (p. ej. guardar la contraseña sin hash).
-- [ ] 9.2 GREEN: ajustar el seed si hace falta. Verificación: el archivo de test en verde.
-- [ ] 9.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 9.1 RED: test de integración "El revisor sembrado inicia sesión con la contraseña documentada" en `sembrar.int.test.ts`. Verificación: falla por la razón esperada o mutación documentada (p. ej. guardar la contraseña sin hash).
+- [x] 9.2 GREEN: ajustar el seed si hace falta. Verificación: el archivo de test en verde.
+- [x] 9.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 10. Escenario: Ejecutar el seed dos veces no duplica datos
 
-- [ ] 10.1 RED: test de integración "Ejecutar el seed dos veces no duplica datos" en `sembrar.int.test.ts`. Verificación: falla por duplicados o por violación de unicidad.
-- [ ] 10.2 GREEN: `upsert` del revisor por email y borrado y recreación de sus datos en la misma transacción. Verificación: el archivo de test en verde.
-- [ ] 10.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 10.1 RED: test de integración "Ejecutar el seed dos veces no duplica datos" en `sembrar.int.test.ts`. Verificación: falla por duplicados o por violación de unicidad.
+- [x] 10.2 GREEN: `upsert` del revisor por email y borrado y recreación de sus datos en la misma transacción. Verificación: el archivo de test en verde.
+- [x] 10.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 11. Escenario: El seed restablece los datos que el revisor cambió
 
-- [ ] 11.1 RED: test de integración "El seed restablece los datos que el revisor cambió" en `sembrar.int.test.ts`. Verificación: falla por la razón esperada o mutación documentada.
-- [ ] 11.2 GREEN: ajustar el borrado del revisor si hace falta. Verificación: el archivo de test en verde.
-- [ ] 11.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 11.1 RED: test de integración "El seed restablece los datos que el revisor cambió" en `sembrar.int.test.ts`. Verificación: falla por la razón esperada o mutación documentada.
+- [x] 11.2 GREEN: ajustar el borrado del revisor si hace falta. Verificación: el archivo de test en verde.
+- [x] 11.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 12. Escenario: El seed no modifica los datos de otro usuario
 
-- [ ] 12.1 RED: test de integración "El seed no modifica los datos de otro usuario" en `sembrar.int.test.ts`; observar el RED por mutación (quitar el filtro por `usuarioId` en un borrado) y anotarlo en progress.md. Verificación: fallo observado con la mutación.
-- [ ] 12.2 GREEN: restaurar el filtro. Verificación: el archivo de test en verde.
-- [ ] 12.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 12.1 RED: test de integración "El seed no modifica los datos de otro usuario" en `sembrar.int.test.ts`; observar el RED por mutación (quitar el filtro por `usuarioId` en un borrado) y anotarlo en progress.md. Verificación: fallo observado con la mutación.
+- [x] 12.2 GREEN: restaurar el filtro. Verificación: el archivo de test en verde.
+- [x] 12.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 13. Escenario: Ningún script automático invoca el seed
 

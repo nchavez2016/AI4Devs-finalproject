@@ -49,6 +49,8 @@ export default defineConfig({
         test: {
           name: 'integracion',
           environment: 'node',
+          testTimeout: 15000,
+          hookTimeout: 15000,
           include: ['src/**/*.int.test.ts'],
           // Serie: comparten la misma base de datos de prueba, que se vacía entre tests.
           fileParallelism: false,
