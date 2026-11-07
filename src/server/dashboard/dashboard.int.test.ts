@@ -180,4 +180,66 @@ describe('dashboard', () => {
     expect(resumen.totalGastos).toBe('0.30')
     expect(resumen.balance).toBe('0.00')
   })
+
+  it('Ver saldo por cuenta', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const banco = await crearCuentaDePrueba(usuarioId, 'Banco', '500.00')
+    const caja = await crearCuentaDePrueba(usuarioId, 'Caja', '0.00')
+    await registrar(usuarioId, {
+      tipo: 'INGRESO',
+      monto: '200.00',
+      fecha: '2026-11-02',
+      cuentaId: banco,
+      categoria: 'Ventas',
+    })
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '50.00',
+      fecha: '2026-11-03',
+      cuentaId: banco,
+      categoria: 'Insumos',
+    })
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '12.75',
+      fecha: '2026-11-04',
+      cuentaId: caja,
+      categoria: 'Transporte',
+    })
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.saldosPorCuenta).toEqual([
+      { cuentaId: banco, nombre: 'Banco', saldo: '650.00' },
+      { cuentaId: caja, nombre: 'Caja', saldo: '-12.75' },
+    ])
+  })
+
+  it('El saldo por cuenta incluye movimientos fuera del período', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const banco = await crearCuentaDePrueba(usuarioId, 'Banco', '100.00')
+    await registrar(usuarioId, {
+      tipo: 'INGRESO',
+      monto: '25.25',
+      fecha: '2026-10-15',
+      cuentaId: banco,
+      categoria: 'Ventas',
+    })
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.saldosPorCuenta).toEqual([{ cuentaId: banco, nombre: 'Banco', saldo: '125.25' }])
+    expect(resumen.totalIngresos).toBe('0.00')
+  })
+
+  it('Una cuenta sin movimientos muestra su saldo inicial', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const ahorro = await crearCuentaDePrueba(usuarioId, 'Ahorro negocio', '320.40')
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.saldosPorCuenta).toEqual([
+      { cuentaId: ahorro, nombre: 'Ahorro negocio', saldo: '320.40' },
+    ])
+  })
 })

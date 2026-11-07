@@ -1,11 +1,19 @@
 import { Prisma } from '@/generated/prisma/client'
+import { listarCuentas } from '@/server/cuentas/cuentas'
 import { transaccionRepository } from '@/server/repositories/transaccionRepository'
 import { limitesPeriodo, type Periodo } from './periodo'
+
+export interface SaldoCuenta {
+  cuentaId: string
+  nombre: string
+  saldo: string
+}
 
 export interface ResumenDashboard {
   totalIngresos: string
   totalGastos: string
   balance: string
+  saldosPorCuenta: SaldoCuenta[]
 }
 
 export async function calcularResumen(
@@ -14,7 +22,10 @@ export async function calcularResumen(
   hoy: string
 ): Promise<ResumenDashboard> {
   const { desde, hasta } = limitesPeriodo(periodo, hoy)
-  const sumas = await transaccionRepository.sumasPorTipo(usuarioId, desde, hasta)
+  const [sumas, cuentas] = await Promise.all([
+    transaccionRepository.sumasPorTipo(usuarioId, desde, hasta),
+    listarCuentas(usuarioId),
+  ])
 
   let ingresos = new Prisma.Decimal(0)
   let gastos = new Prisma.Decimal(0)
@@ -31,5 +42,6 @@ export async function calcularResumen(
     totalIngresos: ingresos.toFixed(2),
     totalGastos: gastos.toFixed(2),
     balance: ingresos.minus(gastos).toFixed(2),
+    saldosPorCuenta: cuentas.map((c) => ({ cuentaId: c.id, nombre: c.nombre, saldo: c.saldo })),
   }
 }

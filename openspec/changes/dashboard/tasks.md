@@ -43,15 +43,15 @@ Sin migraciones. Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 3. Saldo por cuenta
 
-- [ ] 3.1 RED — `src/server/dashboard/dashboard.int.test.ts`, test "Ver saldo por cuenta". Debe fallar porque el resumen no incluye `saldosPorCuenta`.
-- [ ] 3.2 GREEN — `calcularResumen` añade `saldosPorCuenta` a partir de `listarCuentas(usuarioId)` (`{ cuentaId, nombre, saldo }`). Test en verde.
-- [ ] 3.3 REFACTOR — test en verde, y 1.3 también.
-- [ ] 3.4 RED — mismo archivo, test "El saldo por cuenta incluye movimientos fuera del período". Si pasa sin cambios, forzar el RED.
-- [ ] 3.5 GREEN — sin cambios si ya lo cumple. Test en verde.
-- [ ] 3.6 REFACTOR — test en verde.
-- [ ] 3.7 RED — mismo archivo, test "Una cuenta sin movimientos muestra su saldo inicial". Si pasa sin cambios, forzar el RED.
-- [ ] 3.8 GREEN — sin cambios si ya lo cumple. Test en verde.
-- [ ] 3.9 REFACTOR — `dashboard.int.test.ts` completo en verde.
+- [x] 3.1 RED — `src/server/dashboard/dashboard.int.test.ts`, test "Ver saldo por cuenta". Debe fallar porque el resumen no incluye `saldosPorCuenta`.
+- [x] 3.2 GREEN — `calcularResumen` añade `saldosPorCuenta` a partir de `listarCuentas(usuarioId)` (`{ cuentaId, nombre, saldo }`). Test en verde.
+- [x] 3.3 REFACTOR — test en verde, y 1.3 también.
+- [x] 3.4 RED — mismo archivo, test "El saldo por cuenta incluye movimientos fuera del período". Si pasa sin cambios, forzar el RED.
+- [x] 3.5 GREEN — sin cambios si ya lo cumple. Test en verde.
+- [x] 3.6 REFACTOR — test en verde.
+- [x] 3.7 RED — mismo archivo, test "Una cuenta sin movimientos muestra su saldo inicial". Si pasa sin cambios, forzar el RED.
+- [x] 3.8 GREEN — sin cambios si ya lo cumple. Test en verde.
+- [x] 3.9 REFACTOR — `dashboard.int.test.ts` completo en verde.
 
 ## 4. Principales categorías de gasto
 
