@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: cuadre
+          POSTGRES_PASSWORD: cuadre
+          POSTGRES_DB: cuadre
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U cuadre"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      # Valores de CI: la base es el servicio de arriba y el secreto es ficticio (no es un secreto real).
+      DATABASE_URL: postgresql://cuadre:cuadre@localhost:5432/cuadre?schema=public
+      AUTH_SECRET: secreto-de-ci-00000000000000000000000000
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Generar el cliente Prisma
+        run: npx prisma generate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Comprobar tipos
+        run: npm run typecheck
+
+      - name: Tests unitarios y de integración
+        run: npm run test:run
+
+      - name: Instalar Chromium de Playwright
+        run: npx playwright install --with-deps chromium
+
+      # El build lo hace el webServer de Playwright (playwright.config.ts).
+      - name: Tests E2E
+        run: npm run test:e2e
+
+      - name: Subir el informe de Playwright
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14

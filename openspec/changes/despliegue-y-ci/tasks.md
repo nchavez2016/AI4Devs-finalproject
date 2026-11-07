@@ -88,9 +88,9 @@
 
 ## 14. Escenarios: workflow de CI
 
-- [ ] 14.1 RED: tests "El workflow de CI ejecuta los pasos obligatorios en orden", "El workflow de CI usa Node 24 y PostgreSQL 16" y "El workflow de CI publica el informe de Playwright siempre" en `src/config/ci.test.ts` (lee el YAML como texto); fallan porque `.github/workflows/ci.yml` no existe. Verificación: `npx vitest run src/config/ci.test.ts --reporter=dot` falla por esa razón.
-- [ ] 14.2 GREEN: `.github/workflows/ci.yml` según design.md (push y pull_request, Node 24 con caché npm, servicio `postgres:16` con healthcheck, `DATABASE_URL` y `AUTH_SECRET` ficticio a nivel de job, pasos en orden y `actions/upload-artifact` de `playwright-report` con `if: always()`). Verificación: los tres tests pasan.
-- [ ] 14.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 14.1 RED: tests "El workflow de CI ejecuta los pasos obligatorios en orden", "El workflow de CI usa Node 24 y PostgreSQL 16" y "El workflow de CI publica el informe de Playwright siempre" en `src/config/ci.test.ts` (lee el YAML como texto); fallan porque `.github/workflows/ci.yml` no existe. Verificación: `npx vitest run src/config/ci.test.ts --reporter=dot` falla por esa razón.
+- [x] 14.2 GREEN: `.github/workflows/ci.yml` según design.md (push y pull_request, Node 24 con caché npm, servicio `postgres:16` con healthcheck, `DATABASE_URL` y `AUTH_SECRET` ficticio a nivel de job, pasos en orden y `actions/upload-artifact` de `playwright-report` con `if: always()`). Verificación: los tres tests pasan.
+- [x] 14.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 15. Documentación
 
