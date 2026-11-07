@@ -17,7 +17,7 @@ function urlDeAdministracion(url: string): string {
   return administracion.toString()
 }
 
-async function crearBaseSiNoExiste(url: string): Promise<void> {
+export async function crearBaseSiNoExiste(url: string): Promise<void> {
   const nombreBase = exigirBaseDePrueba(url)
 
   if (!/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(nombreBase)) {
@@ -47,7 +47,7 @@ async function crearBaseSiNoExiste(url: string): Promise<void> {
   }
 }
 
-async function aplicarMigraciones(url: string): Promise<void> {
+export async function aplicarMigraciones(url: string): Promise<void> {
   exigirBaseDePrueba(url)
 
   const cliPrisma = require.resolve('prisma/build/index.js')

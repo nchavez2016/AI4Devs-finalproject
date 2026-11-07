@@ -6,7 +6,7 @@
 - [x] 0.2 [HUMANO] Decidir navegadores (solo Chromium o más) y viewports (escritorio, móvil 360 px o ambos). Ver tabla 0.2. Verificación: decisión anotada en design.md.
 - [x] 0.3 [HUMANO] Decidir si se prueban también el redirect sin sesión y el aislamiento entre usuarios (grupos 7 y 8) o solo el flujo principal; si es solo el flujo principal, retirar el requisito "Acceso y aislamiento verificados en el navegador" con `/opsx:update` y validar de nuevo. Verificación: decisión en design.md y `openspec validate e2e-playwright --strict` sin errores.
 - [x] 0.4 [HUMANO] Revisar el diseño de CI propuesto (tabla 0.4); no se implementa en este change. Verificación: decisión anotada en design.md.
-- [ ] 0.5 [HUMANO] Tras la tarea 1.1, descargar los navegadores elegidos en 0.2 (p. ej. `npx playwright install chromium`). Verificación: `npx playwright --version` responde y el navegador figura instalado.
+- [x] 0.5 [HUMANO] Tras la tarea 1.1, descargar los navegadores elegidos en 0.2 (p. ej. `npx playwright install chromium`). Verificación: `npx playwright --version` responde y el navegador figura instalado.
 
 ## 1. Instalación de Playwright
 
@@ -14,10 +14,10 @@
 
 ## 2. Escenario: La suite E2E se niega a correr si la base no termina en _test
 
-- [ ] 2.1 CARACTERIZACIÓN: si la creación y migración de base de `src/test/bd/global-setup.ts` se extrae a una función compartida, añadir antes un test de caracterización de la guarda existente en `src/test/bd/guardia.test.ts` (o confirmar que ya existe). Verificación: `npx vitest run src/test/bd/guardia.test.ts --reporter=dot` en verde.
-- [ ] 2.2 RED: test "La suite E2E se niega a correr si la base no termina en _test" en `src/test/e2e/preparar-base-e2e.test.ts`; falla porque `preparar-base-e2e.ts` no existe. Verificación: `npx vitest run src/test/e2e/preparar-base-e2e.test.ts --reporter=dot` falla por esa razón.
-- [ ] 2.3 GREEN: `src/test/e2e/preparar-base-e2e.ts`, que comprueba el nombre con `exigirBaseDePrueba` antes de crear o migrar la base y reutiliza la lógica de `global-setup.ts`. Verificación: el test de 2.2 pasa y `npx vitest run --project integracion --reporter=dot` sigue en verde.
-- [ ] 2.4 REFACTOR: eliminar duplicación entre `global-setup.ts` y `preparar-base-e2e.ts`. Verificación: tests de 2.1–2.3 en verde.
+- [x] 2.1 CARACTERIZACIÓN: si la creación y migración de base de `src/test/bd/global-setup.ts` se extrae a una función compartida, añadir antes un test de caracterización de la guarda existente en `src/test/bd/guardia.test.ts` (o confirmar que ya existe). Verificación: `npx vitest run src/test/bd/guardia.test.ts --reporter=dot` en verde.
+- [x] 2.2 RED: test "La suite E2E se niega a correr si la base no termina en _test" en `src/test/e2e/preparar-base-e2e.test.ts`; falla porque `preparar-base-e2e.ts` no existe. Verificación: `npx vitest run src/test/e2e/preparar-base-e2e.test.ts --reporter=dot` falla por esa razón.
+- [x] 2.3 GREEN: `src/test/e2e/preparar-base-e2e.ts`, que comprueba el nombre con `exigirBaseDePrueba` antes de crear o migrar la base y reutiliza la lógica de `global-setup.ts`. Verificación: el test de 2.2 pasa y `npx vitest run --project integracion --reporter=dot` sigue en verde.
+- [x] 2.4 REFACTOR: eliminar duplicación entre `global-setup.ts` y `preparar-base-e2e.ts`. Verificación: tests de 2.1–2.3 en verde.
 
 ## 3. Escenario: La suite E2E acepta una base que termina en _test
 
