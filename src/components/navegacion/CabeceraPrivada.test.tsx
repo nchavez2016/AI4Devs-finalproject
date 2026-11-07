@@ -40,7 +40,20 @@ describe('CabeceraPrivada', () => {
     unmount()
 
     const { ContenidoPanel } = await import('@/app/(privado)/panel/ContenidoPanel')
-    render(<ContenidoPanel nombreNegocio="Tienda Ana" />)
+    render(
+      <ContenidoPanel
+        nombreNegocio="Tienda Ana"
+        periodo="mes"
+        hayTransacciones={false}
+        resumen={{
+          totalIngresos: '0.00',
+          totalGastos: '0.00',
+          balance: '0.00',
+          saldosPorCuenta: [],
+          topCategoriasGasto: [],
+        }}
+      />
+    )
 
     expect(screen.queryByRole('button', { name: 'Cerrar sesión' })).toBeNull()
   })

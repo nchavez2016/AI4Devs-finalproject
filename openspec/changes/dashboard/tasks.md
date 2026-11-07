@@ -92,37 +92,37 @@ Sin migraciones. Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 7. Pantalla del dashboard
 
-- [ ] 7.1 RED — `src/app/(privado)/panel/panel.test.tsx`, test "Dashboard sin datos" (props con totales "0.00", sin transacciones). Antes, aplicar la autorización 0.7: retirar los tres tests de tarjetas y actualizar la frase de "El panel usa el encabezado de página".
-- [ ] 7.2 GREEN — `page.tsx` recibe `searchParams` (asíncrono en Next 16) y llama a `cargarDashboard`; `ContenidoPanel` muestra totales con `Importe` y el vacío con un único primario "Registrar movimiento" (estados.md 9.1). Test en verde y el resto de `panel.test.tsx` también.
-- [ ] 7.3 REFACTOR — extraer secciones a `src/app/(privado)/panel/` (`TotalesPeriodo`, `SaldosCuentas`, `CategoriasGasto`) si `ContenidoPanel` crece. Test en verde.
-- [ ] 7.4 RED — mismo archivo, test "Período sin movimientos muestra el aviso del período".
-- [ ] 7.5 GREEN — segundo vacío según `hayTransacciones`. Test en verde.
-- [ ] 7.6 REFACTOR — test en verde.
-- [ ] 7.7 RED — mismo archivo, test "El dashboard tiene una sola acción primaria".
-- [ ] 7.8 GREEN — enlace primario "Registrar movimiento" en `EncabezadoPagina` solo si hay transacciones. Test en verde.
-- [ ] 7.9 REFACTOR — test en verde.
-- [ ] 7.10 RED — mismo archivo, test "El balance negativo se muestra con su signo".
-- [ ] 7.11 GREEN — balance con `Importe` tipo `saldo` (signo U+2212). Test en verde.
-- [ ] 7.12 REFACTOR — test en verde.
-- [ ] 7.13 RED — mismo archivo, test "Usuario sin cuentas ve cómo crear una".
-- [ ] 7.14 GREEN — vacío de la sección de saldos con enlace terciario "Crear cuenta". Test en verde.
-- [ ] 7.15 REFACTOR — test en verde.
-- [ ] 7.16 RED — `src/app/(privado)/panel/SelectorPeriodo.test.tsx`, test "El selector de período marca el período activo".
-- [ ] 7.17 GREEN — `SelectorPeriodo.tsx` con tres `Link` y `aria-current="page"`. Test en verde.
-- [ ] 7.18 REFACTOR — test en verde.
-- [ ] 7.19 RED — mismo archivo, test "Cambiar de período muestra Actualizando junto al selector" (simula `useLinkStatus` de `next/link` con `pending: true`; leer antes `node_modules/next/dist/docs/01-app/03-api-reference/04-functions/use-link-status.md`).
-- [ ] 7.20 GREEN — indicador "Actualizando…" en `aria-live="polite"`. Test en verde.
-- [ ] 7.21 REFACTOR — test en verde.
-- [ ] 7.22 RED — `src/app/(privado)/panel/CategoriasGasto.test.tsx`, test "Período sin gastos muestra el aviso de la sección".
-- [ ] 7.23 GREEN — `CategoriasGasto.tsx` con el aviso y sin gráfico si la lista está vacía. Test en verde.
-- [ ] 7.24 REFACTOR — test en verde.
-- [ ] 7.25 RED — mismo archivo, test "El gráfico de categorías tiene una alternativa en tabla".
-- [ ] 7.26 GREEN — `GraficoCategorias.tsx` (cliente, Recharts según visualizacion.md 8.9: `var(--color-chart-1)`, eje desde cero, `LabelList` con `formatearImporte`, sin `Legend` ni `Tooltip`, `isAnimationActive={false}` con movimiento reducido) dentro de `role="img"` con `aria-label`, y tabla `sr-only`. Test en verde.
-- [ ] 7.27 REFACTOR — test en verde.
-- [ ] 7.28 RED — mismo archivo, test "Ver como tabla muestra la tabla a cualquier persona".
-- [ ] 7.29 GREEN — botón terciario "Ver como tabla" con `aria-expanded`. Test en verde.
-- [ ] 7.30 REFACTOR — `panel/` completo en verde.
-- [ ] 7.31 Documentación — readme: HU-003 y TK-003 a ✅ (menos E2E y PR), sección 4 "Consulta 3 — Resumen del dashboard" (`cargarDashboard`, `?periodo=`, importes como texto) en lugar del endpoint previsto; `docs/pendientes.md`: quitar "Por dónde empezar". Verificación: los textos coinciden con la spec `dashboard`.
+- [x] 7.1 RED — `src/app/(privado)/panel/panel.test.tsx`, test "Dashboard sin datos" (props con totales "0.00", sin transacciones). Antes, aplicar la autorización 0.7: retirar los tres tests de tarjetas y actualizar la frase de "El panel usa el encabezado de página".
+- [x] 7.2 GREEN — `page.tsx` recibe `searchParams` (asíncrono en Next 16) y llama a `cargarDashboard`; `ContenidoPanel` muestra totales con `Importe` y el vacío con un único primario "Registrar movimiento" (estados.md 9.1). Test en verde y el resto de `panel.test.tsx` también.
+- [x] 7.3 REFACTOR — extraer secciones a `src/app/(privado)/panel/` (`TotalesPeriodo`, `SaldosCuentas`, `CategoriasGasto`) si `ContenidoPanel` crece. Test en verde.
+- [x] 7.4 RED — mismo archivo, test "Período sin movimientos muestra el aviso del período".
+- [x] 7.5 GREEN — segundo vacío según `hayTransacciones`. Test en verde.
+- [x] 7.6 REFACTOR — test en verde.
+- [x] 7.7 RED — mismo archivo, test "El dashboard tiene una sola acción primaria".
+- [x] 7.8 GREEN — enlace primario "Registrar movimiento" en `EncabezadoPagina` solo si hay transacciones. Test en verde.
+- [x] 7.9 REFACTOR — test en verde.
+- [x] 7.10 RED — mismo archivo, test "El balance negativo se muestra con su signo".
+- [x] 7.11 GREEN — balance con `Importe` tipo `saldo` (signo U+2212). Test en verde.
+- [x] 7.12 REFACTOR — test en verde.
+- [x] 7.13 RED — mismo archivo, test "Usuario sin cuentas ve cómo crear una".
+- [x] 7.14 GREEN — vacío de la sección de saldos con enlace terciario "Crear cuenta". Test en verde.
+- [x] 7.15 REFACTOR — test en verde.
+- [x] 7.16 RED — `src/app/(privado)/panel/SelectorPeriodo.test.tsx`, test "El selector de período marca el período activo".
+- [x] 7.17 GREEN — `SelectorPeriodo.tsx` con tres `Link` y `aria-current="page"`. Test en verde.
+- [x] 7.18 REFACTOR — test en verde.
+- [x] 7.19 RED — mismo archivo, test "Cambiar de período muestra Actualizando junto al selector" (simula `useLinkStatus` de `next/link` con `pending: true`; leer antes `node_modules/next/dist/docs/01-app/03-api-reference/04-functions/use-link-status.md`).
+- [x] 7.20 GREEN — indicador "Actualizando…" en `aria-live="polite"`. Test en verde.
+- [x] 7.21 REFACTOR — test en verde.
+- [x] 7.22 RED — `src/app/(privado)/panel/CategoriasGasto.test.tsx`, test "Período sin gastos muestra el aviso de la sección".
+- [x] 7.23 GREEN — `CategoriasGasto.tsx` con el aviso y sin gráfico si la lista está vacía. Test en verde.
+- [x] 7.24 REFACTOR — test en verde.
+- [x] 7.25 RED — mismo archivo, test "El gráfico de categorías tiene una alternativa en tabla".
+- [x] 7.26 GREEN — `GraficoCategorias.tsx` (cliente, Recharts según visualizacion.md 8.9: `var(--color-chart-1)`, eje desde cero, `LabelList` con `formatearImporte`, sin `Legend` ni `Tooltip`, `isAnimationActive={false}` con movimiento reducido) dentro de `role="img"` con `aria-label`, y tabla `sr-only`. Test en verde.
+- [x] 7.27 REFACTOR — test en verde.
+- [x] 7.28 RED — mismo archivo, test "Ver como tabla muestra la tabla a cualquier persona".
+- [x] 7.29 GREEN — botón terciario "Ver como tabla" con `aria-expanded`. Test en verde.
+- [x] 7.30 REFACTOR — `panel/` completo en verde.
+- [x] 7.31 Documentación — readme: HU-003 y TK-003 a ✅ (menos E2E y PR), sección 4 "Consulta 3 — Resumen del dashboard" (`cargarDashboard`, `?periodo=`, importes como texto) en lugar del endpoint previsto; `docs/pendientes.md`: quitar "Por dónde empezar". Verificación: los textos coinciden con la spec `dashboard`.
 
 ## 8. Estados de carga y error
 

@@ -18,7 +18,6 @@
 - Formulario: reformateo del monto al salir, validación al enviar y foco al primer campo inválido.
 - Los `input type="date"` (formulario de transacciones y filtros) muestran mm/dd/yyyy según el idioma del navegador, y el checklist pide fechas en formato `es-EC` (checklist.md, línea 69). Valorar un campo de fecha propio o fijar el idioma del control.
 - Antigravity en Windows pide permiso para comandos con argumentos aunque su prefijo esté en la lista y en el hook (git log, git diff, npx vitest run...). Usar Claude Code para ciclos largos de apply. Revisar si una versión futura respeta el allow del hook.
-- Cabecera compartida de la app (marca, navegación, cerrar sesión) y retirar el nav provisional del panel; "Por dónde empezar" es estático y lo sustituye el dashboard.
 - `FiltrosMovimientos.tsx` importa `contarFiltrosActivos`/`hayFiltrosActivos` desde `@/app/(privado)/transacciones/filtros`: mover a `src/server/transacciones/` o `src/components/` (requiere autorizar la modificación de los tests que importan `filtros.ts`).
 - `aria-controls="grupo-filtros"` en `FiltrosMovimientos.tsx` usa un id fijo: usar `useId()` si el componente se reutiliza.
 

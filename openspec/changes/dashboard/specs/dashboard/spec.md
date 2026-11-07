@@ -60,7 +60,7 @@ de la semana de hoy; `mes` va del día 1 al último día del mes de hoy.
 #### Scenario: El selector de período marca el período activo
 - **GIVEN** el usuario A abre el dashboard con el período "semana"
 - **WHEN** se muestra el selector de período
-- **THEN** hay tres enlaces "Hoy", "Esta semana" y "Este mes" a `?periodo=dia`, `?periodo=semana` y `?periodo=mes`
+- **THEN** hay tres enlaces "Hoy", "Esta semana" y "Este mes" a `/panel?periodo=dia`, `/panel?periodo=semana` y `/panel?periodo=mes`
 - **AND** solo "Esta semana" tiene aria-current="page"
 
 #### Scenario: Cambiar de período muestra Actualizando junto al selector

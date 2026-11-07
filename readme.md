@@ -8,10 +8,10 @@
 | Gestión de cuentas | ✅ Implementado |
 | Gestión de categorías | ✅ Implementado |
 | Registro de transacciones | ✅ Implementado (alta, listado y filtros; sin editar ni eliminar) |
-| Dashboard | ⏳ Pendiente |
+| Dashboard | ✅ Implementado (totales del período, saldos por cuenta y categorías de gasto) |
 | Despliegue (Vercel + Neon) | ⏳ Pendiente |
 
-**Pendiente tras la Entrega 2:** dashboard, editar y eliminar transacciones, despliegue en
+**Pendiente tras la Entrega 2:** editar y eliminar transacciones, despliegue en
 Vercel + Neon, E2E y GitHub Actions.
 
 ## Índice
@@ -96,10 +96,10 @@ estado real a fecha de la Entrega 2 se marca con ✅ (implementado) o ⏳
   sus categorías de ingreso y de gasto (de primer nivel; las subcategorías
   quedan fuera de esta entrega) y asignar una a cada transacción, que debe ser
   del mismo tipo que la transacción.
-- **[MVP] ⏳ Dashboard.** Una pantalla de resumen muestra el saldo actual, el
-  total de ingresos y gastos del período y las principales categorías de gasto,
-  todo calculado automáticamente a partir de las transacciones. Pendiente para
-  la entrega final.
+- **[MVP] ✅ Dashboard.** Una pantalla de resumen muestra el saldo actual de
+  cada cuenta, el total de ingresos y gastos del período (hoy, semana o mes) y
+  las principales categorías de gasto, todo calculado automáticamente a partir
+  de las transacciones.
 
 Estas funcionalidades corresponden a las historias de usuario priorizadas que se
 detallan en la sección 5.
@@ -231,7 +231,7 @@ Recorrido sugerido, con la app corriendo (`npm run dev`) y la base levantada:
 
 *(Registrar transacciones tiene su propio recorrido en **Transacciones**: elige tipo,
 monto, categoría, cuenta y fecha, y el saldo de la cuenta cambia en **Cuentas**. El
-dashboard queda pendiente.)*
+**Panel** resume los totales del período, los saldos y las categorías de gasto.)*
 
 ---
 
@@ -298,14 +298,14 @@ de login, registro, panel, cuentas y categorías, construidas hoy con
 componentes propios (`src/components/ui/`) y Tailwind para los estilos.
 shadcn/ui está aprobado para el MVP pero todavía no se ha instalado; cuando se
 necesiten componentes más complejos (tablas, gráficos) se evaluará incorporarlo.
-Los gráficos del dashboard (pendiente) se dibujan con una librería de charts
-(Recharts, aprobada y aún no instalada).
+El gráfico de categorías de gasto del dashboard se dibuja con Recharts (versión
+exacta `3.10.1`) y siempre tiene una alternativa en tabla.
 
 **Backend (Next.js API Routes / Server Actions).** Es la lógica de servidor:
 recibe las peticiones del frontend, valida los datos, aplica las reglas de
 negocio (por ejemplo, que una cuenta o categoría pertenezca al usuario
 autenticado) y habla con la base de datos a través de Prisma. Aquí también se
-calcularán los totales y agregados que alimentarán el dashboard (pendiente).
+calculan los totales y agregados que alimentan el dashboard.
 
 **Autenticación (Auth.js / next-auth v5 beta, versión exacta `5.0.0-beta.32`).**
 Gestiona el registro, el inicio de sesión y la sesión activa del usuario. Cada
@@ -344,7 +344,7 @@ cuadre/
 ├── src/
 │   ├── app/
 │   │   ├── (privado)/
-│   │   │   ├── panel/           # Panel (dashboard provisional) ✅
+│   │   │   ├── panel/           # Panel: dashboard financiero ✅
 │   │   │   ├── cuentas/         # Gestión de cuentas ✅
 │   │   │   └── categorias/      # Gestión de categorías ✅
 │   │   ├── login/                ✅
@@ -369,8 +369,7 @@ cuadre/
 └── readme.md
 ```
 
-Pendiente: un `dashboard/` con cálculos reales; hoy existe `panel/` como pantalla de
-bienvenida provisional. La separación clave es: `app/` contiene las pantallas y
+El dashboard vive en `panel/` (pantalla) y `server/dashboard/` (cálculos). La separación clave es: `app/` contiene las pantallas y
 los endpoints; `server/` contiene la lógica de negocio y, dentro de
 `server/repositories/`, la capa de acceso a datos que encapsula Prisma (patrón
 Repository); `prisma/` define el modelo de datos. Esto mantiene la lógica
@@ -440,7 +439,7 @@ La estrategia de pruebas contempla tres niveles:
 - **⏳ Prueba de extremo a extremo (E2E).** Pendiente: Playwright se configurará
   con el primer change que la necesite (ver AGENTS.md). Verificará el flujo
   principal completo desde el navegador, incluyendo registro de transacciones y
-  dashboard una vez existan.
+  dashboard.
 
 **⏳ GitHub Actions.** Pendiente: hoy las pruebas se ejecutan en local (hook de
 pre-commit con `npm run lint`, `typecheck` y `test:run`); la ejecución
@@ -583,8 +582,8 @@ invoca como **Server Actions** de Next.js y la pantalla carga sus datos en el se
 con la misma separación en capas que cuentas y categorías (repositorio, esquemas Zod,
 caso de uso, acción y pantalla). Todas exigen que el usuario esté autenticado y se
 restringen a los datos del usuario de la sesión: el dueño nunca se toma de los datos
-enviados. Sin sesión, la acción redirige a `/login`. El dashboard (pendiente) seguirá
-la misma vía; el endpoint de abajo describe su contrato previsto.
+enviados. Sin sesión, la acción redirige a `/login`. El dashboard sigue la misma vía
+(Consulta 3, abajo).
 
 ### Acción 1 — Registrar transacción
 
@@ -642,62 +641,47 @@ Ejemplo: `/transacciones?tipo=GASTO&desde=2026-09-01&hasta=2026-09-15`.
 Cada transacción incluye `tipo`, `monto` (texto con 2 decimales), `fecha`, `descripcion` y el
 nombre y el identificador de su cuenta y de su categoría.
 
-### Endpoint 3 — Resumen del dashboard (pendiente)
+### Consulta 3 — Resumen del dashboard
 
-```yaml
-GET /api/dashboard
-summary: Devuelve los totales calculados para el dashboard del período.
-security:
-  - sessionAuth: []
-parameters:
-  - name: periodo
-    in: query
-    schema: { type: string, enum: [dia, semana, mes], default: mes }
-    description: "Período de agregación"
-responses:
-  "200":
-    description: "Resumen calculado"
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            totalIngresos:  { type: number }
-            totalGastos:    { type: number }
-            balance:        { type: number }
-            saldosPorCuenta:
-              type: array
-              items:
-                type: object
-                properties:
-                  cuentaId: { type: string }
-                  nombre:   { type: string }
-                  saldo:    { type: number }
-            topCategoriasGasto:
-              type: array
-              items:
-                type: object
-                properties:
-                  categoria: { type: string }
-                  total:     { type: number }
-  "401": { description: "No autenticado" }
-```
+`cargarDashboard(parametrosDeUrl)` en `src/server/dashboard/pantalla.ts`, que usa la página
+`/panel`. Devuelve el resumen del usuario autenticado para el período elegido, más el nombre de
+su negocio. Sin sesión, redirige a `/login`. No hay endpoint REST: se carga en el servidor, como
+las demás pantallas.
 
-Ejemplo de respuesta (200):
+| Parámetro de la URL | Valor |
+|---|---|
+| `periodo` | `dia` (hoy), `semana` (de lunes a domingo de la semana de hoy) o `mes` (del día 1 al último día del mes de hoy). Por defecto `mes`; un valor inválido se trata como `mes`. |
+
+Los límites del período son fechas calendario de Ecuador (America/Guayaquil), con ambos
+extremos incluidos, y no dependen de la zona horaria del servidor. Los importes son texto con
+2 decimales.
+
+- `totalIngresos`, `totalGastos` y `balance` (ingresos menos gastos) cuentan solo el período.
+- `saldosPorCuenta` es el saldo actual de cada cuenta (saldo inicial más ingresos menos gastos
+  de todas las fechas); una cuenta sin movimientos muestra su saldo inicial.
+- `topCategoriasGasto` lista como máximo 5 categorías con gastos en el período, de mayor a
+  menor total y, a igual total, por nombre.
+
+Ejemplo de `/panel?periodo=mes`:
 
 ```json
 {
-  "totalIngresos": 1200.00,
-  "totalGastos": 780.50,
-  "balance": 419.50,
-  "saldosPorCuenta": [
-    { "cuentaId": "cta_001", "nombre": "Banco", "saldo": 950.00 },
-    { "cuentaId": "cta_002", "nombre": "Efectivo", "saldo": 120.00 }
-  ],
-  "topCategoriasGasto": [
-    { "categoria": "Arriendo", "total": 400.00 },
-    { "categoria": "Servicios básicos", "total": 180.50 }
-  ]
+  "nombreNegocio": "Tienda Ana",
+  "periodo": "mes",
+  "hayTransacciones": true,
+  "resumen": {
+    "totalIngresos": "1200.00",
+    "totalGastos": "780.50",
+    "balance": "419.50",
+    "saldosPorCuenta": [
+      { "cuentaId": "cta_001", "nombre": "Banco", "saldo": "950.00" },
+      { "cuentaId": "cta_002", "nombre": "Efectivo", "saldo": "120.00" }
+    ],
+    "topCategoriasGasto": [
+      { "categoria": "Arriendo", "total": "400.00" },
+      { "categoria": "Servicios básicos", "total": "180.50" }
+    ]
+  }
 }
 ```
 
@@ -819,7 +803,7 @@ Scenario: Evitar el acceso a cuentas de otro usuario
 
 ---
 
-### HU-003 — Ver el dashboard financiero ⏳ Pendiente
+### HU-003 — Ver el dashboard financiero ✅ Implementado
 
 **Como** persona que gestiona las finanzas de mi negocio
 **quiero** ver un panel de resumen con mi saldo, mis ingresos y gastos del
@@ -947,31 +931,31 @@ Actions y una pantalla `/transacciones`, no con endpoints REST.
 
 ---
 
-### TK-003 — Pantalla de dashboard ⏳ Pendiente
+### TK-003 — Pantalla de dashboard ✅ Implementado (pendiente de revisión manual, E2E y PR)
 
 **Tipo:** Frontend
 **Prioridad:** Alta
 **Historia relacionada:** HU-003
 
 **Descripción:**
-Construir la pantalla de dashboard que consume el endpoint `GET /api/dashboard`
-y muestra los totales del período, el saldo por cuenta y las principales
-categorías de gasto, con un estado vacío para usuarios nuevos.
+Construir la pantalla de dashboard en `/panel`, que carga sus datos en el servidor
+(Consulta 3, sección 4) y muestra los totales del período, el saldo por cuenta y las
+principales categorías de gasto, con un estado vacío para usuarios nuevos.
 
 **Tareas técnicas:**
-- Maquetar la pantalla con componentes de shadcn/ui (tarjetas de resumen, tabla
-  de saldos, gráfico de categorías con Recharts).
-- Consumir el endpoint de dashboard y mostrar los datos calculados.
-- Selector de período (día / semana / mes).
+- Maquetar la pantalla con los componentes propios de `src/components/ui/` (totales
+  del período, lista de saldos, gráfico de categorías con Recharts y su tabla).
+- Cargar los datos calculados en el servidor con `cargarDashboard`.
+- Selector de período (día / semana / mes) en la URL.
 - Estado vacío con mensaje que invita a registrar la primera transacción.
 - Diseño responsivo (móvil y escritorio).
 
 **Definition of Done:**
-- [ ] El dashboard muestra ingresos, gastos y balance correctos para el período
+- [x] El dashboard muestra ingresos, gastos y balance correctos para el período
       seleccionado.
-- [ ] Muestra el saldo actual de cada cuenta.
-- [ ] Muestra las categorías de gasto ordenadas de mayor a menor.
-- [ ] Un usuario sin datos ve el estado vacío con el mensaje de invitación.
+- [x] Muestra el saldo actual de cada cuenta.
+- [x] Muestra las categorías de gasto ordenadas de mayor a menor.
+- [x] Un usuario sin datos ve el estado vacío con el mensaje de invitación.
 - [ ] La pantalla se ve y funciona correctamente en móvil y escritorio.
 - [ ] Prueba E2E del flujo: login registrar transacción ver dashboard
       actualizado.
