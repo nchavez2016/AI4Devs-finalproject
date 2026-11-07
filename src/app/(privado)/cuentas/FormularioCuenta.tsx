@@ -24,6 +24,7 @@ export function FormularioCuenta({
     <form
       ref={formularioRef}
       action={accion}
+      data-testid="formulario-cuenta"
       noValidate
       className="flex flex-col gap-entre-campos"
     >

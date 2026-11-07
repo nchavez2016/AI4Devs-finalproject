@@ -38,6 +38,7 @@ export function FormularioTransaccion({
     <form
       ref={formularioRef}
       action={accion}
+      data-testid="formulario-transaccion"
       noValidate
       className="flex flex-col gap-entre-campos"
     >

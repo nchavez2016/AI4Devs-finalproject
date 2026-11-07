@@ -44,19 +44,19 @@ export function ContenidoPanel({
             <dl className="flex flex-col gap-entre-campos">
               <div className="flex items-baseline justify-between gap-seccion">
                 <dt className="text-cuerpo text-muted-foreground">Ingresos</dt>
-                <dd>
+                <dd data-testid="total-ingresos">
                   <Importe valor={resumen.totalIngresos} tipo="saldo" tamano="importe-resumen" />
                 </dd>
               </div>
               <div className="flex items-baseline justify-between gap-seccion">
                 <dt className="text-cuerpo text-muted-foreground">Gastos</dt>
-                <dd>
+                <dd data-testid="total-gastos">
                   <Importe valor={resumen.totalGastos} tipo="saldo" tamano="importe-resumen" />
                 </dd>
               </div>
               <div className="flex items-baseline justify-between gap-seccion">
                 <dt className="text-cuerpo text-foreground font-control">Balance</dt>
-                <dd className="flex flex-col items-end">
+                <dd className="flex flex-col items-end" data-testid="total-balance">
                   <Importe valor={resumen.balance} tipo="saldo" tamano="importe-principal" />
                   {resumen.balance.startsWith('-') && (
                     <span className="text-detalle text-negativo">Saldo negativo</span>
