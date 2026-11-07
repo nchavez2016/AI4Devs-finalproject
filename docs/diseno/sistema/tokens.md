@@ -137,6 +137,9 @@ Escala tipográfica. Cada `--text-*` define tamaño, `--text-*--line-height` y `
 | `--spacing-icono` | 1.25rem | Iconos en botones, campos y filas. |
 | `--spacing-icono-detalle` | 1rem | Iconos junto a `--text-detalle` (mensajes de error). |
 | `--spacing-reserva-barra-inferior` | 4.75rem | Espacio reservado bajo el contenido y `scroll-padding-bottom` cuando hay barra fija inferior (alto de control + 2 × margen de página). |
+| `--spacing-margen-seguro-inferior` | `env(safe-area-inset-bottom, 0px)` | Margen de seguridad inferior del dispositivo (iOS). |
+| `--spacing-relleno-barra-inferior` | `calc(var(--spacing-pagina) + var(--spacing-margen-seguro-inferior))` | Relleno inferior del contenedor fijo de la barra de acciones. |
+| `--spacing-reserva-barra-segura` | `calc(var(--spacing-reserva-barra-inferior) + var(--spacing-margen-seguro-inferior))` | Reserva inferior del `main` en móvil para no quedar tapado por la barra fija. |
 | `--spacing-contenedor-icono` | 2.5rem | Lado del contenedor de icono. |
 | `--spacing-alto-cabecera` | 3.5rem → 4rem | Alto de la cabecera de la app. |
 | `--container-formulario` | 30rem | Ancho máximo de formulario. |
@@ -176,7 +179,7 @@ Las sombras de tarjeta se tiñen con la tinta (`30 28 24`), nunca con un color d
 | Token | Valor | Uso |
 |---|---|---|
 | `--degradado-marca` | `linear-gradient(135deg, var(--color-primary), var(--color-primary-hover))` | Único degradado: de `primary` a `primary-hover`, monocromo. Se usa con `bg-(image:--degradado-marca)` en la marca de la cabecera y el distintivo de login y registro. |
-| `--columnas-lista-formulario` | `minmax(0, 1fr)` → `minmax(0, 1fr) minmax(0, var(--container-formulario))` | Columnas de las pantallas con lista y formulario; una en móvil y dos desde `escritorio`. Se usa con `grid-cols-(--columnas-lista-formulario)`. |
+| `--columnas-lista-formulario` | `minmax(0, 1fr)` → `minmax(0, 1fr) minmax(0, var(--container-formulario))` | Columnas de las pantallas con lista y formulario; una en móvil y dos desde `escritorio`. En pantallas de registro frecuente (transacciones), el formulario va primero en móvil, también en el DOM; en el resto, la lista primero. Se usa con `grid-cols-(--columnas-lista-formulario)`. |
 
 #### 3.3.8 Movimiento
 
@@ -200,7 +203,7 @@ Las sombras de tarjeta se tiñen con la tinta (`30 28 24`), nunca con un color d
 | `--animate-esqueleto` | `@theme static` | fotograma `esqueleto` (opacidad de 0 a 1), duración 0ms, retardo `var(--duracion-espera-esqueleto)`, `both` | Aparición del esqueleto de carga tras la espera. Sin pulso ni brillo. |
 | `--animate-panel-entrada`, `--animate-panel-salida` | `@theme static` | fotogramas `panel-entrada` / `panel-salida` (desplazamiento horizontal completo), `var(--duracion-panel)`, `var(--ease-entrada)` / `var(--ease-salida)`, `both` | Panel lateral (Sheet). Con movimiento reducido la duración es 0ms. |
 | `--animate-velo-entrada`, `--animate-velo-salida` | `@theme static` | fotogramas `velo-entrada` / `velo-salida` (opacidad), `var(--duracion-panel)`, `both` | Velo detrás del Sheet y los diálogos. |
-| `--animate-entrada` | `@theme static` | fotograma `entrada` (opacidad de 0 a 1 y subida de `--desplazamiento-entrada`), `var(--duracion-entrada)`, `var(--ease-entrada)`, `both` | Entrada breve del contenedor de la página. Con movimiento reducido vale `none`. |
+| `--animate-entrada` | `@theme static` | fotograma `entrada` (opacidad de 0 a 1 y subida de `--desplazamiento-entrada`), `var(--duracion-entrada)`, `var(--ease-entrada)`, `backwards` | Entrada breve del contenedor de la página. Con movimiento reducido vale `none`. |
 
 Con `prefers-reduced-motion: reduce` solo cambian valores de estos tokens (movimiento.md, sección 6).
 

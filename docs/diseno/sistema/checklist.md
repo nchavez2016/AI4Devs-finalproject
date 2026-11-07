@@ -30,7 +30,7 @@ Sección 10 del sistema de diseño. Índice completo en [README.md](README.md).
 - [ ] Toda eliminación pasa por un diálogo de confirmación que nombra el elemento.
 - [ ] No hay una rejilla de tarjetas idénticas ni `rounded-full`; las tarjetas usan `shadow-tarjeta` y los iconos van en su contenedor con `aria-hidden` (componentes.md, 7.3 y 7.8).
 - [ ] La pantalla usa la cabecera compartida y no lleva su propio enlace "← Volver" (componentes.md, 7.7).
-- [ ] En escritorio, lista y formulario van en dos columnas (`grid-cols-(--columnas-lista-formulario)`), con el formulario en una tarjeta con título; en móvil, una columna.
+- [ ] En escritorio, lista y formulario van en dos columnas (`grid-cols-(--columnas-lista-formulario)`), con el formulario en una tarjeta con título; en móvil, una columna: en pantallas de registro frecuente (transacciones), el formulario va primero en móvil, también en el DOM; en el resto, la lista primero.
 
 **Estados**
 - [ ] Están diseñados los estados vacío (y vacío por filtro si hay filtros), carga, error y éxito.

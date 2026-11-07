@@ -20,10 +20,9 @@ degradado monocromo de la marca y una entrada de página breve.
 5. Una sección nueva de navegación se añade en `src/components/navegacion/secciones.ts`.
 
 ## Composición lista + formulario
-- En escritorio, dos columnas con `grid grid-cols-(--columnas-lista-formulario)`; en móvil, una
-  columna con la lista primero (tokens.md, 3.3.7b).
-- El formulario va en una `Tarjeta` con su título `h2` ("Nueva cuenta") y dentro de un contenedor
-  `max-w-formulario`.
+- En escritorio, dos columnas con `grid grid-cols-(--columnas-lista-formulario)`; en móvil, una columna. En pantallas de registro frecuente (transacciones), el formulario va primero en móvil, también en el DOM; en el resto, la lista primero (tokens.md, 3.3.7b).
+- En móvil, los filtros del listado empiezan plegados tras el botón "Filtros (n)" y la acción de guardar queda fija abajo con `fixed` sin tapar el campo enfocado.
+- El formulario va en una `Tarjeta` con su título `h2` ("Nueva cuenta") y dentro de un contenedor `max-w-formulario`.
 - Pantallas sin sesión (login, registro): `PaginaAcceso`, tarjeta centrada con `MarcaCuadre`.
 - Accesos del panel: `TarjetaAcceso` (un único enlace que cubre la tarjeta, componentes.md, 7.3).
 

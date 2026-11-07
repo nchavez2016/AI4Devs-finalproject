@@ -26,6 +26,7 @@ a su clase: `bg-primary`, `text-detalle`, `h-alto-control`, `rounded-control`.
 
 ### 7.2 Campo de formulario
 
+- En pantallas de registro frecuente (transacciones), el formulario va antes de la lista en móvil (también en el DOM); en el resto, la lista primero. — Por qué: quien entra a registrar frecuentemente no debe recorrer la lista para encontrar los campos.
 - Etiqueta siempre visible encima del campo, en `etiqueta`, separada `etiqueta`; nunca un placeholder en su lugar. — Por qué: el placeholder desaparece al escribir y no se lee bien.
 - Los opcionales se marcan con "(opcional)" y los obligatorios no llevan marca. — Por qué: casi todos los campos son obligatorios; se señala la excepción.
 - Campo: fondo `card`, borde `input`, radio `control`, alto `alto-campo`, relleno `campo-x`, texto `cuerpo`. — Por qué: objetivo cómodo y sin zoom en iOS.
@@ -43,10 +44,10 @@ a su clase: `bg-primary`, `text-detalle`, `h-alto-control`, `rounded-control`.
 - Sin signo: el tipo (Ingreso o Gasto) decide si suma o resta. — Por qué: coincide con la regla del dominio (monto siempre mayor que 0).
 
 **Selector de tipo (Ingreso / Gasto)**
-- Grupo de dos radios en forma de control segmentado, cada opción con icono (`Minus` / `Plus` de la librería de iconos, 7.8) y texto: "− Gasto", "+ Ingreso". "Gasto" va primero y es la opción por defecto. — Por qué: es el movimiento más frecuente, y el tipo se distingue sin color.
+- Grupo de dos radios en forma de control segmentado, con nombre accesible "Gasto" e "Ingreso", y un icono decorativo `aria-hidden="true"` (`Minus` / `Plus` de la librería de iconos, 7.8). "Gasto" va primero y es la opción por defecto. — Por qué: es el movimiento más frecuente, y el tipo se distingue sin color.
 - Opción seleccionada: fondo `card` (Gasto) o `ingreso-fondo` (Ingreso), borde `input`, peso `enfasis`. Opción no seleccionada: sobre `muted`, peso `lectura`. Alto `alto-control`. — Por qué: la selección se ve por forma y peso, no solo por color.
 
-**Orden del registro en móvil:** Tipo → Monto (recibe el foco al abrir) → Categoría (filtrada por
+**Orden del registro en móvil:** Tipo → Monto (recibe el foco solo al abrir un registro a propósito, nunca al cargar la página) → Categoría (filtrada por
 tipo) → Cuenta (por defecto, la última usada en el dispositivo) → Fecha (por defecto, hoy) →
 Descripción (opcional). — Por qué: el caso habitual se completa con monto y categoría.
 
@@ -67,7 +68,7 @@ Descripción (opcional). — Por qué: el caso habitual se completa con monto y 
 ### 7.4 Lista y tabla de movimientos
 
 **Móvil (por debajo de `escritorio`): lista agrupada por día**
-- Cabecera de día fija al desplazarse, en `grupo` y `muted-foreground`: "Hoy · lun, 28 sept". — Por qué: se registra y revisa por días.
+- Cabecera de día fija al desplazarse, en `grupo` y `muted-foreground`: "Hoy · vie, 6 nov". — Por qué: se registra y revisa por días.
 - Fila de alto mínimo `alto-fila`, relleno `fila-x` / `fila-y`. Izquierda: categoría (`cuerpo`, peso `control`) y debajo "Cuenta · descripción" (`detalle`, `muted-foreground`, truncado a una línea). Derecha: importe (7.5) alineado a la derecha. — Por qué: el ojo baja por la columna de importes como en un libro de caja.
 - Separador `border` con sangría `fila-x`. — Por qué: renglones finos, no cajas.
 - Toda la fila es el área de clic y abre la edición. — Por qué: una única acción por fila, con el objetivo más grande posible.
@@ -81,7 +82,7 @@ Descripción (opcional). — Por qué: el caso habitual se completa con monto y 
 - Editar y eliminar se hacen desde la vista de edición del movimiento, no con iconos en cada fila. — Por qué: la fila queda limpia y la acción destructiva, lejos de un clic accidental.
 
 **Barra de filtros (encima de la tabla y de la lista)**
-- Una fila de controles sobre la tabla, separada `acciones`: selectores nativos (7.2) con su etiqueta visible, y "Quitar filtros" terciario a la derecha, visible solo si hay un filtro activo. En móvil los controles se apilan a todo el ancho. — Por qué: los filtros se ven de un vistazo y se pueden quitar de una vez.
+- Una fila de controles sobre la tabla, separada `acciones`: selectores nativos (7.2) con su etiqueta visible, y "Quitar filtros" terciario a la derecha, visible solo si hay un filtro activo. En móvil los filtros empiezan plegados tras el botón secundario "Filtros (n)" y se despliegan a todo el ancho, manteniendo "Actualizando…" y "Quitar filtros" visibles fuera del grupo plegable. — Por qué: los filtros se ven de un vistazo y en móvil se ahorra espacio vertical sin ocultar el estado ni la acción de reseteo.
 - Los filtros avanzados (rangos libres, múltiples categorías, búsqueda de texto) quedan fuera del MVP y se tratan después de la entrega. — Por qué: el MVP necesita período, cuenta y categoría.
 - La barra no es una tarjeta. — Por qué: evita tarjetas dentro de tarjetas.
 
