@@ -59,8 +59,8 @@ cómo forzar el RED. Sin migraciones ni dependencias. Pantallas: cargar antes la
 
 ## 6. Revisión manual
 
-- [ ] 6.1 [HUMANO] Revisar `/panel` a 360 px y a 1280 px con cada período (incluida una semana que cruce de mes si es posible), con y sin cuentas y con y sin transacciones, pasando `docs/diseno/sistema/checklist.md`: botón en una línea (debajo del título en móvil, al lado en escritorio), rango legible bajo el selector y subtítulo de saldos. Verificación: hallazgos anotados en progress.md y corregidos o aceptados.
+- [x] 6.1 [HUMANO] Revisar `/panel` a 360 px y a 1280 px con cada período (incluida una semana que cruce de mes si es posible), con y sin cuentas y con y sin transacciones, pasando `docs/diseno/sistema/checklist.md`: botón en una línea (debajo del título en móvil, al lado en escritorio), rango legible bajo el selector y subtítulo de saldos. Verificación: hallazgos anotados en progress.md y corregidos o aceptados.
 
 ## 7. Cierre
 
-- [ ] 7.1 `npm run lint`, `npx tsc --noEmit`, `npx vitest run --reporter=dot` y `openspec validate dashboard-ajustes --strict` sin errores.
+- [x] 7.1 `npm run lint`, `npx tsc --noEmit`, `npx vitest run --reporter=dot` y `openspec validate dashboard-ajustes --strict` sin errores.
