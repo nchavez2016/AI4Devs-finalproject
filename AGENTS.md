@@ -67,7 +67,7 @@ descrito en `readme.md`. Entorno de desarrollo: Windows.
 
 ## Dependencias
 - Aprobadas para el MVP: Zod, Auth.js, shadcn/ui, Recharts, Vitest, Testing Library, jsdom,
-  `@vitejs/plugin-react`, Playwright.
+  `@vitejs/plugin-react`, Playwright, `tsx` (versión exacta, solo para `scripts/db-seed.ts`).
 - Cada una se instala dentro del change que la necesita y se justifica en su `design.md`.
 - Cualquier otra dependencia: preguntar antes.
 - NO ejecutar `npm audit fix --force`: bajaría Prisma a la versión 6.
