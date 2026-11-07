@@ -39,6 +39,15 @@ export const transaccionRepository = {
     })
   },
 
+  /** Suma de montos por tipo de las transacciones del usuario entre dos fechas, ambas incluidas. */
+  async sumasPorTipo(usuarioId: string, desde: Date, hasta: Date) {
+    return prisma.transaccion.groupBy({
+      by: ['tipo'],
+      where: { usuarioId, fecha: { gte: desde, lte: hasta } },
+      _sum: { monto: true },
+    })
+  },
+
   async listar(usuarioId: string, filtros: FiltrosListarRepo = {}) {
     return prisma.transaccion.findMany({
       where: {

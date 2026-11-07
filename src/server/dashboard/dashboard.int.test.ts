@@ -1,0 +1,183 @@
+import { beforeEach, describe, expect, it } from 'vitest'
+import { limpiarBD } from '@/test/bd/limpiar'
+import { registrarUsuario } from '@/server/auth/registro'
+import { listarCategorias } from '@/server/categorias/categorias'
+import { crearCuenta } from '@/server/cuentas/cuentas'
+import { registrarTransaccion } from '@/server/transacciones/transacciones'
+import { calcularResumen } from './dashboard'
+
+// "Hoy" de los escenarios: viernes 6 de noviembre de 2026 en Ecuador.
+const HOY = '2026-11-06'
+
+beforeEach(async () => {
+  await limpiarBD(process.env.DATABASE_URL!)
+})
+
+async function registrarUsuarioDePrueba(nombre: string, email: string) {
+  const registro = await registrarUsuario({
+    nombre,
+    nombreNegocio: `Negocio de ${nombre}`,
+    email,
+    password: 'clave-segura-1',
+  })
+  if (!registro.ok) throw new Error('Falló el registro')
+  return registro.usuario.id
+}
+
+async function crearCuentaDePrueba(usuarioId: string, nombre: string, saldoInicial = '0.00') {
+  const cuenta = await crearCuenta(usuarioId, { nombre, tipo: 'BANCO', saldoInicial })
+  if (!cuenta.ok) throw new Error('Falló la creación de la cuenta')
+  return cuenta.cuenta.id
+}
+
+async function idCategoria(usuarioId: string, tipo: 'GASTO' | 'INGRESO', nombre: string) {
+  const categorias = await listarCategorias(usuarioId)
+  const lista = tipo === 'GASTO' ? categorias.gasto : categorias.ingreso
+  const categoria = lista.find((c) => c.nombre === nombre)
+  if (!categoria) throw new Error(`Falta la categoría ${nombre}`)
+  return categoria.id
+}
+
+interface MovimientoDePrueba {
+  tipo: 'GASTO' | 'INGRESO'
+  monto: string
+  fecha: string
+  cuentaId: string
+  categoria: string
+}
+
+async function registrar(usuarioId: string, movimiento: MovimientoDePrueba) {
+  const categoriaId = await idCategoria(usuarioId, movimiento.tipo, movimiento.categoria)
+  const resultado = await registrarTransaccion(usuarioId, {
+    tipo: movimiento.tipo,
+    monto: movimiento.monto,
+    fecha: movimiento.fecha,
+    cuentaId: movimiento.cuentaId,
+    categoriaId,
+  })
+  if (!resultado.ok) throw new Error('Falló el registro de la transacción')
+}
+
+describe('dashboard', () => {
+  it('Ver totales del período', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const cuentaId = await crearCuentaDePrueba(usuarioId, 'Banco')
+    await registrar(usuarioId, {
+      tipo: 'INGRESO',
+      monto: '1200.00',
+      fecha: '2026-11-02',
+      cuentaId,
+      categoria: 'Ventas',
+    })
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '400.00',
+      fecha: '2026-11-03',
+      cuentaId,
+      categoria: 'Arriendo',
+    })
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '380.50',
+      fecha: '2026-11-05',
+      cuentaId,
+      categoria: 'Insumos',
+    })
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.totalIngresos).toBe('1200.00')
+    expect(resumen.totalGastos).toBe('780.50')
+    expect(resumen.balance).toBe('419.50')
+  })
+
+  it('El período día solo cuenta las transacciones de hoy', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const cuentaId = await crearCuentaDePrueba(usuarioId, 'Banco')
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '12.40',
+      fecha: '2026-11-06',
+      cuentaId,
+      categoria: 'Insumos',
+    })
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '7.60',
+      fecha: '2026-11-05',
+      cuentaId,
+      categoria: 'Insumos',
+    })
+
+    const resumen = await calcularResumen(usuarioId, 'dia', HOY)
+
+    expect(resumen.totalGastos).toBe('12.40')
+  })
+
+  it('El período semana va de lunes a domingo', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const cuentaId = await crearCuentaDePrueba(usuarioId, 'Banco')
+    const gastos = [
+      { monto: '10.00', fecha: '2026-11-01' },
+      { monto: '20.25', fecha: '2026-11-02' },
+      { monto: '30.50', fecha: '2026-11-08' },
+      { monto: '40.00', fecha: '2026-11-09' },
+    ]
+    for (const gasto of gastos) {
+      await registrar(usuarioId, { tipo: 'GASTO', ...gasto, cuentaId, categoria: 'Insumos' })
+    }
+
+    const resumen = await calcularResumen(usuarioId, 'semana', HOY)
+
+    expect(resumen.totalGastos).toBe('50.75')
+  })
+
+  it('Las transacciones fuera del período no cuentan en los totales', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const cuentaId = await crearCuentaDePrueba(usuarioId, 'Banco')
+    const ingresos = [
+      { monto: '300.00', fecha: '2026-10-31' },
+      { monto: '45.50', fecha: '2026-11-01' },
+      { monto: '4.50', fecha: '2026-11-30' },
+    ]
+    for (const ingreso of ingresos) {
+      await registrar(usuarioId, { tipo: 'INGRESO', ...ingreso, cuentaId, categoria: 'Ventas' })
+    }
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.totalIngresos).toBe('50.00')
+  })
+
+  it('Los importes del dashboard se suman sin redondeos intermedios', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const cuentaId = await crearCuentaDePrueba(usuarioId, 'Banco')
+    await registrar(usuarioId, {
+      tipo: 'INGRESO',
+      monto: '0.10',
+      fecha: '2026-11-02',
+      cuentaId,
+      categoria: 'Ventas',
+    })
+    await registrar(usuarioId, {
+      tipo: 'INGRESO',
+      monto: '0.20',
+      fecha: '2026-11-03',
+      cuentaId,
+      categoria: 'Ventas',
+    })
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '0.30',
+      fecha: '2026-11-04',
+      cuentaId,
+      categoria: 'Insumos',
+    })
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.totalIngresos).toBe('0.30')
+    expect(resumen.totalGastos).toBe('0.30')
+    expect(resumen.balance).toBe('0.00')
+  })
+})
