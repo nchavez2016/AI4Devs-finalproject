@@ -38,7 +38,9 @@ export function GraficoCategorias({ categorias }: { categorias: CategoriaGasto[]
         <BarChart data={datos} layout="vertical">
           <XAxis
             type="number"
-            domain={[0, (maximo: number) => maximo * 1.3]}
+            // Deja a la derecha de la barra más larga el espacio de su etiqueta de valor, que
+            // si no se corta en pantallas estrechas (a 360 px el 30 % extra no alcanzaba).
+            domain={[0, (maximo: number) => maximo * 1.7]}
             tick={false}
             axisLine={false}
             hide

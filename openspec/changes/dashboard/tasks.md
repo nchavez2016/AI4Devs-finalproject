@@ -135,8 +135,8 @@ Sin migraciones. Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 9. Revisión manual
 
-- [ ] 9.1 [HUMANO] Revisar `/panel` a 360 px y a 1280 px con datos, sin datos, período sin gastos, saldo negativo y cada período, pasando `docs/diseno/sistema/checklist.md` (incluida la sección de visualización, movimiento reducido y teclado). Verificación: hallazgos anotados en progress.md y corregidos o aceptados.
+- [x] 9.1 [HUMANO] Revisar `/panel` a 360 px y a 1280 px con datos, sin datos, período sin gastos, saldo negativo y cada período, pasando `docs/diseno/sistema/checklist.md` (incluida la sección de visualización, movimiento reducido y teclado). Verificación: hallazgos anotados en progress.md y corregidos o aceptados.
 
 ## 10. Cierre
 
-- [ ] 10.1 Ejecutar `npm run lint`, `npm run typecheck`, `npm run test:run` y `openspec validate dashboard --strict`. Verificación: todos sin errores; cada escenario de los deltas tiene un test con su nombre exacto.
+- [x] 10.1 Ejecutar `npm run lint`, `npm run typecheck`, `npm run test:run` y `openspec validate dashboard --strict`. Verificación: todos sin errores; cada escenario de los deltas tiene un test con su nombre exacto.
