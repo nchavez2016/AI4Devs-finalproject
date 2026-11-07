@@ -122,6 +122,7 @@ Se formatea con `Intl.NumberFormat('es-EC', { style: 'currency', currency: 'USD'
 - **Cerrar sesión:** botón terciario, nunca el primario de la vista. — Por qué: no compite con la acción principal de la pantalla.
 - **Móvil (por debajo de `escritorio`):** la navegación y "Cerrar sesión" se agrupan en un menú que se abre con el botón "Abrir menú" (icono `Menu`, `objetivo-tactil`, `aria-expanded`) y se muestra en un Sheet lateral que atrapa el foco, se cierra con Escape o al elegir un enlace y devuelve el foco al botón. — Por qué: en 360 px no caben tres enlaces y el botón.
 - El `h1` de cada pantalla pertenece a su `EncabezadoPagina`, dentro de `main`; la cabecera no lleva `h1`. — Por qué: un único `h1` por pantalla.
+- En el `EncabezadoPagina`, la acción primaria se mantiene en una sola línea de texto y baja bajo el título si no cabe junto a él. — Por qué: evita que el texto del botón se parta o reduzca el ancho del título cuando el espacio no es suficiente.
 - No hay enlace "← Volver al panel" en las pantallas: la cabecera lo sustituye. — Por qué: un solo mecanismo de navegación.
 
 ### 7.8 Iconos
