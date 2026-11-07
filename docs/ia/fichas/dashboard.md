@@ -1,0 +1,18 @@
+# Ficha IA — dashboard — 2026-11-07
+- Ticket / HU: HU-003 (dashboard financiero) y TK-003
+- Fase: spec + implementación + tests
+- Herramienta y modelo, por fase:
+  - propose: Claude Code, Opus 5.5 (claude-opus-5-5); sesión 943dbdf7-77d6-4fb0-b200-0793d4aa9dba
+  - apply, ajuste del gráfico y archive: Claude Code, Sonnet 5.5 (claude-sonnet-5-5), tras un /model a mitad de la sesión
+  - modelIds tomados del contexto de la sesión
+- Skills, comandos o subagentes usados: /opsx:propose, /opsx:apply, /opsx:archive; skills ux-cuadre y dashboard-cuadre; sin /opsx:verify (cobertura por nombre de escenario, suite completa y revisión manual 9.1)
+- Prompt clave (resumido): /opsx:propose dashboard con lectura previa de AGENTS.md, skills y docs de diseño; decisiones 1–4 abiertas como tareas [HUMANO]; sin código ni commits.
+  - session_id: 943dbdf7-77d6-4fb0-b200-0793d4aa9dba
+  - prompt_id: f76dffab-3a49-400c-8bbd-8a54eaca44a9 (propose) y 0430a1e1-62fc-43cc-b9c3-3b1bd1dca16c (apply)
+- Resultado: panel convertido en dashboard con totales por período, saldos, top 5 de categorías (Recharts 3.10.1) y estados; 102/102 tareas, 284 tests, 29 escenarios.
+- Ajuste humano (BORRADOR, humano valida):
+  - Decisiones 0.1–0.6 la opción recomendada y autorización 0.7 (retirar panel.ts y tests de tarjetas); un commit por grupo.
+  - Pidió mutación float para forzar el RED de 2.13.
+  - Corrección tras revisión manual: etiqueta $120,00 cortada a 360 px.
+- Tests: iteraciones hasta pasar: 2 en el RED de 2.13 (formato, no deriva) y 1 fallo transitorio por timeout al comitear
+- Salió bien a la primera: no (6 REDs forzados por mutación, un test de semana añadido y un fix visual del gráfico)

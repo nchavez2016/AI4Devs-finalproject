@@ -169,27 +169,6 @@ error y uno de éxito, con un único botón primario en la vista.
 - **AND** la lista va antes que la tarjeta y la tarjeta contiene el formulario
 - **AND** la vista tiene un solo botón primario, "Crear cuenta"
 
-### Requirement: Acceso desde el panel
-El panel SHALL ofrecer una tarjeta de acceso a la pantalla de cuentas, otra a la de categorías
-y otra a la de transacciones. Cada tarjeta es un único enlace que cubre toda su superficie y no
-contiene otros controles.
-
-#### Scenario: El panel enlaza a cuentas y categorías
-- **GIVEN** el usuario autenticado está en el panel
-- **WHEN** se muestra el panel
-- **THEN** hay un enlace "Cuentas" a /cuentas y un enlace "Categorías" a /categorias
-
-#### Scenario: El panel enlaza a transacciones
-- **GIVEN** el usuario autenticado está en el panel
-- **WHEN** se muestra el panel
-- **THEN** hay un enlace "Transacciones" a /transacciones
-
-#### Scenario: Las tarjetas de acceso del panel tienen un solo enlace
-- **GIVEN** el usuario autenticado está en el panel
-- **WHEN** se muestra el panel
-- **THEN** hay una lista con tres tarjetas, "Transacciones", "Cuentas" y "Categorías", cada una con una frase que explica la sección
-- **AND** cada tarjeta contiene exactamente un enlace y ningún botón
-
 ### Requirement: Saldo actual calculado
 El saldo de una cuenta SHALL calcularse como su saldo inicial más la suma de sus ingresos
 menos la suma de sus gastos, con 2 decimales y sin redondeos intermedios. El saldo MUST no
