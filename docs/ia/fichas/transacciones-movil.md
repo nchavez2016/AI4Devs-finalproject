@@ -1,0 +1,21 @@
+# Ficha IA — transacciones-movil — 2026-11-06
+- Ticket / HU: HU-001 (registrar una transacción), mejora de registro móvil primero; ticket propio no registrado
+- Fase: spec + implementación + tests
+- Herramienta y modelo, por fase:
+  - propose: Claude Code, Opus 5.5 (claude-opus-5-5); sesión e10c1c46-b553-4ff5-8abb-cf64c5f66dc9
+  - apply: Antigravity, Gemini 3.8 Flash (High); registro manual (el hook de .claude/settings.json no se dispara allí); modelId no registrado
+  - verify: Claude Code, Opus 5.5 (claude-opus-5-5)
+  - ajuste del test de estilos y archive: Claude Code, Sonnet 5.5 (claude-sonnet-5-5), tras un /model a mitad del change
+  - modelIds tomados del contexto de la sesión; el transcript no se consultó (el hook bloquea comandos sobre .claude)
+- Skills, comandos o subagentes usados: /opsx:propose, /opsx-apply (Antigravity), /opsx:verify, /opsx:archive; uso de ux-cuadre en apply no registrado
+- Prompt clave (resumido): /opsx-apply transacciones-movil en Antigravity, con las autorizaciones 0.1 (modificar el test "…en dos columnas"), 0.2 (aceptar el orden de foco en escritorio) y 0.3 (vitest.config.mts), y la orden de detenerse antes de 9.1 (revisión manual).
+  - session_id: no registrado (Antigravity, registro manual)
+  - prompt_id: no registrado
+- Resultado (1-2 líneas): 37 tareas: formulario primero en el DOM, filtros plegables con "Filtros (n)", botón Guardar fijo con margen seguro, cabecera "Hoy · …" y sin hueco bajo el encabezado. Main spec transacciones sincronizada (3 requirements modificados, 25 escenarios del delta con test; 45 en total).
+- Ajuste humano:
+  - Se eliminó viewport-fit=cover de la propuesta (global, sin aporte con viewport-fit=auto) y se detectó que animate-entrada con `both` rompía position: fixed (cambiado a backwards).
+  - Se reforzó el test de scroll-padding-bottom, que daba falso positivo (verify, aviso 1).
+  - Revisión manual a 360 px y 1280 px; commits agrupados en dos (docs y código) porque la aplicación en Antigravity fue en bloque, lo que incumple el commit por subtarea.
+- Tests: iteraciones hasta pasar: 255 en verde (47 archivos); solo "La cabecera del día de hoy en la lista móvil empieza por Hoy" necesitó una segunda iteración (el selector .escritorio:hidden coincidía con el botón de filtros); el resto, RED → GREEN a la primera.
+- Salió bien a la primera: sí, salvo ese test (el resto de los tests, RED → GREEN en la primera iteración).
+- Hallazgos del verify sin corregir, ya en docs/pendientes.md: helpers de filtros importados desde src/app y aria-controls con id fijo.
