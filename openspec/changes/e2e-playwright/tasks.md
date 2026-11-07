@@ -21,9 +21,9 @@
 
 ## 3. Escenario: La suite E2E acepta una base que termina en _test
 
-- [ ] 3.1 RED: test "La suite E2E acepta una base que termina en _test" en `src/test/e2e/preparar-base-e2e.test.ts`; si pasa sin cambios porque la guarda ya existe, detenerse y proponer cómo observar el RED (mutación). Verificación: fallo observado o mutación documentada en progress.md.
-- [ ] 3.2 GREEN: ajustar `src/test/e2e/preparar-base-e2e.ts` para devolver el nombre aceptado. Verificación: `npx vitest run src/test/e2e/preparar-base-e2e.test.ts --reporter=dot` en verde.
-- [ ] 3.3 REFACTOR: revisar nombres y mensajes de error. Verificación: mismo comando en verde.
+- [x] 3.1 RED: test "La suite E2E acepta una base que termina en _test" en `src/test/e2e/preparar-base-e2e.test.ts`; si pasa sin cambios porque la guarda ya existe, detenerse y proponer cómo observar el RED (mutación). Verificación: fallo observado o mutación documentada en progress.md.
+- [x] 3.2 GREEN: ajustar `src/test/e2e/preparar-base-e2e.ts` para devolver el nombre aceptado. Verificación: `npx vitest run src/test/e2e/preparar-base-e2e.test.ts --reporter=dot` en verde.
+- [x] 3.3 REFACTOR: revisar nombres y mensajes de error. Verificación: mismo comando en verde.
 
 ## 4. Escenario: Cada ejecución E2E usa un correo distinto
 
