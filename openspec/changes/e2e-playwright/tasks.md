@@ -45,15 +45,15 @@
 
 ## 7. Escenario: Abrir el panel sin sesión en el navegador lleva al login (si 0.3 lo incluye)
 
-- [ ] 7.1 RED: test "Abrir el panel sin sesión en el navegador lleva al login" en `e2e/acceso.spec.ts`; como la protección ya existe, verificar el RED por mutación del destino esperado. Verificación: fallo observado y anotado.
-- [ ] 7.2 GREEN: ajustar el test o los `data-testid` necesarios. Verificación: `npm run test:e2e -- e2e/acceso.spec.ts` en verde.
-- [ ] 7.3 REFACTOR: reutilizar `e2e/soporte/pasos.ts`. Verificación: en verde.
+- [x] 7.1 RED: test "Abrir el panel sin sesión en el navegador lleva al login" en `e2e/acceso.spec.ts`; como la protección ya existe, verificar el RED por mutación del destino esperado. Verificación: fallo observado y anotado.
+- [x] 7.2 GREEN: ajustar el test o los `data-testid` necesarios. Verificación: `npm run test:e2e -- e2e/acceso.spec.ts` en verde.
+- [x] 7.3 REFACTOR: reutilizar `e2e/soporte/pasos.ts`. Verificación: en verde.
 
 ## 8. Escenario: El panel de un usuario no muestra la cuenta ni los gastos de otro (si 0.3 lo incluye)
 
-- [ ] 8.1 RED: test "El panel de un usuario no muestra la cuenta ni los gastos de otro" en `e2e/aislamiento.spec.ts`, con dos contextos de navegador y dos correos únicos; verificar el RED por mutación si pasa a la primera. Verificación: fallo observado y anotado.
-- [ ] 8.2 GREEN: mínimo cambio que el RED exija. Verificación: `npm run test:e2e -- e2e/aislamiento.spec.ts` en verde.
-- [ ] 8.3 REFACTOR: reutilizar `e2e/soporte/pasos.ts`. Verificación: en verde.
+- [x] 8.1 RED: test "El panel de un usuario no muestra la cuenta ni los gastos de otro" en `e2e/aislamiento.spec.ts`, con dos contextos de navegador y dos correos únicos; verificar el RED por mutación si pasa a la primera. Verificación: fallo observado y anotado.
+- [x] 8.2 GREEN: mínimo cambio que el RED exija. Verificación: `npm run test:e2e -- e2e/aislamiento.spec.ts` en verde.
+- [x] 8.3 REFACTOR: reutilizar `e2e/soporte/pasos.ts`. Verificación: en verde.
 
 ## 9. Estabilidad
 
