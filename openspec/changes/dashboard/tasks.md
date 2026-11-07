@@ -126,12 +126,12 @@ Sin migraciones. Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 8. Estados de carga y error
 
-- [ ] 8.1 RED — `src/app/(privado)/panel/estados.test.tsx`, test "Dashboard en carga muestra un esqueleto ocupado".
-- [ ] 8.2 GREEN — `src/app/(privado)/panel/loading.tsx` con esqueleto estático de totales, saldos y categorías y `aria-busy="true"`. Test en verde.
-- [ ] 8.3 REFACTOR — test en verde.
-- [ ] 8.4 RED — mismo archivo, test "Error al cargar el dashboard ofrece reintentar".
-- [ ] 8.5 GREEN — `src/app/(privado)/panel/error.tsx` ("No pudimos cargar tu resumen.", secundario "Reintentar" que llama a `retry`), como `cuentas/error.tsx`. Test en verde.
-- [ ] 8.6 REFACTOR — `panel/` completo en verde.
+- [x] 8.1 RED — `src/app/(privado)/panel/estados.test.tsx`, test "Dashboard en carga muestra un esqueleto ocupado".
+- [x] 8.2 GREEN — `src/app/(privado)/panel/loading.tsx` con esqueleto estático de totales, saldos y categorías y `aria-busy="true"`. Test en verde.
+- [x] 8.3 REFACTOR — test en verde.
+- [x] 8.4 RED — mismo archivo, test "Error al cargar el dashboard ofrece reintentar".
+- [x] 8.5 GREEN — `src/app/(privado)/panel/error.tsx` ("No pudimos cargar tu resumen.", secundario "Reintentar" que llama a `retry`), como `cuentas/error.tsx`. Test en verde.
+- [x] 8.6 REFACTOR — `panel/` completo en verde.
 
 ## 9. Revisión manual
 
