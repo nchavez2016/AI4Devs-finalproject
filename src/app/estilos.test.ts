@@ -23,10 +23,42 @@ describe('estilos globales', () => {
   })
 
   it('El botón fijo no tapa el campo enfocado', () => {
-    const ruta = resolve(__dirname, 'globals.css')
-    const css = readFileSync(ruta, 'utf-8')
+    const css = readFileSync(resolve(__dirname, 'globals.css'), 'utf-8')
 
-    expect(css).toMatch(/html\s*\{[^}]*scroll-padding-bottom:\s*var\(--spacing-reserva-barra-inferior\)/)
-    expect(css).toMatch(/@variant\s+escritorio\s*\{[\s\S]*?html\s*\{[^}]*scroll-padding-bottom:\s*0/)
+    // Se busca solo dentro de @layer base: otro @variant escritorio anterior (el de :root)
+    // no puede dar un falso positivo.
+    const capaBase = cuerpoDeBloque(css, /@layer\s+base\s*\{/)
+    expect(capaBase).not.toBeNull()
+
+    const variantEscritorio = capaBase!.match(/@variant\s+escritorio\s*\{/)
+    expect(variantEscritorio).toBeTruthy()
+    const cuerpoVariant = cuerpoDeBloque(capaBase!, /@variant\s+escritorio\s*\{/)
+    expect(cuerpoVariant).toMatch(/html\s*\{[^}]*scroll-padding-bottom:\s*0\s*;/)
+
+    // La regla de móvil es la que queda fuera de la variante.
+    const fueraDeVariant = capaBase!.replace(
+      `${variantEscritorio![0]}${cuerpoVariant}}`,
+      ''
+    )
+    expect(fueraDeVariant).toMatch(
+      /html\s*\{[^}]*scroll-padding-bottom:\s*var\(--spacing-reserva-barra-inferior\)/
+    )
   })
 })
+
+// Devuelve el texto entre las llaves del primer bloque que empieza en `inicio`, o null.
+function cuerpoDeBloque(texto: string, inicio: RegExp): string | null {
+  const coincidencia = inicio.exec(texto)
+  if (!coincidencia) return null
+
+  const desde = coincidencia.index + coincidencia[0].length
+  let profundidad = 1
+  for (let i = desde; i < texto.length; i++) {
+    if (texto[i] === '{') profundidad++
+    else if (texto[i] === '}') {
+      profundidad--
+      if (profundidad === 0) return texto.slice(desde, i)
+    }
+  }
+  return null
+}
