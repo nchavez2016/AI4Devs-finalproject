@@ -57,8 +57,8 @@
 
 ## 9. Estabilidad
 
-- [ ] 9.1 Ejecutar `npm run test:e2e -- --retries=0` tres veces seguidas sin cambios entre ejecuciones. La primera se hace con la base `cuadre_e2e_test` inexistente (la persona la borra antes), para comprobar que `migrate deploy` la crea y migra. Verificación: las tres en verde, anotado en progress.md.
+- [x] 9.1 Ejecutar `npm run test:e2e -- --retries=0` tres veces seguidas sin cambios entre ejecuciones. La primera se hace con la base `cuadre_e2e_test` inexistente (la persona la borra antes), para comprobar que `migrate deploy` la crea y migra. Verificación: las tres en verde, anotado en progress.md.
 
 ## 10. Cierre
 
-- [ ] 10.1 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run`, `npm run test:e2e` y `openspec validate e2e-playwright --strict`. Verificación: todos sin errores.
+- [x] 10.1 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run`, `npm run test:e2e` y `openspec validate e2e-playwright --strict`. Verificación: todos sin errores.
