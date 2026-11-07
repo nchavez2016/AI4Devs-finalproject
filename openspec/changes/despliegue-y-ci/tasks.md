@@ -34,21 +34,21 @@
 
 ## 5. Escenario: El seed se niega a correr sin confirmar la base
 
-- [ ] 5.1 RED: test "El seed se niega a correr sin confirmar la base" en `src/server/semilla/destino.test.ts`; falla porque `destino.ts` no existe. Verificación: `npx vitest run src/server/semilla/destino.test.ts --reporter=dot` falla por esa razón.
-- [ ] 5.2 GREEN: `src/server/semilla/destino.ts` con `comprobarDestinoSemilla(url, confirmacion)` (función pura, sin conexión). Verificación: el test pasa.
-- [ ] 5.3 REFACTOR: mensajes de error claros. Verificación: mismo comando en verde.
+- [x] 5.1 RED: test "El seed se niega a correr sin confirmar la base" en `src/server/semilla/destino.test.ts`; falla porque `destino.ts` no existe. Verificación: `npx vitest run src/server/semilla/destino.test.ts --reporter=dot` falla por esa razón.
+- [x] 5.2 GREEN: `src/server/semilla/destino.ts` con `comprobarDestinoSemilla(url, confirmacion)` (función pura, sin conexión). Verificación: el test pasa.
+- [x] 5.3 REFACTOR: mensajes de error claros. Verificación: mismo comando en verde.
 
 ## 6. Escenario: El seed se niega a correr si la confirmación no coincide
 
-- [ ] 6.1 RED: test "El seed se niega a correr si la confirmación no coincide" en `src/server/semilla/destino.test.ts`. Verificación: falla por la razón esperada o mutación documentada.
-- [ ] 6.2 GREEN: comparar confirmación y nombre de la base. Verificación: el archivo de test en verde.
-- [ ] 6.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 6.1 RED: test "El seed se niega a correr si la confirmación no coincide" en `src/server/semilla/destino.test.ts`. Verificación: falla por la razón esperada o mutación documentada.
+- [x] 6.2 GREEN: comparar confirmación y nombre de la base. Verificación: el archivo de test en verde.
+- [x] 6.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 7. Escenario: El seed acepta la base confirmada
 
-- [ ] 7.1 RED: test "El seed acepta la base confirmada" en `src/server/semilla/destino.test.ts`. Verificación: falla por la razón esperada o mutación documentada.
-- [ ] 7.2 GREEN: devolver el nombre aceptado. Verificación: el archivo de test en verde.
-- [ ] 7.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
+- [x] 7.1 RED: test "El seed acepta la base confirmada" en `src/server/semilla/destino.test.ts`. Verificación: falla por la razón esperada o mutación documentada.
+- [x] 7.2 GREEN: devolver el nombre aceptado. Verificación: el archivo de test en verde.
+- [x] 7.3 REFACTOR: sin cambios previstos. Verificación: mismo comando en verde.
 
 ## 8. Escenario: El seed crea al revisor con cuentas y movimientos del mes
 
