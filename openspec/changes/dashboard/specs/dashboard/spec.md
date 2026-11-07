@@ -109,9 +109,9 @@ en el período no aparecen.
 - **THEN** solo ve "Insumos" 30.00
 
 #### Scenario: Las categorías con el mismo total se ordenan por nombre
-- **GIVEN** el usuario A tiene en noviembre de 2026 gastos de 25.00 en "Transporte" y 25.00 en "Insumos"
+- **GIVEN** el usuario A tiene en noviembre de 2026 gastos de 25.00 en "Servicios básicos" y 25.00 en "Arriendo"
 - **WHEN** abre el dashboard con el período "mes"
-- **THEN** ve "Insumos" antes que "Transporte"
+- **THEN** ve "Arriendo" antes que "Servicios básicos"
 
 #### Scenario: El dashboard muestra como máximo cinco categorías de gasto
 - **GIVEN** el usuario A tiene en noviembre de 2026 gastos en seis categorías, de 60.00, 50.00, 40.00, 30.00, 20.00 y 10.00

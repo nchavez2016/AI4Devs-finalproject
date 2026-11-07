@@ -39,6 +39,14 @@ export const categoriaRepository = {
     })
   },
 
+  /** Categorías del usuario con esos identificadores (incluye subcategorías). */
+  async listarPorIds(usuarioId: string, ids: string[]) {
+    return prisma.categoria.findMany({
+      where: { usuarioId, id: { in: ids } },
+      select: { id: true, nombre: true },
+    })
+  },
+
   async listar(usuarioId: string) {
     return prisma.categoria.findMany({
       where: {

@@ -48,6 +48,15 @@ export const transaccionRepository = {
     })
   },
 
+  /** Suma de los gastos del usuario por categoría entre dos fechas, ambas incluidas. */
+  async sumasGastoPorCategoria(usuarioId: string, desde: Date, hasta: Date) {
+    return prisma.transaccion.groupBy({
+      by: ['categoriaId'],
+      where: { usuarioId, tipo: 'GASTO', fecha: { gte: desde, lte: hasta } },
+      _sum: { monto: true },
+    })
+  },
+
   async listar(usuarioId: string, filtros: FiltrosListarRepo = {}) {
     return prisma.transaccion.findMany({
       where: {

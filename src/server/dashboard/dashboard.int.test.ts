@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { limpiarBD } from '@/test/bd/limpiar'
 import { registrarUsuario } from '@/server/auth/registro'
-import { listarCategorias } from '@/server/categorias/categorias'
+import { crearCategoria, listarCategorias } from '@/server/categorias/categorias'
 import { crearCuenta } from '@/server/cuentas/cuentas'
 import { registrarTransaccion } from '@/server/transacciones/transacciones'
 import { calcularResumen } from './dashboard'
@@ -230,6 +230,108 @@ describe('dashboard', () => {
 
     expect(resumen.saldosPorCuenta).toEqual([{ cuentaId: banco, nombre: 'Banco', saldo: '125.25' }])
     expect(resumen.totalIngresos).toBe('0.00')
+  })
+
+  it('Ver principales categorías de gasto', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const cuentaId = await crearCuentaDePrueba(usuarioId, 'Banco')
+    const gastos = [
+      { monto: '95.25', fecha: '2026-11-02', categoria: 'Insumos' },
+      { monto: '400.00', fecha: '2026-11-03', categoria: 'Arriendo' },
+      { monto: '120.00', fecha: '2026-11-04', categoria: 'Servicios básicos' },
+      { monto: '60.50', fecha: '2026-11-05', categoria: 'Servicios básicos' },
+    ]
+    for (const gasto of gastos) {
+      await registrar(usuarioId, { tipo: 'GASTO', ...gasto, cuentaId })
+    }
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.topCategoriasGasto).toEqual([
+      { categoria: 'Arriendo', total: '400.00' },
+      { categoria: 'Servicios básicos', total: '180.50' },
+      { categoria: 'Insumos', total: '95.25' },
+    ])
+  })
+
+  it('Las categorías de gasto solo cuentan gastos del período', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const cuentaId = await crearCuentaDePrueba(usuarioId, 'Banco')
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '70.00',
+      fecha: '2026-10-31',
+      cuentaId,
+      categoria: 'Arriendo',
+    })
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '30.00',
+      fecha: '2026-11-03',
+      cuentaId,
+      categoria: 'Insumos',
+    })
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.topCategoriasGasto).toEqual([{ categoria: 'Insumos', total: '30.00' }])
+  })
+
+  it('Las categorías con el mismo total se ordenan por nombre', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const cuentaId = await crearCuentaDePrueba(usuarioId, 'Banco')
+    // Las categorías por defecto se crean con "Servicios básicos" antes que "Arriendo": el orden
+    // por nombre es el contrario al de creación, así que el test no pasa por casualidad.
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '25.00',
+      fecha: '2026-11-02',
+      cuentaId,
+      categoria: 'Servicios básicos',
+    })
+    await registrar(usuarioId, {
+      tipo: 'GASTO',
+      monto: '25.00',
+      fecha: '2026-11-03',
+      cuentaId,
+      categoria: 'Arriendo',
+    })
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.topCategoriasGasto.map((c) => c.categoria)).toEqual([
+      'Arriendo',
+      'Servicios básicos',
+    ])
+  })
+
+  it('El dashboard muestra como máximo cinco categorías de gasto', async () => {
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+    const cuentaId = await crearCuentaDePrueba(usuarioId, 'Banco')
+    // Las categorías por defecto de gasto son cinco: se crea una sexta.
+    const nueva = await crearCategoria(usuarioId, { nombre: 'Publicidad', tipo: 'GASTO' })
+    if (!nueva.ok) throw new Error('Falló la creación de la categoría')
+    const gastos = [
+      { monto: '60.00', categoria: 'Arriendo' },
+      { monto: '50.00', categoria: 'Insumos' },
+      { monto: '40.00', categoria: 'Servicios básicos' },
+      { monto: '30.00', categoria: 'Transporte' },
+      { monto: '20.00', categoria: 'Otros' },
+      { monto: '10.00', categoria: 'Publicidad' },
+    ]
+    for (const gasto of gastos) {
+      await registrar(usuarioId, { tipo: 'GASTO', ...gasto, fecha: '2026-11-02', cuentaId })
+    }
+
+    const resumen = await calcularResumen(usuarioId, 'mes', HOY)
+
+    expect(resumen.topCategoriasGasto.map((c) => c.total)).toEqual([
+      '60.00',
+      '50.00',
+      '40.00',
+      '30.00',
+      '20.00',
+    ])
   })
 
   it('Una cuenta sin movimientos muestra su saldo inicial', async () => {

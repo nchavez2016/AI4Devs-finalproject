@@ -55,18 +55,18 @@ Sin migraciones. Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 4. Principales categorías de gasto
 
-- [ ] 4.1 RED — `src/server/dashboard/dashboard.int.test.ts`, test "Ver principales categorías de gasto". Debe fallar porque el resumen no incluye `topCategoriasGasto`.
-- [ ] 4.2 GREEN — `transaccionRepository.sumasGastoPorCategoria(usuarioId, desde, hasta)` (`groupBy` por `categoriaId`, `tipo: 'GASTO'`), nombres desde `categoriaRepository.listar`, orden por total descendente en `dashboard.ts`. Test en verde.
-- [ ] 4.3 REFACTOR — test en verde.
-- [ ] 4.4 RED — mismo archivo, test "Las categorías de gasto solo cuentan gastos del período". Si pasa sin cambios, forzar el RED.
-- [ ] 4.5 GREEN — filtro de fechas en `sumasGastoPorCategoria`. Test en verde.
-- [ ] 4.6 REFACTOR — test en verde.
-- [ ] 4.7 RED — mismo archivo, test "Las categorías con el mismo total se ordenan por nombre".
-- [ ] 4.8 GREEN — desempate por nombre (`localeCompare` con `es`). Test en verde.
-- [ ] 4.9 REFACTOR — test en verde.
-- [ ] 4.10 RED — mismo archivo, test "El dashboard muestra como máximo cinco categorías de gasto".
-- [ ] 4.11 GREEN — recorte a 5 tras ordenar (design 0.5). Test en verde.
-- [ ] 4.12 REFACTOR — `dashboard.int.test.ts` completo en verde.
+- [x] 4.1 RED — `src/server/dashboard/dashboard.int.test.ts`, test "Ver principales categorías de gasto". Debe fallar porque el resumen no incluye `topCategoriasGasto`.
+- [x] 4.2 GREEN — `transaccionRepository.sumasGastoPorCategoria(usuarioId, desde, hasta)` (`groupBy` por `categoriaId`, `tipo: 'GASTO'`), nombres desde `categoriaRepository.listar`, orden por total descendente en `dashboard.ts`. Test en verde.
+- [x] 4.3 REFACTOR — test en verde.
+- [x] 4.4 RED — mismo archivo, test "Las categorías de gasto solo cuentan gastos del período". Si pasa sin cambios, forzar el RED.
+- [x] 4.5 GREEN — filtro de fechas en `sumasGastoPorCategoria`. Test en verde.
+- [x] 4.6 REFACTOR — test en verde.
+- [x] 4.7 RED — mismo archivo, test "Las categorías con el mismo total se ordenan por nombre".
+- [x] 4.8 GREEN — desempate por nombre (`localeCompare` con `es`). Test en verde.
+- [x] 4.9 REFACTOR — test en verde.
+- [x] 4.10 RED — mismo archivo, test "El dashboard muestra como máximo cinco categorías de gasto".
+- [x] 4.11 GREEN — recorte a 5 tras ordenar (design 0.5). Test en verde.
+- [x] 4.12 REFACTOR — `dashboard.int.test.ts` completo en verde.
 
 ## 5. Carga de la pantalla, período en la URL y aislamiento
 
