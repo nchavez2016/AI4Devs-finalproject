@@ -27,6 +27,15 @@ crear/migrar la base y la app se arranca después, con `DATABASE_URL` apuntando 
 y la lógica de creación/migración de `global-setup.ts`, extrayéndola a una función compartida si
 hace falta (con caracterización previa). Alternativa descartada: guarda propia duplicada.
 
+**Desvío de D1 (grupo 5).** La base E2E la crea `prisma migrate deploy`, no `global-setup.ts`
+(comprobado: sobre una base inexistente la crea y aplica las 3 migraciones). Motivo: Playwright
+carga la configuración y el `globalSetup` como CommonJS, y el cliente Prisma generado
+(`src/generated/prisma`) usa `import.meta`, por lo que no puede importarse. Consecuencias:
+`aplicarMigraciones` pasó a `src/test/bd/migraciones.ts` (sin cliente Prisma, compartido por
+Vitest y Playwright); `global-setup.ts` conserva `crearBaseSiNoExiste` solo para Vitest;
+`preparar-base-e2e.ts` aplica la guarda y luego migra. La guarda también se ejecuta al cargar
+`playwright.config.ts`, porque el `webServer` arranca antes que el `globalSetup`.
+
 **D2. Puerto propio y sin reutilizar servidor.** `webServer` en el puerto 3100 con
 `reuseExistingServer: false`, para no conectarse por error a un `next dev` en 3000 apuntando a
 la base de desarrollo.

@@ -1,13 +1,8 @@
-import { execFile } from 'node:child_process'
-import { createRequire } from 'node:module'
-import { promisify } from 'node:util'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '@/generated/prisma/client'
 import { exigirBaseDePrueba } from './guardia'
+import { aplicarMigraciones } from './migraciones'
 import { urlBaseDePrueba } from './url'
-
-const execFileAsync = promisify(execFile)
-const require = createRequire(import.meta.url)
 
 /** URL al mismo servidor, pero a la base "postgres" (siempre existe), para poder
  * crear la base de prueba si todavía no existe. */
@@ -17,7 +12,7 @@ function urlDeAdministracion(url: string): string {
   return administracion.toString()
 }
 
-export async function crearBaseSiNoExiste(url: string): Promise<void> {
+async function crearBaseSiNoExiste(url: string): Promise<void> {
   const nombreBase = exigirBaseDePrueba(url)
 
   if (!/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(nombreBase)) {
@@ -44,22 +39,6 @@ export async function crearBaseSiNoExiste(url: string): Promise<void> {
     )
   } finally {
     await prisma.$disconnect()
-  }
-}
-
-export async function aplicarMigraciones(url: string): Promise<void> {
-  exigirBaseDePrueba(url)
-
-  const cliPrisma = require.resolve('prisma/build/index.js')
-
-  try {
-    await execFileAsync(process.execPath, [cliPrisma, 'migrate', 'deploy'], {
-      env: { ...process.env, DATABASE_URL: url },
-    })
-  } catch (error) {
-    throw new Error(
-      `No se pudieron aplicar las migraciones en la base de prueba. ${String(error)}`
-    )
   }
 }
 

@@ -33,8 +33,8 @@
 
 ## 5. Configuración de la suite
 
-- [ ] 5.1 Crear `playwright.config.ts` según 0.1 y 0.2: `testDir: 'e2e'`, `globalSetup` que llama a `preparar-base-e2e`, `webServer` en el puerto acordado con `reuseExistingServer: false` y `env` con `DATABASE_URL` de la base E2E y un `AUTH_SECRET` ficticio (sin leer `.env`), `trace: 'on-first-retry'`, `screenshot: 'only-on-failure'`, `retries: 0`. Verificación: `npx playwright test --list` arranca sin errores y la configuración contiene ambos valores.
-- [ ] 5.2 Añadir el script `test:e2e` (`playwright test`) a `package.json`, sin tocar `test:run` ni el hook de pre-commit; añadir `playwright-report/` y `test-results/` a `.gitignore`; documentar en `.env.example` cualquier variable nueva que exija la app en E2E. Verificación: `npm run test:e2e -- --list` funciona y `npm run test:run` no recoge archivos de `e2e/`.
+- [x] 5.1 Crear `playwright.config.ts` según 0.1 y 0.2: `testDir: 'e2e'`, `globalSetup` que llama a `preparar-base-e2e`, `webServer` en el puerto acordado con `reuseExistingServer: false` y `env` con `DATABASE_URL` de la base E2E y un `AUTH_SECRET` ficticio (sin leer `.env`), `trace: 'on-first-retry'`, `screenshot: 'only-on-failure'`, `retries: 0`. Verificación: `npx playwright test --list` arranca sin errores y la configuración contiene ambos valores.
+- [x] 5.2 Añadir el script `test:e2e` (`playwright test`) a `package.json`, sin tocar `test:run` ni el hook de pre-commit; añadir `playwright-report/` y `test-results/` a `.gitignore`; documentar en `.env.example` cualquier variable nueva que exija la app en E2E. Verificación: `npm run test:e2e -- --list` funciona y `npm run test:run` no recoge archivos de `e2e/`.
 
 ## 6. Escenario: Flujo principal de registro, cuenta, gasto y panel
 
@@ -57,7 +57,7 @@
 
 ## 9. Estabilidad
 
-- [ ] 9.1 Ejecutar `npm run test:e2e -- --retries=0` tres veces seguidas sin cambios entre ejecuciones. Verificación: las tres en verde, anotado en progress.md.
+- [ ] 9.1 Ejecutar `npm run test:e2e -- --retries=0` tres veces seguidas sin cambios entre ejecuciones. La primera se hace con la base `cuadre_e2e_test` inexistente (la persona la borra antes), para comprobar que `migrate deploy` la crea y migra. Verificación: las tres en verde, anotado en progress.md.
 
 ## 10. Cierre
 

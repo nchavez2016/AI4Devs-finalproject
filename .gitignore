@@ -41,6 +41,10 @@ yarn-error.log*
 next-env.d.ts
 !.env.example
 
+# playwright (informes y trazas locales)
+/playwright-report/
+/test-results/
+
 # prisma client generado
 /src/generated/
 
