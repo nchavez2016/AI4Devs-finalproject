@@ -20,6 +20,7 @@
 - Antigravity en Windows pide permiso para comandos con argumentos aunque su prefijo esté en la lista y en el hook (git log, git diff, npx vitest run...). Usar Claude Code para ciclos largos de apply. Revisar si una versión futura respeta el allow del hook.
 - `FiltrosMovimientos.tsx` importa `contarFiltrosActivos`/`hayFiltrosActivos` desde `@/app/(privado)/transacciones/filtros`: mover a `src/server/transacciones/` o `src/components/` (requiere autorizar la modificación de los tests que importan `filtros.ts`).
 - `aria-controls="grupo-filtros"` en `FiltrosMovimientos.tsx` usa un id fijo: usar `useId()` si el componente se reutiliza.
+- ContenidoPanel: rangoPeriodo quedó opcional, aunque DatosDashboard lo exige. Hacerlo obligatorio en las props.
 
 ## Producto
 - Editar y eliminar movimientos (HU-005).

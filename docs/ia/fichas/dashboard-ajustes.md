@@ -1,0 +1,20 @@
+# Ficha IA — dashboard-ajustes — 2026-11-07
+- Ticket / HU: HU-003 (dashboard), ajustes de claridad en /panel; ticket propio no registrado
+- Fase: spec + implementación + tests
+- Herramienta y modelo, por fase:
+  - propose (y /opsx:update previo a aplicar): Claude Code, Opus 5.5 (claude-opus-5-5); sesión cfcecaf8-0967-4448-8bcc-e9e22e227f14
+  - apply: Antigravity, Gemini 3.8 Flash; registro manual (el hook de .claude/settings.json no se dispara allí); modelId no registrado
+  - verify y archive: Claude Code, Sonnet 5.5 (claude-sonnet-5-5), tras un /model a mitad de la sesión
+  - modelIds tomados del contexto de la sesión; el transcript no se consultó
+- Skills, comandos o subagentes usados: /opsx:propose, /opsx:update, /opsx-apply (Antigravity), /opsx:verify, /opsx:archive; ux-cuadre cargada en propose; en apply no registrado
+- Prompt clave (resumido): /opsx-apply dashboard-ajustes en Antigravity, con las decisiones 0.1 (EncabezadoPagina con flex-wrap y whitespace-nowrap), 0.2 (formato del rango sin coma y texto del subtítulo) y 0.3 (añadir rangoPeriodo al fixture datos() sin cambiar aserciones), y la orden de detenerse al final de cada grupo con resumen de los fallos vistos en RED y antes de 6.1 (revisión manual).
+  - session_id: no registrado (Antigravity, registro manual)
+  - prompt_id: no registrado
+- Resultado (1-2 líneas): 35 tareas: rango del período en fechas de Ecuador bajo el selector (textoRangoPeriodo), subtítulo en "Saldos por cuenta" y acción del encabezado en una línea. Main spec dashboard sincronizada (3 requirements, 8 escenarios con test).
+- Ajuste humano :
+  - Se corrigió el subtítulo de saldos ("hoy" no era exacto porque los saldos incluyen fechas futuras).
+  - Se añadió la tarea 5.7 para documentar la regla del encabezado en componentes.md.
+  - Revisión manual a 360 px y 1280 px, sin hallazgos; commits agrupados en dos (docs y código) porque la aplicación en Antigravity fue en bloque.
+- Tests: iteraciones hasta pasar: 293 en verde (53 archivos); ninguno necesitó más de una iteración, con un solo RED por escenario y el fallo esperado.
+- Salió bien a la primera: sí.
+- Hallazgo del verify (aviso): rangoPeriodo quedó opcional en ContenidoPanel (con Omit y valor por defecto) aunque design lo daba por obligatorio; sin corregir, no registrado en docs/pendientes.md.
