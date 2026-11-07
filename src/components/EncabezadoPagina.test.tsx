@@ -43,4 +43,21 @@ describe('EncabezadoPagina', () => {
 
     expect(within(screen.getByRole('banner')).queryByRole('button')).toBeNull()
   })
+
+  it('La acción del encabezado baja bajo el título si no cabe', () => {
+    render(
+      <EncabezadoPagina
+        titulo="Cuentas"
+        proposito="Propósito"
+        accion={<Button>Nueva cuenta</Button>}
+      />
+    )
+
+    const h1 = screen.getByRole('heading', { level: 1, name: 'Cuentas' })
+    const boton = screen.getByRole('button', { name: 'Nueva cuenta' })
+    const fila = h1.parentElement?.parentElement
+    expect(fila).not.toBeNull()
+    expect(fila?.contains(boton)).toBe(true)
+    expect(fila?.className).toContain('flex-wrap')
+  })
 })

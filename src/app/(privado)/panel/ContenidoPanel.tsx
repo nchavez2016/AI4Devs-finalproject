@@ -8,12 +8,17 @@ import { CategoriasGasto } from './CategoriasGasto'
 import { SaldosCuentas } from './SaldosCuentas'
 import { SelectorPeriodo } from './SelectorPeriodo'
 
+export interface ContenidoPanelProps extends Omit<DatosDashboard, 'rangoPeriodo'> {
+  rangoPeriodo?: string
+}
+
 export function ContenidoPanel({
   nombreNegocio,
   periodo,
+  rangoPeriodo = '',
   hayTransacciones,
   resumen,
-}: DatosDashboard) {
+}: ContenidoPanelProps) {
   return (
     <main className="px-pagina py-seccion bg-background text-foreground min-h-full">
       <div className="w-full max-w-contenido mx-auto flex flex-col gap-seccion animate-entrada">
@@ -29,7 +34,10 @@ export function ContenidoPanel({
           }
         />
 
-        <SelectorPeriodo periodo={periodo} />
+        <div className="flex flex-col gap-fila-y">
+          <SelectorPeriodo periodo={periodo} />
+          <p className="text-detalle text-muted-foreground">{rangoPeriodo}</p>
+        </div>
 
         <section aria-label="Totales del período">
           <Tarjeta>

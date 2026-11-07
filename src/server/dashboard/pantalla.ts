@@ -4,11 +4,12 @@ import { hoyEnEcuador } from '@/server/fechas'
 import { transaccionRepository } from '@/server/repositories/transaccionRepository'
 import { calcularResumen, type ResumenDashboard } from './dashboard'
 import { esquemaParametrosDashboard } from './esquemas'
-import type { Periodo } from './periodo'
+import { limitesPeriodo, textoRangoPeriodo, type Periodo } from './periodo'
 
 export interface DatosDashboard {
   nombreNegocio: string
   periodo: Periodo
+  rangoPeriodo: string
   /** Si el usuario tiene alguna transacción, en cualquier fecha (distingue los dos vacíos). */
   hayTransacciones: boolean
   resumen: ResumenDashboard
@@ -28,6 +29,7 @@ export async function cargarDashboard(parametrosDeUrl: unknown): Promise<DatosDa
   return {
     nombreNegocio: session?.user?.nombreNegocio ?? '',
     periodo,
+    rangoPeriodo: textoRangoPeriodo(periodo, limitesPeriodo(periodo, hoy)),
     hayTransacciones,
     resumen,
   }

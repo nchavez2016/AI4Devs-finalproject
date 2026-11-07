@@ -42,6 +42,7 @@ function datos(parcial: Partial<DatosDashboard> = {}): DatosDashboard {
     periodo: 'mes',
     hayTransacciones: false,
     resumen: resumenVacio,
+    rangoPeriodo: '1 – 30 nov',
     ...parcial,
   }
 }
@@ -214,5 +215,61 @@ describe('panel', () => {
     expect(within(totales).getAllByText('$0,00')).toHaveLength(3)
     expect(screen.getByText('No hay movimientos en este período.')).toBeTruthy()
     expect(screen.queryByText(/Todavía no has registrado movimientos/)).toBeNull()
+  })
+
+  it('El rango del período semana muestra de lunes a domingo', async () => {
+    const { ContenidoPanel } = await import('./ContenidoPanel')
+
+    render(
+      <ContenidoPanel
+        {...datos({
+          periodo: 'semana',
+          rangoPeriodo: 'lun 2 – dom 8 nov',
+        })}
+      />
+    )
+
+    const nav = screen.getByRole('navigation', { name: 'Período' })
+    expect(nav.nextElementSibling?.textContent).toBe('lun 2 – dom 8 nov')
+  })
+
+  it('Los saldos por cuenta aclaran que no dependen del período', async () => {
+    const { ContenidoPanel } = await import('./ContenidoPanel')
+
+    render(
+      <ContenidoPanel
+        {...datos({
+          periodo: 'semana',
+          resumen: {
+            ...resumenVacio,
+            saldosPorCuenta: [{ cuentaId: 'cta_1', nombre: 'Banco', saldo: '500.00' }],
+          },
+        })}
+      />
+    )
+
+    const h2 = screen.getByRole('heading', { level: 2, name: 'Saldos por cuenta' })
+    expect(h2.nextElementSibling?.textContent).toBe(
+      'Saldo de cada cuenta con todos sus movimientos. No cambia con el período elegido.'
+    )
+  })
+
+  it('La acción del encabezado no parte su texto', async () => {
+    const { ContenidoPanel } = await import('./ContenidoPanel')
+
+    render(
+      <ContenidoPanel
+        {...datos({
+          hayTransacciones: true,
+          resumen: { ...resumenVacio, totalIngresos: '100.00', balance: '100.00' },
+        })}
+      />
+    )
+
+    const header = screen.getByRole('banner')
+    const enlace = within(header).getByRole('link', { name: 'Registrar movimiento' })
+    const contenedor = enlace.closest('.whitespace-nowrap')
+    expect(contenedor).not.toBeNull()
+    expect(header.contains(contenedor)).toBe(true)
   })
 })

@@ -9,6 +9,9 @@ export function SaldosCuentas({ saldos }: { saldos: SaldoCuenta[] }) {
     <section aria-label="Saldos por cuenta">
       <Tarjeta className="flex flex-col gap-entre-campos">
         <h2 className="font-titulo text-titulo-seccion text-foreground">Saldos por cuenta</h2>
+        <p className="text-detalle text-muted-foreground">
+          Saldo de cada cuenta con todos sus movimientos. No cambia con el período elegido.
+        </p>
         {saldos.length === 0 ? (
           <div className="flex flex-col items-start gap-entre-campos">
             <p className="text-cuerpo text-muted-foreground">Todavía no tienes cuentas.</p>

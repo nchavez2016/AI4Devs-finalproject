@@ -153,4 +153,15 @@ describe('cargarDashboard', () => {
     await expect(cargarDashboard({})).rejects.toThrow('NEXT_REDIRECT:/login')
     expect(redirectSimulado).toHaveBeenCalledWith('/login')
   })
+
+  it('El rango del período usa la fecha de Ecuador', async () => {
+    // 03:30 UTC del 1 de diciembre son las 22:30 del 30 de noviembre en Ecuador (UTC-5).
+    vi.setSystemTime(new Date('2026-12-01T03:30:00Z'))
+    const usuarioId = await registrarUsuarioDePrueba('Ana', 'ana@tienda.ec')
+
+    iniciarSesion(usuarioId, 'Negocio de Ana')
+    const datos = await cargarDashboard({ periodo: 'mes' })
+
+    expect(datos.rangoPeriodo).toBe('1 – 30 nov')
+  })
 })
