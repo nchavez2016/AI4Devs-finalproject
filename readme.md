@@ -46,8 +46,8 @@ financiero completo, con una arquitectura ordenada que deja espacio para crecer
 en el futuro.
 
 ### 0.4. URL del proyecto:
-Pendiente — despliegue previsto en Vercel + Neon para la entrega final. En la
-Entrega 2 la app se ejecuta en local siguiendo 1.4 y se prueba con 1.5.
+Pendiente de publicar — despliegue en Vercel + Neon según la guía `docs/despliegue.md`.
+Mientras tanto la app se ejecuta en local siguiendo 1.4 y se prueba con 1.5.
 
 ### 0.5. URL o archivo comprimido del repositorio:
 https://github.com/nchavez2016/AI4Devs-finalproject
@@ -143,7 +143,7 @@ Capturas del flujo implementado hasta la Entrega 2:
 Pasos comprobados contra `package.json` y `docker-compose.yml`, coherentes con la
 arquitectura de la sección 2:
 
-1. **Requisitos previos:** Node.js y Docker instalados.
+1. **Requisitos previos:** Node.js 24.x (`engines` de `package.json`) y Docker instalados.
 2. **Clonar el repositorio** (rama de la Entrega 2) e instalar dependencias:
    ```
    git clone --branch feature/entrega-2-NCH https://github.com/nchavez2016/AI4Devs-finalproject.git
@@ -172,17 +172,24 @@ arquitectura de la sección 2:
    ```
    `migrate deploy` aplica las migraciones existentes sin crear nuevas ni hacer
    preguntas; `migrate dev` queda para quien desarrolla cambios de esquema.
-   No existe un seed de datos de ejemplo: la base queda vacía y lista para que
-   cada usuario se registre (ver 1.5).
+   Opcional: crea al usuario revisor con cuentas y movimientos de ejemplo (ver 1.5).
+   El seed exige confirmar el nombre de la base. En PowerShell:
+   ```
+   $env:SEED_CONFIRMAR_BASE = "cuadre"
+   npm run db:seed
+   ```
+   Sin seed, la base queda vacía y cada usuario se registra. Los movimientos del seed
+   son del mes en curso: **vuelve a ejecutarlo el día de la entrega** para que el panel
+   muestre datos.
 6. **Arrancar la aplicación:**
    ```
    npm run dev
    ```
    Queda disponible en `http://localhost:3000`.
 
-En desarrollo se usa PostgreSQL local (vía Docker); en producción (pendiente de
-confirmar, prevista en Vercel + Neon) la misma aplicación se conectaría cambiando
-únicamente `DATABASE_URL`.
+En desarrollo se usa PostgreSQL local (vía Docker); en producción (Vercel + Neon,
+ver `docs/despliegue.md`) la misma aplicación se conecta cambiando únicamente
+`DATABASE_URL` (y `AUTH_SECRET`).
 
 **Ejecutar los tests** (verificado en `package.json` y `vitest.config.mts`):
 
@@ -198,13 +205,14 @@ ficticias y no tocan una base de datos real. Las de integración
 
 ### 1.5. Cómo probar el MVP:
 
-**No hay usuario de demostración ni datos de ejemplo (seed).** Para revisar la
-app, regístrate con un email y contraseña nuevos: el formulario de registro crea
-tu usuario y, automáticamente, tus 7 categorías por defecto (5 de gasto y 2 de
-ingreso).
+**Usuario de demostración.** Tras ejecutar `npm run db:seed` (ver 1.4) existe el
+usuario revisor con 2 cuentas, 7 categorías y 5 movimientos de ejemplo: basta con
+iniciar sesión. Sin seed, regístrate con un email y contraseña nuevos: el formulario
+de registro crea tu usuario y, automáticamente, tus 7 categorías por defecto (5 de
+gasto y 2 de ingreso).
 
-**Credenciales de prueba sugeridas** (se registran una sola vez en el paso 1;
-después basta con iniciar sesión):
+**Credenciales de prueba** (son las del seed; sin seed se registran una sola vez
+en el paso 1):
 
 | Campo | Valor |
 |---|---|
@@ -214,12 +222,14 @@ después basta con iniciar sesión):
 
 Recorrido sugerido, con la app corriendo (`npm run dev`) y la base levantada:
 
-1. Abre `http://localhost:3000` y entra a **Registro**. Crea un usuario con las
-   credenciales de prueba de arriba (o las tuyas).
-2. Al registrarte entras directo al **panel**, con tu nombre de negocio y los
-   enlaces a Cuentas y Categorías.
-3. Entra a **Cuentas** y crea una, por ejemplo "Banco Pichincha", tipo banco,
-   con saldo inicial 500.00. La lista muestra la cuenta con ese saldo.
+1. Abre `http://localhost:3000`. Con el seed, inicia sesión con las credenciales de
+   prueba de arriba. Sin seed, entra a **Registro** y crea un usuario (con esas
+   credenciales o las tuyas).
+2. Entras directo al **panel**, con tu nombre de negocio y los enlaces a Cuentas y
+   Categorías. Con el seed ya ves ingresos, gastos y saldos del mes.
+3. Entra a **Cuentas** y crea una, por ejemplo "Cooperativa Andina", tipo banco,
+   con saldo inicial 500.00 (el seed ya trae "Banco Pichincha" y "Caja chica").
+   La lista muestra la cuenta con ese saldo.
 4. Intenta crear otra cuenta con el mismo nombre (sin distinguir mayúsculas):
    el formulario rechaza el duplicado con un mensaje junto al campo.
 5. Entra a **Categorías** y confirma que ya existen 7 (Arriendo, Insumos, Otros,
@@ -397,7 +407,8 @@ aplicación se conecta mediante una variable de entorno segura. Este esquema
 cumple el requisito de la entrega final de tener el proyecto desplegado y
 accesible por URL.
 
-**Estado: despliegue y GitHub Actions pendientes.**
+**Estado: GitHub Actions configurado (`.github/workflows/ci.yml`); el despliegue en
+Vercel + Neon sigue la guía `docs/despliegue.md` y está pendiente de publicarse.**
 
 ### 2.5. Seguridad:
 

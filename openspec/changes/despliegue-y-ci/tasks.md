@@ -94,8 +94,8 @@
 
 ## 15. Documentación
 
-- [ ] 15.1 `docs/despliegue.md`: Neon (URL pooled para Vercel, directa para migrar y sembrar exportada solo en la terminal), Vercel (rama de producción `final-project-NCH`, `DATABASE_URL`, `AUTH_SECRET`, Node 24), migraciones en producción según 0.1 y comando del seed con `SEED_CONFIRMAR_BASE`. Verificación: cada comando del documento existe en `package.json` o en la CLI de Prisma.
-- [ ] 15.2 `readme.md`: 0.4 (URL, pendiente hasta la tarea 16.6), 1.4 (Node 24 y `db:seed`), 1.5 (el revisor ya existe tras el seed; misma contraseña documentada), 2.4 (estado de CI y despliegue). Verificación: ninguna sección dice ya "No existe un seed".
+- [x] 15.1 `docs/despliegue.md`: Neon (URL pooled para Vercel, directa para migrar y sembrar exportada solo en la terminal), Vercel (rama de producción `final-project-NCH`, `DATABASE_URL`, `AUTH_SECRET`, Node 24), migraciones en producción según 0.1 y comando del seed con `SEED_CONFIRMAR_BASE`. Verificación: cada comando del documento existe en `package.json` o en la CLI de Prisma.
+- [x] 15.2 `readme.md`: 0.4 (URL, pendiente hasta la tarea 16.6), 1.4 (Node 24 y `db:seed`), 1.5 (el revisor ya existe tras el seed; misma contraseña documentada), 2.4 (estado de CI y despliegue). Verificación: ninguna sección dice ya "No existe un seed".
 
 ## 16. Despliegue [HUMANO]
 
@@ -108,4 +108,4 @@
 
 ## 17. Cierre
 
-- [ ] 17.1 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run`, `npm run test:e2e` y `openspec validate despliegue-y-ci --strict`. Verificación: todos sin errores.
+- [x] 17.1 Ejecutar `npm run lint`, `npx tsc --noEmit`, `npm run test:run`, `npm run test:e2e` y `openspec validate despliegue-y-ci --strict`. Verificación: todos sin errores.
