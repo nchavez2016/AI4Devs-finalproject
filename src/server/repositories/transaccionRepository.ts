@@ -39,6 +39,15 @@ export const transaccionRepository = {
     })
   },
 
+  /** Indica si el usuario tiene al menos una transacción, en cualquier fecha. */
+  async existeAlguna(usuarioId: string) {
+    const transaccion = await prisma.transaccion.findFirst({
+      where: { usuarioId },
+      select: { id: true },
+    })
+    return transaccion !== null
+  },
+
   /** Suma de montos por tipo de las transacciones del usuario entre dos fechas, ambas incluidas. */
   async sumasPorTipo(usuarioId: string, desde: Date, hasta: Date) {
     return prisma.transaccion.groupBy({

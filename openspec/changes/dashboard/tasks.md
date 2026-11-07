@@ -70,21 +70,21 @@ Sin migraciones. Pantallas: cargar antes la skill `ux-cuadre`.
 
 ## 5. Carga de la pantalla, período en la URL y aislamiento
 
-- [ ] 5.1 RED — `src/server/dashboard/pantalla.int.test.ts` (simula `@/auth` y `next/navigation`), test "El dashboard no incluye datos de otro usuario". Debe fallar porque `cargarDashboard` no existe.
-- [ ] 5.2 GREEN — `src/server/dashboard/pantalla.ts`: `cargarDashboard(parametrosDeUrl)` con `exigirUsuarioId()`, `Promise.all` del resumen, `existeAlguna(usuarioId)` en `transaccionRepository` y `nombreNegocio` de la sesión. Test en verde.
-- [ ] 5.3 REFACTOR — test en verde.
-- [ ] 5.4 RED — mismo archivo, test "El período por defecto es el mes en curso".
-- [ ] 5.5 GREEN — `src/server/dashboard/esquemas.ts`: `periodo` con `z.enum(['dia','semana','mes']).catch('mes')`; `cargarDashboard` devuelve `periodo`. Test en verde.
-- [ ] 5.6 REFACTOR — test en verde.
-- [ ] 5.7 RED — mismo archivo, test "Un período inválido en la URL se trata como mes". Si pasa sin cambios, forzar el RED quitando temporalmente el `.catch`.
-- [ ] 5.8 GREEN — sin cambios si ya lo cumple. Test en verde.
-- [ ] 5.9 REFACTOR — test en verde.
-- [ ] 5.10 RED — mismo archivo, test "Los límites del período usan la fecha de Ecuador" (reloj en 2026-12-01T03:30:00Z).
-- [ ] 5.11 GREEN — `src/server/fechas.ts` con `hoyEnEcuador()` (mismo `Intl.DateTimeFormat` de design 0.2), usado por `cargarDashboard`. Test en verde.
-- [ ] 5.12 REFACTOR — `src/server/transacciones/pantalla.ts` usa `hoyEnEcuador()`; `pantalla.test.ts` de transacciones (1.1) y este archivo en verde.
-- [ ] 5.13 RED — mismo archivo, test "Abrir el dashboard sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
-- [ ] 5.14 GREEN — sin cambios si `exigirUsuarioId` ya lo cumple. Test en verde.
-- [ ] 5.15 REFACTOR — `src/server/panel.ts` se retira si queda sin uso, y con él el test 1.2 (cubierto por 5.13; registrar en progress.md). Grupo 5 completo en verde.
+- [x] 5.1 RED — `src/server/dashboard/pantalla.int.test.ts` (simula `@/auth` y `next/navigation`), test "El dashboard no incluye datos de otro usuario". Debe fallar porque `cargarDashboard` no existe.
+- [x] 5.2 GREEN — `src/server/dashboard/pantalla.ts`: `cargarDashboard(parametrosDeUrl)` con `exigirUsuarioId()`, `Promise.all` del resumen, `existeAlguna(usuarioId)` en `transaccionRepository` y `nombreNegocio` de la sesión. Test en verde.
+- [x] 5.3 REFACTOR — test en verde.
+- [x] 5.4 RED — mismo archivo, test "El período por defecto es el mes en curso".
+- [x] 5.5 GREEN — `src/server/dashboard/esquemas.ts`: `periodo` con `z.enum(['dia','semana','mes']).catch('mes')`; `cargarDashboard` devuelve `periodo`. Test en verde.
+- [x] 5.6 REFACTOR — test en verde.
+- [x] 5.7 RED — mismo archivo, test "Un período inválido en la URL se trata como mes". Si pasa sin cambios, forzar el RED quitando temporalmente el `.catch`.
+- [x] 5.8 GREEN — sin cambios si ya lo cumple. Test en verde.
+- [x] 5.9 REFACTOR — test en verde.
+- [x] 5.10 RED — mismo archivo, test "Los límites del período usan la fecha de Ecuador" (reloj en 2026-12-01T03:30:00Z).
+- [x] 5.11 GREEN — `src/server/fechas.ts` con `hoyEnEcuador()` (mismo `Intl.DateTimeFormat` de design 0.2), usado por `cargarDashboard`. Test en verde.
+- [x] 5.12 REFACTOR — `src/server/transacciones/pantalla.ts` usa `hoyEnEcuador()`; `pantalla.test.ts` de transacciones (1.1) y este archivo en verde.
+- [x] 5.13 RED — mismo archivo, test "Abrir el dashboard sin sesión redirige al login". Si pasa sin cambios, forzar el RED.
+- [x] 5.14 GREEN — sin cambios si `exigirUsuarioId` ya lo cumple. Test en verde.
+- [x] 5.15 REFACTOR — `src/server/panel.ts` se retira si queda sin uso, y con él el test 1.2 (cubierto por 5.13; registrar en progress.md). Grupo 5 completo en verde. Aún lo usan `page.tsx`, `ContenidoPanel.tsx` y `panel.test.tsx`: se retira en 7.2, al rehacer la página.
 
 ## 6. Dependencia del gráfico
 

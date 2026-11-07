@@ -1,6 +1,7 @@
 import { exigirUsuarioId } from '@/server/auth/sesion'
 import { listarCategorias, type ListadoCategorias } from '@/server/categorias/categorias'
 import { listarCuentas, type CuentaItem } from '@/server/cuentas/cuentas'
+import { hoyEnEcuador } from '@/server/fechas'
 import { esquemaFiltros } from './esquemas'
 import {
   listarTransacciones,
@@ -17,13 +18,6 @@ export interface DatosTransacciones {
   hoy: string
 }
 
-const formatoHoy = new Intl.DateTimeFormat('en-CA', {
-  timeZone: 'America/Guayaquil',
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-})
-
 export async function cargarTransacciones(parametrosDeUrl: unknown): Promise<DatosTransacciones> {
   const usuarioId = await exigirUsuarioId()
   // Un parámetro inválido de la URL se ignora (design f).
@@ -35,5 +29,5 @@ export async function cargarTransacciones(parametrosDeUrl: unknown): Promise<Dat
     listarCategorias(usuarioId),
   ])
 
-  return { transacciones, cuentas, categorias, filtros, hoy: formatoHoy.format(new Date()) }
+  return { transacciones, cuentas, categorias, filtros, hoy: hoyEnEcuador() }
 }
