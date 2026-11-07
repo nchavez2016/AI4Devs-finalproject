@@ -1,0 +1,18 @@
+# Ficha IA — e2e-playwright — 2026-11-07
+- Ticket / HU: suite E2E del flujo principal (HU-001 a HU-003); ticket propio no registrado
+- Fase: spec + implementación + tests
+- Herramienta y modelo, por fase (Claude Code en todas; modelIds tomados del contexto de la sesión):
+  - propose: Opus 5.5 (claude-opus-5-5)
+  - update, apply, verify y archive: Sonnet 5.5 (claude-sonnet-5-5), tras un /model a mitad de la sesión
+- Skills, comandos o subagentes usados: /opsx:propose, /opsx:apply, /opsx:update, /opsx:verify, /opsx:archive; sin subagentes; ux-cuadre no cargada
+- Prompt clave (resumido): /opsx:propose e2e-playwright con la lista de archivos permitidos, las reglas (Playwright exacto, base _test con guarda, getByRole/getByLabel/getByTestId, sin waitForTimeout, correo único, trace on-first-retry, 3 ejecuciones sin flakiness) y cuatro decisiones abiertas que debían presentarse como tareas [HUMANO] sin resolverlas.
+  - session_id: d481590a-2929-49e8-816f-407a0b6a0c37
+  - prompt_id: 0c7e220f-9617-43ca-82e8-98a3f7f14e98 (propose); 7d415fed-a146-44d1-9c05-ecd7905c8866 (apply con las decisiones 0.1 a 0.4)
+- Resultado (1-2 líneas): 30 tareas: Playwright 1.65.0, config con build+start en el puerto 3100, base cuadre_e2e_test creada por migrate deploy y 3 specs E2E (6 tests en escritorio y móvil 360 px). Main spec pruebas-e2e creada (4 requirements, 6 escenarios con test).
+- Ajuste humano (humano valida):
+  - Pidió editar global-setup.ts directamente con migraciones.ts compartido (sin git checkout, que el hook bloqueó) y anotar el desvío de D1.
+  - /opsx:update posterior a la propuesta: screenshot only-on-failure, tarea 6.4 de evidencias con E2E_EVIDENCIA=1 y decisión D5 (capturas commiteadas a mano).
+  - Añadió a 9.1 que la primera ejecución parta con la base inexistente, y se quedó con las capturas sin commitear.
+- Tests: iteraciones hasta pasar: Vitest 296 en verde, un RED por escenario; el flujo principal necesitó 3 iteraciones (botón "Crear cuenta" ambiguo, etiqueta "Cuenta" ambigua, data-testid ausentes). E2E: 3 ejecuciones seguidas 6/6.
+- Salió bien a la primera: no (grupo 5: Playwright no cargaba el cliente Prisma por import.meta; grupo 6: selectores ambiguos).
+- Hallazgos del verify (sugerencias, sin corregir): la guarda de preparar-base-e2e.ts es redundante con la de aplicarMigraciones; el hook de pre-commit falló una vez en 3 tests sin identificar y pasó al repetir.
