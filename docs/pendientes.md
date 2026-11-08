@@ -38,3 +38,6 @@
 
 ## Despliegue
 - Comprobar que la extensión `citext` (nombres de categoría sin distinguir mayúsculas) esté disponible en Neon antes de migrar.
+- (verify de despliegue-y-ci) `AGENTS.md` (definición de terminado), `openspec/config.yaml` (guía de archivar) y `scripts/agents/antigravity-adapter.mjs` (lista de comandos permitidos) mencionan `npx tsc --noEmit` suelto, que en un clon limpio falla porque `LayoutProps` necesita `.next/types`. Cambiarlos a `npm run typecheck` (que ya ejecuta `next typegen`).
+- (verify de despliegue-y-ci) `src/server/semilla/destino.ts`: quitar la rama de confirmación vacía no rompe ningún test, porque la comparación siguiente también falla y solo cambia el mensaje. Hacer que el test "El seed se niega a correr sin confirmar la base" compruebe que el mensaje menciona `SEED_CONFIRMAR_BASE`.
+- (verify de despliegue-y-ci) El escenario "El typecheck genera los tipos de rutas antes de tsc" habla de un clon sin `.next/`, pero su test solo lee `package.json`; la prueba real fue el CI (tarea 18.4). Valorar un test que ejecute el typecheck sin `.next/`.
