@@ -142,8 +142,6 @@ Capturas del panel a la Entrega final, 11 de noviembre de 2026, generadas por la
 | Panel en móvil (360 px) | ![Panel a 360 px](docs/evidencias/e2e/panel-360.png) |
 | Panel en escritorio (1280 px) | ![Panel a 1280 px](docs/evidencias/e2e/panel-1280.png) |
 
-*(Videotutorial del recorrido: pendiente de confirmar si se agrega.)*
-
 ### 1.4. Instrucciones de instalación:
 
 Pasos comprobados contra `package.json` y `docker-compose.yml`, coherentes con la
@@ -1133,8 +1131,9 @@ a la vez, un commit por subtarea.
 - Antigravity en Windows pide confirmación para comandos con argumentos aunque
   su prefijo esté en la lista de permitidos; para ciclos largos de `apply` se
   prefiere Claude Code.
-- Los workflows de Antigravity (`.agents/workflows/`) se retiran el
-  1-nov-2026; tras esa fecha habrá que revisar la migración a las skills
+- **Riesgo a vigilar:** Antigravity anunció el retiro de sus workflows
+  (`.agents/workflows/`) el 1-nov-2026. Los workflows instalados con OpenSpec siguen
+  funcionando; si Antigravity llega a retirarlos, habrá que migrar a las skills
   `openspec-*`.
 - El traspaso entre herramientas exige hacer commit antes de cambiar de
   agente, y leer `progress.md` y `tasks.md` al retomar.
