@@ -7,7 +7,7 @@
   - session_id: 9feb4320-9c87-4b70-94dc-a185bc61fb11
   - prompt_id: ff17a050-bb41-403a-8021-7ce10b307fe0
 - Resultado (1-2 líneas): 142 tareas en TDD: registro y listado con filtros por URL (desde, hasta, tipo, cuenta), saldo calculado, pertenencia de cuenta y categoría, pantalla en dos columnas con lista por día y tabla propia, y estados vacío, carga, error y éxito. Specs principales sincronizadas: transacciones nueva, cuentas y navegacion modificadas. 51 escenarios, cada uno con su test.
-- Ajuste humano: BORRADOR (humano valida)
+- Ajuste humano: (validado)
   - Reorientó el change tras archivar rediseno-base (cabecera compartida, tarjeta, selects nativos, filtros por URL) y reordenó los grupos (pertenencia antes del tipo); aprobó la opción A (tipo = tipo de la categoría) y la modificación de 5 tests existentes.
   - Pidió parar ante timeouts del pre-commit (subió el timeout él mismo en vitest.config.mts) y aprobó las desviaciones de 2.2, 2.12 y el test de repositorio de 3.10.
   - Su revisión manual halló la tabla desbordada, la fecha en tres líneas y faltaba un título "Movimientos"; anotó además fechas mm/dd/yyyy, descripción truncada y PR de TK-002 en pendientes.

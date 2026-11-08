@@ -7,7 +7,7 @@
   - session_id: f2c5955c-c9fe-4b4f-9f45-ea36257a3954
   - prompt_id: 41a0596b-63f2-414f-b278-d7ad2c23ca81
 - Resultado (1-2 líneas): 91 tareas en TDD (cabecera con menú móvil en Sheet, tarjetas, campo de monto con "$" dentro, foco en el primer campo inválido, login y registro en tarjeta) más el script de pre-commit que rechaza clases del tema por defecto. Specs principales sincronizadas con 2 capacidades nuevas (navegacion, formularios) y 3 modificadas.
-- Ajuste humano:
+- Ajuste humano:(validado)
   - Aprobó 0.1 y 0.2 con límites: solo Sheet de shadcn/ui, Select nativo y tabla propia, sin tailwind-merge ni tw-animate-css; relajó además los gráficos (degradado, sombra, entrada breve).
   - Corrigió el flujo: un comando por vez, sin ';' ni '&&' y sin tocar .claude tras el bloqueo del hook; pidió detenerse en los grupos 10, 15, 26 y 27 y un commit por grupo.
   - El hook de protección bloqueó un comando que apuntaba a `.claude/` y encadenaba órdenes; el agente se detuvo y avisó, y se reanudó con instrucciones acotadas.

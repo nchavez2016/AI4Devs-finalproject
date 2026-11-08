@@ -9,7 +9,7 @@
   - session_id: d481590a-2929-49e8-816f-407a0b6a0c37
   - prompt_id: 0c7e220f-9617-43ca-82e8-98a3f7f14e98 (propose); 7d415fed-a146-44d1-9c05-ecd7905c8866 (apply con las decisiones 0.1 a 0.4)
 - Resultado (1-2 líneas): 30 tareas: Playwright 1.65.0, config con build+start en el puerto 3100, base cuadre_e2e_test creada por migrate deploy y 3 specs E2E (6 tests en escritorio y móvil 360 px). Main spec pruebas-e2e creada (4 requirements, 6 escenarios con test).
-- Ajuste humano (humano valida):
+- Ajuste humano:(validado)
   - Pidió editar global-setup.ts directamente con migraciones.ts compartido (sin git checkout, que el hook bloqueó) y anotar el desvío de D1.
   - /opsx:update posterior a la propuesta: screenshot only-on-failure, tarea 6.4 de evidencias con E2E_EVIDENCIA=1 y decisión D5 (capturas commiteadas a mano).
   - Añadió a 9.1 que la primera ejecución parta con la base inexistente, y se quedó con las capturas sin commitear.

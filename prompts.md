@@ -134,7 +134,7 @@ tomado de las fichas.
 - **Qué salió:** 142 tareas en TDD; registro y listado con filtros por URL, saldo
   calculado, pantalla `/transacciones` con estados vacío, carga, error y éxito.
   51 escenarios, cada uno con su test.
-- **Ajuste humano (BORRADOR, humano valida):** reorientó el change tras archivar
+- **Ajuste humano (humano valida):** reorientó el change tras archivar
   `rediseno-base` y aprobó la opción A (el tipo de la transacción es el de la
   categoría); mandó parar ante los timeouts del pre-commit; su revisión manual halló
   la tabla desbordada, la fecha en tres líneas y faltaba un título "Movimientos".
@@ -148,7 +148,7 @@ tomado de las fichas.
 - **Qué salió:** 102 tareas; el panel pasó a dashboard con totales por período,
   saldos por cuenta, top 5 de categorías de gasto (Recharts 3.10.1) y estados; 284
   tests y 29 escenarios.
-- **Ajuste humano (BORRADOR, humano valida):** eligió la opción recomendada en las
+- **Ajuste humano (humano valida):** eligió la opción recomendada en las
   decisiones 0.1–0.6 y autorizó retirar `panel.ts` y los tests de tarjetas (0.7);
   pidió una mutación `float` para forzar el RED de 2.13; su revisión manual halló una
   etiqueta `$120,00` cortada a 360 px.
@@ -164,7 +164,7 @@ tomado de las fichas.
 - **Qué salió:** 30 tareas; Playwright 1.65.0, build + start en el puerto 3100, base
   `cuadre_e2e_test` y 3 specs (6 tests en escritorio y móvil a 360 px). 3 ejecuciones
   seguidas 6/6.
-- **Ajuste humano (BORRADOR, humano valida):** pidió editar `global-setup.ts`
+- **Ajuste humano (humano valida):** pidió editar `global-setup.ts`
   directamente con `migraciones.ts` compartido y anotar el desvío de D1; añadió con
   `/opsx:update` las capturas `only-on-failure`, la tarea 6.4 de evidencias con
   `E2E_EVIDENCIA=1` y la decisión D5 (capturas commiteadas a mano).
@@ -179,7 +179,7 @@ tomado de las fichas.
 - **Qué salió:** 60 tareas; build con `prisma generate`, `npm run db:seed` con la
   guarda `SEED_CONFIRMAR_BASE`, workflow de CI, `docs/despliegue.md` y typecheck con
   `next typegen`; 313 tests en verde y E2E 6/6; app publicada en Vercel + Neon.
-- **Ajuste humano (BORRADOR, humano valida):** cerró las decisiones 0.1 a 0.5
+- **Ajuste humano (humano valida):** cerró las decisiones 0.1 a 0.5
   (migraciones a mano, seed mínimo, build en el `webServer`, `SEED_CONFIRMAR_BASE`,
   `tsx` exacto) y añadió 5 ajustes; tras un bloqueo del hook pidió seguir solo con
   Edit, un comando por ejecución; el primer CI falló en typecheck (`LayoutProps` sin

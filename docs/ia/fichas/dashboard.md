@@ -10,7 +10,7 @@
   - session_id: 943dbdf7-77d6-4fb0-b200-0793d4aa9dba
   - prompt_id: f76dffab-3a49-400c-8bbd-8a54eaca44a9 (propose) y 0430a1e1-62fc-43cc-b9c3-3b1bd1dca16c (apply)
 - Resultado: panel convertido en dashboard con totales por período, saldos, top 5 de categorías (Recharts 3.10.1) y estados; 102/102 tareas, 284 tests, 29 escenarios.
-- Ajuste humano (BORRADOR, humano valida):
+- Ajuste humano: (validado)
   - Decisiones 0.1–0.6 la opción recomendada y autorización 0.7 (retirar panel.ts y tests de tarjetas); un commit por grupo.
   - Pidió mutación float para forzar el RED de 2.13.
   - Corrección tras revisión manual: etiqueta $120,00 cortada a 360 px.

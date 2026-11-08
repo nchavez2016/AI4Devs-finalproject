@@ -11,7 +11,7 @@
   - session_id: no registrado (Antigravity, registro manual)
   - prompt_id: no registrado
 - Resultado (1-2 líneas): 35 tareas: rango del período en fechas de Ecuador bajo el selector (textoRangoPeriodo), subtítulo en "Saldos por cuenta" y acción del encabezado en una línea. Main spec dashboard sincronizada (3 requirements, 8 escenarios con test).
-- Ajuste humano :
+- Ajuste humano : (validado)
   - Se corrigió el subtítulo de saldos ("hoy" no era exacto porque los saldos incluyen fechas futuras).
   - Se añadió la tarea 5.7 para documentar la regla del encabezado en componentes.md.
   - Revisión manual a 360 px y 1280 px, sin hallazgos; commits agrupados en dos (docs y código) porque la aplicación en Antigravity fue en bloque.

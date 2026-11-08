@@ -12,7 +12,7 @@
   - session_id: no registrado (Antigravity, registro manual)
   - prompt_id: no registrado
 - Resultado (1-2 líneas): 37 tareas: formulario primero en el DOM, filtros plegables con "Filtros (n)", botón Guardar fijo con margen seguro, cabecera "Hoy · …" y sin hueco bajo el encabezado. Main spec transacciones sincronizada (3 requirements modificados, 25 escenarios del delta con test; 45 en total).
-- Ajuste humano:
+- Ajuste humano:(validado)
   - Se eliminó viewport-fit=cover de la propuesta (global, sin aporte con viewport-fit=auto) y se detectó que animate-entrada con `both` rompía position: fixed (cambiado a backwards).
   - Se reforzó el test de scroll-padding-bottom, que daba falso positivo (verify, aviso 1).
   - Revisión manual a 360 px y 1280 px; commits agrupados en dos (docs y código) porque la aplicación en Antigravity fue en bloque, lo que incumple el commit por subtarea.
