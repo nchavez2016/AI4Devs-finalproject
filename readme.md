@@ -1,6 +1,8 @@
 # Cuadre — Control de gastos e ingresos
 
-## Estado del proyecto (Entrega 2, 23 de octubre de 2026)
+[![CI](https://github.com/nchavez2016/AI4Devs-finalproject/actions/workflows/ci.yml/badge.svg?branch=final-project-NCH)](https://github.com/nchavez2016/AI4Devs-finalproject/actions/workflows/ci.yml?query=branch%3Afinal-project-NCH)
+
+## Estado del proyecto (Entrega final, 11 de noviembre de 2026)
 
 | Funcionalidad | Estado |
 |---|---|
@@ -9,10 +11,11 @@
 | Gestión de categorías | ✅ Implementado |
 | Registro de transacciones | ✅ Implementado (alta, listado y filtros; sin editar ni eliminar) |
 | Dashboard | ✅ Implementado (totales del período, saldos por cuenta y categorías de gasto) |
-| Despliegue (Vercel + Neon) | ⏳ Pendiente |
+| Despliegue (Vercel + Neon) | ✅ Publicado en https://cuadre-ashy.vercel.app |
+| Integración continua (GitHub Actions) | ✅ Lint, typecheck, tests unitarios, de integración y E2E en cada push |
+| Pruebas E2E (Playwright) | ✅ Flujo principal, acceso sin sesión y aislamiento entre usuarios |
 
-**Pendiente tras la Entrega 2:** editar y eliminar transacciones, despliegue en
-Vercel + Neon, E2E y GitHub Actions.
+**Pendiente:** editar y eliminar transacciones (HU-005, should-have).
 
 ## Índice
 
@@ -48,8 +51,10 @@ en el futuro.
 ### 0.4. URL del proyecto:
 https://cuadre-ashy.vercel.app
 
-Credenciales de prueba en 1.5. Integración continua:
-https://github.com/nchavez2016/AI4Devs-finalproject/actions/workflows/ci.yml
+Credenciales de prueba y recorrido en [1.5](#15-cómo-probar-el-mvp).
+
+Integración continua (rama `final-project-NCH`):
+https://github.com/nchavez2016/AI4Devs-finalproject/actions/workflows/ci.yml?query=branch%3Afinal-project-NCH
 
 ### 0.5. URL o archivo comprimido del repositorio:
 https://github.com/nchavez2016/AI4Devs-finalproject
@@ -79,8 +84,8 @@ completo.
 Cada funcionalidad se marca con una etiqueta de alcance: **[MVP]** si se
 implementa en este proyecto, o **[DOCUMENTADO]** si se describe para dar contexto
 del producto pero queda fuera del alcance de esta entrega. Dentro del MVP, el
-estado real a fecha de la Entrega 2 se marca con ✅ (implementado) o ⏳
-(pendiente).
+estado real a fecha de la Entrega final, 11 de noviembre de 2026, se marca con
+✅ (implementado) o ⏳ (pendiente).
 
 - **[MVP] ✅ Registro y acceso de usuario.** El usuario crea una cuenta e inicia
   sesión; sus datos financieros son privados y solo él los ve. Al registrarse
@@ -129,14 +134,13 @@ La experiencia busca sentirse tan ágil como una hoja de cálculo pero sin su
 fragilidad: capturar un movimiento debe tomar segundos, y los números del
 resumen se actualizan solos sin fórmulas que se rompan.
 
-Capturas del flujo implementado hasta la Entrega 2:
+Capturas del panel a la Entrega final, 11 de noviembre de 2026, generadas por la prueba E2E del flujo principal
+(`E2E_EVIDENCIA=1 npm run test:e2e`, ver `.env.example`):
 
-| Pantalla | Captura |
+| Vista | Captura |
 |---|---|
-| Inicio de sesión | ![Login](docs/capturas/Login.png) |
-| Panel | ![Panel](docs/capturas/Panel.png) |
-| Creación de cuenta | ![Creación de cuenta](docs/capturas/CreacionCuentaUsuario.png) |
-| Creación de categoría | ![Creación de categoría](docs/capturas/CreacionCategoriasUsuario.png) |
+| Panel en móvil (360 px) | ![Panel a 360 px](docs/evidencias/e2e/panel-360.png) |
+| Panel en escritorio (1280 px) | ![Panel a 1280 px](docs/evidencias/e2e/panel-1280.png) |
 
 *(Videotutorial del recorrido: pendiente de confirmar si se agrega.)*
 
@@ -146,9 +150,9 @@ Pasos comprobados contra `package.json` y `docker-compose.yml`, coherentes con l
 arquitectura de la sección 2:
 
 1. **Requisitos previos:** Node.js 24.x (`engines` de `package.json`) y Docker instalados.
-2. **Clonar el repositorio** (rama de la Entrega 2) e instalar dependencias:
+2. **Clonar el repositorio** (rama de la entrega final, `final-project-NCH`) e instalar dependencias:
    ```
-   git clone --branch feature/entrega-2-NCH https://github.com/nchavez2016/AI4Devs-finalproject.git
+   git clone --branch final-project-NCH https://github.com/nchavez2016/AI4Devs-finalproject.git
    cd AI4Devs-finalproject
    npm install
    ```
@@ -180,9 +184,13 @@ arquitectura de la sección 2:
    $env:SEED_CONFIRMAR_BASE = "cuadre"
    npm run db:seed
    ```
-   Sin seed, la base queda vacía y cada usuario se registra. Los movimientos del seed
-   son del mes en curso: **vuelve a ejecutarlo el día de la entrega** para que el panel
-   muestre datos.
+   Sin seed, la base queda vacía y cada usuario se registra. El seed toma como
+   referencia el día de hoy en Ecuador y crea 5 movimientos: 4 el día 1 del mes en
+   curso y 1 ingreso de 800.00 el día 15 del mes anterior (este último solo cuenta
+   para el saldo de la cuenta, no para el panel del mes). Por eso, **vuelve a
+   ejecutarlo al empezar un mes nuevo** para que el panel, que por defecto muestra el
+   mes actual, tenga datos. Es idempotente: repetirlo restablece al revisor y borra lo
+   que haya creado, sin tocar a otros usuarios.
 6. **Arrancar la aplicación:**
    ```
    npm run dev
@@ -190,31 +198,63 @@ arquitectura de la sección 2:
    Queda disponible en `http://localhost:3000`.
 
 En desarrollo se usa PostgreSQL local (vía Docker); en producción (Vercel + Neon,
-ver `docs/despliegue.md`) la misma aplicación se conecta cambiando únicamente
-`DATABASE_URL` (y `AUTH_SECRET`).
+ver `docs/despliegue.md`) la misma aplicación usa la URL *pooled* de Neon con
+`sslmode=require` como `DATABASE_URL`, más su propio `AUTH_SECRET`. Las
+migraciones de producción se aplican a mano con la URL directa de Neon; no corren
+en el build.
 
-**Ejecutar los tests** (verificado en `package.json` y `vitest.config.mts`):
+**Verificaciones y tests** (verificado en `package.json`, `vitest.config.mts` y
+`playwright.config.ts`). Con la base de Docker levantada:
+
+```
+npm run lint
+```
+
+```
+npm run typecheck
+```
 
 ```
 npm run test:run
 ```
 
-Las pruebas unitarias (`*.test.ts(x)`) corren con variables de entorno
-ficticias y no tocan una base de datos real. Las de integración
-(`*.int.test.ts`) necesitan una base PostgreSQL de prueba llamada por defecto
-`cuadre_test`; se puede apuntar a otra con la variable de entorno
-`TEST_DATABASE_URL`.
+- `lint` ejecuta ESLint y `typecheck` genera los tipos de rutas de Next.js
+  (`next typegen`) y ejecuta `tsc --noEmit`.
+- `test:run` ejecuta **unitarios e integración** con Vitest. Las pruebas unitarias
+  (`*.test.ts(x)`) corren con variables de entorno ficticias y no tocan una base de
+  datos real. Las de integración (`*.int.test.ts`) necesitan una base PostgreSQL de
+  prueba llamada por defecto `cuadre_test`, que se crea y migra sola; se puede
+  apuntar a otra con la variable de entorno `TEST_DATABASE_URL` (debe terminar en
+  `_test`).
+
+**Tests E2E (Playwright).** La primera vez, instala el navegador:
+
+```
+npx playwright install chromium
+```
+
+```
+npm run test:e2e
+```
+
+Playwright construye la app (`npm run build`), la arranca en el puerto 3100 contra
+su propia base `cuadre_e2e_test` (se crea y migra sola, en el mismo servidor que
+`TEST_DATABASE_URL`) y corre 3 escenarios —flujo principal, acceso sin sesión y
+aislamiento entre usuarios— en escritorio y en móvil a 360 px. No necesita
+variables nuevas: el `AUTH_SECRET` de la app E2E es ficticio y está en
+`playwright.config.ts`. Con `E2E_EVIDENCIA=1` guarda capturas del panel en
+`docs/evidencias/e2e/`.
+
+Las mismas verificaciones corren en GitHub Actions en cada push y pull request
+(`.github/workflows/ci.yml`); ver 2.4 y 2.6.
 
 ### 1.5. Cómo probar el MVP:
 
-**Usuario de demostración.** Tras ejecutar `npm run db:seed` (ver 1.4) existe el
-usuario revisor con 2 cuentas, 7 categorías y 5 movimientos de ejemplo: basta con
-iniciar sesión. Sin seed, regístrate con un email y contraseña nuevos: el formulario
-de registro crea tu usuario y, automáticamente, tus 7 categorías por defecto (5 de
-gasto y 2 de ingreso).
+**Dónde probar.** La app está publicada en **https://cuadre-ashy.vercel.app**, con
+el usuario revisor ya sembrado. Como alternativa, se puede correr en local
+(`http://localhost:3000`, ver 1.4) después de ejecutar `npm run db:seed`.
 
-**Credenciales de prueba** (son las del seed; sin seed se registran una sola vez
-en el paso 1):
+**Credenciales de prueba** (usuario revisor creado por el seed):
 
 | Campo | Valor |
 |---|---|
@@ -222,28 +262,62 @@ en el paso 1):
 | Contraseña | `Revisor2026!` |
 | Nombre del negocio | `Negocio de prueba` |
 
-Recorrido sugerido, con la app corriendo (`npm run dev`) y la base levantada:
+El revisor tiene 2 cuentas (Banco Pichincha, saldo inicial 500.00; Caja chica,
+saldo inicial 300.00), las 7 categorías por defecto (5 de gasto y 2 de ingreso) y 5
+movimientos de ejemplo: 4 el día 1 del mes en curso y 1 el día 15 del mes anterior.
+Volver a ejecutar el seed restablece estos datos y borra lo que haya creado el
+revisor.
 
-1. Abre `http://localhost:3000`. Con el seed, inicia sesión con las credenciales de
-   prueba de arriba. Sin seed, entra a **Registro** y crea un usuario (con esas
-   credenciales o las tuyas).
-2. Entras directo al **panel**, con tu nombre de negocio y los enlaces a Cuentas y
-   Categorías. Con el seed ya ves ingresos, gastos y saldos del mes.
-3. Entra a **Cuentas** y crea una, por ejemplo "Cooperativa Andina", tipo banco,
-   con saldo inicial 500.00 (el seed ya trae "Banco Pichincha" y "Caja chica").
-   La lista muestra la cuenta con ese saldo.
-4. Intenta crear otra cuenta con el mismo nombre (sin distinguir mayúsculas):
-   el formulario rechaza el duplicado con un mensaje junto al campo.
-5. Entra a **Categorías** y confirma que ya existen 7 (Arriendo, Insumos, Otros,
-   Servicios básicos, Transporte, Otros ingresos, Ventas). Crea una propia, por
-   ejemplo "Publicidad" de tipo gasto.
-6. Intenta crear otra categoría de gasto con el mismo nombre: se rechaza igual
-   que con las cuentas.
-7. Cierra sesión desde el botón correspondiente y confirma que vuelves al login.
+**Recorrido sugerido.** Los importes se muestran con formato local (por ejemplo,
+`$1.200,00`).
 
-*(Registrar transacciones tiene su propio recorrido en **Transacciones**: elige tipo,
-monto, categoría, cuenta y fecha, y el saldo de la cuenta cambia en **Cuentas**. El
-**Panel** resume los totales del período, los saldos y las categorías de gasto.)*
+*Acceso*
+
+1. Abre https://cuadre-ashy.vercel.app e inicia sesión con las credenciales de
+   arriba. Entras directo al **Panel**, con el nombre del negocio
+   ("Negocio de prueba") y la navegación a Panel, Transacciones, Cuentas y
+   Categorías.
+
+*Panel (período "mes", el que se abre por defecto)*
+
+2. Comprueba los totales del mes en curso: **ingresos 1200.00**, **gastos 571.00** y
+   **balance 629.00**. El ingreso de 800.00 del mes anterior no cuenta aquí.
+3. En **Saldos por cuenta**: **Banco Pichincha 2100.00** y **Caja chica 129.00**
+   (saldo inicial más ingresos menos gastos de todas las fechas).
+4. En **Categorías de gasto**: Arriendo 400.00, Insumos 150.75 y Transporte 20.25,
+   de mayor a menor, con su tabla alternativa al gráfico.
+5. Cambia el período a **hoy** o **semana**: los totales se recalculan y el período
+   viaja en la URL (`/panel?periodo=semana`).
+
+*Transacciones*
+
+6. Entra a **Transacciones**. El listado muestra los 5 movimientos del revisor, del
+   más reciente al más antiguo.
+7. Registra un gasto: tipo gasto, monto `25.50`, categoría Insumos, cuenta Caja
+   chica y la fecha que propone el formulario (hoy). Pulsa **Guardar transacción**:
+   aparece el aviso de confirmación y el movimiento sale en el listado.
+8. Intenta guardar otro con monto `0`: el formulario lo rechaza con un mensaje junto
+   al campo y no crea nada.
+9. Filtra por tipo **Gasto** o por la cuenta **Caja chica**: el listado y la URL
+   reflejan el filtro.
+10. Vuelve al **Panel**: los gastos del mes suben a 596.50, el balance baja a 603.50
+    y Caja chica queda en 103.50.
+
+*Cuentas y categorías*
+
+11. Entra a **Cuentas** y crea una, por ejemplo "Cooperativa Andina", tipo banco,
+    con saldo inicial 500.00. Intenta crear otra con el mismo nombre (sin distinguir
+    mayúsculas): el formulario rechaza el duplicado con un mensaje junto al campo.
+12. Entra a **Categorías** y confirma que existen las 7 por defecto (Arriendo,
+    Insumos, Otros, Servicios básicos, Transporte, Otros ingresos, Ventas). Crea
+    "Publicidad" de tipo gasto e intenta repetirla: se rechaza igual que con las
+    cuentas.
+13. Cierra sesión y confirma que vuelves al login. Abrir `/panel` sin sesión
+    también lleva al login.
+
+**Sin seed.** Si la base está vacía, entra a **Registro** y crea tu usuario: el
+registro crea automáticamente tus 7 categorías por defecto y el panel muestra el
+estado vacío, con una invitación a registrar la primera transacción.
 
 ---
 
@@ -295,7 +369,8 @@ un backend separado, por tres razones concretas para este proyecto:
   desplegar el MVP sin costo inicial mientras el uso sea bajo.
 
 **Beneficios.** Velocidad de desarrollo, despliegue simple (cada push a la rama
-principal se publica solo), y un stack muy documentado que la IA conoce bien.
+de producción, `final-project-NCH`, se publica solo), y un stack muy documentado
+que la IA conoce bien.
 
 **Sacrificios / limitaciones asumidas.** Un monolito escala de forma menos
 granular que los microservicios: si en el futuro un módulo (por ejemplo, un
@@ -306,10 +381,11 @@ esa extracción más adelante.
 ### 2.2. Descripción de componentes principales:
 
 **Frontend (React + Tailwind CSS).** Es la capa que ve el usuario: las pantallas
-de login, registro, panel, cuentas y categorías, construidas hoy con
-componentes propios (`src/components/ui/`) y Tailwind para los estilos.
-shadcn/ui está aprobado para el MVP pero todavía no se ha instalado; cuando se
-necesiten componentes más complejos (tablas, gráficos) se evaluará incorporarlo.
+de login, registro, panel, transacciones, cuentas y categorías, construidas con
+componentes propios (`src/components/ui/`) y Tailwind para los estilos. De
+shadcn/ui se incorporó solo el componente `Sheet` (`src/components/ui/sheet.tsx`,
+sobre `@radix-ui/react-dialog`), adaptado a los tokens del sistema de diseño; lo
+usa el menú de navegación en móvil.
 El gráfico de categorías de gasto del dashboard se dibuja con Recharts (versión
 exacta `3.10.1`) y siempre tiene una alternativa en tabla.
 
@@ -357,25 +433,36 @@ cuadre/
 │   ├── app/
 │   │   ├── (privado)/
 │   │   │   ├── panel/           # Panel: dashboard financiero ✅
+│   │   │   ├── transacciones/   # Registro y listado de transacciones ✅
 │   │   │   ├── cuentas/         # Gestión de cuentas ✅
 │   │   │   └── categorias/      # Gestión de categorías ✅
 │   │   ├── login/                ✅
 │   │   ├── registro/             ✅
 │   │   └── api/auth/[...nextauth]/route.ts  ✅
 │   ├── components/
-│   │   ├── EncabezadoPagina.tsx  ✅
-│   │   └── ui/                   # Button, Campo, Importe ✅
+│   │   ├── navegacion/           # Cabecera, navegación y menú móvil ✅
+│   │   ├── formularios/          # Utilidades compartidas de formularios ✅
+│   │   └── ui/                   # Button, Campo, Importe, Selector, Tarjeta, Sheet ✅
 │   ├── config/env.ts            # Validación de variables de entorno ✅
 │   ├── server/
 │   │   ├── auth/                 ✅
 │   │   ├── cuentas/               ✅
 │   │   ├── categorias/            ✅
+│   │   ├── transacciones/         ✅
+│   │   ├── dashboard/             # Cálculos del panel ✅
+│   │   ├── semilla/               # Datos y lógica del seed del revisor ✅
 │   │   └── repositories/         # Acceso a datos: encapsula Prisma ✅
-│   ├── test/                     # Fixtures y BD de prueba (Vitest) ✅
+│   ├── test/                     # Fixtures y BD de prueba (Vitest y E2E) ✅
 │   └── proxy.ts                  # Antes "middleware.ts" en Next.js 16 ✅
-├── docs/diseno/sistema/         # Tokens y sistema de diseño ✅
+├── e2e/                          # Pruebas E2E con Playwright ✅
+├── scripts/db-seed.ts            # Seed del usuario revisor (npm run db:seed) ✅
+├── docs/
+│   ├── despliegue.md             # Guía de despliegue en Vercel + Neon ✅
+│   ├── evidencias/e2e/           # Capturas generadas por el E2E ✅
+│   └── diseno/sistema/           # Tokens y sistema de diseño ✅
 ├── openspec/                     # Specs y changes (OpenSpec) ✅
-├── .github/workflows/            ⏳ Pendiente (no existe aún)
+├── .github/workflows/ci.yml      # Integración continua (GitHub Actions) ✅
+├── playwright.config.ts          ✅
 ├── docker-compose.yml            ✅
 ├── .env.example                  ✅
 └── readme.md
@@ -400,14 +487,17 @@ graph LR
 ```
 
 El flujo de despliegue es de integración y despliegue continuos (CI/CD): el
-código vive en GitHub; cada cambio subido a la rama principal dispara dos cosas
-en paralelo: (1) **GitHub Actions** ejecuta automáticamente la suite de pruebas
-(integración continua), y (2) **Vercel** construye y publica la nueva versión de
-la aplicación en una URL pública (despliegue continuo). La base de datos
-PostgreSQL está alojada en Neon (proveedor gestionado en la nube) al que la
-aplicación se conecta mediante una variable de entorno segura. Este esquema
-cumple el requisito de la entrega final de tener el proyecto desplegado y
-accesible por URL.
+código vive en GitHub. (1) **GitHub Actions** corre en cada push y en cada pull
+request, en cualquier rama: lint, typecheck, tests unitarios y de integración
+contra un PostgreSQL 16 de servicio, y tests E2E con Playwright, cuyo informe queda
+como artefacto (integración continua). (2) **Vercel** construye y publica la
+aplicación cada vez que se sube la rama de producción, `final-project-NCH`
+(despliegue continuo). La base de datos PostgreSQL está alojada en Neon (proveedor
+gestionado en la nube) y la aplicación se conecta a ella mediante una variable de
+entorno segura (`DATABASE_URL`, URL *pooled* con `sslmode=require`). Las
+migraciones de producción no corren en el build: se aplican a mano antes de subir
+una rama que las incluya (`docs/despliegue.md`). Este esquema cumple el requisito
+de la entrega final de tener el proyecto desplegado y accesible por URL.
 
 **Estado: GitHub Actions configurado (`.github/workflows/ci.yml`) y despliegue en
 Vercel + Neon publicado en https://cuadre-ashy.vercel.app (guía en `docs/despliegue.md`).**
@@ -422,9 +512,10 @@ datos financieros personales, son:
   sesión mediante Auth.js; las contraseñas se almacenan con hash (nunca en texto
   plano). Las rutas privadas exigen sesión iniciada.
 - **✅ Aislamiento de datos por usuario.** Toda consulta al backend se filtra
-  por el identificador del usuario autenticado (implementado en cuentas y
-  categorías), de modo que una persona nunca puede leer ni modificar datos de
-  otra. Es el control de seguridad más importante del producto.
+  por el identificador del usuario autenticado (implementado en cuentas,
+  categorías, transacciones y panel, y comprobado con pruebas de integración y con
+  el E2E `e2e/aislamiento.spec.ts`), de modo que una persona nunca puede leer ni
+  modificar datos de otra. Es el control de seguridad más importante del producto.
 - **✅ Validación de entradas con Zod.** Cada dato que llega en el cuerpo de una
   petición (montos, nombres, tipos) se valida contra un esquema Zod en el
   servidor antes de aplicar la lógica de negocio, para rechazar datos corruptos o
@@ -436,8 +527,9 @@ datos financieros personales, son:
 - **✅ Variables sensibles fuera del código.** Credenciales de base de datos y
   claves de sesión se guardan como variables de entorno (`.env`, fuera del
   repositorio), y no se colocan datos sensibles en las URLs.
-- **⏳ Conexión cifrada en producción.** Pendiente: depende del despliegue en
-  Vercel (HTTPS) y Neon (TLS), todavía no realizado.
+- **✅ Conexión cifrada en producción.** Vercel sirve la aplicación por HTTPS y la
+  conexión con Neon exige TLS (`sslmode=require` en `DATABASE_URL`, ver
+  `.env.example` y `docs/despliegue.md`).
 
 ### 2.6. Tests:
 
@@ -450,15 +542,18 @@ La estrategia de pruebas contempla tres niveles:
   funcionen de extremo a extremo contra una base de datos PostgreSQL real de
   prueba (`*.int.test.ts`), por ejemplo crear una cuenta y comprobar su
   aislamiento por usuario.
-- **⏳ Prueba de extremo a extremo (E2E).** Pendiente: Playwright se configurará
-  con el primer change que la necesite (ver AGENTS.md). Verificará el flujo
-  principal completo desde el navegador, incluyendo registro de transacciones y
-  dashboard.
+- **✅ Pruebas de extremo a extremo (E2E).** Playwright (`@playwright/test`
+  1.65.0, `playwright.config.ts`) contra la app construida en modo producción y una
+  base propia `cuadre_e2e_test`. Tres escenarios en `e2e/`, cada uno en escritorio
+  y en móvil a 360 px: el flujo principal (registro → cuenta → gasto → panel con
+  totales, saldo y categorías), el acceso al panel sin sesión (lleva al login) y el
+  aislamiento entre dos usuarios. Comando: `npm run test:e2e` (ver 1.4).
 
-**⏳ GitHub Actions.** Pendiente: hoy las pruebas se ejecutan en local (hook de
-pre-commit con `npm run lint`, `typecheck` y `test:run`); la ejecución
-automática en cada push mediante GitHub Actions está prevista para la entrega
-final (ver 2.4).
+**✅ GitHub Actions.** `.github/workflows/ci.yml` corre en cada push y pull request:
+`npm ci`, `prisma generate`, lint, typecheck, `test:run` y `test:e2e`, con
+PostgreSQL 16 como servicio y el informe de Playwright como artefacto
+`playwright-report` (ver 2.4). En local, el hook de pre-commit sigue corriendo
+lint, typecheck y `test:run` antes de cada commit.
 
 ---
 
@@ -911,7 +1006,7 @@ de usuarios con Auth.js (next-auth v5 beta).
 
 ---
 
-### TK-002 — Transacciones: registrar y listar ✅ Implementado (pendiente de PR)
+### TK-002 — Transacciones: registrar y listar ✅ Implementado
 
 **Tipo:** Backend y pantalla
 **Prioridad:** Alta
@@ -941,11 +1036,11 @@ Actions y una pantalla `/transacciones`, no con endpoints REST.
 - [x] Un usuario nunca recibe transacciones de otro usuario.
 - [x] Pruebas de integración que cubran los escenarios de HU-001 (caso válido,
       monto inválido, campos faltantes).
-- [ ] PR enlazado a la historia HU-001, revisado por una persona.
+- PR enlazado a la historia HU-001: No aplica: entrega por rama, sin PR.
 
 ---
 
-### TK-003 — Pantalla de dashboard ✅ Implementado (pendiente de revisión manual, E2E y PR)
+### TK-003 — Pantalla de dashboard ✅ Implementado
 
 **Tipo:** Frontend
 **Prioridad:** Alta
@@ -970,22 +1065,36 @@ principales categorías de gasto, con un estado vacío para usuarios nuevos.
 - [x] Muestra el saldo actual de cada cuenta.
 - [x] Muestra las categorías de gasto ordenadas de mayor a menor.
 - [x] Un usuario sin datos ve el estado vacío con el mensaje de invitación.
-- [ ] La pantalla se ve y funciona correctamente en móvil y escritorio.
-- [ ] Prueba E2E del flujo: login registrar transacción ver dashboard
-      actualizado.
-- [ ] PR enlazado a la historia HU-003, revisado por una persona.
+- [x] La pantalla se ve y funciona correctamente en móvil y escritorio (E2E en
+      los proyectos `escritorio` y `movil-360`; capturas a 360 y 1280 px en
+      `docs/evidencias/e2e/`).
+- [x] Prueba E2E del flujo: registro, crear cuenta, registrar gasto y ver el
+      dashboard actualizado (`e2e/flujo-principal.spec.ts`).
+- PR enlazado a la historia HU-003: No aplica: entrega por rama, sin PR.
 
 ---
 
 ## 7. Pull requests
 
-> Esta sección se completa durante las Entregas 2 y final, documentando los
-> Pull Requests principales del desarrollo.
+**La entrega se hace por rama, sin pull requests.** El código de la entrega final
+está en la rama
+[`final-project-NCH`](https://github.com/nchavez2016/AI4Devs-finalproject/tree/final-project-NCH),
+que es también la rama de producción de Vercel. No se abrieron PR, así que esta
+sección no enlaza ninguno.
 
-- **PR Entrega 2:** rama `feature/entrega-2-NCH` — scaffold, autenticación,
-  cuentas y categorías. _(Enlace al PR: pendiente de abrir tras el push.)_
-- **PR 2:** _(pendiente — Entrega final)_
-- **PR 3:** _(pendiente — Entrega final)_
+La revisión que en otro flujo haría un PR se cubre así:
+
+- **Changes de OpenSpec.** Cada funcionalidad nace como un *change* con propuesta,
+  diseño, specs y tareas, que una persona revisa antes de aplicarlo. Los changes
+  terminados quedan archivados en `openspec/changes/archive/`.
+- **Un commit por subtarea** en formato Conventional Commits, con el test y el
+  código juntos y la suite en verde (hook de pre-commit).
+- **Integración continua** en cada push de la rama: lint, typecheck, tests
+  unitarios, de integración y E2E (`.github/workflows/ci.yml`, insignia al inicio
+  de este documento).
+
+Ramas de las entregas anteriores: `feature/entrega-1-NCH` (documentación) y
+`feature/entrega-2-NCH` (scaffold, autenticación, cuentas y categorías).
 
 ---
 
