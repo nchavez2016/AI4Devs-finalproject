@@ -99,12 +99,12 @@
 
 ## 16. Despliegue [HUMANO]
 
-- [ ] 16.1 [HUMANO] Crear el proyecto en Neon (PostgreSQL 16) y copiar las URLs pooled y directa. Verificación: ambas URLs conectan con `sslmode=require`.
-- [ ] 16.2 [HUMANO] Desde tu máquina, con la URL directa exportada solo en esa terminal: `npx prisma migrate deploy`. Verificación: Prisma informa todas las migraciones aplicadas.
-- [ ] 16.3 [HUMANO] Sembrar Neon: `npm run db:seed` con `SEED_CONFIRMAR_BASE` igual al nombre de la base de Neon. Verificación: el comando termina sin errores.
-- [ ] 16.4 [HUMANO] Crear el proyecto en Vercel, conectar el repositorio, rama de producción `final-project-NCH`, y cargar `DATABASE_URL` (pooled) y `AUTH_SECRET` en su panel. Verificación: las variables figuran en Production.
-- [ ] 16.5 [HUMANO] `git push` de la rama. Verificación: el workflow de CI termina en verde en GitHub Actions y el informe de Playwright aparece como artefacto.
-- [ ] 16.6 [HUMANO] Abrir la URL de Vercel, entrar con `revisor@cuadre.test` y comprobar el panel con datos; anotar la URL en `readme.md` 0.4. Verificación: el panel muestra ingresos 1200.00 y gastos 571.00 si el seed se ejecutó en el mismo mes.
+- [x] 16.1 [HUMANO] Crear el proyecto en Neon (PostgreSQL 16) y copiar las URLs pooled y directa. Verificación: ambas URLs conectan con `sslmode=require`.
+- [x] 16.2 [HUMANO] Desde tu máquina, con la URL directa exportada solo en esa terminal: `npx prisma migrate deploy`. Verificación: Prisma informa todas las migraciones aplicadas.
+- [x] 16.3 [HUMANO] Sembrar Neon: `npm run db:seed` con `SEED_CONFIRMAR_BASE` igual al nombre de la base de Neon. Verificación: el comando termina sin errores.
+- [x] 16.4 [HUMANO] Crear el proyecto en Vercel, conectar el repositorio, rama de producción `final-project-NCH`, y cargar `DATABASE_URL` (pooled) y `AUTH_SECRET` en su panel. Verificación: las variables figuran en Production.
+- [x] 16.5 [HUMANO] `git push` de la rama. Verificación: el workflow de CI termina en verde en GitHub Actions y el informe de Playwright aparece como artefacto.
+- [x] 16.6 [HUMANO] Abrir la URL de Vercel, entrar con `revisor@cuadre.test` y comprobar el panel con datos; anotar la URL en `readme.md` 0.4. Verificación: el panel muestra ingresos 1200.00 y gastos 571.00 si el seed se ejecutó en el mismo mes.
 
 ## 17. Cierre
 

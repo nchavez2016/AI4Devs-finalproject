@@ -46,8 +46,10 @@ financiero completo, con una arquitectura ordenada que deja espacio para crecer
 en el futuro.
 
 ### 0.4. URL del proyecto:
-Pendiente de publicar — despliegue en Vercel + Neon según la guía `docs/despliegue.md`.
-Mientras tanto la app se ejecuta en local siguiendo 1.4 y se prueba con 1.5.
+https://cuadre-ashy.vercel.app
+
+Credenciales de prueba en 1.5. Integración continua:
+https://github.com/nchavez2016/AI4Devs-finalproject/actions/workflows/ci.yml
 
 ### 0.5. URL o archivo comprimido del repositorio:
 https://github.com/nchavez2016/AI4Devs-finalproject
@@ -407,8 +409,9 @@ aplicación se conecta mediante una variable de entorno segura. Este esquema
 cumple el requisito de la entrega final de tener el proyecto desplegado y
 accesible por URL.
 
-**Estado: GitHub Actions configurado (`.github/workflows/ci.yml`); el despliegue en
-Vercel + Neon sigue la guía `docs/despliegue.md` y está pendiente de publicarse.**
+**Estado: GitHub Actions configurado (`.github/workflows/ci.yml`) y despliegue en
+Vercel + Neon publicado en https://cuadre-ashy.vercel.app (guía en `docs/despliegue.md`).**
+
 
 ### 2.5. Seguridad:
 
