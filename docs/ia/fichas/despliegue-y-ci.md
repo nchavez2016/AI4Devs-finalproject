@@ -1,0 +1,18 @@
+# Ficha IA — despliegue-y-ci — 2026-11-07
+- Ticket / HU: despliegue y verificación para la entrega final (Vercel + Neon, seed del revisor, CI); ticket propio no registrado
+- Fase: spec + implementación + tests + despliegue
+- Herramienta y modelo, por fase (Claude Code en todas; modelIds tomados del contexto de la sesión):
+  - propose: Opus 5.5 (claude-opus-5-5)
+  - apply, verify y archive: Sonnet 5.5 (claude-sonnet-5-5), tras un /model a mitad de la sesión
+- Skills, comandos o subagentes usados: /opsx:propose, /opsx:apply, /opsx:verify, /opsx:archive; sin subagentes; ux-cuadre no cargada
+- Prompt clave (resumido): /opsx:propose despliegue-y-ci con la lista de archivos permitidos y el alcance (build reproducible, seed del revisor idempotente, CI en GitHub Actions, guía Vercel + Neon), con cuatro decisiones abiertas a presentar como tareas [HUMANO] sin resolverlas.
+  - session_id: c23e7fe9-56e1-4a7f-a86f-1a520623d2cb
+  - prompt_id: 9086a387-9178-4f21-88b5-6e335a1f4e2b (propose); 4bc63d9a-62d8-4f85-8b13-4a75c3d4f7b8 (apply con las decisiones 0.1 a 0.5); dbdaaea3-02e5-437a-988e-3b272ca00370 (fallo de CI en typecheck)
+- Resultado (1-2 líneas): 60 tareas. Build con prisma generate, engines Node 24, `npm run db:seed` (tsx 4.23.15) con guarda SEED_CONFIRMAR_BASE, workflow de CI, docs/despliegue.md y typecheck con next typegen. Specs despliegue y datos-de-demostracion creadas y pruebas-e2e ampliada (17 escenarios con test); app publicada en Vercel + Neon.
+- Ajuste humano: (validado)
+  - Cerró las decisiones 0.1 a 0.5 (migraciones a mano, seed mínimo, build en el webServer, SEED_CONFIRMAR_BASE, aprobó tsx exacto) y añadió 5 ajustes: fecha del seed con hoyEnEcuador(), --env-file-if-exists, timeouts de integración a 15000, aviso de re-sembrar el día de la entrega y playwright install en el CI.
+  - Tras un bloqueo del hook, pidió seguir solo con Edit (sin shell, heredocs ni redirecciones), un comando por ejecución, y que le mostrara .env.example y progress.md que yo había escrito con cat/printf.
+  - El primer CI falló en typecheck (LayoutProps sin .next/types): pidió el grupo 18 con TDD y anotar el hallazgo; las 3 sugerencias del verify se enviaron a docs/pendientes.md.
+- Tests: iteraciones hasta pasar: Vitest 313 en verde, un RED por escenario salvo 4.1, 6.1, 7.1 y 9 a 12, sin RED natural y verificados por mutación; el test del informe de Playwright (14.1) necesitó una segunda iteración por un fallo del propio test. E2E 6/6.
+- Salió bien a la primera: no (el primer CI falló en typecheck; un comando con la frase prohibida fue bloqueado por el hook).
+- Hallazgos del verify (sugerencias, ahora en docs/pendientes.md): `npx tsc --noEmit` suelto en AGENTS.md, openspec/config.yaml y antigravity-adapter.mjs; la rama de confirmación vacía de destino.ts no la cubre ningún test; el escenario del clon limpio no tiene test automático.
